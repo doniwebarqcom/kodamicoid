@@ -96,3 +96,14 @@ h2 {
     padding-top: 30px;
     margin-top: -5px;
 }
+
+@media screen and (min-width: 480px) {
+    .tombol-signin {
+        margin-left: 0;
+    }
+}
+@media screen and (min-width: 320px) {
+    .tombol-signin {
+        margin-left: 0;
+    }
+}
