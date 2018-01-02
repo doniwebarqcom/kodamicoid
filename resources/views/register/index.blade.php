@@ -44,10 +44,10 @@
 		    <input type="text" name="tempat_lahir" placeholder="Tempat Lahir" value="<?=Form::old('tempat_lahir')?>" />
 
 		    <span class="error"><?php echo $errors->first('tanggal_lahir') ?></span>
-		    <input type="text" name="tanggal_lahir" placeholder="Tanggal Lahir" value="<?=Form::old('tanggal_lahir')?>" />
+		    <input type="date" name="tanggal_lahir" placeholder="Tanggal Lahir" value="<?=Form::old('tanggal_lahir')?>" />
 
 		    <span class="error"><?php echo $errors->first('jenis_kelamin') ?></span>
-		    <?=Form::select('jenis_kelamin', array('Laki-laki' => 'Laki-laki', 'Wanita' => 'Wanita'));?>
+		    <?=Form::select('jenis_kelamin', array('' => '- Jenis Kelamin - ', 'Laki-laki' => 'Laki-laki', 'Wanita' => 'Wanita'));?>
 
 		    <span class="error"><?php echo $errors->first('alamat') ?></span>
 		    <input type="text" name="alamat" placeholder="Alamat" value="<?=Form::old('alamat')?>" />
