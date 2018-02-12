@@ -1,6 +1,6 @@
 @extends('layout.login')
 
-@section('title', 'Register - Koperasi Dana Masyarakat Indonesia')
+@section('title', 'Kodami Pocket System')
 
 @section('content')
 	<div class="info">

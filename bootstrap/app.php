@@ -41,6 +41,8 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
+$app->register(Kodami\Models\ModelServiceProvider::class);
+
 /*
 |--------------------------------------------------------------------------
 | Return The Application

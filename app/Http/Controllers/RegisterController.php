@@ -5,7 +5,8 @@ use App\ModelUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
-
+use App\Mail\RegisterMail;
+use Mail;
 
 class RegisterController extends Controller
 {
@@ -19,45 +20,61 @@ class RegisterController extends Controller
         return view('register.index');
     }
 
-
+    /**
+     * [registerPost description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
     public function registerPost(Request $request)
     {
     	$this->validate($request,[
     		'nik' 				=> 'required|unique:users',
-    		'tempat_lahir'		=> 'required',
-    		'tanggal_lahir'		=> 'required',
-    		'jenis_kelamin'		=> 'required',
-    		'alamat'			=> 'required',
     		'telepon'			=> 'required',
-            'foto'              => 'required|mimes:jpg,jpeg,bmp,png:size:5000',
-    		'foto_ktp'			=> 'required|mimes:jpg,jpeg,bmp,png:size:5000',
-    		'name'				=> 'required',
+            'name'				=> 'required',
     		'email'				=> 'required|email|unique:users',
     		'password'			=> 'required',
     		'confirmation'		=> 'required|same:password',
     	]);
 
     	$no_anggota = date('y').date('m').date('d'). (ModelUser::all()->count() + 1);
-
-        $foto = $request->foto->store('foto');
-        $foto_ktp = $request->foto_ktp->store('foto_ktp');
-
+    
     	$data = new ModelUser();
-        $data->foto                 = $foto;
-        $data->foto_ktp             = $foto_ktp;
     	$data->nik 					= $request->nik;
-    	$data->tempat_lahir 		= $request->tempat_lahir;
-    	$data->tanggal_lahir 		= $request->tanggal_lahir;
-    	$data->jenis_kelamin 		= $request->jenis_kelamin;
-    	$data->alamat				= $request->alamat;
     	$data->telepon 				= $request->telepon;
     	$data->no_anggota 			= $no_anggota;
     	$data->name 				= $request->name;
     	$data->email 				= $request->email;
     	$data->password 			= bcrypt($request->password); 
+        $data->user_group_id        = 2; // User Sebagai Anggota
     	$data->save();
 
+        $data->password = $request->password;
+        // send email
+        Mail::to($data->email)->send(new RegisterMail($data));
 
-    	return redirect('register')->with('alert-success', 'Berhasil melakukan registrasi');
+    	return redirect('register/success')->with('success-register', 'Berhasil melakukan registrasi');
+    }
+
+    /**
+     * [success description]
+     * @return [type] [description]
+     */
+    public function success()
+    {
+        $session = session('success-register'); 
+        
+        if(isset($session))
+            return view('success');
+        else
+            return redirect('home');
+    }
+
+    /**
+     * [v2 description]
+     * @return [type] [description]
+     */
+    public function v2()
+    {
+        return view('register.index');
     }
 }

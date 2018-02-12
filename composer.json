@@ -23,7 +23,8 @@
             "database/factories"
         ],
         "psr-4": {
-            "App\\": "app/"
+            "App\\": "app/",
+            "Kodami\\Models\\": "packages/kodami/models/src"
         }
     },
     "autoload-dev": {
