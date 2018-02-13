@@ -62,6 +62,7 @@
 										</div>
 									</a>
 								</li>
+								@guest
 								<li>
 									<a data-toggle="modal" role="button" href="{{ route('login') }}">
 										<div class="inside">
@@ -70,6 +71,7 @@
 										</div>
 									</a>
 								</li>
+								@endguest
 							</ul>
 						</nav>
 						<div class="wr-soc">
