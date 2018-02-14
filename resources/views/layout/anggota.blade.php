@@ -153,41 +153,51 @@
                             <li><a href="{{ url('logout') }}"><i class="fa fa-power-off"></i> <span class="hide-menu">Logout</span></a></li>
                         </ul>
                     </li>
-                    <li> <a href="/" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span class="label label-rouded label-inverse pull-right">4</span></span></a>
+                    <li> <a href="/" class="waves-effect active"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span class="label label-rouded label-inverse pull-right">4</span></span></a>
                     </li>
 
                     <li class="devider"></li>
-                    <li>
-                        <a href="javascript:void(0)" class="waves-effect">
-                            <i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Management User<span class="fa arrow"></span></span>
-                        </a>
+                    <li class="last-nav"><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu">Apps<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ url('admin/user') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users</span></a>
+                            <li><a href="chat.html"><i class="ti-comments-smiley fa-fw"></i><span class="hide-menu">Chat-message</span></a></li>
+                            <li><a href="javascript:void(0)" class="waves-effect"><i class="ti-desktop fa-fw"></i><span class="hide-menu">Inbox</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li> <a href="inbox.html"><i class="ti-email fa-fw"></i><span class="hide-menu">Mail box</span></a></li>
+                                    <li> <a href="inbox-detail.html"><i class="ti-layout-media-left-alt fa-fw"></i><span class="hide-menu">Inbox detail</span></a></li>
+                                    <li> <a href="compose.html"><i class="ti-layout-media-center-alt fa-fw"></i><span class="hide-menu">Compose mail</span></a></li>
+                                </ul>
                             </li>
-                            <li>
-                                <a href="{{ url('admin/user-group') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users Group</span></a>
+                            <li><a href="javascript:void(0)" class="waves-effect"><i class="ti-user fa-fw"></i><span class="hide-menu">Contacts</span><span class="fa arrow"></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li> <a href="contact.html"><i class="icon-people fa-fw"></i><span class="hide-menu">Contact1</span></a></li>
+                                    <li> <a href="contact2.html"><i class="icon-user-follow fa-fw"></i><span class="hide-menu">Contact2</span></a></li>
+                                    <li> <a href="contact-detail.html"><i class="icon-user-following fa-fw"></i><span class="hide-menu">Contact Detail</span></a></li>
+                                </ul>
                             </li>
+                            <li> <a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-settings fa-fw"></i> <span class="hide-menu">Charts<span class="fa arrow"></span></span></a>
+                                <ul class="nav nav-third-level">
+                                    <li> <a href="flot.html"><i class="fa-fw">F</i><span class="hide-menu">Flot Charts</span></a> </li>
+                                    <li><a href="morris-chart.html"><i class="fa-fw">M</i><span class="hide-menu">Morris Chart</span></a></li>
+                                    <li><a href="chart-js.html"><i class="fa-fw">P</i><span class="hide-menu">Chart-js</span></a></li>
+                                    <li><a href="peity-chart.html"><i class="fa-fw">P</i><span class="hide-menu">Peity Charts</span></a></li>
+                                    <li><a href="chartist-js.html"><i class="fa-fw">C</i><span class="hide-menu">Chartist-js</span></a></li>
+                                    <li><a href="knob-chart.html"><i class="fa-fw">K</i><span class="hide-menu">Knob Charts</span></a></li>
+                                    <li><a href="sparkline-chart.html"><i class="fa-fw">S</i><span class="hide-menu">Sparkline charts</span></a></li>
+                                    <li><a href="extra-charts.html"><i class="fa-fw">E</i><span class="hide-menu">Extra Charts</span></a></li>
+                                </ul>
+                            </li>
+                            <li> <a href="map-google.html" class="waves-effect"><i class="mdi mdi-google-maps fa-fw"></i><span class="hide-menu">Google Map</span></a> </li>
+                            <li> <a href="map-vector.html" class="waves-effect"><i class="mdi mdi-map-marker fa-fw"></i><span class="hide-menu">Vector Map</span></a> </li>
+                            <li> <a href="calendar.html" class="waves-effect"><i class="mdi mdi-calendar-check fa-fw"></i> <span class="hide-menu">Calendar</span></a></li>
                         </ul>
                     </li>
-                    <li class="last-nav">
-                        <a href="javascript:void(0)" class="waves-effect">
-                            <i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Management Anggota<span class="fa arrow"></span></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ url('admin/anggota') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Anggota</span></a>
-                            </li>
-                        </ul>
-                    </li>
-
                 </ul>
             </div>
         </div>
         <!-- ============================================================== -->
         <!-- End Left Sidebar -->
         <!-- ============================================================== -->
-        
+
         @yield('content')
 
     <!-- ============================================================== -->

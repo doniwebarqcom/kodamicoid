@@ -173,7 +173,7 @@
 	<section class="container" data-anchor="features">
 		<div class="spacer6"></div>
 			<h2 class='text-center xxh-Bold'>Koperasi Daya Masyarakat</h2>
-			<h3 class='text-center xmedium-h'>Selamat datang di Kodami</h3>
+			<h3 class='text-center xmedium-h'>Kodami memberikan solusi kepada Usaha Anda<br />kami fokus memberikan layanan untuk Penjualan, Permodalan dan Perkembangan Bisnis Anda.</h3>
 			<div class="row trainings" id='trainings'>
 				<div class="col-md-3 col-xs-6 hov1">
 					<figure class='thumbnails'>

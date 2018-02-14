@@ -12,7 +12,7 @@
       <tbody>
         <tr>
           <td style="vertical-align: top; padding-bottom:30px;">
-            <a href="http://www.kodami.co.id" target="_blank" style="text-decoration: none;color: #484848;"><img src="http://kodami.co.id/logo.jpeg" alt="Admin Responsive web app kit" style="border:none; width: 270px; "><br/>
+            <a href="http://www.kodami.co.id" target="_blank" style="text-decoration: none;color: #484848;"><img src="http://kodami.co.id/logo.png" alt="Admin Responsive web app kit" style="border:none; width: 270px; "><br/>
             <h2 style="margin-top: 5px; padding-top: 5px;">Koperasi Daya Masyarakat</h2>
             </a>
           </td>
@@ -49,7 +49,7 @@
               </table>
               <p>Informasi Keanggotaan:</p>
               <ol>
-                <li>Data Keanggotaan anda belum aktif, sebelum anda membayar biaya keanggotaan sebesar Rp. 100.000, jika anda sudah melakukan pembayaran, anda bisa melakukan konfirmasi pembayaran dengan cara login ke sistem keanggotaan anda dengan akun yang sudah anda daftarkan dan lihat di menu profile anda ada tombol "Konfirmasi Pembayaran Keanggotaan" maka kami akan mengecek pembayaran anda</li>
+                <li>Data Keanggotaan anda belum aktif, sebelum anda membayar biaya keanggotaan sebesar Rp. 100.000, anda bisa melakukan pembayaran dengan cara login ke sistem keanggotaan anda dengan akun yang sudah anda daftarkan dan lihat di menu profile anda ada tombol "Bayar Keanggotaan" dan ikuti proses selanjutnya.</li>
 
                 <li>Anda diwajibkan membayar iuran bulanan yaitu sebesar Rp. 10.000, untuk iuran bulanan, anda bisa melihat di menu "Iuran Bulanan" apakah anda sudah melakukan pembayaran atau belum, jika anda sudah melakukan pembayaran maka anda bisa menekan tombol "Konfirmasi Pembayaran" maka kami akan mengecek pembayaran anda.
                 </li>

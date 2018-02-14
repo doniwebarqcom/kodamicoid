@@ -33,19 +33,28 @@
                     <h3 class="box-title m-b-0">Konfirmasi Pembayaran Anggota</h3>
                     <div class="row">
                         <div class="col-sm-12 col-xs-12">
-                            <form method="post" action="{{ url('anggota/submitkonfirmasianggota') }}" enctype="multipart/form-data">
-                                
-                                {{ csrf_field() }}
 
+                            @if (count($errors) > 0)
+                                <div class="alert alert-danger">
+                                    <strong>Whoops!</strong> There were some problems with your input.
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            <form method="post" action="{{ url('anggota/post-konfirmasi-pembayaran') }}" enctype="multipart/form-data">
+                                {{ csrf_field() }}
                                 <div class="form-group">
                                     @if ($errors->has('password'))
                                       <span class="help-block">
                                           <strong>{{ $errors->first('file_konfirmasi') }}</strong>
                                       </span>
                                     @endif
-                                    
                                     <label for="exampleInputEmail1">Upload Struk Pembayaran</label>
-                                    <input type="file" class="form-control" > </div>
+                                    <input type="file" name="image" class="form-control" > </div>
                                 <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                                 <a href="{{ url('anggota') }}" class="btn btn-inverse waves-effect waves-light">Cancel</a>
                             </form>
