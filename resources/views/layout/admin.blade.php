@@ -9,24 +9,24 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
     <title>@yield('title')</title>
     <!-- Bootstrap Core CSS -->
-    <link href="{{ asset('admin/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-css/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Menu CSS -->
-    <link href="{{ asset('admin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-css/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css') }}" rel="stylesheet">
     <!-- toast CSS -->
-    <link href="{{ asset('admin/plugins/bower_components/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-css/plugins/bower_components/toast-master/css/jquery.toast.css') }}" rel="stylesheet">
     <!-- morris CSS -->
-    <link href="{{ asset('admin/plugins/bower_components/morrisjs/morris.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-css/plugins/bower_components/morrisjs/morris.css') }}" rel="stylesheet">
     <!-- chartist CSS -->
-    <link href="{{ asset('admin/plugins/bower_components/chartist-js/dist/chartist.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-css/plugins/bower_components/chartist-js/dist/chartist.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-css/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.css') }}" rel="stylesheet">
     <!-- Calendar CSS -->
-    <link href="{{ asset('admin/plugins/bower_components/calendar/dist/fullcalendar.css') }}" rel="stylesheet" />
+    <link href="{{ asset('admin-css/plugins/bower_components/calendar/dist/fullcalendar.css') }}" rel="stylesheet" />
     <!-- animation CSS -->
-    <link href="{{ asset('admin/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('admin-css/css/animate.css') }}" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="{{ asset('admin/css/style.css') }}?time=<?=date('His')?>" rel="stylesheet">
+    <link href="{{ asset('admin-css/css/style.css') }}?time=<?=date('His')?>" rel="stylesheet">
     <!-- color CSS -->
-    <link href="{{ asset('admin/css/colors/green.css') }}" id="theme" rel="stylesheet">
+    <link href="{{ asset('admin-css/css/colors/green.css') }}" id="theme" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -108,14 +108,14 @@
                             <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
                     </li>
                     <li class="dropdown">
-                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="javascript:void(0)"> <img src="{{ asset('admin/images/user.png') }}" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">{{ Auth::user()->name }}</b><span class="caret"></span> </a>
+                        <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="javascript:void(0)"> <img src="{{ asset('admin-css/images/user.png') }}" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">{{ Auth::user()->name }}</b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
                             <li>
                                 <div class="dw-user-box">
-                                    <div class="u-img"><img src="{{ asset('admin/images/user.png') }}" alt="user" /></div>
+                                    <div class="u-img"><img src="{{ asset('admin-css/images/user.png') }}" alt="user" /></div>
                                     <div class="u-text">
                                         <h4>{{ Auth::user()->name }}</h4>
-                                        <p class="text-muted">{{ Auth::user()->email }}</p><a href="{{ url('admin/profile') }}" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                        <p class="text-muted">{{ Auth::user()->email }}</p><a href="{{ url('admin-css/profile') }}" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
@@ -170,7 +170,8 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="last-nav">
+                    <li class="devider"></li>
+                    <li>
                         <a href="javascript:void(0)" class="waves-effect">
                             <i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Management Anggota<span class="fa arrow"></span></span>
                         </a>
@@ -179,6 +180,16 @@
                                 <a href="{{ url('admin/anggota') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Anggota</span></a>
                             </li>
                         </ul>
+                    </li>
+                    <li class="last-nav">
+                        <a href="javascript:void(0)" class="waves-effect">
+                            <i class="mdi mdi-settings fa-fw"></i> <span class="hide-menu">Setting<span class="fa arrow"></span></span>
+                        </a>
+                         <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.contact-us') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Submit Kontak Kami</span></a>
+                            </li>
+                         </ul>
                     </li>
 
                 </ul>
@@ -196,35 +207,35 @@
     <!-- ============================================================== -->
     <!-- All Jquery -->
     <!-- ============================================================== -->
-    <script src="{{ asset('admin/plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap Core JavaScript -->
-    <script src="{{ asset('admin/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('admin-css/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <!-- Menu Plugin JavaScript -->
-    <script src="{{ asset('admin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js') }}"></script>
     <!--slimscroll JavaScript -->
-    <script src="{{ asset('admin/js/jquery.slimscroll.js') }}"></script>
+    <script src="{{ asset('admin-css/js/jquery.slimscroll.js') }}"></script>
     <!--Wave Effects -->
-    <script src="{{ asset('admin/js/waves.js') }}"></script>
+    <script src="{{ asset('admin-css/js/waves.js') }}"></script>
     <!--Counter js -->
-    <script src="{{ asset('admin/plugins/bower_components/waypoints/lib/jquery.waypoints.js') }}"></script>
-    <script src="{{ asset('admin/plugins/bower_components/counterup/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/waypoints/lib/jquery.waypoints.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/counterup/jquery.counterup.min.js') }}"></script>
     <!--Morris JavaScript -->
-    <script src="{{ asset('admin/plugins/bower_components/raphael/raphael-min.js') }}"></script>
-    <script src="{{ asset('admin/plugins/bower_components/morrisjs/morris.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/raphael/raphael-min.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/morrisjs/morris.js') }}"></script>
     <!-- chartist chart -->
-    <script src="{{ asset('admin/plugins/bower_components/chartist-js/dist/chartist.min.js') }}"></script>
-    <script src="{{ asset('admin/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/chartist-js/dist/chartist.min.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/chartist-plugin-tooltip-master/dist/chartist-plugin-tooltip.min.js') }}"></script>
     <!-- Calendar JavaScript -->
-    <script src="{{ asset('admin/plugins/bower_components/moment/moment.js') }}"></script>
-    <script src="{{ asset('admin/plugins/bower_components/calendar/dist/fullcalendar.min.js') }}"></script>
-    <script src="{{ asset('admin/plugins/bower_components/calendar/dist/cal-init.js') }}"></script>
-    <script src="{{ asset('admin/plugins/bower_components/toast-master/js/jquery.toast.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/moment/moment.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/calendar/dist/fullcalendar.min.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/calendar/dist/cal-init.js') }}"></script>
+    <script src="{{ asset('admin-css/plugins/bower_components/toast-master/js/jquery.toast.js') }}"></script>
     
     <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('admin/js/custom.min.js') }}"></script>
-    <script src="{{ asset('admin/js/dashboard1.js') }}?time=<?=date('His')?>"></script>
+    <script src="{{ asset('admin-css/js/custom.min.js') }}"></script>
+    <script src="{{ asset('admin-css/js/dashboard1.js') }}?time=<?=date('His')?>"></script>
     <!-- Custom tab JavaScript -->
-    <script src="{{ asset('admin/js/cbpFWTabs.js') }}"></script>
+    <script src="{{ asset('admin-css/js/cbpFWTabs.js') }}"></script>
     <script type="text/javascript">
     (function() {
         [].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {

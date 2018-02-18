@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.anggota')
 
 @section('title', 'Anggota - Koperasi Daya Masyarakat Indonesia')
 
@@ -26,15 +26,17 @@
                 </div>
                 <!-- /.col-lg-12 -->
             </div>
+            
             <!-- .row -->
             <div class="row">
+                @include('layout.alert');
                 <div class="col-md-6 col-sm-12 col-lg-4">
                     <div class="panel">
                         <div class="p-30">
                             <div class="row">
                                 <div class="col-xs-4 col-sm-4">
                                     @if(Auth::user()->foto != "")
-                                        <img src="{{ Auth::user()->foto }}" alt="{{ Auth::user()->name }}" class="img-circle img-responsive">
+                                        <img src="{{ asset('file_photo/'.  Auth::user()->id .'/'. Auth::user()->foto) }}" alt="{{ Auth::user()->name }}" class="img-circle img-responsive">
                                     @else 
                                         <img src="{{ asset('images/user.png') }}" alt="{{ Auth::user()->name }}" class="img-circle img-responsive">
                                     @endif
@@ -45,15 +47,16 @@
                             </div>
                             <div class="row text-center m-t-30">
                                 <div class="col-xs-4 b-r">
-                                    <h2>Simpanan Pokok</h2>
+                                    <h3>Simpanan Pokok</h3>
                                     <a href="{{ url('anggota/user/iuran') }}" class="btn btn-rounded btn-warning">Belum Lunas</a>
                                 </div>
                                 <div class="col-xs-4 b-r">
-                                    <h2>Simpanan Sukarela</h2>
+                                    <h3>Simpanan Sukarela</h3>
                                     <h4>Rp. 0</h4>
+                                    <a href="{{ route('anggota.index.save.profile') }}" title="Tambah Simpanan Sukarela"><i class="fa fa-plus"></i> </a>
                                 </div>
                                 <div class="col-xs-4 b-r">
-                                    <h2>Simpanan Wajib</h2>
+                                    <h3>Simpanan Wajib</h3>
                                     <a href="{{ url('anggota/user/iuran') }}" class="btn btn-rounded btn-warning">Belum Lunas</a>
                                 </div>
                             </div>
@@ -70,18 +73,18 @@
                 </div>
                 <div class="col-md-6 col-lg-8 col-sm-12">
 
-                    
                     <div class="panel panel-themecolor">
                         <div class="panel-heading">AKTIVASI KEANGGOTAAN</div>
-                        <div class="panel-body">
+                        <div class="panel-body">                            
                             <div class="steamline">
                                 <div class="sl-item">
                                     <div class="sl-left bg-success"> <i class="fa fa-check"></i></div>
                                     <div class="sl-right">
                                         <div><h2>Pendaftaran</h2> <span class="sl-date">&nbsp;</span></div>
                                         <div class="desc">
-                                            <form method="POST" action="{{ url('anggota/user/save') }}">
-                                              <div class="col-md-4">
+                                            <form method="POST" action="{{ route('anggota.index.save.profile') }}" enctype="multipart/form-data">
+                                                {{ csrf_field() }}
+                                                <div class="col-md-6">
                                                 <div>
                                                     <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> NIK : {{ Auth::user()->name }}</h5>
                                                 </div>
@@ -95,33 +98,64 @@
                                                     <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Telepon : {{ Auth::user()->telepon }}</h5>
                                                 </div>
                                                <div>
-                                                    <h5> <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-check"></i></span> Agama : </h5>
+                                                    @if(!empty(Auth::user()->agama))
+                                                        <h5><span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Agama : </h5>
+                                                    @else
+                                                        <h5><span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Agama : </h5>
+                                                    @endif
+
+                                                    <?php $agama = ['Islam', 'Kristen', 'Budha', 'Hindu']; ?>
                                                     <select class="form-control" name="agama">
                                                         <option value=""> - Agama - </option>
-                                                        <option value="Islam"> Islam </option>
-                                                        <option value="Kristen"> Kristen </option>
-                                                        <option value="Budha"> Budha </option>
-                                                        <option value="Hindu"> Hindu </option>
+                                                        @foreach($agama as $item)
+                                                            <option value="{{ $item }}" {{ $item == Auth::user()->agama ? 'selected' : '' }}> {{ $item }} </option>
+                                                        @endforeach
+
                                                     </select>
                                                 </div>
                                                 <hr />
                                                 <div>
-                                                    <h5> <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-check"></i></span> Tempat Lahir : </h5>
-                                                    <input type="text" name="tempat_lahir" class="form-control" />
+                                                    @if(!empty(Auth::user()->tempat_lahir))
+                                                        <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Tempat Lahir : </h5>
+                                                    @else 
+                                                        <h5> <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Tempat Lahir : </h5>
+                                                    @endif
+
+                                                    <input type="text" name="tempat_lahir" class="form-control" value="{{ Auth::user()->tempat_lahir }}" />
                                                 </div>
                                                 <hr />
                                                 <div>
-                                                    <h5> <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-check"></i></span> Tanggal Lahir : </h5>
-                                                    <input type="text" name="tanggal_lahir" class="form-control" />
+                                                    @if(!empty(Auth::user()->tanggal_lahir))
+                                                        <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Tanggal Lahir : </h5>
+                                                    @else 
+                                                         <h5> <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Tanggal Lahir : </h5>
+                                                    @endif
+
+                                                    <input type="text" name="tanggal_lahir" class="form-control" value="{{ Auth::user()->tanggal_lahir }}" />
                                                 </div>
                                                 <hr />
-                                                <div>
-                                                    <h5><span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Upload KTP <input type="file" name="file_ktp" class="form-control"></h5>
-                                                </div>
+                                                @if(!empty(Auth::user()->foto_ktp))
+                                                    <div>
+                                                        <h5><span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Upload KTP <input type="file" name="file_ktp" class="form-control"></h5>
+                                                        <img src="{{ asset('file_ktp/'. Auth::user()->id .'/'.  Auth::user()->foto_ktp)}}" style="width: 200px;">
+                                                    </div>
+                                                @else 
+                                                    <div>
+                                                        <h5><span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Upload KTP <input type="file" name="file_ktp" class="form-control"></h5>
+                                                    </div>
+                                                @endif
                                                 <hr />
-                                                <div>
-                                                    <h5><span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Upload Foto <input type="file" name="file_ktp" class="form-control"></h5>
-                                                </div>
+
+                                                @if(!empty(Auth::user()->foto))
+                                                    <div>
+                                                        <h5><span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Upload Foto <input type="file" name="file_photo" class="form-control"></h5>
+                                                        <img src="{{ asset('file_photo/'. Auth::user()->id .'/'. Auth::user()->foto)}}" style="width: 200px;">
+                                                    </div>
+                                                @else 
+                                                    <div>
+                                                        <h5><span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Upload Foto <input type="file" name="file_photo" class="form-control"></h5>
+                                                    </div>
+                                                @endif
                                                 <hr />
                                                 <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Simpan Perubahan</button>
                                               </div>
@@ -230,7 +264,8 @@
             <!-- ============================================================== -->
         </div>
         <!-- /.container-fluid -->
-        <footer class="footer text-center"> &copy; Kodami Pocket System </footer>
+        @include('layout.footer-admin')
+
     </div>
     <!-- ============================================================== -->
     <!-- End Page Content -->

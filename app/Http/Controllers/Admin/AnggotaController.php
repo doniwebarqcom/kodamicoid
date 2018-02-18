@@ -15,10 +15,6 @@ class AnggotaController extends ControllerLogin
 	 */
     public function index()
     {
-    	if (Auth::user() == NULL) {
-	        return redirect()->route('login');
-	    }
-	    
     	return view('admin.anggota.index');
     }
 }

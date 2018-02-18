@@ -37,7 +37,9 @@
 			<nav class="navbar header-navbar" role="navigation">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
-					<div class="logo navbar-brand"><h1 style="color: white; font-weight: bold;">Kodami Pocket System</h1></div>
+					<div class="logo navbar-brand">
+						<img src="{{ asset('kodami-co-id.png') }}" style="width: 200px;" />
+					</div>
 		      <button class='toggle-slide-left visible-xs collapsed navbar-toggle' type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><i class="fa fa-bars"></i></button>
 				</div>
 
@@ -47,7 +49,7 @@
 						<nav class='nav-menu navbar-left main-nav trig-mob slide-menu-left'>
 							<ul class='list-unstyled'>
 								<li>
-									<a href="#" data-scroll="information">
+									<a href="#" data-scroll="about_kodami">
 										<div class="inside">
 											<div class="backside"> About Kodami </div>
 											<div class="frontside"> About Kodami </div>
@@ -57,8 +59,8 @@
 								<li>
 									<a data-toggle="modal" role="button" href="#myModal">
 										<div class="inside">
-											<div class="backside"> Contact </div>
-											<div class="frontside"> Contact </div>
+											<div class="backside"> Hubungi Kami </div>
+											<div class="frontside"> Hubungi Kami </div>
 										</div>
 									</a>
 								</li>
@@ -96,8 +98,6 @@
 		</div>
 	</div>
 </header>
-
-
 <!--===========================-->
 <!--==========Content==========-->
 <div class='main-wrapper content'>
@@ -110,14 +110,8 @@
 						<ul class="form-bxslider list-unstyled">
 							<li>
 								<div class="list-forstart fin_1">
-									<h2 class='h-Bold'>KODAMI</h2>
-									<p class='desc'>Koperasi Daya Masyarakat (KODAMI) adalah koperasi simpan pinjam berskala nasional yang menawarkan beragam produk keuangan untuk membantu masyarakat Indonesia mencapai kehidupan yang lebih baik.</p>
-									<ul class='ul-list-slider Open-sansR'>
-										<li>Kenaggotaaan</li>
-										<li>Profesional</li>
-										<li>Competency</li>
-										<li>Giving</li>
-									</ul>
+									<h2 class="h-Bold" style="font-size: 29px;">Kodami Pocket System</h2>
+									<p class='desc'>Koperasi Daya Masyarakat Indonesia (KODAMI) adalah koperasi berskala nasional yang menawarkan beragam produk keuangan untuk membantu masyarakat Indonesia mencapai kehidupan yang lebih baik.</p>
 								</div>
 								<div class="img-slider hidden-xs fin_2"></div>
 							</li>
@@ -127,8 +121,7 @@
 					<div class="clearfix visible-xs visible-md"></div>
 
 					<div class="container relative fin_3" id='elem-portable'>
-						<div class="reg-now">
-
+						<div class="reg-now" style="top: 100px;">
 						@guest
 							<h2 class='medium-h text-center'>Registrasi Form</h2>
 							<h3 class='xsmall-h text-center'>Daftar disini untuk menjadi anggota Koperasi Kodami. </h3>
@@ -170,9 +163,9 @@
 			</div><!-- end container -->
 		</div>
 	</section>
-	<section class="container" data-anchor="features">
+	<section class="container" data-anchor="about_kodami">
 		<div class="spacer6"></div>
-			<h2 class='text-center xxh-Bold'>Koperasi Daya Masyarakat</h2>
+			<h2 class='text-center xxh-Bold'>Koperasi Daya Masyarakat Indonesia</h2>
 			<h3 class='text-center xmedium-h'>Kodami memberikan solusi kepada Usaha Anda<br />kami fokus memberikan layanan untuk Penjualan, Permodalan dan Perkembangan Bisnis Anda.</h3>
 			<div class="row trainings" id='trainings'>
 				<div class="col-md-3 col-xs-6 hov1">
@@ -243,8 +236,6 @@
 		</div>
 	</div>
 </footer>
-
-
 <!-- Top -->
 <div id="back-top-wrapper" class="visible-lg">
 	<p id="back-top" class='bounceOut'>
@@ -253,34 +244,37 @@
 		</a>
 	</p>
 </div>
-
 <!-- Modal -->
 <div id="myModal" class="modal fade" tabindex="-1" aria-hidden="true">
-	<div class="modal-wr">
+	<div class="modal-wr" style="width: 525px; left: 40%;">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-
-		<form id='contact' action="request-form.php" method="post" accept-charset="utf-8" role="form">
-			<input type="hidden" name='resultCaptcha' value=''>
+		<h2 style="font-size: 20px;">Silakan hubungi kami untuk memberikan kritik / saran, menanyakan keanggotaan, mengadakan kerja sama, laporan mengenai layanan kami dsb. KODAMI selalu siap membantu anda.</h2>
+		<br />
+		<form id='contact' action="{{ route('contact-us') }}" method="post" accept-charset="utf-8" role="form">
+			{{ csrf_field() }}
 			<div class='control-group'>
-				<input type="text" name='name' value='' placeholder='Enter your name' data-required>
+				<input type="text" required name="nama" placeholder='Nama' data-required>
 			</div>
 			<div class='control-group'>
-				<input type="text" name='email' value='' placeholder='Enter your mail' class='insert-attr' data-required>
+				<input type="email" required placeholder='Email' name="email" class='insert-attr' data-required>
 			</div>
 			<div class='control-group'>
-				<textarea name='message' cols="30" rows="10" maxlength="300" placeholder='Enter your message ...' data-required></textarea>
+				<input type="text" required placeholder='No Telepon' name="telepon" class='insert-attr' data-required>
 			</div>
-			<div class='control-group captcha'>
-				<div class="picture-code">
-					What is <span id="numb1">4</span> + <span id="numb2">1</span> (Anti-spam)
-				</div>
-				<input type="text" placeholder='Type here ...' name='name' id='chek' data-required data-pattern="5">
+			<div class='control-group'>
+				<textarea name='message' cols="30" required rows="10" maxlength="300" placeholder='Ketik pertanyaan anda disini.' data-required></textarea>
 			</div>
 			<button type="submit" value="Submit" class='btn submit' name="submit">Submit</button>
 		</form>
 	</div>
 </div>
 
+<div id="modal_success" class="modal fade" tabindex="-1" aria-hidden="true">
+	<div class="modal-wr">
+		<h2>Terima kasih</h2> 
+		<p>{{ Session::get('messages') }}</p>
+	</div>
+</div>
 
 </div>
 	<div class="mask"></div>
@@ -293,9 +287,16 @@
 	<script src="{{ asset('advisa/js/jquery.colorbox-min.js') }}"></script>
 	<script src="{{ asset('advisa/js/jquery.waypoints.min.js') }}"></script>
 	<script src="{{ asset('advisa/js/jquery.parallax-1.1.3.js') }}"></script>
-	<script src="{{ asset('advisa/js/custom.js?v=1') }}"></script>
+	<script src="{{ asset('advisa/js/custom.js?v=2') }}"></script>
 	<!-- file loader -->
 	<script src="{{ asset('advisa/js/loader.js?v=1') }}"></script>
+	
+	<script type="text/javascript">
+		
+		@if(Session::has('messages'))
+		$("#modal_success").modal('show');
+		@endif;
 
+	</script>
 </body>
 </html>

@@ -14,10 +14,12 @@ class ControllerLogin extends BaseController
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
     /**
-     * [__construct description]
+     * Create a new controller instance.
+     *
+     * @return void
      */
-    public function __construct() {
-     	
-     
+    public function __construct()
+    {
+        $this->middleware('auth');
     }
 }

@@ -10,9 +10,9 @@
 <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
 <title>LOGIN - Kodami Pocket System</title>
 <!-- Bootstrap Core CSS -->
-<link href="{{ asset('admin/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+<link href="{{ asset('admin-css/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 <!-- animation CSS -->
-<link href="{{ asset('admin/css/animate.css') }}" rel="stylesheet">
+<link href="{{ asset('admin-css/css/animate.css') }}" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="{{ asset('admin/css/style.css') }}?time=<?=date('His')?>" rel="stylesheet">
 <!-- color CSS -->
@@ -30,19 +30,19 @@
 
 </section>
 <!-- jQuery -->
-<script src="{{ asset('admin/plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('admin-css/plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
 <!-- Bootstrap Core JavaScript -->
-<script src="{{ asset('admin/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('admin-css/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <!-- Menu Plugin JavaScript -->
-<script src="{{ asset('admin/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js') }}"></script>
+<script src="{{ asset('admin-css/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js') }}"></script>
 
 <!--slimscroll JavaScript -->
-<script src="{{ asset('admin/js/jquery.slimscroll.js') }}"></script>
+<script src="{{ asset('admin-css/js/jquery.slimscroll.js') }}"></script>
 <!--Wave Effects -->
-<script src="{{ asset('admin/js/waves.js') }}"></script>
+<script src="{{ asset('admin-css/js/waves.js') }}"></script>
 <!-- Custom Theme JavaScript -->
-<script src="{{ asset('admin/js/custom.min.js') }}"></script>
+<script src="{{ asset('admin-css/js/custom.min.js') }}"></script>
 <!--Style Switcher -->
-<script src="{{ asset('admin/plugins/bower_components/styleswitcher/jQuery.style.switcher.js') }}"></script>
+<script src="{{ asset('admin-css/plugins/bower_components/styleswitcher/jQuery.style.switcher.js') }}"></script>
 </body>
 </html>

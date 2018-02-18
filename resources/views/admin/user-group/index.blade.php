@@ -7,9 +7,6 @@
 @endsection
 
 @section('content')
-
-  
-        
 <!-- ============================================================== -->
 <!-- Page Content -->
 <!-- ============================================================== -->
@@ -31,7 +28,7 @@
         <div class="row">
             <div class="col-md-12">
 
-                @extends('layout.alert');
+                @include('layout.alert');
 
                 <div class="panel">
                     <div class="panel-heading">MANAGE USER GROUP <a href="{{ url('admin/user-group/create') }}" class="btn btn-success"> <i class="fa fa-plus"></i> TAMBAH</a></div>
@@ -44,29 +41,29 @@
                                 <tr>
                                     <th width="70" class="text-center">#</th>
                                     <th>NAME</th>
-                                    <th>GROUP</th>
+                                    <th>DESCRIPTION</th>
                                     <th>ADDED</th>
                                     <th width="300">MANAGE</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td class="text-center">1</td>
-                                    <td>Daniel Kristeen
-                                        <br><span class="text-muted">Texas, Unitedd states</span></td>
-                                    <td>Visual Designer
-                                        <br><span class="text-muted">Past : teacher</span></td>
-                                    <td>daniel@website.com
-                                        <br><span class="text-muted">999 - 444 - 555</span></td>
-                                    <td>15 Mar 1988
-                                        <br><span class="text-muted">10: 55 AM</span></td>
-                                    <td>
-                                        <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-key"></i></button>
-                                        <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
-                                        <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button>
-                                        <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-20"><i class="ti-upload"></i></button>
-                                    </td>
-                                </tr>
+                                @foreach($data as $no => $item)
+                                    <tr>
+                                        <td class="text-center">{{ $no+1 }}</td>
+                                        <td>{{ $item->name }}</td>
+                                        <td>{{ $item->description }}</td>
+                                        <td>{{ $item->created_at }}</td>
+                                        <td>
+                                            <a href="{{ route('user-group.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button></a>
+
+                                            <form action="{{ route('user-group.destroy', $item->id) }}" method="post" style="float: left;">
+                                                {{ csrf_field() }}
+                                                {{ method_field('DELETE') }}                                               
+                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                @endforeach
                             </tbody>
                         </table>
                     </div>
@@ -77,7 +74,7 @@
         <!-- ============================================================== -->
     </div>
     <!-- /.container-fluid -->
-    <footer class="footer text-center"> 2017 &copy; Ample Admin brought to you by themedesigner.in </footer>
+   @include('layout.footer-admin')
 </div>
 <!-- ============================================================== -->
 <!-- End Page Content -->

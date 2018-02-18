@@ -10,15 +10,15 @@ use Auth;
 class UserController extends ControllerLogin
 {
 	/**
-	 * [__construct description]
-	 */
-	public function __construct()
-	{
-		if (Auth::user() == NULL) {
-	        return redirect()->route('login');
-	    }
-	}
-	
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
 	/**
 	 * [index description]
 	 * @return [type] [description]
@@ -36,7 +36,7 @@ class UserController extends ControllerLogin
     {
     	return view('anggota.user.konfirmasi-pembayaran');
     }
-
+    
     /**
      * [postKonfirmasiAnggota description]
      * @return [type] [description]

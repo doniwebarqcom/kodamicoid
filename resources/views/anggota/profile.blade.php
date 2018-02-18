@@ -1,6 +1,6 @@
-@extends('layout.admin')
+@extends('layout.anggota')
 
-@section('title', 'Admin - Koperasi Daya Masyarakat Indonesia')
+@section('title', 'Anggota - Koperasi Daya Masyarakat Indonesia')
 
 @section('sidebar')
 

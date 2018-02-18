@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Kodami\Models\Mysql\UserGroup;
-
 use Auth;
 
 class UserGroupController extends Controller
@@ -16,11 +15,9 @@ class UserGroupController extends Controller
 	 */
     public function index()
     {
-        if (Auth::user() == NULL) {
-            return redirect()->route('login');
-        }
-        
-    	return view('admin.user-group.index');
+        $data = UserGroup::all();
+
+    	return view('admin.user-group.index', compact('data'));
     }
 
     /**
@@ -41,6 +38,46 @@ class UserGroupController extends Controller
         return view('admin.user-group.create');
     }
 
+    /**
+     * [edit description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function edit($id)
+    {
+        $data = UserGroup::where('id', $id)->get();
+
+        return view('admin.user-group.edit', compact('data'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $data =  UserGroup::where('id', $id)->first();
+        $data->name         = $request->name;
+        $data->description  = $request->description;
+        $data->save();
+
+        return redirect()->route('admin.user-group.index')->with('message-success', 'Data berhasil disimpan'); 
+    }
+    /**
+     * [desctroy description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function destroy($id)
+    {
+        $data = UserGroup::where('id', $id)->first();
+        $data->delete();
+
+        return redirect()->route('user-group.index')->with('message-sucess', 'Data berhasi di hapus');
+    }
 
    /**
     * Store a newly created resource in storage.

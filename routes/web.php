@@ -25,35 +25,37 @@ Route::get('register/success', 'RegisterController@success');
 Route::get('register', 'RegisterController@index');
 Route::post('registerPost', 'RegisterController@registerPost');
 Route::get('logout', 'Auth\LoginController@logout');
+Route::post('contact-us', 'HomeController@postContactUs')->name('contact-us');
 
 // ROUTING ADMIN
 Route::group(['prefix' => 'admin'], function(){
 
-	$pathAnggota = "Admin\\";
+	$path = "Admin\\";
 
-	Route::get('/', $pathAnggota . 'IndexController@index');
-	Route::get('profile', $pathAnggota . 'UserController@profile');
-	
-	Route::resource('user', $pathAnggota . 'UserController');
-	Route::resource('user-group', $pathAnggota . 'UserGroupController');
-	Route::resource('anggota', $pathAnggota . 'AnggotaController');
+	Route::get('/', $path . 'IndexController@index')->name('admin.index');
+	Route::get('profile', $path . 'UserController@profile');
+	Route::get('contact-us', $path.'ContactUsController@index')->name('admin.contact-us');
 
+	Route::resource('user', $path . 'UserController');
+	Route::resource('user-group', $path . 'UserGroupController');
+	Route::resource('anggota', $path . 'AnggotaController');
 });
 
 // ROUTING ANGGOTA
 Route::group(['prefix' => 'anggota'], function(){
 
-	$pathAnggota = "Anggota\\";
+	$path = "Anggota\\";
 
-	Route::get('/', $pathAnggota . 'IndexController@index');
-	Route::get('profile', $pathAnggota . 'IndexController@index');
-	Route::get('user/konfirmasi-pembayaran', $pathAnggota . 'UserController@konfirmasiPembayaran');
-	Route::post('user/post-konfirmasi-pembayaran', $pathAnggota.'UserController@postKonfirmasiPembayaran');
+	Route::get('/', $path . 'IndexController@index')->name('anggota.index');
+	Route::get('profile', $path . 'IndexController@index')->name('anggota.profile');
+	Route::get('user/konfirmasi-pembayaran', $path . 'UserController@konfirmasiPembayaran');
+	Route::post('user/post-konfirmasi-pembayaran', $path.'UserController@postKonfirmasiPembayaran');
 	
-	Route::get('user/submit-pembayaran-anggota', $pathAnggota . 'UserController@submitkonfirmasianggota');
-	Route::get('user/post-submit-pembayaran-anggota', $pathAnggota . 'UserController@submitkonfirmasianggota');
+	Route::get('user/submit-pembayaran-anggota', $path . 'UserController@submitkonfirmasianggota');
+	Route::get('user/post-submit-pembayaran-anggota', $path . 'UserController@submitkonfirmasianggota');
+	Route::post('save-profile', $path.'IndexController@saveProfile')->name('anggota.index.save.profile');
 
-	
+	Route::get('bayar', $path.'BayarController@step1');
 });
 
 Auth::routes();
