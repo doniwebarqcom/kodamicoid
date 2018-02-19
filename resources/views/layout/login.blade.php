@@ -14,9 +14,9 @@
 <!-- animation CSS -->
 <link href="{{ asset('admin-css/css/animate.css') }}" rel="stylesheet">
 <!-- Custom CSS -->
-<link href="{{ asset('admin/css/style.css') }}?time=<?=date('His')?>" rel="stylesheet">
+<link href="{{ asset('admin-css/css/style.css') }}?time=<?=date('His')?>" rel="stylesheet">
 <!-- color CSS -->
-<link href="{{ asset('admin/css/colors/blue.css') }}" id="theme"  rel="stylesheet">
+<link href="{{ asset('admin-css/css/colors/blue.css') }}" id="theme"  rel="stylesheet">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>

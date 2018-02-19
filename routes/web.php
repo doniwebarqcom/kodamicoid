@@ -54,8 +54,10 @@ Route::group(['prefix' => 'anggota'], function(){
 	Route::get('user/submit-pembayaran-anggota', $path . 'UserController@submitkonfirmasianggota');
 	Route::get('user/post-submit-pembayaran-anggota', $path . 'UserController@submitkonfirmasianggota');
 	Route::post('save-profile', $path.'IndexController@saveProfile')->name('anggota.index.save.profile');
-
 	Route::get('bayar', $path.'BayarController@step1');
+	Route::get('rekening-bank', $path. 'RekeningBankController@index')->name('anggota.rekening-bank');
+	Route::get('rekening-bank/create', $path. 'RekeningBankController@create')->name('anggota.rekening-bank.create');
+
 });
 
 Auth::routes();
