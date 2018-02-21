@@ -8,6 +8,7 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
     <title>@yield('title')</title>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <!-- Bootstrap Core CSS -->
     <link href="{{ asset('admin-css/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Menu CSS -->
@@ -39,7 +40,6 @@
         }
     </style>
 </head>
-
 <body class="fix-header">
 
      <!-- ============================================================== -->
@@ -62,7 +62,7 @@
             <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="<?=url('/')?>"><b>KODAMI Pocket System</b>
+                    <a class="logo" href="{{ url('anggota') }}"><b>KODAMI Pocket System</b>
                         <span class="hidden-xs">&nbsp;</span> 
                     </a>
                 </div>
@@ -153,13 +153,13 @@
                             <li><a href="{{ url('logout') }}"><i class="fa fa-power-off"></i> <span class="hide-menu">Logout</span></a></li>
                         </ul>
                     </li>
-                    <li> <a href="/" class="waves-effect active"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span class="label label-rouded label-inverse pull-right">4</span></span></a>
+                    <li> <a href="{{ url('anggota') }}" class="waves-effect active"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span class="label label-rouded label-inverse pull-right">4</span></span></a>
                     </li>
 
                     <li class="devider"></li>
                     <li class="last-nav"><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu">Apps<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <li> <a href="{{ route('anggota.rekening-bank') }}" class="waves-effect"><i class="mdi mdi-calendar-check fa-fw"></i> <span class="hide-menu">Rekening Bank</span></a></li>
+                            <li> <a href="{{ route('rekening-bank-user.index') }}" class="waves-effect"><i class="mdi mdi-calendar-check fa-fw"></i> <span class="hide-menu">Rekening Bank</span></a></li>
                         </ul>
                     </li>
                 </ul>
@@ -170,6 +170,8 @@
         <!-- ============================================================== -->
 
         @yield('content')
+        
+        @include('layout.alert')
 
     <!-- ============================================================== -->
     <!-- End Wrapper -->

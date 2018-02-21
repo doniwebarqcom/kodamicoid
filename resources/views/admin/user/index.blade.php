@@ -16,7 +16,7 @@
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h4 class="page-title">Dashboard</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-
+                <a href="{{ route('user.create') }}" class="btn btn-success pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"> <i class="fa fa-plus"></i> TAMBAH</a>
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
                     <li class="active">Home</li>
@@ -27,11 +27,8 @@
         <!-- .row -->
         <div class="row">
             <div class="col-md-12">
-
-                @include('layout.alert');
-
                 <div class="panel">
-                    <div class="panel-heading">MANAGE USER <a href="{{ url('admin/user/create') }}" class="btn btn-success"> <i class="fa fa-plus"></i> TAMBAH</a></div>
+                    <div class="panel-heading">MANAGE USER</div>
                     <div class="table-responsive">
                         <div class="col-md-12">
                             

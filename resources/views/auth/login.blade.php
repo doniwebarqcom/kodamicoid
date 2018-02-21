@@ -18,8 +18,8 @@
       </div>
       <div class="new-login-box">
           <div class="white-box">
-              <h3 class="box-title m-b-0">Sign In to System</h3>
-              <small>Enter your details below</small>
+              <h3 class="box-title m-b-0">Kodami Pocket System</h3>
+              <small>Sign In to and Enter your details below</small>
             <form class="form-horizontal new-lg-form" method="POST" id="loginform" action="{{ route('login') }}">
               
               {{ csrf_field() }}

@@ -9,6 +9,7 @@
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
     <title>@yield('title')</title>
     <!-- Bootstrap Core CSS -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="{{ asset('admin-css/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Menu CSS -->
     <link href="{{ asset('admin-css/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css') }}" rel="stylesheet">
@@ -62,7 +63,7 @@
             <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="<?=url('/')?>"><b>KODAMI Pocket System</b>
+                    <a class="logo" href="{{ url('admin') }}"><b>KODAMI Pocket System</b>
                         <span class="hidden-xs">&nbsp;</span> 
                     </a>
                 </div>
@@ -153,9 +154,8 @@
                             <li><a href="{{ url('logout') }}"><i class="fa fa-power-off"></i> <span class="hide-menu">Logout</span></a></li>
                         </ul>
                     </li>
-                    <li> <a href="/" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span class="label label-rouded label-inverse pull-right">4</span></span></a>
+                    <li> <a href="{{ url('anggota') }}" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span class="label label-rouded label-inverse pull-right">4</span></span></a>
                     </li>
-
                     <li class="devider"></li>
                     <li>
                         <a href="javascript:void(0)" class="waves-effect">
@@ -164,9 +164,6 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{ url('admin/user') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users</span></a>
-                            </li>
-                            <li>
-                                <a href="{{ url('admin/user-group') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users Group</span></a>
                             </li>
                         </ul>
                     </li>
@@ -189,6 +186,12 @@
                             <li>
                                 <a href="{{ route('admin.contact-us') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Submit Kontak Kami</span></a>
                             </li>
+                            <li>
+                                <a href="{{ route('rekening-bank.index') }}"><i class="ti-book fa-fw"></i><span class="hide-menu">Rekening Bank</span></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('bank.index') }}"><i class="ti-server fa-fw"></i><span class="hide-menu">Bank</span></a>
+                            </li>
                          </ul>
                     </li>
 
@@ -200,6 +203,8 @@
         <!-- ============================================================== -->
         
         @yield('content')
+
+        @include('layout.alert')
 
     <!-- ============================================================== -->
     <!-- End Wrapper -->

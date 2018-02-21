@@ -13,10 +13,6 @@
 		  	<img src="{{ asset('logo.jpeg') }}" style="width: 100%;margin-bottom:10px;border-radius: 5px;" />
 		  </div>
 		  <form class="login-form" method="POST" action="">
-		  	
-
-
-
 		  	@if(\Session::has('alert-success'))
                 <div class="alert alert-success">
 	                <br/>
@@ -24,8 +20,6 @@
 	                <br/><br/>
             	</div>
             @endif
-
-            
 		  	<input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>" />
 
 		    <span class="error"><?php echo $errors->first('nik') ?></span>

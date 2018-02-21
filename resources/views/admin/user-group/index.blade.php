@@ -27,9 +27,6 @@
         <!-- .row -->
         <div class="row">
             <div class="col-md-12">
-
-                @include('layout.alert');
-
                 <div class="panel">
                     <div class="panel-heading">MANAGE USER GROUP <a href="{{ url('admin/user-group/create') }}" class="btn btn-success"> <i class="fa fa-plus"></i> TAMBAH</a></div>
                     <div class="table-responsive">

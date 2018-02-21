@@ -18,7 +18,7 @@
                     <h4 class="page-title">Dashboard</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
-                    <a href="{{ url('profile')}}" target="_blank" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Profile</a>
+                    <a href="{{ route('anggota.profile')}}" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Profile</a>
                     <ol class="breadcrumb">
                         <li><a href="javascript:void(0)">Dashboard</a></li>
                         <li class="active">Dashboard</li>
@@ -29,7 +29,6 @@
             
             <!-- .row -->
             <div class="row">
-                @include('layout.alert');
                 <div class="col-md-6 col-sm-12 col-lg-4">
                     <div class="panel">
                         <div class="p-30">
@@ -99,41 +98,45 @@
                                                 </div>
                                                <div>
                                                     @if(!empty(Auth::user()->agama))
-                                                        <h5><span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Agama : </h5>
+                                                        <h5><span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Agama : {{ Auth::user()->agama }}</h5>
                                                     @else
                                                         <h5><span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Agama : </h5>
                                                     @endif
 
-                                                    <?php $agama = ['Islam', 'Kristen', 'Budha', 'Hindu']; ?>
-                                                    <select class="form-control" name="agama">
-                                                        <option value=""> - Agama - </option>
-                                                        @foreach($agama as $item)
-                                                            <option value="{{ $item }}" {{ $item == Auth::user()->agama ? 'selected' : '' }}> {{ $item }} </option>
-                                                        @endforeach
-
-                                                    </select>
+                                                    @if(empty(Auth::user()->agama))
+                                                        <?php $agama = ['Islam', 'Kristen', 'Budha', 'Hindu']; ?>
+                                                        <select class="form-control" name="agama">
+                                                            <option value=""> - Agama - </option>
+                                                            @foreach($agama as $item)
+                                                                <option value="{{ $item }}" {{ $item == Auth::user()->agama ? 'selected' : '' }}> {{ $item }} </option>
+                                                            @endforeach
+                                                        </select>    
+                                                    @endif
                                                 </div>
-                                                <hr />
                                                 <div>
                                                     @if(!empty(Auth::user()->tempat_lahir))
-                                                        <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Tempat Lahir : </h5>
+                                                        <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Tempat Lahir : {{ Auth::user()->tempat_lahir }}</h5>
                                                     @else 
                                                         <h5> <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Tempat Lahir : </h5>
                                                     @endif
 
-                                                    <input type="text" name="tempat_lahir" class="form-control" value="{{ Auth::user()->tempat_lahir }}" />
+                                                    @if(empty(Auth::user()->tempat_lahir))
+                                                        <input type="text" name="tempat_lahir" class="form-control" value="{{ Auth::user()->tempat_lahir }}" />
+                                                    @endif
+
                                                 </div>
-                                                <hr />
                                                 <div>
                                                     @if(!empty(Auth::user()->tanggal_lahir))
-                                                        <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Tanggal Lahir : </h5>
+                                                        <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Tanggal Lahir : {{ Auth::user()->tanggal_lahir }}</h5>
                                                     @else 
                                                          <h5> <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Tanggal Lahir : </h5>
                                                     @endif
 
-                                                    <input type="text" name="tanggal_lahir" class="form-control" value="{{ Auth::user()->tanggal_lahir }}" />
+                                                    @if(empty(Auth::user()->tanggal_lahir))
+                                                        <input type="text" name="tanggal_lahir" class="form-control" value="{{ Auth::user()->tanggal_lahir }}" />
+                                                    @endif
+
                                                 </div>
-                                                <hr />
                                                 @if(!empty(Auth::user()->foto_ktp))
                                                     <div>
                                                         <h5><span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Upload KTP <input type="file" name="file_ktp" class="form-control"></h5>

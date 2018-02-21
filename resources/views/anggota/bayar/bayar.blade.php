@@ -15,7 +15,7 @@
                 <h4 class="page-title">Pembayaran</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                 
-                <a href="{{ route('anggota.profile') }}"class="btn-info btn-circle pull-right m-l-20"><i class="ti-user text-white"></i></a>
+                <a href="{{ route('anggota.profile') }}" class="btn-info btn-circle pull-right m-l-20"><i class="ti-user text-white"></i></a>
                 
                 <ol class="breadcrumb">
                     <li><a href="{{ route('anggota.index') }}">Home</a></li>
@@ -29,93 +29,147 @@
             <div class="col-md-12">
                 <div class="white-box">
                     <div class="vtabs">
-                        <ul class="nav tabs-vertical">
-                            <li class="tab active">
-                                <a data-toggle="tab" href="#vihome3" aria-expanded="false"> <span><i class="fa fa-money"></i> Bank Transfer</span></a>
+                        <ul class="nav tabs-vertical col-md-4">
+                            <li class="tab active li-tab-opsi_pembayaran">
+                                <a data-toggle="tab" href="#tab-opsi_pembayaran" aria-expanded="false"> <span><i class="fa fa-money"></i> Opsi Pembayaran</span></a>
 
                             </li>
-                            <li class="tab">
-                                <a data-toggle="tab" href="#viprofile3" aria-expanded="false"> <span><i class="fa fa-bank"></i> Rekening Bank</span></a>
+                            <li class="tab li-tab-rekening">
+                                <a data-toggle="tab" href="#tab-rekening" aria-expanded="false"> <span><i class="fa fa-bank"></i> Rekening Bank</span></a>
                             </li>
-                            <li class="tab">
-                                <a aria-expanded="true" data-toggle="tab" href="#vimessages3"> <span><i class="ti-email"></i> Pembayaran</span></a>
+                            <li class="tab li-tab-pembayaran">
+                                <a aria-expanded="true" data-toggle="tab" href="#tab-pembayaran"> <span><i class="ti-email"></i> Pembayaran</span></a>
                             </li>
                         </ul>
-                        <div class="tab-content">
-                            <div id="vihome3" class="tab-pane active">
-                                <div class="col-md-12">
-                                    <h3>Bank Transfer</h3>    
-                                    <div class="col-md-4">
-                                        <img src="{{ asset('images/bank/bca.png') }}">
-                                        <p>
-                                            No Rekening : 0984746582<br />
-                                            Atas Nama : KODAMI
-                                        </p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <img src="{{ asset('images/bank/bni.png') }}">
-                                        <p>
-                                            No Rekening : 0984746582<br />
-                                            Atas Nama : KODAMI
-                                        </p>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <img src="{{ asset('images/bank/bri.png') }}">
-                                        <p>
-                                            No Rekening : 0984746582<br />
-                                            Atas Nama : KODAMI
-                                        </p>
+                        <div class="tab-content col-md-7">
+                            <div id="tab-opsi_pembayaran" class="tab-pane active">
+                                <div class="col-lg-12 col-sm-12 col-xs-12">
+                                    <div class="white-box">
+                                        <!-- Nav tabs -->
+                                        <ul class="nav nav-tabs" role="tablist">
+                                            <li role="presentation" class="active"><a href="#transfer" aria-controls="home" role="tab" data-toggle="tab" aria-expanded="false"><span><i class="fa fa-bank"></i> Bank Transfer</span></a></li>
+                                            
+                                            <li role="presentation" class=""><a href="#iprofile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span><i class="fa fa-credit-card-alt"></i> Kartu Kredit / Debit Online</span> </a></li>
+
+                                            <li role="presentation" class=""><a href="#imessages" aria-controls="messages" role="tab" data-toggle="tab" aria-expanded="true"><span><i class="fa fa-bank"></i> Indomaret</span></a></li>
+                                            
+                                            <li role="presentation" class=""><a href="#isettings" aria-controls="settings" role="tab" data-toggle="tab" aria-expanded="false"><span><i class="fa fa-bank"></i> Alfamart</span></a></li>
+                                        </ul>
+                                        <!-- Tab panes -->
+                                        <div class="tab-content">
+                                            <div role="tabpanel" class="tab-pane active" id="transfer">
+                                                <div class="col-md-12 show-grid">
+                                                    <h3>Bank Transfer</h3>
+                                                    <p>Pilih salah satu bank yang akan anda transfer</p>  
+                                                    @foreach($rekening_bank as $item)
+                                                    <div class="col-md-4 list-bank" style="margin-right: 20px; cursor: pointer;">
+                                                        
+                                                        <input type="hidden" class="hidden-rekening_bank_id" value="{{ $item->id }}">
+                                                        <input type="hidden" class="hidden-rekening_bank_nama_akun" value="{{ $item->nama_akun }}">
+                                                        <input type="hidden" class="hidden-rekening_bank_no_rekening" value="{{ $item->no_rekening }}">
+                                                        <input type="hidden" class="hidden-rekening_bank_image" value="{{ asset('bank/'.$item->bank->image) }}">
+                                                        <input type="hidden" class="hidden-rekening_bank_bank_id" value="{{ $item->bank_id }}">
+
+                                                        <span class="btn btn-xs btn-rounded btn-success checklist-bank"><i class="fa fa-check"></i></span>
+
+                                                        <img src="{{ asset('bank/'. $item->bank->image) }}">
+                                                        <p>
+                                                            No Rekening : <strong>{{ $item->no_rekening }}</strong><br />
+                                                            <strong>{{ $item->nama_akun }}</strong>
+                                                        </p>
+                                                    </div>
+                                                    @endforeach  
+                                                </div>
+                                                <button class="btn btn-success pull-right btn-next" style="display:none;">Berikutnya <i class="fa fa-arrow-right"></i> </button>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="iprofile">
+                                                <br />
+                                                <h4><i class="fa fa-ban"></i> <i> Maaf sistem pembayaran ini belum bisa digunakan</i></h4>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="imessages">
+                                                <br />
+                                                <h4><i class="fa fa-ban"></i> <i>Maaf sistem pembayaran ini belum bisa digunakan</i></h4>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div role="tabpanel" class="tab-pane" id="isettings">
+                                                <br />
+                                                <h4><i class="fa fa-ban"></i> <i>Maaf sistem pembayaran ini belum bisa digunakan</i></h4>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="clearfix"></div>
+                                 <div class="clearfix"></div>
                             </div>
-                            <div id="viprofile3" class="tab-pane">
+
+                            <div id="tab-rekening" class="tab-pane">
                                 <h3>Rekening Bank Anda</h3>
-                                <a href="" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah Rekening Bank</a>
+                                <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal_rekening_bank"><i class="fa fa-plus"></i> Tambah Rekening Bank</a>
                                 <br style="clear:both;" />
                                 <br style="clear:both;" />
                                 <table class="table table-bordered" style="width: 100%;">
                                     <thead>
                                         <tr>
                                             <th>No</th>
-                                            <th>Bank</th>
-                                            <th>Atas Nama</th>
-                                            <th>Cabang</th>
+                                            <th>Nama Akun</th>
                                             <th>No Rekening</th>
+                                            <th>Bank</th>
+                                            <th>Cabang</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    @foreach($rekening_bank_user as $no => $item)
+                                        <tr style="cursor: pointer;" class="rekening_bank_user">
+                                            <td style="position: relative;">
+                                                <input type="hidden" class="rekening_bank_user_id" value="{{ $item->id }}">
+                                                <span class="btn btn-xs btn-rounded btn-success checklist-rekening-bank"><i class="fa fa-check"></i></span>
+                                                {{ $no+1 }}
+                                            </td>
+                                            <td>{{ $item->nama_akun }}</td>
+                                            <td>{{ $item->no_rekening }}</td>
+                                            <td><img src="{{ asset('bank/'. $item->bank->image) }}" style="width: 200px;" /></td>
+                                            <td>{{ $item->cabang }}</td>
+                                        </tr>
+                                    @endforeach
                                     </tbody>
                                 </table>
+                                <button class="btn btn-success pull-right btn-next-rekening-bank" style="display:none;">Berikutnya <i class="fa fa-arrow-right"></i> </button>
                             </div>
-                            <div id="vimessages3" class="tab-pane">
+                            <div id="tab-pembayaran" class="tab-pane">
                                 <div class="white-box printableArea">
-                                  <form method="post" action="">
-                                    <h3><b>INVOICE</b> <span class="pull-right">#5669626</span></h3>
+                                  <form method="post" id="form_payment" action="{{ route('anggota.bayar.submit') }}">
+                                    {{ csrf_field() }}
+                                    <h3><b>INVOICE</b> <span class="pull-right">#{{ $no_invoice }}</span></h3>
+
+                                    <input type="hidden" name="no_invoice" value="{{ $no_invoice }}">
+                                    <input type="hidden" name="total_pembayaran" value="{{ $total_pembayaran}}" />
+                                    <input type="hidden" name="rekening_bank_id" />
+                                    <input type="hidden" name="rekening_bank_user_id" />
+                                    <input type="hidden" name="due_date" value="{{ $due_date }}" />
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="pull-left">
-                                                <h3>Transfer Ke,</h3>
-
-                                                <!-- <address>
-                                                    <h3> &nbsp;<b class="text-danger">Elite Admin</b></h3>
-                                                    <p class="text-muted m-l-5">E 104, Dharti-2,
-                                                        <br> Nr' Viswakarma Temple,
-                                                        <br> Talaja Road,
-                                                        <br> Bhavnagar - 364002</p>
-                                                </address> -->
+                                                <h3>Transfer Ke,</h3> 
+                                                <div class="transfer_ke">
+                                                    <img src="http://localhost/kodami.co.id/public/bank/1519125431.png">
+                                                    <p>
+                                                        No Rekening : <strong class="no_rekening">123456789</strong><br>
+                                                        <strong class="nama_akun">Koperasi Daya Masyarakat</strong>
+                                                    </p>
+                                                </div> 
                                             </div>
                                             <div class="pull-right text-right">
                                                 <address>
                                                     <h3>To,</h3>
                                                     <h4 class="font-bold">{{ Auth::user()->name }},</h4>
-                                                    <p class="text-muted m-l-30">E 104, Dharti-2,
-                                                        <br> Nr' Viswakarma Temple,
-                                                        <br> Talaja Road,
-                                                        <br> Bhavnagar - 364002</p>
-                                                    <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> {{ date('d F Y') }}</p>
-                                                    <p><b>Due Date :</b> <i class="fa fa-calendar"></i> {{ date('d F Y', strtotime("+3 dasys")) }}</p>
+                                                    <p class="text-muted m-l-30">
+                                                        {{ Auth::user()->alamat }}
+                                                    </p>
+                                                    <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> {{ $invoice_date }}</p>
+                                                    <p><b>Due Date :</b> <i class="fa fa-calendar"></i> {{ $due_date }}</p>
                                                 </address>
                                             </div>
                                         </div>
@@ -151,11 +205,11 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="pull-right m-t-30 text-right">
-                                                <h3><b>Total :</b> Rp. 120.000</h3> </div>
+                                                <h3><b>Total :</b> Rp. {{ number_format($total_pembayaran) }}</h3> </div>
                                             <div class="clearfix"></div>
                                             <hr>
                                             <div class="text-right">
-                                                <button class="btn btn-danger" type="submit"> Proceed to payment </button>
+                                                <span class="btn btn-danger" id="submit_payment"> Proceed to payment </span>
                                                 <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
                                             </div>
                                         </div>
@@ -170,16 +224,80 @@
         </div>
         <!-- /.row -->
     </div>
+
+    <div class="modal fade" id="modal_rekening_bank" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="exampleModalLabel1">Tambah Rekening Bank</h4> </div>
+                    <div class="modal-body">
+                        <form method="POST" action="{{ route('ajax.add.rekening.bank') }}" id="form-add-rekening">
+                            {{ csrf_field() }}
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">Nama Akun:</label>
+                                <input type="text" class="form-control" name="nama_akun"> </div>
+                            
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">No Rekening:</label>
+                                <input type="text" class="form-control" name="no_rekening"> </div>
+
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">Nama Bank:</label>
+                                <select class="form-control" name="bank_id">
+                                    <option value=""> - Bank - </option>
+                                    @foreach($bank as $item)
+                                        <option value="{{ $item->id }}"> {{ $item->nama }} </option>
+                                    @endforeach
+                                </select>
+                                </div>
+                                <input type="hidden" name="user_id" value="{{ Auth::user()->id }}">
+
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">Cabang:</label>
+                                <input type="text" class="form-control" name="cabang"> </div>
+                        </form>
+                    </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="simpan-rekening">Simpan</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- /.container-fluid -->
     @include('layout.footer-admin')
 </div>
 
-<link href="{{ asset('admin/plugins/bower_components/horizontal-timeline/css/horizontal-timeline.css') }}" rel="stylesheet">
 @section('footer-script')
-    <!-- Horizontal-timeline JavaScript -->
-    <script src="{{ asset('admin/plugins/bower_components/horizontal-timeline/js/horizontal-timeline.js') }}"></script>
-    <!--Style Switcher -->
-    <script src="{{ asset('admin/plugins/bower_components/styleswitcher/jQuery.style.switcher.js') }}"></script>
+    <style type="text/css">
+        /**
+         * overide style
+         */
+        .vtabs {
+            width: 100%;
+        }
+        .active-bank{
+            background-color: #cfe1ec !important;
+        }
+        .checklist-bank {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            display: none;
+        }
+        .tab-content {
+            margin-top:0;
+            padding-top:0 !important;
+        }
+        .checklist-rekening-bank {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            display: none;
+        }
+    </style>
+    <script src="{{ asset('js/bayar.js') }}"></script>
 @endsection
 
 @endsection

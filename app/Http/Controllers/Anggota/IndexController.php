@@ -6,20 +6,10 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ControllerLogin;
 use App\Http\Controllers\Controller;
 use App\ModelUser;
-use Auth;
 use Carbon\Carbon;
 
 class IndexController extends ControllerLogin
 {	
-	/**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     
 	/**
 	 * [index description]
@@ -28,6 +18,15 @@ class IndexController extends ControllerLogin
     public function index()
     {
     	return view('anggota.index');
+    }
+
+    /**
+     * [profile description]
+     * @return [type] [description]
+     */
+    public function profile()
+    {
+        return view('anggota.profile');
     }
 
     /**

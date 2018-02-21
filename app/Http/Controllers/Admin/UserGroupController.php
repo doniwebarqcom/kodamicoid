@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\ControllerLogin;
 use Kodami\Models\Mysql\UserGroup;
 use Auth;
 
-class UserGroupController extends Controller
+class UserGroupController extends ControllerLogin
 {
 	/**
 	 * [index description]

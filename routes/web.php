@@ -26,9 +26,11 @@ Route::get('register', 'RegisterController@index');
 Route::post('registerPost', 'RegisterController@registerPost');
 Route::get('logout', 'Auth\LoginController@logout');
 Route::post('contact-us', 'HomeController@postContactUs')->name('contact-us');
+Route::post('ajax/add-rekening-bank', 'AjaxController@addRekeningBank')->name('ajax.add.rekening.bank');
+
 
 // ROUTING ADMIN
-Route::group(['prefix' => 'admin'], function(){
+Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], function(){
 
 	$path = "Admin\\";
 
@@ -39,15 +41,18 @@ Route::group(['prefix' => 'admin'], function(){
 	Route::resource('user', $path . 'UserController');
 	Route::resource('user-group', $path . 'UserGroupController');
 	Route::resource('anggota', $path . 'AnggotaController');
+
+	Route::resource('bank', $path.'BankController');
+	Route::resource('rekening-bank', $path.'RekeningBankController');
 });
 
 // ROUTING ANGGOTA
-Route::group(['prefix' => 'anggota'], function(){
+Route::group(['prefix' => 'anggota', 'middleware' => ['auth', 'access:2']], function(){
 
 	$path = "Anggota\\";
 
 	Route::get('/', $path . 'IndexController@index')->name('anggota.index');
-	Route::get('profile', $path . 'IndexController@index')->name('anggota.profile');
+	Route::get('profile', $path . 'IndexController@profile')->name('anggota.profile');
 	Route::get('user/konfirmasi-pembayaran', $path . 'UserController@konfirmasiPembayaran');
 	Route::post('user/post-konfirmasi-pembayaran', $path.'UserController@postKonfirmasiPembayaran');
 	
@@ -55,9 +60,8 @@ Route::group(['prefix' => 'anggota'], function(){
 	Route::get('user/post-submit-pembayaran-anggota', $path . 'UserController@submitkonfirmasianggota');
 	Route::post('save-profile', $path.'IndexController@saveProfile')->name('anggota.index.save.profile');
 	Route::get('bayar', $path.'BayarController@step1');
-	Route::get('rekening-bank', $path. 'RekeningBankController@index')->name('anggota.rekening-bank');
-	Route::get('rekening-bank/create', $path. 'RekeningBankController@create')->name('anggota.rekening-bank.create');
-
+	Route::post('anggota/bayar/submit', $path.'BayarController@submit')->name('anggota.bayar.submit');
+	Route::resource('rekening-bank-user', $path. 'RekeningBankUserController');
 });
 
 Auth::routes();

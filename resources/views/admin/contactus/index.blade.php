@@ -27,7 +27,6 @@
         <!-- .row -->
         <div class="row">
             <div class="col-md-12">
-                @include('layout.alert');
                 <div class="panel">
                     <div class="table-responsive">
                         <div class="col-md-12">
@@ -41,7 +40,7 @@
                                     <th>EMAIL</th>
                                     <th>TELEPON</th>
                                     <th>MESSAGES</th>
-                                    <th>ADDED</th>
+                                    <th>SUBMIT DATE</th>
                                 </tr>
                             </thead>
                             <tbody>

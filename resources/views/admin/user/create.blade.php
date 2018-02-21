@@ -34,21 +34,62 @@
                 
                 <h3 class="box-title m-b-0">USER</h3>
                 <br />
-                <form class="form-horizontal" action="{{ route('user-group.store') }}" method="POST">
+                <form class="form-horizontal" action="{{ route('user.store') }}" method="POST">
                     <div class="col-md-6">
                         {{ csrf_field() }}
+
+                        @if (count($errors) > 0)
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                                </ul>
+                            </div>
+                        @endif
+                        
                         <div class="form-group">
-                            <label class="col-md-12">Name</label>
+                            <label class="col-md-12">NIK</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" name="nik"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Nama</label>
                             <div class="col-md-12">
                                 <input type="text" class="form-control" name="name"> </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-12">Description</label>
+                            <label class="col-md-12">Email</label>
                             <div class="col-md-12">
-                                <textarea class="form-control" name="description"></textarea>    
+                                <input type="email" class="form-control" name="email"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Phone</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" name="telepon"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Password</label>
+                            <div class="col-md-12">
+                                <input type="password" class="form-control" name="password"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Confirm Password</label>
+                            <div class="col-md-12">
+                                <input type="password" class="form-control" name="confirmation"> </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-12">Akses</label>
+                            <div class="col-md-12">
+                                <select class="form-control" name="access_id">
+                                    <option value="1"> Administrator </option>
+                                    <option value="3"> Teller </option>
+                                    <option value="4"> CS </option>
+                                </select>    
                             </div>
                         </div>
-                        <a href="{{ url('admin/user-group') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>
+                        <a href="{{ url('angggota.iindex') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                     </div>
                     <br style="clear: both;" />

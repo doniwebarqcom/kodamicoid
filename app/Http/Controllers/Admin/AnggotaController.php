@@ -4,8 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\ControllerLogin;
-use App\Http\Controllers\Controller;
-use Auth;
+use App\ModelUser; 
 
 class AnggotaController extends ControllerLogin
 {	
@@ -15,6 +14,8 @@ class AnggotaController extends ControllerLogin
 	 */
     public function index()
     {
-    	return view('admin.anggota.index');
+    	$data = ModelUser::where('user_group_id', 2)->get();
+
+    	return view('admin.anggota.index', compact('data'));
     }
 }

@@ -45,7 +45,7 @@ class RegisterController extends Controller
     	$data->name 				= $request->name;
     	$data->email 				= $request->email;
     	$data->password 			= bcrypt($request->password); 
-        $data->user_group_id        = 2; // User Sebagai Anggota
+        $data->access_id            = 2; // User Sebagai Anggota
     	$data->save();
 
         $data->password = $request->password;
