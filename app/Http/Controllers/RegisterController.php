@@ -31,7 +31,7 @@ class RegisterController extends Controller
     		'nik' 				=> 'required|unique:users',
     		'telepon'			=> 'required',
             'name'				=> 'required',
-    		'email'				=> 'required|email|unique:users',
+    		//'email'				=> 'required|email|unique:users',
     		'password'			=> 'required',
     		'confirmation'		=> 'required|same:password',
     	]);
@@ -46,6 +46,7 @@ class RegisterController extends Controller
     	$data->email 				= $request->email;
     	$data->password 			= bcrypt($request->password); 
         $data->access_id            = 2; // User Sebagai Anggota
+        $data->status               = 1; // menunggu pembayaran
     	$data->save();
 
         $data->password = $request->password;

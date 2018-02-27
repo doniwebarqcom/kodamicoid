@@ -143,7 +143,7 @@
                     <h3><span class="fa-fw open-close"><i class="ti-menu hidden-xs"></i><i class="ti-close visible-xs"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
                 <ul class="nav" id="side-menu">
                     <li class="user-pro">
-                        <a href="javascript:void(0)" class="waves-effect"><img src="../plugins/images/users/varun.jpg" alt="user-img" class="img-circle"> <span class="hide-menu"> {{ Auth::user()->name }}<span class="fa arrow"></span></span>
+                        <a href="javascript:void(0)" class="waves-effect"><img src="{{ asset('admin-css/plugins/images/users/varun.jpg') }}" alt="user-img" class="img-circle"> <span class="hide-menu"> {{ Auth::user()->name }}<span class="fa arrow"></span></span>
                         </a>
                         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
                             <li><a href="javascript:void(0)"><i class="ti-user"></i> <span class="hide-menu">My Profile</span></a></li>
@@ -214,6 +214,12 @@
             new CBPFWTabs(el);
         });
     })();
+
+    $(".myadmin-alert .closed").click(function(event) {
+        $(this).parents(".myadmin-alert").fadeToggle(350);
+        return false;
+    });
+
     </script>
 
     @yield('footer-script')

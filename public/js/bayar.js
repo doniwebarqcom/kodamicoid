@@ -5,14 +5,14 @@ $(function(){
         var cek_rekening_bank_user_id = $("input[name='rekening_bank_user_id']").val();
         var cek_rekening_bank_id = $("input[name='rekening_bank_id']").val();
 
-        if(cek_rekening_bank_id == ""){
-            alert("Opsi pembayaran harus dipilih !");
+        if(cek_rekening_bank_user_id == ""){
+            alert("Rekening Bank harus dipilih !");
             
             return false;
         }
 
         if(cek_rekening_bank_id == ""){
-            alert("Rekenig Bank harus dipilih !");
+            alert("Opsi Pembayaran harus dipilih !");
             
             return false;
         }

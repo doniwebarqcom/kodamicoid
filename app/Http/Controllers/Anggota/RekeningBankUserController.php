@@ -90,7 +90,7 @@ class RekeningBankUserController extends ControllerLogin
         $data->no_rekening          = $request->no_rekening;
         $data->bank_id              = $request->bank_id;
         $data->cabang               = $request->cabang;
-        $datat->user_id             = Auth::user()->id;
+        $data->user_id             = Auth::user()->id;
         $data->save();
 
         return redirect()->route('rekening-bank-user.index')->with('messages-success', 'Data berhasil disimpan');

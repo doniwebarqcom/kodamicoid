@@ -27,6 +27,7 @@ class UserController extends ControllerLogin
     {
         return view('admin.user.create');
     }
+
     /**
      * [profile description]
      * @return [type] [description]
@@ -34,6 +35,49 @@ class UserController extends ControllerLogin
     public function profile()
     {
     	return view('/admin/profile');
+    }
+
+    /**
+     * [edit description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function edit($id)
+    {
+        $data = ModelUser::where('id', $id)->first();
+
+        return view('admin.user.edit', compact('data'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        $data =  ModelUser::where('id', $id)->first();
+        
+        if(!empty($request->password))
+        {
+            $this->validate($request,[
+                'confirmation'      => 'same:password',
+            ]);
+
+            $data->password             = bcrypt($request->password);
+        }
+
+        $data->nik                  = $request->nik;
+        $data->telepon              = $request->telepon;
+        $data->name                 = $request->name;
+        $data->email                = $request->email; 
+        $data->jenis_kelamin        = $request->jenis_kelamin;
+        $data->access_id            = $request->access_id;
+        $data->save();
+
+        return redirect()->route('user.index')->with('message-success', 'Data berhasil disimpan'); 
     }
 
     /**
@@ -57,11 +101,10 @@ class UserController extends ControllerLogin
         $data->telepon              = $request->telepon;
         $data->name                 = $request->name;
         $data->email                = $request->email;
+        $data->jenis_kelamin        = $request->jenis_kelamin;
         $data->password             = bcrypt($request->password); 
         $data->access_id            = $request->access_id;
         $data->save();
-
-        $data->password = $request->password;
 
         return redirect()->route('user.index')->with('message-success', 'User berhasil di buat');
     }

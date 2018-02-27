@@ -206,6 +206,29 @@
 
         @include('layout.alert')
 
+        <div class="modal fade" id="modal_status_anggota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <form method="POST" action="{{ route('anggota.upload.confirmation') }}" enctype="multipart/form-data">
+                    {{ csrf_field() }}            
+                    
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel1">Upload Bukti Transfer</h4> </div>
+                    <div class="modal-body">
+                            <div class="form-group">
+                                <label for="recipient-name" class="control-label">File:</label>
+                                <input type="file" name="file" accept="image/*" class="form-control" id="recipient-name1"> </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                  </form>
+                </div>
+            </div>
+        </div>
+
     <!-- ============================================================== -->
     <!-- End Wrapper -->
     <!-- ============================================================== -->
@@ -247,6 +270,12 @@
             new CBPFWTabs(el);
         });
     })();
+
+    $(".myadmin-alert .closed").click(function(event) {
+        $(this).parents(".myadmin-alert").fadeToggle(350);
+        return false;
+    });
+
     </script>
 
     @yield('footer-script')

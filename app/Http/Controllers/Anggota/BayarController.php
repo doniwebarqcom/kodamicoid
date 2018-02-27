@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Anggota;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\ControllerLogin;
+use App\ModelUser;
 
 use Kodami\Models\Mysql\RekeningBank;
 use Kodami\Models\Mysql\Bank;
@@ -23,11 +24,13 @@ class BayarController extends ControllerLogin
         $data = [];
         $data['rekening_bank']          = RekeningBank::all();
         $data['rekening_bank_user']     = RekeningBankUser::where('user_id', Auth::user()->id)->get();
-        $data['bank']                   = Bank::all();  
-        $data['total_pembayaran']       = '120'. rand(100, 999); 
+        $data['bank']                   = Bank::all(); 
+        $code = rand(100, 999); 
+        $data['code'] = $code;
+        $data['total_pembayaran']       = '120'. $code; 
         $data['invoice_date']           = date('d F Y');
-        $data['due_date']               = date('d F Y', strtotime("+3 days"));
-        $data['no_invoice']             = (Deposit::count()+1). Auth::user()->id.date('d').date('m').date('y');
+        $data['due_date']               = date('Y-m-d', strtotime("+3 days"));
+        $data['no_invoice']             = (Deposit::count()+1).Auth::user()->id.'/INV/KDM/'. date('d').date('m').date('y');
 
     	return view('anggota.bayar.bayar')->with($data);
     }
@@ -50,6 +53,32 @@ class BayarController extends ControllerLogin
         $data->due_date     = $request->due_date;
         $data->save();
 
-        return redirect()->route('anggota.index')->with('message-success', 'Pembayaran anda berhasil dilakukan, silahkan melakukan pembayaran');
+        return redirect()->route('anggota.dashboard')->with('message-success', 'Pembayaran anda berhasil dilakukan, silahkan melakukan pembayaran');
+    }
+
+    /**
+     * [confirmation description]
+     * @return [type] [description]
+     */
+    public function confirmation(Request $request)
+    {   
+        $data = Deposit::where('id', $request->id)->first();
+
+        if ($request->hasFile('file')) {
+            
+            $image = $request->file('file');
+            
+            $name = time().'.'.$image->getClientOriginalExtension();
+            
+            $destinationPath = public_path('/file_confirmation/'. Auth::user()->id);
+            
+            $image->move($destinationPath, $name);
+            
+            $data->file_confirmation = $name;
+            $data->status = 2;
+        }
+        $data->save();
+
+        return redirect()->route('anggota.dashboard')->with('message-success', "File Konfirmasi berhasil di upload silahkan anda konfirmasi dari Admin");
     }
 }

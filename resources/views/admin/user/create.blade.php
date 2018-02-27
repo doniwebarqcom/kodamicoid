@@ -59,6 +59,17 @@
                             <div class="col-md-12">
                                 <input type="text" class="form-control" name="name"> </div>
                         </div>
+                         <div class="form-group">
+                            <label class="col-md-12">Jenis Kelamin</label>
+                            <div class="col-md-12">
+                                <select class="form-control" name="jenis_kelamin" required>
+                                    <option value=""> - Jenis Kelamin - </option>
+                                    @foreach(['Laki-laki', 'Perempuan'] as $item)
+                                        <option>{{ $item }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-md-12">Email</label>
                             <div class="col-md-12">
@@ -83,10 +94,15 @@
                             <label class="col-md-12">Akses</label>
                             <div class="col-md-12">
                                 <select class="form-control" name="access_id">
-                                    <option value="1"> Administrator </option>
-                                    <option value="3"> Teller </option>
-                                    <option value="4"> CS </option>
-                                </select>    
+                                    @foreach(access_rules() as $key => $item)
+                                        
+                                        @if($key == 2) 
+                                            @continue
+                                        @endif
+
+                                        <option value="{{ $key }}"> {{ $item }} </option>
+                                    @endforeach 
+                                </select>  
                             </div>
                         </div>
                         <a href="{{ url('angggota.iindex') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>

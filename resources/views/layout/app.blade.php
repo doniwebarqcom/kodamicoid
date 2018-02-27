@@ -12,7 +12,10 @@
 
 	<link type="image/x-icon" href="img/favicon.ico" rel="shortcut icon">
 	<link rel="stylesheet" href="{{ asset('advisa/css/bootstrap.css') }}">
-	<link rel="stylesheet" href="{{ asset('advisa/css/font-awesome.css') }}">
+	<!--<link rel="stylesheet" href="{{ asset('advisa/css/font-awesome.css') }}"> -->
+	<link rel="stylesheet" href="{{ asset('advisa/fontawesome/css/fontawesome-all.css') }}">
+
+	
 	<link rel="stylesheet" href="{{ asset('advisa/css/main.css') }}">
 	<link rel="stylesheet" href="{{ asset('advisa/css/responsive.css') }}">
 </head>
@@ -80,13 +83,13 @@
 							<div class="header-social">
 								<ul class='social-transform unstyled'>
 								<li>
-									<a href='#' target='blank' class='front'><div class="fa fa-facebook"></div></a>
+									<a href='#' target='blank' class='front'><div class="fab fa-facebook-f"></div></a>
 								</li>
 								<li>
-									<a href='#' target='blank' class='front'><i class="fa fa-twitter"></i></a>
+									<a href='#' target='blank' class='front'><i class="fab fa-twitter"></i></a>
 								</li>
 								<li>
-									<a href='#' target='blank' class='front'><i class="fa fa-google-plus"></i></a>
+									<a href='#' target='blank' class='front'><i class="fab fa-google-plus"></i></a>
 								</li>
 								</ul>
 							</div>
@@ -111,7 +114,7 @@
 							<li>
 								<div class="list-forstart fin_1">
 									<h2 class="h-Bold" style="font-size: 29px;">Kodami Pocket System</h2>
-									<p class='desc'>Koperasi Daya Masyarakat Indonesia (KODAMI) adalah koperasi berskala nasional yang menawarkan beragam produk keuangan untuk membantu masyarakat Indonesia mencapai kehidupan yang lebih baik.</p>
+									<p class='desc' style="font-size: 16px;">Adalah layanan digital Kodami yang memungkinkan seluruh anggota maupun calon anggota untuk dapat mengetahui lebih jauh tentang Kodami. Layanan ini memberikan informasi cukup rinci mengenai profil Kodami, pengurus, badan pengawas, tatacara keanggotaan, manfaat, jenis layanan Kodami, armada, proteksi, bagi hasil usaha dan kegiatan yang telah dan sedang dilakukan oleh Kodami.</p>
 								</div>
 								<div class="img-slider hidden-xs fin_2"></div>
 							</li>
@@ -124,7 +127,7 @@
 						<div class="reg-now" style="top: 100px;">
 						@guest
 							<h2 class='medium-h text-center'>Registrasi Form</h2>
-							<h3 class='xsmall-h text-center'>Daftar disini untuk menjadi anggota Koperasi Kodami. </h3>
+							<h3 class='xsmall-h text-center'>Daftar disini untuk menjadi anggota Kodami. </h3>
 
 							<form class='reg-now-visible' action="{{ url('registerPost') }}" method="POST">
 
@@ -165,45 +168,59 @@
 	</section>
 	<section class="container" data-anchor="about_kodami">
 		<div class="spacer6"></div>
-			<h2 class='text-center xxh-Bold'>Koperasi Daya Masyarakat Indonesia</h2>
-			<h3 class='text-center xmedium-h'>Kodami memberikan solusi kepada Usaha Anda<br />kami fokus memberikan layanan untuk Penjualan, Permodalan dan Perkembangan Bisnis Anda.</h3>
+			<h2 class='text-center xxh-Bold'>kodami</h2>
+			<h3 class='text-center xmedium-h'>Adalah Koperasi Daya Masyarakat Indonesia, merupakan salah satu koperasi produsen yang modern, bekerja dengan memberdayakan masyarakat Indonesia dalam rangka menjadi pelaku ekonomi yang tangguh dan profesional, dengan mengembangkan sistem ekonomi kerakyatan yang bertumpu pada mekanisme pasar yang berkeadilan, dengan suatu tujuan untuk Indonesia yang lebih baik. Layanan Kodami berupa penjualan offline dan online didukung armada kuper (kurir koperasi) dan eskop (ekspedisi koperasi) yang akan membantu masyarakat untuk kemudahan bertransaksi dengan harga yang lebih kompetitif.</h3>
 			<div class="row trainings" id='trainings'>
-				<div class="col-md-3 col-xs-6 hov1">
+				
+				<div class="col-md-2 col-xs-6 hov1">
 					<figure class='thumbnails'>
-						<i class='fa fa-shield'></i>
+						<i class='fa fa-users'></i>
 					</figure>
-					<h4 class='xxsmall-h text-center transition-h'>Keanggotaaan</h4>
+					<h4 class='xxsmall-h text-center transition-h'>Keanggotaan</h4>
 					<div class="full-text"></div>
 				</div>
 
-				<div class="col-md-3 col-xs-6 hov2">
+				<div class="col-md-2 col-xs-6 hov2">
 					<figure class='thumbnails'>
-						<i class='fa fa-heart-o'></i>
+						<i class='fa fa-sync'></i>
 					</figure>
 					<h4 class='xxsmall-h text-center transition-h'>Modern</h4>
 					<div class="full-text"> </div>
 				</div>
 
-				<div class="col-md-3 col-xs-6 hov3">
+				<div class="col-md-2 col-xs-6 hov3">
 					<figure class='thumbnails'>
-						<i class='fa fa-refresh'></i>
+						<i class='fa fa-star'></i>
 					</figure>
 					<h4 class='xxsmall-h text-center transition-h'>Profesional</h4>
 					<div class="full-text"></div>
 				</div>
 
-				<div class="col-md-3 col-xs-6 hov4">
+				<div class="col-md-2 col-xs-6 hov4">
+					<figure class='thumbnails'>
+						<i class='fa fa-share-alt'></i>
+					</figure>
+					<h4 class='xxsmall-h text-center transition-h'>Berbagi</h4>
+					<div class="full-text"></div>
+				</div>
+				<div class="col-md-2 col-xs-6 hov4">
+					<figure class='thumbnails'>
+						<i class='fa fa-umbrella'></i>
+					</figure>
+					<h4 class='xxsmall-h text-center transition-h'>Proteksi</h4>
+					<div class="full-text"></div>
+				</div>
+				<div class="col-md-2 col-xs-6 hov4">
 					<figure class='thumbnails'>
 						<i class='fa fa-book'></i>
 					</figure>
-					<h4 class='xxsmall-h text-center transition-h'>Sharing</h4>
+					<h4 class='xxsmall-h text-center transition-h'>Edukasi</h4>
 					<div class="full-text"></div>
 				</div>
 			</div>
 		<div class="offsetY-4"></div>
 	</section>
 </div>
-
 <!--===========================-->
 <!--=========Footer============-->
 <footer class='main-wrapper footer'>
@@ -214,16 +231,16 @@
 
 		<ul class='social-transform footer-soc list-unstyled'>
 			<li>
-				<a href='#' target='blank' class='front'><div class="fa fa-facebook"></div></a>
+				<a href='#' target='blank' class='front'><div class="fab fa-facebook-f"></div></a>
 			</li>
 			<li>
-				<a href='#' target='blank' class='front'><i class="fa fa-twitter"></i></a>
+				<a href='#' target='blank' class='front'><i class="fab fa-twitter"></i></a>
 			</li>
 			<li>
-				<a href='#' target='blank' class='front'><i class="fa fa-google-plus"></i></a>
+				<a href='#' target='blank' class='front'><i class="fab fa-google-plus"></i></a>
 			</li>
 			<li>
-				<a href='#' target='blank' class='front'><i class='fa fa-vimeo-square'></i></a>
+				<a href='#' target='blank' class='front'><i class='fab fa-youtube'></i></a>
 			</li>
 		</ul>
 		<div class="clearifx"></div>
@@ -248,7 +265,7 @@
 <div id="myModal" class="modal fade" tabindex="-1" aria-hidden="true">
 	<div class="modal-wr" style="width: 525px; left: 40%;">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-		<h2 style="font-size: 20px;">Silakan hubungi kami untuk memberikan kritik / saran, menanyakan keanggotaan, mengadakan kerja sama, laporan mengenai layanan kami dsb. KODAMI selalu siap membantu anda.</h2>
+		<h2 style="font-size: 20px;">Silakan hubungi kami untuk memberikan saran, kritik, keluhan, menanyakan keanggotaan, mekanisme kerja sama dan sebagainya. Kami selalu siap membantu anda.</h2>
 		<br />
 		<form id='contact' action="{{ route('contact-us') }}" method="post" accept-charset="utf-8" role="form">
 			{{ csrf_field() }}
@@ -289,7 +306,7 @@
 	<script src="{{ asset('advisa/js/jquery.parallax-1.1.3.js') }}"></script>
 	<script src="{{ asset('advisa/js/custom.js?v=2') }}"></script>
 	<!-- file loader -->
-	<script src="{{ asset('advisa/js/loader.js?v=1') }}"></script>
+	<script src="{{ asset('advisa/js/loader.js?v=2') }}"></script>
 	
 	<script type="text/javascript">
 		
@@ -298,5 +315,14 @@
 		@endif;
 
 	</script>
+	<style type="text/css">
+		/*.list-forstart {
+			width: 55%;
+		}*/
+
+		.fa-share-alt:before {
+		    content: "\f1e0";
+		}
+	</style>
 </body>
 </html>

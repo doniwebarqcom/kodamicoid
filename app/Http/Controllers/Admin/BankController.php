@@ -69,6 +69,7 @@ class BankController extends ControllerLogin
 
         return redirect()->route('bank.index')->with('message-success', 'Data berhasil disimpan'); 
     }
+    
     /**
      * [desctroy description]
      * @param  [type] $id [description]

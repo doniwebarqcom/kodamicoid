@@ -12,7 +12,7 @@
       <tbody>
         <tr>
           <td style="vertical-align: top; padding-bottom:30px;">
-            <a href="http://www.kodami.co.id" target="_blank" style="text-decoration: none;color: #484848;"><img src="http://kodami.co.id/logo.png" alt="Admin Responsive web app kit" style="border:none; width: 270px; "><br/>
+            <a href="http://www.kodami.co.id" target="_blank" style="text-decoration: none;color: #484848;"><img src="{{ asset('kodami-co-id.png') }}" alt="Admin Responsive web app kit" style="border:none; width: 270px; "><br/>
             <h2 style="margin-top: 5px; padding-top: 5px;">Koperasi Daya Masyarakat</h2>
             </a>
           </td>

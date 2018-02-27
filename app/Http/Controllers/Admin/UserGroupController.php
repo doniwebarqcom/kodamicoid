@@ -66,6 +66,7 @@ class UserGroupController extends ControllerLogin
 
         return redirect()->route('admin.user-group.index')->with('message-success', 'Data berhasil disimpan'); 
     }
+    
     /**
      * [desctroy description]
      * @param  [type] $id [description]

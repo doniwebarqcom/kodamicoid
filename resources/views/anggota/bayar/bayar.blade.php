@@ -106,7 +106,10 @@
 
                             <div id="tab-rekening" class="tab-pane">
                                 <h3>Rekening Bank Anda</h3>
-                                <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal_rekening_bank"><i class="fa fa-plus"></i> Tambah Rekening Bank</a>
+                                
+                                <!-- <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal_rekening_bank"><i class="fa fa-plus"></i> Tambah Rekening Bank</a> -->
+                                <a href="{{ route('rekening-bank-user.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah Rekening Bank</a>
+
                                 <br style="clear:both;" />
                                 <br style="clear:both;" />
                                 <table class="table table-bordered" style="width: 100%;">
@@ -169,7 +172,7 @@
                                                         {{ Auth::user()->alamat }}
                                                     </p>
                                                     <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> {{ $invoice_date }}</p>
-                                                    <p><b>Due Date :</b> <i class="fa fa-calendar"></i> {{ $due_date }}</p>
+                                                    <p><b>Due Date :</b> <i class="fa fa-calendar"></i> {{ date('d F Y', strtotime($due_date)) }}</p>
                                                 </address>
                                             </div>
                                         </div>
@@ -205,6 +208,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <div class="pull-right m-t-30 text-right">
+                                                <h4>Unique Code <label class="label label-success">{{ $code }}</label></h4>
                                                 <h3><b>Total :</b> Rp. {{ number_format($total_pembayaran) }}</h3> </div>
                                             <div class="clearfix"></div>
                                             <hr>

@@ -8,6 +8,9 @@ use App\Http\Controllers\Controller;
 use App\ModelUser;
 use Carbon\Carbon;
 
+use Kodami\Models\Mysql\Deposit;
+use Auth;
+
 class IndexController extends ControllerLogin
 {	
     
@@ -17,7 +20,18 @@ class IndexController extends ControllerLogin
 	 */
     public function index()
     {
-    	return view('anggota.index');
+        $data = [];
+
+        $data['tagihan'] = Deposit::where('user_id', Auth::user()->id)
+                                    ->where('status',1)
+                                    ->where('type', 1)
+                                    ->first();
+                                    
+        $data['deposit'] = Deposit::where('user_id', Auth::user()->id)
+                                    ->where('type', 1)
+                                    ->first();
+
+    	return view('anggota.index')->with($data);
     }
 
     /**
@@ -72,6 +86,6 @@ class IndexController extends ControllerLogin
 
         $data->save();
    
-        return redirect()->route('anggota.index')->with('message-success', 'Profil berhasil disimpan');
+        return redirect()->route('anggota.dashboard')->with('message-success', 'Profil berhasil disimpan');
     }
 }

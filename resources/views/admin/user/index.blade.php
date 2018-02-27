@@ -38,14 +38,13 @@
                                 <tr>
                                     <th width="70" class="text-center">#</th>
                                     <th>NAME</th>
-                                    <th>NO ANGGOTA</th>
+                                    <th>EMAIL</th>
                                     <th>JENIS KELAMIN</th>
                                     <th>TELEPON</th>
-                                    <th>PHOTO</th>
-                                    <th>EMAIL</th>
                                     <th>LAST LOGIN</th>
                                     <th>LAST LOGOUT</th>
                                     <th>ADDED</th>
+                                    <th>HAK AKSES</th>
                                     <th width="300">MANAGE</th>
                                 </tr>
                             </thead>
@@ -54,18 +53,17 @@
                                     <tr>
                                         <td class="text-center">{{ $no+1 }}</td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->no_anggota }}</td>
+                                        <td>{{ $item->email }}</td>
                                         <td>{{ $item->jenis_kelamin }}</td>
                                         <td>{{ $item->telepon }}</td>
-                                        <td></td>
-                                        <td>{{ $item->email }}</td>
                                         <td>{{ date('d F Y', strtotime($item->last_logged_in_at)) }}</td>
                                         <td>{{ date('d F Y', strtotime($item->last_logged_out_at)) }}</td>
                                         <td>{{ $item->created_at }}</td>
+                                        <td>{!! access_rules($item->access_id) !!}</td>
                                         <td>
-                                            <a href="{{ route('user-group.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button></a>
+                                            <a href="{{ route('user.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button></a>
 
-                                            <form action="{{ route('user-group.destroy', $item->id) }}" method="post" style="float: left;">
+                                            <form action="{{ route('user.destroy', $item->id) }}" onsubmit="return confirm('Hapus data ini ?')" method="post" style="float: left;">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}                                               
                                                 <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>

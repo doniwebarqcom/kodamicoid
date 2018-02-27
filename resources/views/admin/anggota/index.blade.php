@@ -46,6 +46,7 @@
                                     <th>LAST LOGIN</th>
                                     <th>LAST LOGOUT</th>
                                     <th>ADDED</th>
+                                    <th>STATUS</th>
                                     <th width="300">MANAGE</th>
                                 </tr>
                             </thead>
@@ -63,12 +64,16 @@
                                         <td>{{ date('d F Y', strtotime($item->last_logged_out_at)) }}</td>
                                         <td>{{ $item->created_at }}</td>
                                         <td>
+                                            {!! status_pembayaran_anggota($item->id) !!}
+                                            {!! status_anggota($item->id) !!}
+                                        </td>
+                                        <td>
                                             <a href="{{ route('anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button></a>
 
-                                            <form action="{{ route('anggota.destroy', $item->id) }}" method="post" style="float: left;">
+                                            <form action="{{ route('anggota.destroy', $item->id) }}" onsubmit="return confirm('Hapus data ini?')" method="post" style="float: left;">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}                                               
-                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                                <button type="submit" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
