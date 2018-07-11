@@ -26,7 +26,7 @@ body {
   color: #ffffff;
 }
 .navbar-header {
-  background: #FF5B62;
+  background: #3cd0cc;
 }
 .navbar-top-links > li > a {
   color: #ffffff;
@@ -39,11 +39,11 @@ body {
 }
 /*Right panel*/
 .right-sidebar .rpanel-title {
-  background: #FF5B62;
+  background: #3cd0cc;
 }
 /*Bread Crumb*/
 .bg-title .breadcrumb .active {
-  color: #FF5B62;
+  color: #3cd0cc;
 }
 /*Sidebar*/
 .sidebar {
@@ -65,15 +65,15 @@ body {
   background: rgba(0, 0, 0, 0.07);
 }
 #side-menu > li > a.active {
-  background: #FF5B62;
+  background: #3cd0cc;
   color: #ffffff;
   font-weight: 500;
 }
 #side-menu ul > li > a:hover {
-  color: #FF5B62;
+  color: #3cd0cc;
 }
 #side-menu ul > li > a.active {
-  color: #FF5B62;
+  color: #3cd0cc;
   font-weight: 500;
 }
 .user-profile .user-pro-body .u-dropdown {
@@ -84,38 +84,38 @@ body {
   background-color: #707cd2 !important;
 }
 .bg-theme-dark {
-  background-color: #FF5B62 !important;
+  background-color: #3cd0cc !important;
 }
 /*Button*/
 .btn-custom {
-  background: #FF5B62;
-  border: 1px solid #FF5B62;
+  background: #3cd0cc;
+  border: 1px solid #3cd0cc;
   color: #ffffff;
 }
 .btn-custom:hover {
-  background: #FF5B62;
+  background: #3cd0cc;
   opacity: 0.8;
   color: #ffffff;
-  border: 1px solid #FF5B62;
+  border: 1px solid #3cd0cc;
 }
 /*Custom tab*/
 .customtab li.active a,
 .customtab li.active a:hover,
 .customtab li.active a:focus {
-  border-bottom: 2px solid #FF5B62;
-  color: #FF5B62;
+  border-bottom: 2px solid #3cd0cc;
+  color: #3cd0cc;
 }
 .tabs-vertical li.active a,
 .tabs-vertical li.active a:hover,
 .tabs-vertical li.active a:focus {
-  background: #FF5B62;
-  border-right: 2px solid #FF5B62;
+  background: #3cd0cc;
+  border-right: 2px solid #3cd0cc;
 }
 /*Nav-pills*/
 .nav-pills > li.active > a,
 .nav-pills > li.active > a:focus,
 .nav-pills > li.active > a:hover {
-  background: #FF5B62;
+  background: #3cd0cc;
   color: #ffffff;
 }
 /*Extra css*/
@@ -129,30 +129,30 @@ body {
 .fc th.fc-wed,
 .fc th.fc-fri,
 .fc-button {
-  background-color: #FF5B62 !important;
+  background-color: #3cd0cc !important;
 }
 .table tbody tr.advance-table-row.active,
 .fc-button {
-  border-color: #FF5B62;
+  border-color: #3cd0cc;
 }
 .manage-users .tabs-style-iconbox nav {
-  background: #FF5B62;
+  background: #3cd0cc;
 }
 .manage-users .tabs-style-iconbox nav li.tab-current a {
-  background: #FF5B62;
+  background: #3cd0cc;
 }
 .manage-users .tabs-style-iconbox nav li.tab-current a:after {
-  border-top-color: #FF5B62;
+  border-top-color: #3cd0cc;
 }
 .panel-themecolor,
 .panel-theme {
-  border-color: #FF5B62;
+  border-color: #3cd0cc;
 }
 .panel-themecolor .panel-heading,
 .panel-theme .panel-heading {
-  border-color: #FF5B62;
+  border-color: #3cd0cc;
   color: white;
-  background-color: #FF5B62;
+  background-color: #3cd0cc;
 }
 .panel-themecolor .panel-heading a,
 .panel-theme .panel-heading a {
@@ -164,7 +164,7 @@ body {
 }
 .panel-themecolor a,
 .panel-theme a {
-  color: #FF5B62;
+  color: #3cd0cc;
 }
 .panel-themecolor a:hover,
 .panel-theme a:hover {

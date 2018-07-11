@@ -16,10 +16,21 @@
 	<link rel="stylesheet" href="{{ asset('advisa/fontawesome/css/fontawesome-all.css') }}">
 
 	
-	<link rel="stylesheet" href="{{ asset('advisa/css/main.css') }}">
+	<link rel="stylesheet" href="{{ asset('advisa/css/main.css') }}?v=2">
 	<link rel="stylesheet" href="{{ asset('advisa/css/responsive.css') }}">
+
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114760510-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-114760510-1');
+	</script>
 </head>
 <body>
+
 <!--===========================-->
 <!--==========Header===========-->
 <div id="preloader">
@@ -41,7 +52,7 @@
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<div class="logo navbar-brand">
-						<img src="{{ asset('kodami-co-id.png') }}" style="width: 200px;" />
+						<img src="{{ asset('images/logo.png') }}" style="width: 200px;" />
 					</div>
 		      <button class='toggle-slide-left visible-xs collapsed navbar-toggle' type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><i class="fa fa-bars"></i></button>
 				</div>
@@ -103,8 +114,8 @@
 </header>
 <!--===========================-->
 <!--==========Content==========-->
-<div class='main-wrapper content'>
-	<section class="relative software_slider">
+<div class='main-wrapper content' style="background: url('http://kodami.co.id/public/background/15.png')!important;">
+	<section class="relative software_slider" style="background: url('http://kodami.co.id/public/background/17.png') !important;">
 		<div class="forma-slider">
 			<div class="container">
 				<div class="row">
@@ -112,11 +123,11 @@
 
 						<ul class="form-bxslider list-unstyled">
 							<li>
-								<div class="list-forstart fin_1">
-									<h2 class="h-Bold" style="font-size: 29px;">Kodami Pocket System</h2>
-									<p class='desc' style="font-size: 16px;">Adalah layanan digital Kodami yang memungkinkan seluruh anggota maupun calon anggota untuk dapat mengetahui lebih jauh tentang Kodami. Layanan ini memberikan informasi cukup rinci mengenai profil Kodami, pengurus, badan pengawas, tatacara keanggotaan, manfaat, jenis layanan Kodami, armada, proteksi, bagi hasil usaha dan kegiatan yang telah dan sedang dilakukan oleh Kodami.</p>
-								</div>
-								<div class="img-slider hidden-xs fin_2"></div>
+								<!-- <div class="list-forstart fin_1">
+									<h2 class="h-Bold" style="font-size: 24px;opacity: 1;">Kodami Pocket System</h2>
+									<p class='desc' style="font-size: 16px;">Adalah layanan digital Kodami yang memungkinkan seluruh anggota maupun calon anggota untuk dapat mengetahui lebih jauh tentang Kodami. Layanan ini memberikan informasi cukup rinci mengenai profil Kodami, pengurus, badan pengawas, tatacara keanggotaan, manfaat, jenis layanan Kodami, armada, proteksi, bagi hasil usaha<br /> dan kegiatan yang telah dan sedang dilakukan oleh Kodami.</p>
+								</div> -->
+								<div class="img-slider hidden-xs fin_2"><img src="http://kodami.co.id/public/images/banner1.png"></div>
 							</li>
 						</ul>
 					</div>
@@ -133,10 +144,10 @@
 
 		  						<input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>" />
 
-								<div class='control-group'>
+								<!-- <div class='control-group'>
 									<span class="error"><?php echo $errors->first('nik') ?></span>
 									<input type="text" name="nik" placeholder="NIK" required class="insert-attr"  value="<?=Form::old('nik')?>" />
-								</div>
+								</div> -->
 								<div class="control-group">
 									<span class="error"><?php echo $errors->first('nama') ?></span>
 		    						<input type="text" name="name" placeholder="Nama" required class="insert-attr" value="<?=Form::old('name')?>" />
@@ -166,59 +177,89 @@
 			</div><!-- end container -->
 		</div>
 	</section>
+	<section style="position:relative;" class="content-middle">
+		<img src="{{ asset('background/text-1.png') }}" style="position: absolute;top: 8%;left:4%;" class="text-middle" />
+		<img src="{{ asset('background/14.png') }}" class="background-middle" />
+		<button type="submit" value="Register Now" class="btn submit sub-form info_kodami_btn" name="submit" style="color: #415306; border:1px solid #415306; width: 300px; position: absolute; left: 41%; bottom: 25%; ">INFO</button>
+	</section>
 	<section class="container" data-anchor="about_kodami">
-		<div class="spacer6"></div>
-			<h2 class='text-center xxh-Bold'>kodami</h2>
-			<h3 class='text-center xmedium-h'>Adalah Koperasi Daya Masyarakat Indonesia, merupakan salah satu koperasi produsen yang modern, bekerja dengan memberdayakan masyarakat Indonesia dalam rangka menjadi pelaku ekonomi yang tangguh dan profesional, dengan mengembangkan sistem ekonomi kerakyatan yang bertumpu pada mekanisme pasar yang berkeadilan, dengan suatu tujuan untuk Indonesia yang lebih baik. Layanan Kodami berupa penjualan offline dan online didukung armada kuper (kurir koperasi) dan eskop (ekspedisi koperasi) yang akan membantu masyarakat untuk kemudahan bertransaksi dengan harga yang lebih kompetitif.</h3>
-			<div class="row trainings" id='trainings'>
-				
-				<div class="col-md-2 col-xs-6 hov1">
-					<figure class='thumbnails'>
-						<i class='fa fa-users'></i>
-					</figure>
-					<h4 class='xxsmall-h text-center transition-h'>Keanggotaan</h4>
-					<div class="full-text"></div>
+		<div class="spacer1"></div>
+			<h2 class='text-center xxh-Bold' style="color: white;">kodami</h2>
+			<h3 class='text-center xmedium-h' style="color: white;">Adalah Koperasi Daya Masyarakat Indonesia, merupakan salah satu koperasi produsen yang modern, bekerja dengan memberdayakan masyarakat Indonesia dalam rangka menjadi pelaku ekonomi yang tangguh dan profesional, dengan mengembangkan sistem ekonomi kerakyatan yang bertumpu pada mekanisme pasar yang berkeadilan, dengan suatu tujuan untuk Indonesia yang lebih baik. Layanan Kodami berupa penjualan offline dan online didukung armada kuper (kurir koperasi) dan eskop (ekspedisi koperasi) yang akan membantu masyarakat untuk kemudahan bertransaksi dengan harga yang lebih kompetitif.</h3>
+		<div class="clearfix"></div>
+		<br />
+		<br />
+	</section>
+	<div class="col-md-12" style="margin: auto; float: none;">
+		<div class="row trainings" id='trainings'>
+				<div class="col-md-2">
+					<div class="view view-fifth" style="cursor: pointer;" onclick="slidetoogle_section_keanggotaan()">
+						<img src="{{ asset('banner-middle/keanggotaan.png')}}">
+						<h4 class='xxsmall-h text-center transition-h'>Keanggotaan</h4>
+						<div class="mask col-md-12">
+	                        <h2>Keanggotaan</h2>
+	                    </div>
+					</div>
 				</div>
-
-				<div class="col-md-2 col-xs-6 hov2">
-					<figure class='thumbnails'>
-						<i class='fa fa-sync'></i>
-					</figure>
-					<h4 class='xxsmall-h text-center transition-h'>Modern</h4>
-					<div class="full-text"> </div>
+				<div class="col-md-2">
+					<div class="view view-fifth">
+						<img src="{{ asset('banner-middle/modern.png')}}">
+						<h4 class='xxsmall-h text-center transition-h'>Modern</h4>
+						<div class="mask col-md-12">
+	                        <h2>Modern</h2>
+	                    </div>
+					</div>
 				</div>
-
-				<div class="col-md-2 col-xs-6 hov3">
-					<figure class='thumbnails'>
-						<i class='fa fa-star'></i>
-					</figure>
-					<h4 class='xxsmall-h text-center transition-h'>Profesional</h4>
-					<div class="full-text"></div>
+				<div class="col-md-2">
+					<div class="view view-fifth">
+						<img src="{{ asset('banner-middle/profesional.png')}}">
+						<h4 class='xxsmall-h text-center transition-h'>Profesional</h4>
+						<div class="mask col-md-12">
+	                        <h2>Profesional</h2>
+	                    </div>
+					</div>
 				</div>
-
-				<div class="col-md-2 col-xs-6 hov4">
-					<figure class='thumbnails'>
-						<i class='fa fa-share-alt'></i>
-					</figure>
-					<h4 class='xxsmall-h text-center transition-h'>Berbagi</h4>
-					<div class="full-text"></div>
+				<div class="col-md-2">
+					<div class="view view-fifth">
+						<img src="{{ asset('banner-middle/berbagi.png')}}">
+						<h4 class='xxsmall-h text-center transition-h'>Berbagi</h4>
+						<div class="mask col-md-12">
+	                        <h2>Berbagi</h2>
+	                    </div>
+					</div>
 				</div>
-				<div class="col-md-2 col-xs-6 hov4">
-					<figure class='thumbnails'>
-						<i class='fa fa-umbrella'></i>
-					</figure>
-					<h4 class='xxsmall-h text-center transition-h'>Proteksi</h4>
-					<div class="full-text"></div>
+				<div class="col-md-2">
+					<div class="view view-fifth">
+						<img src="{{ asset('banner-middle/proteksi.png')}}">
+						<h4 class='xxsmall-h text-center transition-h'>Proteksi</h4>
+						<div class="mask col-md-12">
+	                        <h2>Proteksi</h2>
+	                    </div>
+					</div>
 				</div>
-				<div class="col-md-2 col-xs-6 hov4">
-					<figure class='thumbnails'>
-						<i class='fa fa-book'></i>
-					</figure>
-					<h4 class='xxsmall-h text-center transition-h'>Edukasi</h4>
-					<div class="full-text"></div>
+				<div class="col-md-2">
+					<div class="view view-fifth">
+						<img src="{{ asset('banner-middle/edukasi.png')}}">
+						<h4 class='xxsmall-h text-center transition-h'>Edukasi</h4>
+						<div class="mask col-md-12">
+	                        <h2>Edukasi</h2>
+	                    </div>
+					</div>
+				</div>
+				<div class="content_keanggotaan" style="display: none;">
+					<img src="{{ asset('background/17.png') }}">
 				</div>
 			</div>
-		<div class="offsetY-4"></div>
+		<br />
+		<br />
+	</div>
+	<section style="position:relative;" id="slider_bottom">
+		<div>
+			<ul class="slider-bottom1 unstyled">
+				<li><img src="{{ asset('background/13.png') }}" /></li>
+				<li><img src="{{ asset('background/16.jpg') }}" /></li>
+			</ul>
+		</div>
 	</section>
 </div>
 <!--===========================-->
@@ -245,7 +286,7 @@
 		</ul>
 		<div class="clearifx"></div>
 		<span class="copyright">
-			&#169; <?=date('Y')?> Koperasi Daya Masyarakat
+			&#169; <?=date('Y')?> Koperasi Daya Masyarakat Indonesia
 		</span>
 		<div class="container-fluid responsive-switcher hidden-md hidden-lg">
 			<i class="fa fa-mobile"></i>
@@ -294,6 +335,144 @@
 </div>
 
 </div>
+<!-- Animasi -->
+<style type="text/css">
+.xmedium-h {
+	margin-bottom: 30px;
+}
+.trainings > div {
+	min-height: 270px;
+}
+.view {
+   float: left;
+   overflow: hidden;
+   position: relative;
+   text-align: center;
+   cursor: default;
+}
+.view .mask,.view .content {
+   position: absolute;
+   overflow: hidden;
+   top: 0;
+   left: 0;
+}
+.view img {
+   display: block;
+   position: relative;
+}
+.view h2 {
+   text-transform: uppercase;
+   color: #fff;
+   text-align: center;
+   position: relative;
+   font-size: 17px;
+   padding: 10px;
+   margin: 20px 0 0 0;
+}
+.view p {
+   font-family: Georgia, serif;
+   font-style: italic;
+   font-size: 12px;
+   position: relative;
+   color: #fff;
+   padding: 10px 20px 20px;
+   text-align: center;
+}
+.view a.info {
+   display: inline-block;
+   text-decoration: none;
+   padding: 7px 14px;
+   background: #000;
+   color: #fff;
+   text-transform: uppercase;
+   -webkit-box-shadow: 0 0 1px #000;
+   -moz-box-shadow: 0 0 1px #000;
+   box-shadow: 0 0 1px #000;
+}
+.view a.info: hover {
+   -webkit-box-shadow: 0 0 5px #000;
+   -moz-box-shadow: 0 0 5px #000;
+   box-shadow: 0 0 5px #000;
+}
+.view-fifth {
+	padding:0;
+	border: 0;
+	background: white;
+}
+.view-fifth h4 {
+	color: black;
+	position: absolute;
+    bottom: 20px;
+    left: 0;
+    margin: auto;
+    right: 0;
+}
+.view-fifth h4:hover {
+	color: black;
+}
+.view-fifth:last-child{
+
+}
+
+.view-fifth img {
+   -webkit-transition: all 0.3s ease-in-out;
+   -moz-transition: all 0.3s ease-in-out;
+   -o-transition: all 0.3s ease-in-out;
+   -ms-transition: all 0.3s ease-in-out;
+   transition: all 0.3s ease-in-out;
+}
+.view-fifth .mask {
+   -webkit-transform: translateX(-300px);
+   -moz-transform: translateX(-300px);
+   -o-transform: translateX(-300px);
+   -ms-transform: translateX(-300px);
+   transform: translateX(-300px);
+   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+   filter: alpha(opacity=100);
+   opacity: 1;
+   -webkit-transition: all 0.3s ease-in-out;
+   -moz-transition: all 0.3s ease-in-out;
+   -o-transition: all 0.3s ease-in-out;
+   -ms-transition: all 0.3s ease-in-out;
+   transition: all 0.3s ease-in-out;
+}
+.view-fifth h2 {
+   color: #000;
+}
+.view-fifth p {
+   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=0)";
+   filter: alpha(opacity=0);
+   opacity: 0;
+   color: #333;
+   -webkit-transition: all 0.2s linear;
+   -moz-transition: all 0.2s linear;
+   -o-transition: all 0.2s linear;
+   -ms-transition: all 0.2s linear;
+   transition: all 0.2s linear;
+}
+.view-fifth:hover .mask {
+   -webkit-transform: translateX(0px);
+   -moz-transform: translateX(0px);
+   -o-transform: translateX(0px);
+   -ms-transform: translateX(0px);
+   transform: translateX(0px);
+}
+.view-fifth:hover img {
+   -webkit-transform: translateX(300px);
+   -moz-transform: translateX(300px);
+   -o-transform: translateX(300px);
+   -ms-transform: translateX(300px);
+   transform: translateX(300px);
+}
+.view-fifth:hover p {
+   -ms-filter: "progid: DXImageTransform.Microsoft.Alpha(Opacity=100)";
+   filter: alpha(opacity=100);
+   opacity: 1;
+}
+</style>
+
+
+
 	<div class="mask"></div>
 	<script src="{{ asset('advisa/js/libs/jquery-1.10.1.min.js') }}"></script>
 	<script src="{{ asset('advisa/js/libs/bootstrap.min.js') }}"></script>
@@ -307,15 +486,96 @@
 	<script src="{{ asset('advisa/js/custom.js?v=2') }}"></script>
 	<!-- file loader -->
 	<script src="{{ asset('advisa/js/loader.js?v=2') }}"></script>
-	
 	<script type="text/javascript">
-		
+			
+
+		function slidetoogle_section_keanggotaan()
+		{
+			// $('.content_keanggotaan').slideToggle();
+		}
+
+		$( ".hover_btn" ).hover(
+		  function() {
+		    $( this ).find('img').src('{{ asset('background/middle/btn.png') }}');
+		  }, function() {
+		    $( this ).find('img').src('{{ asset('background/middle/btn_hover.png') }}');
+		  }
+		);
+
 		@if(Session::has('messages'))
 		$("#modal_success").modal('show');
 		@endif;
 
+
+		$('.slider-bottom1').bxSlider({
+			mode: 'horizontal',
+			pause: 2500,
+			autoHover: true,
+			pager: false,
+			auto: true
+		});
+
+
 	</script>
 	<style type="text/css">
+
+
+		@media (min-width: 1281px) {  }
+		@media (min-width: 1025px) and (max-width: 1280px) {}
+		@media (min-width: 768px) and (max-width: 1024px) {}
+		@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+		@media (min-width: 481px) and (max-width: 767px) {
+		  
+		}
+
+		@media (min-width: 320px) and (max-width: 480px) {
+		  .content-middle .text-middle {
+		  	width: 179px;
+		  	top: 2% !important;
+		  }
+		  .info_kodami_btn {
+		  	width: 85px !important;
+		  	left: 35% !important;
+		  	color: white !important;
+		  	bottom: 5% !important;
+		  	height: 26px !important;
+		  	padding-top: 2px !important;
+		  	font-size: 10px !important;
+		  }
+		}
+
+		#slider_bottom .bx-wrapper .bx-controls-direction a {
+	       margin-top: -9%;
+	    }
+		.info_kodami_btn:hover
+		{
+			background: transparent;
+		}
+		.software_slider {
+			padding-top: 94px;
+		}
+		.trainings > div
+		{
+			margin-bottom: 0;
+		}
+		.thumbnails {
+		    background: #f7efef;
+		    border: 1px solid #ffffff;
+		}
+		.trainings i {
+			color: #de2c23;
+		}
+
+		.xxsmall-h {
+			color: white;
+		}
+		.list-forstart .desc  {
+			font: 20px/28px 'OpenSans_Regular',Arial
+		}
+		 .xmedium-h {
+		 	font: 14px/19px 'OpenSans_Regular',Arial	
+		 }
+		
 		/*.list-forstart {
 			width: 55%;
 		}*/

@@ -67,23 +67,6 @@ Route::group(['prefix' => 'anggota', 'middleware' => ['auth', 'access:2']], func
 	Route::post('upload-confirmation', $path.'BayarController@confirmation')->name('anggota.upload.confirmation');
 });
 
-
-// ROUTING OPERATOR
-Route::group(['prefix' => 'operator', 'middleware' => ['auth', 'access:5']], function(){
-
-	$path = 'Operator\\';
-
-	Route::get('/', $path .'IndexController@index')->name('operator.dashboard');
-});
-
-// ROUTING ADMIN OPERATOR
-Route::group(['prefix' => 'admin-operator', 'middleware' => ['auth', 'access:6']], function(){
-
-	$path = 'AdminOperator\\';
-
-	Route::get('/', $path .'IndexController@index')->name('admin.operator.dashboard');
-});
-
 Auth::routes();
 
 /* old */

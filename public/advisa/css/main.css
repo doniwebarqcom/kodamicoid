@@ -628,11 +628,10 @@ img {
 	font: 16px/26px 'OpenSans_Regular',Arial;
 }
 .img-slider {
-	bottom: -44px;
-	left: 50%;
+	left: 33%;
 	margin-left: -225px;
 	position: absolute;
-	width: 475px;
+	width: 600px;
 }
 .slide-man1 {
 	background: url("../img/staticks/slider_man1.png") no-repeat;

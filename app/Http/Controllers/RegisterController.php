@@ -28,7 +28,7 @@ class RegisterController extends Controller
     public function registerPost(Request $request)
     {
     	$this->validate($request,[
-    		'nik' 				=> 'required|unique:users',
+    		//'nik' 				=> 'required|unique:users',
     		'telepon'			=> 'required',
             'name'				=> 'required',
     		//'email'				=> 'required|email|unique:users',
@@ -39,7 +39,7 @@ class RegisterController extends Controller
     	$no_anggota = date('y').date('m').date('d'). (ModelUser::all()->count() + 1);
     
     	$data = new ModelUser();
-    	$data->nik 					= $request->nik;
+    	//$data->nik 					= $request->nik;
     	$data->telepon 				= $request->telepon;
     	$data->no_anggota 			= $no_anggota;
     	$data->name 				= $request->name;
