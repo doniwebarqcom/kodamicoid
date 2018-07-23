@@ -51,16 +51,16 @@
                                         <td>{{ $no+1 }}</td>
                                         <td>{{ $item->nama_akun }}</td>
                                         <td>{{ $item->no_rekening }}</td>
-                                        <td><img src="{{ asset('bank/'. $item->bank->image) }}" style="width: 200px;" /></td>
+                                        <td><img src="{{ asset('bank/'. $item->bank->image) }}" style="width: 100px;" /></td>
                                         <td>{{ $item->cabang }}</td>
                                         <td>{{ date("d F Y H:i:s", strtotime($item->created_at)) }}</td>
                                          <td>
-                                            <a href="{{ route('rekening-bank-user.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button></a>
+                                            <a href="{{ route('rekening-bank-user.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> edit</button></a> &nbsp;
 
-                                            <form action="{{ route('rekening-bank-user.destroy', $item->id) }}" onsubmit="return confirm('Hapus data ini?')" method="post" style="float: left;">
+                                            <form action="{{ route('rekening-bank-user.destroy', $item->id) }}" onsubmit="return confirm('Hapus data ini?')" method="post" style="float: left; margin-right: 5px;">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}                                               
-                                                <button type="submit" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-xs "><i class="ti-trash"></i> hapus</button>
                                             </form>
                                         </td>
                                     </tr>

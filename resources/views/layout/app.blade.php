@@ -20,14 +20,14 @@
 	<link rel="stylesheet" href="{{ asset('advisa/css/responsive.css') }}">
 
 	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114760510-1"></script>
+	<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114760510-1"></script>
 	<script>
 	  window.dataLayer = window.dataLayer || [];
 	  function gtag(){dataLayer.push(arguments);}
 	  gtag('js', new Date());
 
 	  gtag('config', 'UA-114760510-1');
-	</script>
+	</script> -->
 </head>
 <body>
 
@@ -115,7 +115,7 @@
 <!--===========================-->
 <!--==========Content==========-->
 <div class='main-wrapper content' style="background: url('http://kodami.co.id/public/background/15.png')!important;">
-	<section class="relative software_slider" style="background: url('http://kodami.co.id/public/background/17.png') !important;">
+	<section class="relative software_slider" style="background: url('{{ asset('18.png')  }}') !important;">
 		<div class="forma-slider">
 			<div class="container">
 				<div class="row">
@@ -140,7 +140,7 @@
 							<h2 class='medium-h text-center'>Registrasi Form</h2>
 							<h3 class='xsmall-h text-center'>Daftar disini untuk menjadi anggota Kodami. </h3>
 
-							<form class='reg-now-visible' action="{{ url('registerPost') }}" method="POST">
+							<form class='reg-now-visible' action="{{ url('registerPost') }}" autocomplete="off" method="POST">
 
 		  						<input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>" />
 
@@ -190,10 +190,10 @@
 		<br />
 		<br />
 	</section>
-	<div class="col-md-12" style="margin: auto; float: none;">
+	<div class="container">
 		<div class="row trainings" id='trainings'>
-				<div class="col-md-2">
-					<div class="view view-fifth" style="cursor: pointer;" onclick="slidetoogle_section_keanggotaan()">
+				<div class="col-md-4">
+					<div class="view view-fifth" onclick="slidetoogle_section_keanggotaan()">
 						<img src="{{ asset('banner-middle/keanggotaan.png')}}">
 						<h4 class='xxsmall-h text-center transition-h'>Keanggotaan</h4>
 						<div class="mask col-md-12">
@@ -201,7 +201,7 @@
 	                    </div>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="view view-fifth">
 						<img src="{{ asset('banner-middle/modern.png')}}">
 						<h4 class='xxsmall-h text-center transition-h'>Modern</h4>
@@ -210,7 +210,7 @@
 	                    </div>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="view view-fifth">
 						<img src="{{ asset('banner-middle/profesional.png')}}">
 						<h4 class='xxsmall-h text-center transition-h'>Profesional</h4>
@@ -219,7 +219,9 @@
 	                    </div>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="clearfix"></div>
+				<br />
+				<div class="col-md-4">
 					<div class="view view-fifth">
 						<img src="{{ asset('banner-middle/berbagi.png')}}">
 						<h4 class='xxsmall-h text-center transition-h'>Berbagi</h4>
@@ -228,7 +230,7 @@
 	                    </div>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="view view-fifth">
 						<img src="{{ asset('banner-middle/proteksi.png')}}">
 						<h4 class='xxsmall-h text-center transition-h'>Proteksi</h4>
@@ -237,7 +239,7 @@
 	                    </div>
 					</div>
 				</div>
-				<div class="col-md-2">
+				<div class="col-md-4">
 					<div class="view view-fifth">
 						<img src="{{ asset('banner-middle/edukasi.png')}}">
 						<h4 class='xxsmall-h text-center transition-h'>Edukasi</h4>
@@ -247,7 +249,7 @@
 					</div>
 				</div>
 				<div class="content_keanggotaan" style="display: none;">
-					<img src="{{ asset('background/17.png') }}">
+					<img src="{{ asset('background/18.png') }}">
 				</div>
 			</div>
 		<br />
@@ -337,6 +339,7 @@
 </div>
 <!-- Animasi -->
 <style type="text/css">
+
 .xmedium-h {
 	margin-bottom: 30px;
 }
@@ -344,11 +347,14 @@
 	min-height: 270px;
 }
 .view {
-   float: left;
+   /*float: left;*/
    overflow: hidden;
    position: relative;
    text-align: center;
    cursor: default;
+
+    width: 200px;
+    margin: auto;
 }
 .view .mask,.view .content {
    position: absolute;
@@ -357,8 +363,8 @@
    left: 0;
 }
 .view img {
-   display: block;
-   position: relative;
+   /*display: block;*/
+   /*position: relative;*/
 }
 .view h2 {
    text-transform: uppercase;
@@ -528,7 +534,8 @@
 		  
 		}
 
-		@media (min-width: 320px) and (max-width: 480px) {
+		@media (min-width: 320px) and (max-width: 480px) 
+		{
 		  .content-middle .text-middle {
 		  	width: 179px;
 		  	top: 2% !important;
@@ -542,6 +549,22 @@
 		  	padding-top: 2px !important;
 		  	font-size: 10px !important;
 		  }
+
+		  	.trainings .col-md-4 .view-fifth
+			{
+				background: transparent;
+			}
+			.trainings .col-md-4 .view {
+				margin-bottom: 15px;
+				float: none;
+			}
+			.trainings .col-md-4 .view img {
+				display: inline;
+			}
+
+			.trainings div.clearfix {
+				min-height: 0;
+			}
 		}
 
 		#slider_bottom .bx-wrapper .bx-controls-direction a {

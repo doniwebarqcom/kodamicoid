@@ -26,8 +26,8 @@
               
               <div class="form-group  m-t-20">
                 <div class="col-xs-12">
-                  <label>Email Address</label>
-                  <input class="form-control" type="email" required="" name="email" placeholder="Email" value="{{ old('email') }}">
+                  <label>No Anggota</label>
+                  <input class="form-control" type="text" required="" name="email" placeholder="No Anggota" value="{{ old('email') }}">
                   @if ($errors->has('email'))
                       <span class="help-block">
                           <strong>{{ $errors->first('email') }}</strong>

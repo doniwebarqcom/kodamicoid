@@ -21,15 +21,9 @@ class IndexController extends ControllerLogin
     public function index()
     {
         $data = [];
-
-        $data['tagihan'] = Deposit::where('user_id', Auth::user()->id)
-                                    ->where('status',1)
-                                    ->where('type', 1)
-                                    ->first();
-                                    
-        $data['deposit'] = Deposit::where('user_id', Auth::user()->id)
-                                    ->where('type', 1)
-                                    ->first();
+        $data['tagihan']    = Deposit::where('user_id', Auth::user()->id)->where('status',1) ->where('due_date', '>=', date('Y-m-d'))->where('type', 1)->first();
+        $data['deposit']    = Deposit::where('user_id', Auth::user()->id)->where('type', 1)->first();
+        $data['user']       = \App\UserModel::where('id', Auth::user()->id)->first();
 
     	return view('anggota.index')->with($data);
     }
@@ -56,8 +50,19 @@ class IndexController extends ControllerLogin
         if(!empty($request->tempat_lahir)) $data->tempat_lahir = $request->tempat_lahir;
         if(!empty($request->tanggal_lahir)) $data->tanggal_lahir = $request->tanggal_lahir;   
 
+        $data->domisili_provinsi_id     = $request->domisili_provinsi_id;
+        $data->domisili_kabupaten_id    = $request->domisili_kabupaten_id;
+        $data->domisili_kecamatan_id    = $request->domisili_kecamatan_id;
+        $data->domisili_kelurahan_id    = $request->domisili_kelurahan_id;
+        $data->domisili_alamat          = $request->domisili_alamat;
 
-        if ($request->hasFile('file_ktp')) {
+        $data->ktp_provinsi_id          = $request->ktp_provinsi_id;
+        $data->ktp_kabupaten_id         = $request->ktp_kabupaten_id;
+        $data->ktp_kecamatan_id         = $request->ktp_kecamatan_id;
+        $data->ktp_kelurahan_id    = $request->ktp_kelurahan_id;
+        $data->ktp_alamat               = $request->ktp_alamat;
+
+        if ($request->hasFile('file_ktp')){
             
             $image = $request->file('file_ktp');
             
@@ -70,7 +75,7 @@ class IndexController extends ControllerLogin
             $data->foto_ktp = $name;
         }
 
-        if ($request->hasFile('file_photo')) {
+        if ($request->hasFile('file_photo')){
             
             $image = $request->file('file_photo');
             
@@ -83,7 +88,6 @@ class IndexController extends ControllerLogin
             $data->foto = $name;
         }
         
-
         $data->save();
    
         return redirect()->route('anggota.dashboard')->with('message-success', 'Profil berhasil disimpan');

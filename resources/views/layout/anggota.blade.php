@@ -157,7 +157,7 @@
                     </li>
 
                     <li class="devider"></li>
-                    <li class="last-nav"><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu">Apps<span class="fa arrow"></span></span></a>
+                    <li class="last-nav"><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu">Data Master<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
                             <li> <a href="{{ route('rekening-bank-user.index') }}" class="waves-effect"><i class="mdi mdi-calendar-check fa-fw"></i> <span class="hide-menu">Rekening Bank</span></a></li>
                         </ul>
@@ -206,9 +206,23 @@
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('admin-css/js/custom.min.js') }}"></script>
     <script src="{{ asset('admin-css/js/dashboard1.js') }}?time=<?=date('His')?>"></script>
+    <script src="{{ asset('js/bootbox.min.js') }}"></script>
     <!-- Custom tab JavaScript -->
     <script src="{{ asset('admin-css/js/cbpFWTabs.js') }}"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <script type="text/javascript">
+
+    /**
+     * [numberWithComma description]
+     * @param  {[type]} x [description]
+     * @return {[type]}   [description]
+     */
+    function numberWithComma(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+
     (function() {
         [].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {
             new CBPFWTabs(el);

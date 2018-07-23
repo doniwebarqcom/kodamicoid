@@ -12,6 +12,21 @@
 */
 
 Route::get('/', function () {
+    
+	if(Auth::check())
+    {
+        if(Auth::user()->access_id == 2) // Anggota
+        {
+            return redirect()->route('anggota.dashboard');
+        }
+
+        if(Auth::user()->access_id == 1) // Admin
+        {
+            return redirect()->route('admin.index');
+        }
+           
+    }
+
     return view('welcome');
 });
 
@@ -28,6 +43,17 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::post('contact-us', 'HomeController@postContactUs')->name('contact-us');
 Route::post('ajax/add-rekening-bank', 'AjaxController@addRekeningBank')->name('ajax.add.rekening.bank');
 
+
+// ROUTING LOGIN
+Route::group(['middleware' => ['auth']], function(){
+	/**
+	 * Ajax
+	 */
+	Route::post('ajax/get-kabupaten-by-provinsi', 'AjaxController@getKabupatenByProvinsi')->name('ajax.get-kabupaten-by-provinsi-id');
+	Route::post('ajax/get-kecamatan-by-kabupaten', 'AjaxController@getKecamatanByKabupaten')->name('ajax.get-kecamatan-by-kabupaten-id');
+	Route::post('ajax/get-kelurahan-by-kecamatan', 'AjaxController@getKelurahanByKecamatan')->name('ajax.get-kelurahan-by-kecamatan-id');
+});
+
 // ROUTING ADMIN
 Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], function(){
 
@@ -40,9 +66,9 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 	Route::resource('user', $path . 'UserController');
 	Route::resource('user-group', $path . 'UserGroupController');
 	Route::resource('anggota', $path . 'AnggotaController');
-
 	Route::resource('bank', $path.'BankController');
 	Route::resource('rekening-bank', $path.'RekeningBankController');
+	Route::resource('setting', $path.'SettingController',['as' => 'admin']);
 
 	Route::get('bayar/approve/{id}', $path.'BayarAdminController@approve')->name('admin.bayar.approve');
 	Route::get('bayar/denied/{id}', $path.'BayarAdminController@denied')->name('admin.bayar.denied');
@@ -61,7 +87,10 @@ Route::group(['prefix' => 'anggota', 'middleware' => ['auth', 'access:2']], func
 	Route::get('user/submit-pembayaran-anggota', $path . 'UserController@submitkonfirmasianggota');
 	Route::get('user/post-submit-pembayaran-anggota', $path . 'UserController@submitkonfirmasianggota');
 	Route::post('save-profile', $path.'IndexController@saveProfile')->name('anggota.index.save.profile');
-	Route::get('bayar', $path.'BayarController@step1');
+	
+	Route::get('bayar', $path.'BayarController@step1')->name('anggota.bayar');
+	Route::post('submitstep1', $path.'BayarController@submitStep1')->name('anggota.submit-step1');
+
 	Route::post('anggota/bayar/submit', $path.'BayarController@submit')->name('anggota.bayar.submit');
 	Route::resource('rekening-bank-user', $path. 'RekeningBankUserController');
 	Route::post('upload-confirmation', $path.'BayarController@confirmation')->name('anggota.upload.confirmation');

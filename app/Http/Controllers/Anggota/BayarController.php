@@ -19,7 +19,7 @@ class BayarController extends ControllerLogin
 	 * [index description]
 	 * @return [type] [description]
 	 */
-    public function step1()
+    public function step1(Request $request)
     {
         $data = [];
         $data['rekening_bank']          = RekeningBank::all();
@@ -27,13 +27,32 @@ class BayarController extends ControllerLogin
         $data['bank']                   = Bank::all(); 
         $code = rand(100, 999); 
         $data['code'] = $code;
-        $data['total_pembayaran']       = '120'. $code; 
+        $total_pembayaran = get_setting('simpanan_pokok') + (Auth::user()->durasi_pembayaran * get_setting('simpanan_wajib') + get_setting('kartu_anggota') + Auth::user()->first_simpanan_sukarela )+$code;
+
+        $data['total_pembayaran']       = $total_pembayaran; 
         $data['invoice_date']           = date('d F Y');
         $data['due_date']               = date('Y-m-d', strtotime("+3 days"));
         $data['no_invoice']             = (Deposit::count()+1).Auth::user()->id.'/INV/KDM/'. date('d').date('m').date('y');
 
     	return view('anggota.bayar.bayar')->with($data);
     }
+
+    /**
+     * [submitStep1 description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function submitStep1(Request $request)
+    {
+        $user = \App\UserModel::where('id', Auth::user()->id)->first();
+        $user->durasi_pembayaran            = $request->durasi_pembayaran;
+        $user->first_durasi_pembayaran_date       = date('Y-m-d');
+        $user->first_simpanan_sukarela      = $request->first_simpanan_sukarela;
+        $user->save();
+
+        return redirect()->route('anggota.bayar');
+    }
+
 
     /**
      * [submit description]

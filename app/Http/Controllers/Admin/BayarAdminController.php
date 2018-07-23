@@ -25,14 +25,43 @@ class BayarAdminController extends ControllerLogin
      */
     public function approve($id)
     {  
-        $deposit = Deposit::where('id', $id)->first();
-        $deposit->status = 3;
-        $deposit->save();   
+        $status = Deposit::where('id', $id)->first();
+        $status->status = 3;
+        $status->save(); 
+
+        $user = \App\UserModel::where('id', $status->user_id)->first();
 
         /** Rubah status angota jadi active */
-        $user = ModelUser::where('id', $deposit->user_id)->first();
+        $user = ModelUser::where('id', $status->user_id)->first();
         $user->status = 2;
         $user->save();
+
+        // Insert Simpanan Pokok
+        $deposit                = new Deposit();
+        $deposit->no_invoice    = $status->no_invoice; 
+        $deposit->status        = 3;
+        $deposit->type          = 3;
+        $deposit->user_id       = $status->user_id;
+        $deposit->nominal       = get_setting('simpanan_pokok');
+        $deposit->save();  
+
+        // Insert Simpanan Wajib
+        $deposit                = new Deposit();
+        $deposit->no_invoice    = $status->no_invoice; 
+        $deposit->status        = 3; 
+        $deposit->type          = 5;
+        $deposit->user_id       = $status->user_id;
+        $deposit->nominal       = $user->durasi_pembayaran * get_setting('simpanan_wajib');
+        $deposit->save();
+
+        // Insert Simpanan Sukarela
+        $deposit                = new Deposit();
+        $deposit->no_invoice    = $status->no_invoice; 
+        $deposit->status        = 3; 
+        $deposit->type          = 4;
+        $deposit->user_id       = $status->user_id;
+        $deposit->nominal       = $user->first_simpanan_sukarela;
+        $deposit->save();
 
         return redirect()->route('anggota.index')->with('message-success', "Proses Approval berhasil");
     }

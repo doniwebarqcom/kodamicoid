@@ -63,7 +63,6 @@
                                                     <p>Pilih salah satu bank yang akan anda transfer</p>  
                                                     @foreach($rekening_bank as $item)
                                                     <div class="col-md-4 list-bank" style="margin-right: 20px; cursor: pointer;">
-                                                        
                                                         <input type="hidden" class="hidden-rekening_bank_id" value="{{ $item->id }}">
                                                         <input type="hidden" class="hidden-rekening_bank_nama_akun" value="{{ $item->nama_akun }}">
                                                         <input type="hidden" class="hidden-rekening_bank_no_rekening" value="{{ $item->no_rekening }}">
@@ -190,17 +189,22 @@
                                                         <tr>
                                                             <td class="text-center">1</td>
                                                             <td>Simpanan Pokok</td>
-                                                            <td class="text-right">Rp. 100.000 </td>
+                                                            <td class="text-right">Rp. {{ number_format(get_setting('simpanan_pokok')) }} </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="text-center">2</td>
                                                             <td>Simpanan Wajib</td>
-                                                            <td class="text-right">Rp. 10.000 perbulan </td>
+                                                            <td class="text-right">Rp. {{ number_format( (Auth::user()->durasi_pembayaran * get_setting('simpanan_wajib') )) }} ( {{ Auth::user()->durasi_pembayaran }} Bulan )</td>
                                                         </tr>
                                                         <tr>
                                                             <td class="text-center">3</td>
                                                             <td>Kartu Anggota</td>
-                                                            <td class="text-right">Rp. 10.000 </td>
+                                                            <td class="text-right">Rp. {{ number_format( get_setting('kartu_anggota') ) }} (1 Kali Bayar) </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="text-center">3</td>
+                                                            <td>Simpanan Sukarela</td>
+                                                            <td class="text-right">Rp. {{ number_format(Auth::user()->first_simpanan_sukarela ) }} </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

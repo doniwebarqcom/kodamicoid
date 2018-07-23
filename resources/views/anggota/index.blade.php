@@ -17,11 +17,9 @@
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                     <h4 class="page-title">Dashboard</h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                    <button class="right-side-toggle waves-effect waves-light btn-info btn-circle pull-right m-l-20"><i class="ti-settings text-white"></i></button>
                     <a href="{{ route('anggota.profile')}}" class="btn btn-danger pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light">Profile</a>
                     <ol class="breadcrumb">
                         <li><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="active">Dashboard</li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -50,21 +48,31 @@
                                 </div>
                                 <div class="col-xs-12 col-sm-8">
                                     <h2 class="m-b-0">{{ Auth::user()->name }}</h2>
-                                    <h4>SHU</h4><a href="{{ url('anggota/user/detail') }}" class="btn btn-rounded btn-success">Rp. 0</a></div>
+                                    <h4>SHU</h4><a class="btn btn-rounded btn-success">Rp. 0</a></div>
                             </div>
                             <div class="row text-center m-t-30">
                                 <div class="col-xs-4 b-r">
                                     <h3>Simpanan Pokok</h3>
-                                    <a href="{{ url('anggota/user/iuran') }}" class="btn btn-rounded btn-warning">Belum Lunas</a>
+                                    @php($simpanan_pokok = simpanan_pokok(Auth::user()->id))
+                                    @if($simpanan_pokok)
+                                        <h4>Rp. {{ number_format($simpanan_pokok) }}</h4>
+                                    @else
+                                        <a class="btn btn-rounded btn-warning">Belum Lunas</a>
+                                    @endif
                                 </div>
                                 <div class="col-xs-4 b-r">
                                     <h3>Simpanan Sukarela</h3>
-                                    <h4>Rp. 0</h4>
-                                    <a href="{{ route('anggota.index.save.profile') }}" title="Tambah Simpanan Sukarela"><i class="fa fa-plus"></i> </a>
+                                    <h4>Rp. {{ number_format(simpanan_sukarela(Auth::user()->id)) }}</h4>
+                                    <a onclick="bootbox.alert('Under Construction');" title="Tambah Simpanan Sukarela"><i class="fa fa-plus"></i> </a>
                                 </div>
                                 <div class="col-xs-4 b-r">
                                     <h3>Simpanan Wajib</h3>
-                                    <a href="{{ url('anggota/user/iuran') }}" class="btn btn-rounded btn-warning">Belum Lunas</a>
+                                    @php($simpanan_wajib = simpanan_wajib(Auth::user()->id))
+                                    @if($simpanan_wajib)
+                                        <h4>{{ number_format($simpanan_wajib) }}</h4>
+                                    @else
+                                        <a class="btn btn-rounded btn-warning">Belum Lunas</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -93,19 +101,115 @@
                                             <form method="POST" action="{{ route('anggota.index.save.profile') }}" enctype="multipart/form-data">
                                                 {{ csrf_field() }}
                                                 <div class="col-md-6">
-                                                <div>
-                                                    <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> NIK : {{ Auth::user()->nik }}</h5>
+                                                    <div>
+                                                        <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> NIK : {{ Auth::user()->nik }}</h5>
+                                                    </div>
+                                                    <div>
+                                                        <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Nama : {{ Auth::user()->name }}</h5>
+                                                    </div>
+                                                    <div>
+                                                        <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Email : {{ Auth::user()->email }}</h5>
+                                                    </div>
+                                                    <div>
+                                                        <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Telepon : {{ Auth::user()->telepon }}</h5>
+                                                    </div>
                                                 </div>
-                                                <div>
-                                                    <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Nama : {{ Auth::user()->name }}</h5>
+                                                <div class="clearfix"></div>
+                                                <div class="col-md-6">
+                                                    <h5>
+                                                        @if($user->domisili_provinsi_id === null || $user->domisili_kabupaten_id === null || $user->domisili_kecamatan_id === null || $user->domisili_kelurahan_id === null )
+                                                            <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span>
+                                                        @else
+                                                            <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span>
+                                                        @endif
+                                                        Alamat Domisili
+                                                    </h5>
+                                                    <p>
+                                                        <select name="domisili_provinsi_id" class="form-control">
+                                                            <option value=""> - Provinsi - </option>
+                                                            @foreach(get_provinsi() as $item)
+                                                            <option value="{{ $item->id_prov }}" {{ $item->id_prov == $user->domisili_provinsi_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </p>
+                                                    <p>
+                                                        <select name="domisili_kabupaten_id" class="form-control">
+                                                            <option value=""> - Kota / Kabupaten - </option>
+                                                            @foreach($user->domisiliKabupatenByProvinsi as $item)
+                                                                <option value="{{ $item->id_kab }}" {{ $item->id_kab == $user->domisili_kabupaten_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </p>
+                                                    <p>
+                                                        <select name="domisili_kecamatan_id" class="form-control">
+                                                            <option value=""> - Kecamatan - </option>
+                                                            @foreach($user->domisiliKecamatanByKabupaten as $item)
+                                                                <option value="{{ $item->id_kec }}" {{ $item->id_kec == $user->domisili_kecamatan_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </p>
+                                                    <p>
+                                                        <select name="domisili_kelurahan_id" class="form-control">
+                                                            <option value=""> - Kelurahan - </option>
+                                                            @foreach($user->domisiliKelurahanByKecamatan as $item)
+                                                                <option value="{{ $item->id_kel }}" {{ $item->id_kel == $user->domisili_kelurahan_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </p>
+                                                    <p>
+                                                        <textarea class="form-control" name="domisili_alamat" placeholder="Alamat RT / RW">{{ Auth::user()->domisili_alamat }}</textarea>
+                                                    </p>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <h5>
+                                                        @if($user->ktp_provinsi_id === null || $user->ktp_kabupaten_id === null || $user->ktp_kecamatan_id === null || $user->ktp_kelurahan_id === null )
+                                                            <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span>
+                                                        @else
+                                                            <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span>
+                                                        @endif
+
+                                                        Alamat KTP
+                                                    </h5>
+                                                    <p>
+                                                        <select name="ktp_provinsi_id" class="form-control">
+                                                            <option value=""> - Provinsi - </option>
+                                                            @foreach(get_provinsi() as $item)
+                                                            <option value="{{ $item->id_prov }}" {{ $item->id_prov == $user->ktp_provinsi_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </p>
+                                                    <p>
+                                                        <select name="ktp_kabupaten_id" class="form-control">
+                                                            <option value=""> - Kota / Kabupaten - </option>
+                                                            @foreach($user->ktpKabupatenByProvinsi as $item)
+                                                                <option value="{{ $item->id_kab }}" {{ $item->id_kab == $user->ktp_kabupaten_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </p>
+                                                    <p>
+                                                        <select name="ktp_kecamatan_id" class="form-control">
+                                                            <option value=""> - Kecamatan - </option>
+                                                            @foreach($user->ktpKecamatanByKabupaten as $item)
+                                                                <option value="{{ $item->id_kec }}" {{ $item->id_kec == $user->ktp_kecamatan_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </p>
+                                                    <p>
+                                                        <select name="ktp_kelurahan_id" class="form-control">
+                                                            <option value=""> - Kelurahan - </option>
+                                                            @foreach($user->ktpKelurahanByKecamatan as $item)
+                                                                <option value="{{ $item->id_kel }}" {{ $item->id_kel == $user->ktp_kelurahan_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                    </p>
+                                                    <p>
+                                                        <textarea class="form-control" name="ktp_alamat" placeholder="Alamat RT / RW">{{ Auth::user()->ktp_alamat }}</textarea>
+                                                    </p>
+                                                </div> 
+
+                                            <div class="clearfix"></div>
+                                            <div class="col-md-6">
                                                 <div>
-                                                    <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Email : {{ Auth::user()->email }}</h5>
-                                                </div>
-                                                <div>
-                                                    <h5> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Telepon : {{ Auth::user()->telepon }}</h5>
-                                                </div>
-                                               <div>
                                                     @if(!empty(Auth::user()->agama))
                                                         <h5><span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Agama : {{ Auth::user()->agama }}</h5>
                                                     @else
@@ -132,7 +236,6 @@
                                                     @if(empty(Auth::user()->tempat_lahir))
                                                         <input type="text" name="tempat_lahir" class="form-control" value="{{ Auth::user()->tempat_lahir }}" />
                                                     @endif
-
                                                 </div>
                                                 <div>
                                                     @if(!empty(Auth::user()->tanggal_lahir))
@@ -142,9 +245,8 @@
                                                     @endif
 
                                                     @if(empty(Auth::user()->tanggal_lahir))
-                                                        <input type="text" name="tanggal_lahir" class="form-control" value="{{ Auth::user()->tanggal_lahir }}" />
+                                                        <input type="text" name="tanggal_lahir" class="form-control datepicker" value="{{ Auth::user()->tanggal_lahir }}" />
                                                     @endif
-
                                                 </div>
                                                 @if(!empty(Auth::user()->foto_ktp))
                                                     <div>
@@ -157,7 +259,6 @@
                                                     </div>
                                                 @endif
                                                 <hr />
-
                                                 @if(!empty(Auth::user()->foto))
                                                     <div>
                                                         <h5><span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Upload Foto <input type="file" name="file_photo" class="form-control"></h5>
@@ -169,7 +270,7 @@
                                                     </div>
                                                 @endif
                                                 <hr />
-                                                <button type="submit" class="btn btn-success btn-sm"><i class="fa fa-save"></i> Simpan Perubahan</button>
+                                                <button type="submit" class="btn btn-success btn-sm" style="background: #3cd0cc;"><i class="fa fa-save"></i> Simpan Perubahan</button>
                                               </div>
                                               <br style="clear:both;" />
                                             </form>
@@ -179,34 +280,55 @@
                                 <div class="sl-item">
                                     <div class="sl-left bg-warning"> <i class="fa fa-money"></i></div>
                                     <div class="sl-right">
+                                        <form action="{{ route('anggota.submit-step1') }}" method="POST">
+                                        {{ csrf_field() }}
                                         <div><h2>Pembayaran</h2> <span class="sl-date">&nbsp;</span></div>
                                             <div class="desc block1">
                                                 <div>
                                                     <h4> <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Simpanan Pokok</h4>
-                                                    <p>Simpanan pokok manjadi anggota KODAMI Rp. 100.000 
+                                                    <p>Simpanan pokok manjadi anggota KODAMI sebesar Rp. 100.000 
                                                     </p>
                                                 </div>
                                                 <hr />
                                                 <div>
                                                     <h4> <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Simpanan Wajib</h4>
+                                                    <div class="col-md-4" style="margin:0;padding:0;"><hr /></div><div class="clearfix"></div>
                                                     <p>Simpanan Wajib anggota KODAMI sebesar Rp. 10.000 perbulan ( Rp. 120.000 pertahun )</p>
+                                                    
+                                                    <p><label>Durasi Pembayaran</label></p>
+                                                    <label style="font-weight: normal;"><input type="radio" name="durasi_pembayaran" value="1" checked="true"> 1 Bulan</label>&nbsp;&nbsp;
+                                                    <label style="font-weight: normal;"><input type="radio" name="durasi_pembayaran" value="3"> 3 Bulan</label>&nbsp;&nbsp;
+                                                    <label style="font-weight: normal;"><input type="radio" name="durasi_pembayaran" value="6"> 6 Bulan</label>&nbsp;&nbsp;
+                                                    <label style="font-weight: normal;"><input type="radio" name="durasi_pembayaran" value="12"> 12 Bulan</label><br />
+                                                    <p style="font-size: 15px;margin-top: 10px;"><label style="font-weight: normal;">Rp. </label> <label class="nominal_simpanan_wajib" style="font-weight: normal;">10.000</label></p>
+
                                                 </div>
                                                 <hr />
                                                 <div>
                                                     <h4> <span class="btn btn-xs btn-rounded btn-success"><i class="fa fa-check"></i></span> Simpanan Sukarela</h4>
-                                                    <p>Simpanan sukarela adalah tabungan anggota yang besarnya tergantung kemampuan anggota </p>
+                                                    <p>Simpanan Sukarela adalah simpanan Anggota yang besarnya tergantung kemampuan anggota</p>
+                                                    <div class="form-grup">
+                                                        <div class="col-md-12">
+                                                            <p>Masukkan Nominal Simpanan Sukarela </p>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <input type="number" name="first_simpanan_sukarela" class="form-control nominal" placeholder="Nominal">
+                                                        </div>
+                                                        <div class="clearfix"></div>
+                                                    </div>
                                                 </div>
                                                 <hr />
                                                  <div>
                                                     <h4> <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Kartu Anggota</h4>
-                                                    <p>Kartu anggota KODAMI sebesar Rp. 10.000 </p>
+                                                    <p>Biaya kartu anggota KODAMI sebesar Rp. 10.000 (1 Kali Bayar) </p>
                                                 </div>
                                                 <hr />
                                                 <div>
-                                                    <h4>Total : Rp. 120.000</h4>
-                                                    <a href="{{ url('anggota/bayar') }}" style="color: white;" class="btn btn-success"><i class="fa fa-money"></i> Bayar</a>
+                                                    <h4>Total : Rp. <label class="total_bayar" style="font-weight: normal;">120.000</label></h4>
+                                                    <button type="submit" style="color: white; background: #3cd0cc;"" class="btn btn-success"><i class="fa fa-money"></i> Bayar</button>
                                                 </div>
                                             </div>
+                                        </form>
 
                                         @if($tagihan)
                                             <div id="counting_message" style="display: none;">
@@ -232,7 +354,7 @@
 
                                                                         </div>
                                                                         <div>
-                                                                            <button class="btn btn-lg btn-info waves-effect waves-light m-t-20"  data-toggle="modal" data-target="#upload_file_konfirmasi"><i class="fa fa-upload"></i> Upload Bukti Transfer</button>
+                                                                            <button type="button" class="btn btn-lg btn-info waves-effect waves-light m-t-20"  data-toggle="modal" data-target="#upload_file_konfirmasi"><i class="fa fa-upload"></i> Upload Bukti Transfer</button>
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -242,6 +364,7 @@
                                                 </div>
                                             </div>
                                         @endif
+                                        
                                         @if(isset($deposit) and $deposit->status >= 2)
                                             <div id="confirmation_messages" style="display: none;">
                                                 <div class="white-box"> 
@@ -285,7 +408,7 @@
                                         @if(isset($deposit) and $deposit->status == 2)
                                             <div class="desc"><h4>Terima kasih<br /> Anda berhasil melakukan konfirmasi pembayaran, silahkan tunggu beberapa saat, sistem kami akan mengecek terlebih dahulu pembayaran Anda.</h4></div>
                                         @else
-                                            <div class="desc">Setelah anda melakukan pembayaran anda di haruskan melakukan konfirmasi pembayaran dengan meng-unggah bukti pembayaran</div>
+                                            <div class="desc">Setelah melakukan pembayaran anda di haruskan melakukan konfirmasi pembayaran dengan meng-unggah bukti pembayaran.</div>
                                         @endif
                                     </div>
                                 </div>
@@ -296,10 +419,9 @@
                                             <h2 class="btn btn-rounded btn-warning">Anggota Belum Aktif</h2>
                                         </div>
                                         <br />
-                                        <div class="desc">Data anggota akan otomatis aktif ketika anda sudah melakukan semua proses ini</div>
+                                        <div class="desc">Status Anggota akan aktif secara otomatis ketika proses registrasi keanggotaan sampai dengan pembayaran telah selesai dilakukan.</div>
                                     </div>
                                 </div>
-
 
                             </div>
                         </div>
@@ -387,7 +509,6 @@
 </div>
 @endif
 
-
 @section('footer-script')
     <style type="text/css">
         .price-lable {
@@ -403,12 +524,216 @@
     </style>
     <script src="{{ asset('admin-css/plugins/bower_components/blockUI/jquery.blockUI.js') }}"></script>
     <script type="text/javascript">
+        
+        jQuery('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+        });
+
+        /**
+         * DOMISILI LOKASI
+         */
+        $("select[name='domisili_provinsi_id']").on('change', function(){
+
+            var id = $(this).val();
+            
+            // get kabupaten
+            $.ajax({
+                url: "{{ route('ajax.get-kabupaten-by-provinsi-id') }}",
+                method:"POST",
+                data: {'id' : id, '_token' : $("meta[name='csrf-token']").attr('content')},
+                dataType:"json",
+                success:function(data)
+                {
+                    var el = '<option value="">- Kota / Kabupaten -</option>';
+
+                    $(data.data).each(function(k,v){
+                        el += '<option value="'+ v.id_kab +'">'+ v.nama +'</option>';
+                    });
+
+                    $("select[name='domisili_kabupaten_id']").html(el);
+                }
+            });
+        });
+
+        $("select[name='domisili_kabupaten_id']").on('change', function(){
+
+            var id = $(this).val();
+            
+            // get kecamatan
+            $.ajax({
+                url: "{{ route('ajax.get-kecamatan-by-kabupaten-id') }}",
+                method:"POST",
+                data: {'id' : id, '_token' : $("meta[name='csrf-token']").attr('content')},
+                dataType:"json",
+                success:function(data)
+                {
+                    var el = '<option value="">- Kecamatan -</option>';
+
+                    $(data.data).each(function(k,v){
+                        el += '<option value="'+ v.id_kec +'">'+ v.nama +'</option>';
+                    });
+
+                    $("select[name='domisili_kecamatan_id']").html(el);
+                }
+            });
+        });
+
+        $("select[name='domisili_kecamatan_id']").on('change', function(){
+
+            var id = $(this).val();
+            
+            // get kelurahan
+            $.ajax({
+                url: "{{ route('ajax.get-kelurahan-by-kecamatan-id') }}",
+                method:"POST",
+                data: {'id' : id, '_token' : $("meta[name='csrf-token']").attr('content')},
+                dataType:"json",
+                success:function(data)
+                {
+                    var el = '<option value="">- Kelurahan -</option>';
+
+                    $(data.data).each(function(k,v){
+                        el += '<option value="'+ v.id_kel +'">'+ v.nama +'</option>';
+                    });
+
+                    $("select[name='domisili_kelurahan_id']").html(el);
+                }
+            });
+        });
+        /**
+         * END LOKASI
+         */
+
+
+        /**
+         * KTP LOKASI
+         */
+        $("select[name='ktp_provinsi_id']").on('change', function(){
+
+            var id = $(this).val();
+            
+            // get kabupaten
+            $.ajax({
+                url: "{{ route('ajax.get-kabupaten-by-provinsi-id') }}",
+                method:"POST",
+                data: {'id' : id, '_token' : $("meta[name='csrf-token']").attr('content')},
+                dataType:"json",
+                success:function(data)
+                {
+                    var el = '<option value="">- Kota / Kabupaten -</option>';
+
+                    $(data.data).each(function(k,v){
+                        el += '<option value="'+ v.id_kab +'">'+ v.nama +'</option>';
+                    });
+
+                    $("select[name='ktp_kabupaten_id']").html(el);
+                }
+            });
+        });
+
+        $("select[name='ktp_kabupaten_id']").on('change', function(){
+
+            var id = $(this).val();
+            
+            // get kecamatan
+            $.ajax({
+                url: "{{ route('ajax.get-kecamatan-by-kabupaten-id') }}",
+                method:"POST",
+                data: {'id' : id, '_token' : $("meta[name='csrf-token']").attr('content')},
+                dataType:"json",
+                success:function(data)
+                {
+                    var el = '<option value="">- Kecamatan -</option>';
+
+                    $(data.data).each(function(k,v){
+                        el += '<option value="'+ v.id_kec +'">'+ v.nama +'</option>';
+                    });
+
+                    $("select[name='ktp_kecamatan_id']").html(el);
+                }
+            });
+        });
+
+        $("select[name='ktp_kecamatan_id']").on('change', function(){
+
+            var id = $(this).val();
+            
+            // get kelurahan
+            $.ajax({
+                url: "{{ route('ajax.get-kelurahan-by-kecamatan-id') }}",
+                method:"POST",
+                data: {'id' : id, '_token' : $("meta[name='csrf-token']").attr('content')},
+                dataType:"json",
+                success:function(data)
+                {
+                    var el = '<option value="">- Kelurahan -</option>';
+
+                    $(data.data).each(function(k,v){
+                        el += '<option value="'+ v.id_kel +'">'+ v.nama +'</option>';
+                    });
+
+                    $("select[name='ktp_kelurahan_id']").html(el);
+                }
+            });
+        });
+        /**
+         * END KTP LOKASI
+         */
+
+        var simpanan_wajib = 10000;
+
+        $(".nominal").on('input', function(){ calculate(); });
+
+        function calculate()
+        {
+            var simpanan_sukarela = $(".nominal").val() == "" ? 0 : parseInt($(".nominal").val());
+
+            total_bayar = parseInt(simpanan_sukarela) + parseInt(simpanan_wajib) + 100000 + 10000;
+
+            $('.total_bayar').html(numberWithComma(total_bayar));
+        }
+
+
+        $("input[name='durasi_pembayaran']").each(function(){
+
+            $(this).click(function(){
+                if($(this).val() == 1)
+                {
+                    $('.nominal_simpanan_wajib').html( '10.000' );
+                    simpanan_wajib = 10000;
+                }
+
+                if($(this).val() == 3)
+                {
+                    $('.nominal_simpanan_wajib').html( '30.000' );
+                    simpanan_wajib = 30000; 
+                }
+
+                if($(this).val() == 6)
+                {
+                    $('.nominal_simpanan_wajib').html( '60.000' );
+                    simpanan_wajib = 60000;
+                }
+
+                if($(this).val() == 12)
+                {
+                    $('.nominal_simpanan_wajib').html( '120.000' );
+                    simpanan_wajib = 120000;
+                }
+
+                calculate();
+            });
+        });
 
         @if(isset($deposit) and $deposit->status >= 2)
             $('div.block1').block({
                 message: $('#confirmation_messages .pricing-plan').html()
             });
         @endif
+
+        jQuery('.datepicker').datepicker({
+            format: 'yyyy-mm-dd',
+        });
 
         @if($tagihan)
             $('div.block1').block({

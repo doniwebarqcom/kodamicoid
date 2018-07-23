@@ -32,13 +32,63 @@ class AjaxController extends Controller
     }
 
     /**
+     * [getKabupatenByProvinsi description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function getKabupatenByProvinsi(Request $request)
+    {
+        if($request->ajax())
+        {
+            $data = \App\Kabupaten::where('id_prov', $request->id)->get();
+
+            $this->respon = ['message' => 'success', 'data' => $data];
+
+            return response()->json($this->respon);
+        }
+    }
+
+    /**
+     * [getKecamatanByKabupaten description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function getKecamatanByKabupaten(Request $request)
+    {
+        if($request->ajax())
+        {
+            $data = \App\Kecamatan::where('id_kab', $request->id)->get();
+
+            $this->respon = ['message' => 'success', 'data' => $data];
+
+            return response()->json($this->respon);
+        }
+    }
+
+    /**
+     * [getKelurahanByKecamatan description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function getKelurahanByKecamatan(Request $request)
+    {
+        if($request->ajax())
+        {
+            $data = \App\Kelurahan::where('id_kec', $request->id)->get();
+
+            $this->respon = ['message' => 'success', 'data' => $data];
+
+            return response()->json($this->respon);
+        }
+    }
+
+    /**
      * [postContactUs description]
      * @param  Request $request [description]
      * @return [type]           [description]
      */
     public function addRekeningBank(Request $request)
     {
-
         if($request->ajax())
         {
             $data               = new RekeningBankUser();

@@ -68,12 +68,12 @@
                                             {!! status_anggota($item->id) !!}
                                         </td>
                                         <td>
-                                            <a href="{{ route('anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button></a>
+                                            <a href="{{ route('anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> edit</button></a>
 
-                                            <form action="{{ route('anggota.destroy', $item->id) }}" onsubmit="return confirm('Hapus data ini?')" method="post" style="float: left;">
+                                            <form action="{{ route('anggota.destroy', $item->id) }}" style="float: left; margin-right: 5px;" onsubmit="return confirm('Hapus data ini?')" method="post">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}                                               
-                                                <button type="submit" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-xs"><i class="ti-trash"></i> delete</button>
                                             </form>
                                         </td>
                                     </tr>

@@ -1,4 +1,4 @@
-@extends('layout.anggota')
+@extends('layout.admin')
 
 @section('title', 'Admin - Koperasi Daya Masyarakat Indonesia')
 
@@ -21,7 +21,7 @@
 
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="active">Rekening Bank</li>
+                    <li class="active">Setting</li>
                 </ol>
             </div>
             <!-- /.col-lg-12 -->
@@ -30,41 +30,25 @@
         <div class="row">
             <div class="col-md-12">
             <div class="white-box">
-                <h3 class="box-title m-b-0">REKENING BANK</h3>
+                <h3 class="box-title m-b-0">SETTING</h3>
                 <br />
-                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('rekening-bank-user.store') }}" method="POST">
+                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.setting.update', $data->id) }}" method="POST">
                     <div class="col-md-6">
                         {{ csrf_field() }}
+                        <input type="hidden" name="_method" value="PUT">
                         <div class="form-group">
-                            <label class="col-md-12">Nama Akun</label>
+                            <label class="col-md-12">Field</label>
                             <div class="col-md-12">
-                                <input type="text" class="form-control" required name="nama_akun"> </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label class="col-md-12">No Rekening</label>
-                            <div class="col-md-12">
-                                <input type="number" class="form-control" required name="no_rekening"> </div>
+                                <input type="text" class="form-control" readonly="true" value="{{ $data->field }}" name="field"> </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-12">Bank</label>
+                            <label class="col-md-12">Value</label>
                             <div class="col-md-12">
-                                <select class="form-control" name="bank_id">
-                                    @foreach($bank as $item)
-                                        <option value="{{ $item->id}}">{{ $item->nama }}</option>
-                                    @endforeach
-                                </select>
+                                <input type="text" name="value" class="form-control" required value="{{ $data->value }}" />  
                             </div>
                         </div>
-
-                        <div class="form-group">
-                            <label class="col-md-12">Cabang</label>
-                            <div class="col-md-12">
-                                <input type="text" class="form-control" required name="cabang"> </div>
-                        </div>
-
-                        <a href="{{ url('rekening-bank-user.index') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
+                        <a href="{{ route('admin.setting.index') }}" class="btn btn-default waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Cancel</a>
+                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Update</button>
                     </div>
                     <br style="clear: both;" />
                 </form>

@@ -184,6 +184,9 @@
                         </a>
                          <ul class="nav nav-second-level">
                             <li>
+                                <a href="{{ route('admin.setting.index') }}"><i class="ti-settings fa-fw"></i><span class="hide-menu">Setting</span></a>
+                            </li>
+                            <li>
                                 <a href="{{ route('admin.contact-us') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Submit Kontak Kami</span></a>
                             </li>
                             <li>

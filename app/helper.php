@@ -1,4 +1,6 @@
 <?php 
+
+
 if (!function_exists('get_api_response')) {
    function get_api_response($url = "", $method = "GET", $header = [], $body = [], $body_type = null)
    {
@@ -43,6 +45,8 @@ if (!function_exists('get_api_response')) {
       return (object) $result_respon;
    }
 }
+
+
 
 /**
  * [access_rules description]
@@ -97,7 +101,7 @@ if (!function_exists('status_pembayaran_anggota'))
                   <a href="'. $url_approve .'"  onclick="return confirm(\'Approve data ini?\')"  class="btn btn-success btn-rounded waves-effect waves-light m-t-20"><i class="fa fa-check"></i> Approve</a>
                      <a href="'. $url_denied .'" onclick="return confirm(\'Reject data ini?\')" class="btn btn-danger btn-rounded waves-effect waves-light m-t-20"><i class="fa fa-close"></i> Reject</a>
                </p>';
-                  break;
+               break;
          }
 
       }else{
@@ -118,16 +122,16 @@ function status_anggota($id)
    switch ($user->status) {
 
       case 1:
-         return "<a class=\"label label-danger\"><i class=\"fa fa-ban\"></i> Inactive</a>";
+         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Inactive</a>";
          break;
       case 2:
-            return "<a class=\"label label-success\"><i class=\"fa fa-check\"></i> Active</a>";
+            return "<a class=\"btn btn-success btn-xs\"><i class=\"fa fa-check\"></i> Active</a>";
          break;
       case 3:
-         return "<a class=\"label label-danger\"><i class=\"fa fa-ban\"></i> Reject</a>";
+         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Reject</a>";
          break;
       default:
-         return "<a class=\"label label-danger\"><i class=\"fa fa-ban\"></i> Inactive</a>";
+         return "<a class=\"btn btn-warning btn-xs\"><i class=\"fa fa-ban\"></i> Inactive</a>";
          break;
    }
 }
