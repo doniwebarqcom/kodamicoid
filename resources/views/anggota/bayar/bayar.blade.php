@@ -14,11 +14,9 @@
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h4 class="page-title">Pembayaran</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                
                 <a href="{{ route('anggota.profile') }}" class="btn-info btn-circle pull-right m-l-20"><i class="ti-user text-white"></i></a>
-                
                 <ol class="breadcrumb">
-                    <li><a href="{{ route('anggota.index') }}">Home</a></li>
+                    <li><a href="{{ route('anggota.dashboard') }}">Home</a></li>
                     <li class="active">Pembayaran</li>
                 </ol>
             </div>
@@ -146,10 +144,11 @@
                                     <h3><b>INVOICE</b> <span class="pull-right">#{{ $no_invoice }}</span></h3>
 
                                     <input type="hidden" name="no_invoice" value="{{ $no_invoice }}">
-                                    <input type="hidden" name="total_pembayaran" value="{{ $total_pembayaran}}" />
+                                    <input type="hidden" name="total_pembayaran" value="{{ $total_pembayaran + $code}}" />
                                     <input type="hidden" name="rekening_bank_id" />
                                     <input type="hidden" name="rekening_bank_user_id" />
                                     <input type="hidden" name="due_date" value="{{ $due_date }}" />
+                                    <input type="hidden" name="code" value="{{ $code }}" />
                                     <hr>
                                     <div class="row">
                                         <div class="col-md-12">
@@ -167,9 +166,7 @@
                                                 <address>
                                                     <h3>To,</h3>
                                                     <h4 class="font-bold">{{ Auth::user()->name }},</h4>
-                                                    <p class="text-muted m-l-30">
-                                                        {{ Auth::user()->alamat }}
-                                                    </p>
+                                                    <p class="text-muted m-l-30">{{ Auth::user()->alamat }}</p>
                                                     <p class="m-t-30"><b>Invoice Date :</b> <i class="fa fa-calendar"></i> {{ $invoice_date }}</p>
                                                     <p><b>Due Date :</b> <i class="fa fa-calendar"></i> {{ date('d F Y', strtotime($due_date)) }}</p>
                                                 </address>

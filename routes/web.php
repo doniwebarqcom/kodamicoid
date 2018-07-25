@@ -11,6 +11,8 @@
 |
 */
 
+date_default_timezone_set("Asia/Bangkok");
+
 Route::get('/', function () {
     
 	if(Auth::check())
@@ -65,13 +67,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 
 	Route::resource('user', $path . 'UserController');
 	Route::resource('user-group', $path . 'UserGroupController');
-	Route::resource('anggota', $path . 'AnggotaController');
+	Route::resource('anggota', $path . 'AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('bank', $path.'BankController');
 	Route::resource('rekening-bank', $path.'RekeningBankController');
 	Route::resource('setting', $path.'SettingController',['as' => 'admin']);
 
 	Route::get('bayar/approve/{id}', $path.'BayarAdminController@approve')->name('admin.bayar.approve');
 	Route::get('bayar/denied/{id}', $path.'BayarAdminController@denied')->name('admin.bayar.denied');
+	Route::get('anggota/confirm/{id}', $path .'AnggotaController@confirm')->name('admin.anggota.confirm');
+	Route::post('anggota/confirm-submit', $path .'AnggotaController@confirmSubmit')->name('admin.anggota.confirm-submit');
 });
 
 // ROUTING ANGGOTA
@@ -94,6 +98,7 @@ Route::group(['prefix' => 'anggota', 'middleware' => ['auth', 'access:2']], func
 	Route::post('anggota/bayar/submit', $path.'BayarController@submit')->name('anggota.bayar.submit');
 	Route::resource('rekening-bank-user', $path. 'RekeningBankUserController');
 	Route::post('upload-confirmation', $path.'BayarController@confirmation')->name('anggota.upload.confirmation');
+	Route::resource('simpanan-sukarela', $path. 'SimpananSukarelaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'anggota']);
 });
 
 Auth::routes();

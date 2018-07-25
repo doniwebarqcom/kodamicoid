@@ -32,7 +32,7 @@
             <div class="white-box">
                 <h3 class="box-title m-b-0">Anggota</h3>
                 <br />
-                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('anggota.update', $data->id) }}" method="POST">
+                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.anggota.update', $data->id) }}" method="POST">
                     <div class="col-md-6">
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="PUT">
@@ -111,7 +111,7 @@
                                 </div>
                             @endif
                         </div>
-                        <a href="{{ route('anggota.index') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>
+                        <a href="{{ route('admin.anggota.index') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                     </div>
                     <br style="clear: both;" />

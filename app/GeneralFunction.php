@@ -1,13 +1,95 @@
 <?php 
 
 /**
+ * [status_deposit_awal description]
+ * @return [type] [description]
+ */
+function status_deposit_awal($user_id)
+{
+	$status = \Kodami\Models\Mysql\Deposit::where('type', 1)->where('user_id', $user_id)->first();
+
+	if($status)
+	{
+		return $status->status;
+	}
+	else
+	{
+		return 0;
+	}
+}
+
+/**
+ * [no_invoice description]
+ * @return [type] [description]
+ */
+function no_invoice()
+{
+	$no = (\Kodami\Models\Mysql\Deposit::count()+1);
+
+	return  $no . \Auth::user()->id.'/INV/KDM/'. date('d').date('m').date('y');
+}
+
+/**
+ * [status_deposit description]
+ * @param  [type] $status [description]
+ * @return [type]         [description]
+ */
+function status_deposit($status)
+{
+	switch ($status) {
+      case 1:
+         return "<a class=\"btn btn-warning btn-xs\"><i class=\"fa fa-ban\"></i> Menunggu Konfirmasi Pembayaran</a>";
+         break;
+      case 2:
+            return "<a class=\"btn btn-warning btn-xs\"><i class=\"fa fa-info\"></i> Menunggu Persetujuan Admin</a>";
+         break;
+      case 3:
+         return "<a class=\"btn btn-success btn-xs\"><i class=\"fa fa-check\"></i> Berhasil</a>";
+         break;
+       case 4:
+         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Ditolak</a>";
+         break;
+      default:
+         return "<a class=\"btn btn-warning btn-xs\"><i class=\"fa fa-ban\"></i> Inactive</a>";
+         break;
+   }
+}
+
+/**
  * [simpanan_wajib description]
  * @param  [type] $id [description]
  * @return [type]     [description]
  */
-function simpanan_wajib($id)
+function simpanan_wajib($id, $status=3)
 {
-	$simpanan_wajib = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 5)->where('status', 3)->sum('nominal'); 
+	if($status == 'all')
+	{
+		$simpanan_wajib = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 5)->get();
+	}
+	else
+	{
+		$simpanan_wajib = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('status', $status)->where('type', 5)->get();
+	}
+
+	return $simpanan_wajib;
+}
+
+/**
+ * [sum_simpanan_wajib description]
+ * @param  [type] $id [description]
+ * @return [type]     [description]
+ */
+function sum_simpanan_wajib($id, $status=3)
+{
+	if($status == 'all')
+	{
+		$simpanan_wajib = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->sum('nominal');
+	}
+	else
+	{
+		$simpanan_wajib = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('status', $status)->where('type', 5)->sum('nominal');
+
+	}
 
 	return $simpanan_wajib;
 }

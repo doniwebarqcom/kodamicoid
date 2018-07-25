@@ -32,7 +32,7 @@
             <div class="white-box">
                 <h3 class="box-title m-b-0">Anggota</h3>
                 <br />
-                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('anggota.store') }}" method="POST">
+                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.anggota.store') }}" method="POST">
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -121,7 +121,7 @@
                             <div class="col-md-12">
                                 <input type="password" name="confirmation" class="form-control form-control-line"> </div>
                         </div>
-                        <a href="{{ route('anggota.index') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>
+                        <a href="{{ route('admin.anggota.index') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                     </div>
                     <br style="clear: both;" />

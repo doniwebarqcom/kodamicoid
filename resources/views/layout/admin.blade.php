@@ -28,6 +28,10 @@
     <link href="{{ asset('admin-css/css/style.css') }}?time=<?=date('His')?>" rel="stylesheet">
     <!-- color CSS -->
     <link href="{{ asset('admin-css/css/colors/green.css') }}" id="theme" rel="stylesheet">
+
+    <link href="{{ asset('admin-css/plugins/bower_components/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -262,22 +266,46 @@
     <script src="{{ asset('admin-css/plugins/bower_components/calendar/dist/cal-init.js') }}"></script>
     <script src="{{ asset('admin-css/plugins/bower_components/toast-master/js/jquery.toast.js') }}"></script>
     
+    <!-- start - This is for export functionality only -->
+    <script src="{{ asset('admin-css/plugins/bower_components/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/2.5.0/jszip.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/pdfmake.min.js"></script>
+    <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('admin-css/js/custom.min.js') }}"></script>
     <script src="{{ asset('admin-css/js/dashboard1.js') }}?time=<?=date('His')?>"></script>
     <!-- Custom tab JavaScript -->
     <script src="{{ asset('admin-css/js/cbpFWTabs.js') }}"></script>
     <script type="text/javascript">
-    (function() {
-        [].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {
-            new CBPFWTabs(el);
-        });
-    })();
+        (function() {
+            [].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {
+                new CBPFWTabs(el);
+            });
+        })();
 
-    $(".myadmin-alert .closed").click(function(event) {
-        $(this).parents(".myadmin-alert").fadeToggle(350);
-        return false;
-    });
+        $(".myadmin-alert .closed").click(function(event) {
+            $(this).parents(".myadmin-alert").fadeToggle(350);
+            return false;
+        });
+
+        $('#data_table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            pageLength : 20
+        });
+
+        $('#data_table_no_button').DataTable({
+            dom: 'Bfrtip',
+            buttons: [],
+            pageLength : 20
+        });
 
     </script>
 

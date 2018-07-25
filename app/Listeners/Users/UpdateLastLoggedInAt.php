@@ -27,7 +27,10 @@ class UpdateLastLoggedInAt
      */
     public function handle(Login $event)
     {
-        $event->user->last_logged_in_at = Carbon::now();
-        $event->user->save();
+        if(isset($event->user->last_logged_in_at))
+        {
+            $event->user->last_logged_in_at = Carbon::now();
+            $event->user->save();
+        }
     }
 }

@@ -20,6 +20,81 @@ class AnggotaController extends ControllerLogin
     }
 
     /**
+     * [confirm description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function confirm($id)
+    {
+        $params['data']         = Modeluser::where('id', $id)->first();
+        $params['deposit']      = \Kodami\Models\Mysql\Deposit::where('type', 1)->where('user_id', $id)->first();
+
+        return view('admin.anggota.confirm')->with($params);
+    }
+
+    /**
+     * [confirmSubmit description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function confirmSubmit(Request $request)
+    {
+        if($request->status == 1)
+        {
+            $status = \Kodami\Models\Mysql\Deposit::where('id', $request->deposit_id)->first();
+            $status->status = 3;
+            $status->save(); 
+
+            $user = \App\UserModel::where('id', $status->user_id)->first();
+
+            /** Rubah status angota jadi active */
+            $user = ModelUser::where('id', $status->user_id)->first();
+            $user->status = 2;
+            $user->save();
+
+            // Insert Simpanan Pokok
+            $deposit                = new \Kodami\Models\Mysql\Deposit();
+            $deposit->no_invoice    = $status->no_invoice; 
+            $deposit->status        = 3;
+            $deposit->type          = 3;
+            $deposit->user_id       = $status->user_id;
+            $deposit->nominal       = get_setting('simpanan_pokok');
+            $deposit->save();  
+
+            // Insert Simpanan Wajib
+            $deposit                = new \Kodami\Models\Mysql\Deposit();
+            $deposit->no_invoice    = $status->no_invoice; 
+            $deposit->status        = 3; 
+            $deposit->type          = 5;
+            $deposit->user_id       = $status->user_id;
+            $deposit->nominal       = $user->durasi_pembayaran * get_setting('simpanan_wajib');
+            $deposit->save();
+
+            // Insert Simpanan Sukarela
+            $deposit                = new \Kodami\Models\Mysql\Deposit();
+            $deposit->no_invoice    = $status->no_invoice; 
+            $deposit->status        = 3; 
+            $deposit->type          = 4;
+            $deposit->user_id       = $status->user_id;
+            $deposit->nominal       = $user->first_simpanan_sukarela;
+            $deposit->save();
+        }
+        else
+        {
+            $deposit = \Kodami\Models\Mysql\Deposit::where('id', $id)->first();
+            $deposit->status = 4;
+            $deposit->save();
+
+             /** Rubah status angota jadi reject */
+            $user = ModelUser::where('id', $deposit->user_id)->first();
+            $user->status = 3;
+            $user->save();
+        }
+
+        return redirect()->route('admin.anggota.index')->with('message-success', 'Data berhasil di konfirmasi');
+    }
+
+    /**
      * [create description]
      * @return [type] [description]
      */

@@ -32,7 +32,7 @@ class BayarController extends ControllerLogin
         $data['total_pembayaran']       = $total_pembayaran; 
         $data['invoice_date']           = date('d F Y');
         $data['due_date']               = date('Y-m-d', strtotime("+3 days"));
-        $data['no_invoice']             = (Deposit::count()+1).Auth::user()->id.'/INV/KDM/'. date('d').date('m').date('y');
+        $data['no_invoice']             = no_invoice();
 
     	return view('anggota.bayar.bayar')->with($data);
     }
@@ -67,9 +67,10 @@ class BayarController extends ControllerLogin
         $data->status       = 1; // menunggu konfirmasi pembayaran
         $data->type         = 1; // pembayaran awal sebagai anggota
         $data->nominal      = $request->total_pembayaran;
-        $data->rekening_bank_id = $request->rekening_bank_id;
-        $data->rekening_bank_user_id = $request->rekening_bank_user_id;
-        $data->due_date     = $request->due_date;
+        $data->rekening_bank_id         = $request->rekening_bank_id;
+        $data->rekening_bank_user_id    = $request->rekening_bank_user_id;
+        $data->due_date                 = $request->due_date;
+        $data->code         = $request->code;
         $data->save();
 
         return redirect()->route('anggota.dashboard')->with('message-success', 'Pembayaran anda berhasil dilakukan, silahkan melakukan pembayaran');

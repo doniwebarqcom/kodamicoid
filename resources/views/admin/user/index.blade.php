@@ -30,9 +30,6 @@
                 <div class="panel">
                     <div class="panel-heading">MANAGE USER</div>
                     <div class="table-responsive">
-                        <div class="col-md-12">
-                            
-                        </div>
                         <table class="table table-hover manage-u-table">
                             <thead>
                                 <tr>
@@ -61,12 +58,12 @@
                                         <td>{{ $item->created_at }}</td>
                                         <td>{!! access_rules($item->access_id) !!}</td>
                                         <td>
-                                            <a href="{{ route('user.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-pencil-alt"></i></button></a>
+                                            <a href="{{ route('user.edit', ['id' => $item->id]) }}"> <button class="btn btn-default btn-xs"><i class="ti-pencil-alt"></i> edit</button></a>
 
-                                            <form action="{{ route('user.destroy', $item->id) }}" onsubmit="return confirm('Hapus data ini ?')" method="post" style="float: left;">
+                                            <form action="{{ route('user.destroy', $item->id) }}" style="float: left; margin-right: 5px;" onsubmit="return confirm('Hapus data ini ?')" method="post" style="float: left;">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}                                               
-                                                <button type="button" class="btn btn-info btn-outline btn-circle btn-lg m-r-5"><i class="ti-trash"></i></button>
+                                                <button type="button" class="btn btn-danger btn-xs"><i class="ti-trash"></i> delete</button>
                                             </form>
                                         </td>
                                     </tr>

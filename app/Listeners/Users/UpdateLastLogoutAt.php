@@ -27,7 +27,10 @@ class UpdateLastLogoutAt
      */
     public function handle(Logout $event)
     {
-        $event->user->last_logged_out_at = Carbon::now();
-        $event->user->save();
+        if(isset($event->user->last_logged_out_at))
+        {
+            $event->user->last_logged_out_at = Carbon::now();
+            $event->user->save();
+        }
     }
 }

@@ -63,11 +63,11 @@
                                 <div class="col-xs-4 b-r">
                                     <h3>Simpanan Sukarela</h3>
                                     <h4>Rp. {{ number_format(simpanan_sukarela(Auth::user()->id)) }}</h4>
-                                    <a onclick="bootbox.alert('Under Construction');" title="Tambah Simpanan Sukarela"><i class="fa fa-plus"></i> </a>
+                                    <a href="{{ route('anggota.simpanan-sukarela.index') }}" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> detail</a>
                                 </div>
                                 <div class="col-xs-4 b-r">
                                     <h3>Simpanan Wajib</h3>
-                                    @php($simpanan_wajib = simpanan_wajib(Auth::user()->id))
+                                    @php($simpanan_wajib = sum_simpanan_wajib(Auth::user()->id,3))
                                     @if($simpanan_wajib)
                                         <h4>{{ number_format($simpanan_wajib) }}</h4>
                                     @else
@@ -443,26 +443,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        @foreach(simpanan_wajib(Auth::user()->id, 'all') as $item)
                                         <tr>
                                             <td class="text-center">1</td>
                                             <td><span class="font-medium">Rp. 10.000</span></td>
-                                            <td>1 Januari 2018</td>
+                                            <td>{{ $item->created_at }}</td>
                                             <td>
                                                 <span class="btn btn-rounded btn-success"><i class="fa fa-check"></i> Lunas</span>
                                             </td>
                                             <td></td>
                                         </tr>
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                            <td><span class="font-medium">Rp. 10.000</span></td>
-                                            <td>1 Januari 2018</td>
-                                            <td>
-                                                <span class="btn btn-rounded btn-danger">Belum Lunas</span>
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-rounded btn-success"><i class="fa fa-check"></i> Konfirmasi Pembayaran</a>
-                                            </td>
-                                        </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
