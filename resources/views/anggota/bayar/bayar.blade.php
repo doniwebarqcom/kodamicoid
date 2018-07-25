@@ -144,7 +144,7 @@
                                     <h3><b>INVOICE</b> <span class="pull-right">#{{ $no_invoice }}</span></h3>
 
                                     <input type="hidden" name="no_invoice" value="{{ $no_invoice }}">
-                                    <input type="hidden" name="total_pembayaran" value="{{ $total_pembayaran + $code}}" />
+                                    <input type="hidden" name="total_pembayaran" value="{{ $total_pembayaran }}" />
                                     <input type="hidden" name="rekening_bank_id" />
                                     <input type="hidden" name="rekening_bank_user_id" />
                                     <input type="hidden" name="due_date" value="{{ $due_date }}" />

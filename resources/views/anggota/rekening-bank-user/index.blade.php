@@ -19,7 +19,7 @@
                 <a href="{{ route('rekening-bank-user.create') }}" class="btn btn-success pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"> <i class="fa fa-plus"></i> TAMBAH</a>
                 
                 <ol class="breadcrumb">
-                    <li><a href="{{ route('anggota.index') }}">Dashboard</a></li>
+                    <li><a href="{{ route('anggota.dashboard') }}">Dashboard</a></li>
                     <li class="active">Rekening Bank</li>
                 </ol>
             </div>

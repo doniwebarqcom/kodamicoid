@@ -56,7 +56,7 @@ class AnggotaController extends ControllerLogin
             $deposit                = new \Kodami\Models\Mysql\Deposit();
             $deposit->no_invoice    = $status->no_invoice; 
             $deposit->status        = 3;
-            $deposit->type          = 3;
+            $deposit->type          = 3; // Simpanan Pokok
             $deposit->user_id       = $status->user_id;
             $deposit->nominal       = get_setting('simpanan_pokok');
             $deposit->save();  
@@ -65,7 +65,7 @@ class AnggotaController extends ControllerLogin
             $deposit                = new \Kodami\Models\Mysql\Deposit();
             $deposit->no_invoice    = $status->no_invoice; 
             $deposit->status        = 3; 
-            $deposit->type          = 5;
+            $deposit->type          = 5; // Simpanan Wajib
             $deposit->user_id       = $status->user_id;
             $deposit->nominal       = $user->durasi_pembayaran * get_setting('simpanan_wajib');
             $deposit->save();
@@ -74,9 +74,9 @@ class AnggotaController extends ControllerLogin
             $deposit                = new \Kodami\Models\Mysql\Deposit();
             $deposit->no_invoice    = $status->no_invoice; 
             $deposit->status        = 3; 
-            $deposit->type          = 4;
+            $deposit->type          = 4; // Simpanan Sukarela
             $deposit->user_id       = $status->user_id;
-            $deposit->nominal       = $user->first_simpanan_sukarela;
+            $deposit->nominal       = $user->first_simpanan_sukarela + $status->code;
             $deposit->save();
         }
         else
