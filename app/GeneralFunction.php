@@ -1,6 +1,25 @@
 <?php 
 
 /**
+ * [type_deposit description]
+ * @param  [type] $id [description]
+ * @return [type]     [description]
+ */
+function type_deposit($key)
+{
+	$array_map = [
+                  3 => 'Simpanan Pokok', 
+                  4 => 'Simpanan Sukarela', 
+                  5 => 'Simpanan Wajib'
+               ];
+
+    if(array_key_exists($key, $array_map))
+    {
+    	return $array_map[$key];
+    }
+}
+
+/**
  * [get_jabatan description]
  * @return [type] [description]
  */
@@ -82,18 +101,9 @@ function status_deposit($status)
  * @param  [type] $id [description]
  * @return [type]     [description]
  */
-function simpanan_wajib($id, $status=3)
+function simpanan_wajib($id)
 {
-	if($status == 'all')
-	{
-		$simpanan_wajib = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 5)->get();
-	}
-	else
-	{
-		$simpanan_wajib = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('status', $status)->where('type', 5)->get();
-	}
-
-	return $simpanan_wajib;
+	return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 5);
 }
 
 /**
@@ -123,9 +133,7 @@ function sum_simpanan_wajib($id, $status=3)
  */
 function simpanan_pokok($id)
 {
-	$simpanan_pokok = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 3)->where('status', 3)->sum('nominal'); 
-
-	return $simpanan_pokok;
+	return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 3); 
 }
 
 /**
@@ -134,9 +142,7 @@ function simpanan_pokok($id)
  */
 function simpanan_sukarela($id)
 {
-	$simpanan_sukarela = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 4)->where('status', 3)->sum('nominal'); 
-
-	return $simpanan_sukarela;
+	return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 4); 
 }
 
 /**

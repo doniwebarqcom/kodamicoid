@@ -43,6 +43,7 @@ class AnggotaController extends ControllerLogin
         {
             $status = \Kodami\Models\Mysql\Deposit::where('id', $request->deposit_id)->first();
             $status->status = 3;
+            $status->proses_user_id = \Auth::user()->id;
             $status->save(); 
 
             $user = \App\UserModel::where('id', $status->user_id)->first();
@@ -59,6 +60,7 @@ class AnggotaController extends ControllerLogin
             $deposit->type          = 3; // Simpanan Pokok
             $deposit->user_id       = $status->user_id;
             $deposit->nominal       = get_setting('simpanan_pokok');
+            $status->proses_user_id = \Auth::user()->id;
             $deposit->save();  
 
             // Insert Simpanan Wajib
@@ -68,6 +70,7 @@ class AnggotaController extends ControllerLogin
             $deposit->type          = 5; // Simpanan Wajib
             $deposit->user_id       = $status->user_id;
             $deposit->nominal       = $user->durasi_pembayaran * get_setting('simpanan_wajib');
+            $status->proses_user_id = \Auth::user()->id;
             $deposit->save();
 
             // Insert Simpanan Sukarela
@@ -77,12 +80,14 @@ class AnggotaController extends ControllerLogin
             $deposit->type          = 4; // Simpanan Sukarela
             $deposit->user_id       = $status->user_id;
             $deposit->nominal       = $user->first_simpanan_sukarela + $status->code;
+            $status->proses_user_id = \Auth::user()->id;
             $deposit->save();
         }
         else
         {
             $deposit = \Kodami\Models\Mysql\Deposit::where('id', $id)->first();
             $deposit->status = 4;
+            $status->proses_user_id = \Auth::user()->id;
             $deposit->save();
 
              /** Rubah status angota jadi reject */
@@ -131,13 +136,17 @@ class AnggotaController extends ControllerLogin
         $data =  ModelUser::where('id', $id)->first();
         
         $data->nik         = $request->nik; 
-        $data->name        = $request->nama; 
+        $data->name        = $request->name; 
         $data->jenis_kelamin= $request->jenis_kelamin; 
         $data->email        = $request->email;
         $data->telepon      = $request->telepon;
         $data->agama        = $request->agama;
         $data->tempat_lahir = $request->tempat_lahir;
         $data->tanggal_lahir = $request->tanggal_lahir;
+        $data->passport_number          = $request->passport_number;
+        $data->kk_number                = $request->kk_number;
+        $data->npwp_number              = $request->npwp_number;
+        $data->bpjs_number              = $request->bpjs_number; 
 
         $data->domisili_provinsi_id     = $request->domisili_provinsi_id;
         $data->domisili_kabupaten_id    = $request->domisili_kabupaten_id;
@@ -151,32 +160,32 @@ class AnggotaController extends ControllerLogin
         $data->ktp_kelurahan_id     = $request->ktp_kelurahan_id;
         $data->ktp_alamat           = $request->ktp_alamat;
 
-        if ($request->hasFile('file_ktp')) {
-            
-            $image = $request->file('file_ktp');
-            
+        if ($request->hasFile('file_ktp'))
+        {    
+            $image = $request->file('file_ktp');   
             $name = time().'.'.$image->getClientOriginalExtension();
-            
-            $destinationPath = public_path('/file_ktp/'. Auth::user()->id);
-            
+            $destinationPath = public_path('/file_ktp/'. $data->id);
             $image->move($destinationPath, $name);
-
             $data->foto_ktp = $name;
         }
 
-        if ($request->hasFile('file_photo')) {
-            
-            $image = $request->file('file_photo');
-            
+        if ($request->hasFile('file_photo')) 
+        {    
+            $image = $request->file('file_photo');   
             $name = time().'.'.$image->getClientOriginalExtension();
-            
-            $destinationPath = public_path('/file_photo/'. Auth::user()->id);
-            
+            $destinationPath = public_path('/file_photo/'. $data->id);
             $image->move($destinationPath, $name);
-            
             $data->foto = $name;
         }
-        
+
+        if ($request->hasFile('file_npwp')) 
+        {    
+            $image = $request->file('file_npwp');   
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/file_npwp/'. $data->id);
+            $image->move($destinationPath, $name);
+            $data->file_npwp = $name;
+        }
 
         $data->save();
 
@@ -205,21 +214,10 @@ class AnggotaController extends ControllerLogin
     */
     public function store(Request $request)
     {
-        //$no_anggota = date('y').date('m').date('d'). (ModelUser::all()->count() + 1);
-
-        // $this->validate($request,[
-        //     'nik'               => 'required|unique:users',
-        //     'telepon'           => 'required',
-        //     'name'              => 'required',
-        //     'email'             => 'required|email|unique:users',
-        //     'password'          => 'required',
-        //     'confirmation'      => 'required|same:password',
-        // ]);
-        
         $data               =  new ModelUser();
         $data->no_anggota   = $request->no_anggota;
         $data->nik          = $request->nik; 
-        $data->name         = $request->nama; 
+        $data->name         = $request->name; 
         $data->jenis_kelamin= $request->jenis_kelamin; 
         $data->email        = $request->email;
         $data->telepon      = $request->telepon;
@@ -229,6 +227,10 @@ class AnggotaController extends ControllerLogin
         $data->password             = bcrypt($request->password); 
         $data->access_id    = 2; // Akses sebagai anggota
         $data->status       = 1; // menunggu pembayaran 
+        $data->passport_number          = $request->passport_number;
+        $data->kk_number                = $request->kk_number;
+        $data->npwp_number              = $request->npwp_number;
+        $data->bpjs_number              = $request->bpjs_number;
 
         $data->domisili_provinsi_id     = $request->domisili_provinsi_id;
         $data->domisili_kabupaten_id    = $request->domisili_kabupaten_id;
@@ -244,35 +246,47 @@ class AnggotaController extends ControllerLogin
     
         $data->save();
 
-        if ($request->hasFile('file_ktp')) {
-            
-            $image = $request->file('file_ktp');
-            
+        if ($request->hasFile('file_ktp'))
+        {    
+            $image = $request->file('file_ktp');   
             $name = time().'.'.$image->getClientOriginalExtension();
-            
             $destinationPath = public_path('/file_ktp/'. $data->id);
-            
             $image->move($destinationPath, $name);
-
             $data->foto_ktp = $name;
         }
 
-        if ($request->hasFile('file_photo')) {
-            
-            $image = $request->file('file_photo');
-            
+        if ($request->hasFile('file_photo')) 
+        {    
+            $image = $request->file('file_photo');   
             $name = time().'.'.$image->getClientOriginalExtension();
-            
             $destinationPath = public_path('/file_photo/'. $data->id);
-            
             $image->move($destinationPath, $name);
-            
             $data->foto = $name;
         }
-        
 
+        if ($request->hasFile('file_npwp')) 
+        {    
+            $image = $request->file('file_npwp');   
+            $name = time().'.'.$image->getClientOriginalExtension();
+            $destinationPath = public_path('/file_npwp/'. $data->id);
+            $image->move($destinationPath, $name);
+            $data->file_npwp = $name;
+        }
+        
         $data->save();
 
         return redirect()->route('admin.anggota.index')->with('message-success', 'Data berhasil disimpan'); 
+   }
+
+   /**
+    * [cetakKwitansi description]
+    * @param  [type] $id [description]
+    * @return [type]     [description]
+    */
+   public function cetakKwitansi($id)
+   {
+        $params['data']     = \Kodami\Models\Mysql\Deposit::where('id', $id)->first();
+
+        return view('admin.anggota.kwitansi')->with($params);
    }
 }

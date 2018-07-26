@@ -50,7 +50,7 @@ class SettingController extends ControllerLogin
      */
     public function update(Request $request, $id)
     {
-        $data =  Setting::where('id', $id)->first();
+        $data =  \App\Setting::where('id', $id)->first();
         
         $data->field            = $request->field; 
         $data->value            = $request->value; 

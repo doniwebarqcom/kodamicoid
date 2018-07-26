@@ -29,9 +29,6 @@
             <div class="col-md-12">
                 <div class="panel">
                     <div class="table-responsive">
-                        <div class="col-md-12">
-                            
-                        </div>
                         <table class="table table-hover manage-u-table">
                             <thead>
                                 <tr>

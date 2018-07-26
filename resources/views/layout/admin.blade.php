@@ -275,6 +275,7 @@
     <script src="{{ asset('admin-css/js/dashboard1.js') }}?time=<?=date('His')?>"></script>
     <!-- Custom tab JavaScript -->
     <script src="{{ asset('admin-css/js/cbpFWTabs.js') }}"></script>
+    <script src="{{ asset('js/bootbox.min.js') }}"></script>
     <script type="text/javascript">
         (function() {
             [].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {
@@ -288,6 +289,20 @@
         });
 
         $('#data_table').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            pageLength : 20
+        });
+        $('#data_table2').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ],
+            pageLength : 20
+        });
+        $('#data_table3').DataTable({
             dom: 'Bfrtip',
             buttons: [
                 'copy', 'csv', 'excel', 'pdf', 'print'

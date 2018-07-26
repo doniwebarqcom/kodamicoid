@@ -65,7 +65,7 @@ function access_rules($selected = 0)
                   7 => 'Dropshiper'
                ];
 
-   if($selected != null || $selected != "" || $selectd != 0)
+   if($selected != null || $selected != "" || $selected != 0)
    { 
       return '<span class="label label-info"><i class="fa fa-key"></i> '. $array_map[$selected] .'</span>';
    }   

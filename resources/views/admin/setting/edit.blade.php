@@ -44,7 +44,7 @@
                         <div class="form-group">
                             <label class="col-md-12">Value</label>
                             <div class="col-md-12">
-                                <input type="text" name="value" class="form-control" required value="{{ $data->value }}" />  
+                                <textarea class="form-control" name="value">{{ $data->value }}</textarea> 
                             </div>
                         </div>
                         <a href="{{ route('admin.setting.index') }}" class="btn btn-default waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Cancel</a>

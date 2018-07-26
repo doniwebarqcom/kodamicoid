@@ -54,6 +54,11 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('ajax/get-kabupaten-by-provinsi', 'AjaxController@getKabupatenByProvinsi')->name('ajax.get-kabupaten-by-provinsi-id');
 	Route::post('ajax/get-kecamatan-by-kabupaten', 'AjaxController@getKecamatanByKabupaten')->name('ajax.get-kecamatan-by-kabupaten-id');
 	Route::post('ajax/get-kelurahan-by-kecamatan', 'AjaxController@getKelurahanByKecamatan')->name('ajax.get-kelurahan-by-kecamatan-id');
+
+	/**
+	 * Ajax Admin
+	 */
+	Route::post('ajax-admin/submit-simpanan-sukarela', 'AjaxAdminController@submitSimpananSukarela')->name('ajax.admin.submit-simpanan-sukarela');
 });
 
 // ROUTING ADMIN
@@ -67,7 +72,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 
 	Route::resource('user', $path . 'UserController');
 	Route::resource('user-group', $path . 'UserGroupController');
+	
+	/**
+	 * Routing Anggota
+	 */
 	Route::resource('anggota', $path . 'AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
+	Route::get('anggota/cetak-kwitansi/{id}', $path .'AnggotaController@cetakKwitansi')->name('admin.anggota.cetak-kwitansi');
+
 	Route::resource('bank', $path.'BankController');
 	Route::resource('rekening-bank', $path.'RekeningBankController');
 	Route::resource('setting', $path.'SettingController',['as' => 'admin']);

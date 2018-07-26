@@ -31,12 +31,13 @@
             <div class="col-md-12">
             <div class="white-box">
                 <h3 class="box-title m-b-0">Data Anggota</h3>
-                <hr />
+                <br />
                 <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.anggota.update', $data->id) }}" method="POST">
                     
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Profile</span></a></li>
+                        <li class="active" role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Profile</span></a></li>
                         <li role="presentation" class=""><a href="#simpanan" aria-controls="simpanan" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Simpanan</span></a></li>
+                         <li role="presentation" class=""><a href="#upload_file" aria-controls="upload_file" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Upload File</span></a></li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
@@ -47,7 +48,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label class="col-md-6">No Anggota</label>
-                                    <label class="col-md-6">NIK</label>
+                                    <label class="col-md-6">KTP Number</label>
                                     <div class="col-md-6">
                                         <input type="text" name="no_anggota" readonly="true" value="{{ $data->no_anggota }}" class="form-control"> 
                                     </div>
@@ -59,7 +60,7 @@
                                     <label class="col-md-6">Nama</label>
                                     <label class="col-md-6">Jenis Kelamin</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="nama" class="form-control" value="{{ $data->nama }}"> 
+                                        <input type="text" name="name" class="form-control" value="{{ $data->name }}"> 
                                     </div>
                                     <div class="col-md-6">
                                         <select class="form-control" name="jenis_kelamin" required>
@@ -98,31 +99,10 @@
                                         <input type="text" name="tempat_lahir" class="form-control" value="{{ $data->tempat_lahir }}"> 
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="text" name="tanggal_lahir" class="form-control datepicker" value="{{ $tanggal_lahir }}"> 
+                                        <input type="text" name="tanggal_lahir" class="form-control datepicker" value="{{ $data->tanggal_lahir }}"> 
                                     </div>
                                 </div>
                                 
-                                <div class="form-group">
-                                    <label class="col-md-6">KTP</label>
-                                    <label class="col-md-6">Foto</label>
-                                    <div class="col-md-6">
-                                        <input type="file" name="file_ktp" class="form-control">
-                                        @if(!empty($data->foto_ktp))
-                                            <div class="col-md-6">
-                                                <img src="{{ asset('file_ktp/'. $data->id .'/'.  $data->foto_ktp)}}" style="width: 200px;">
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input type="file" name="file_photo" class="form-control">
-                                        @if(!empty($data->foto))
-                                            <div class="col-md-6">
-                                                <img src="{{ asset('file_photo/'. $data->id .'/'.  $data->foto)}}" style="width: 200px;">
-                                            </div>
-                                        @endif
-                                    </div>
-                                </div>
-                               
                                 <div class="form-group">
                                     <label class="col-md-6">Password</label>
                                     <label class="col-md-6">Ketik Ulang Password</label>
@@ -143,7 +123,7 @@
                                             <select name="domisili_provinsi_id" class="form-control">
                                                 <option value=""> - Provinsi - </option>
                                                 @foreach(get_provinsi() as $item)
-                                                <option value="{{ $item->id_prov }}" >{{ $item->nama }}</option>
+                                                <option value="{{ $item->id_prov }}" {{ $item->id_prov == $data->domisili_provinsi_id ? 'selected' : '' }} >{{ $item->nama }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -152,6 +132,7 @@
                                         <div class="col-md-12">
                                             <select name="domisili_kabupaten_id" class="form-control">
                                                 <option value=""> - Kota / Kabupaten - </option>
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -205,35 +186,174 @@
                                         <textarea class="form-control" name="ktp_alamat" placeholder="Alamat RT / RW"></textarea>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="simpanan">
-                             <div class="vtabs">
-                                <ul class="nav tabs-vertical">
-                                    <li class="tab active">
-                                        <a data-toggle="tab" href="#home3" aria-expanded="true"> <span class="visible-xs"><i class="ti-home"></i></span> <span class="hidden-xs">Simpanan </span> </a>
-                                    </li>
-                                    <li class="tab">
-                                        <a data-toggle="tab" href="#profile3" aria-expanded="false"> <span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Profile</span> </a>
-                                    </li>
-                                    <li class="tab">
-                                        <a aria-expanded="false" data-toggle="tab" href="#messages3"> <span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Messages</span> </a>
-                                    </li>
-                                </ul>
-                                <div class="tab-content">
-                                    <div id="home3" class="tab-pane active">
-                                        
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-6">Passport Number</label>
+                                        <label class="col-md-6">KK Number</label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="passport_number" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" name="kk_number" class="form-control">
+                                        </div>
                                     </div>
-                                    <div id="profile3" class="tab-pane">
-                                        <p>Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium. Integer tincidunt.Cras dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.</p>
-                                    </div>
-                                    <div id="messages3" class="tab-pane">
-                                        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.</p>
+                                    <div class="form-group">
+                                        <label class="col-md-6">NPWP Number</label>
+                                        <label class="col-md-6">BPJS Number</label>
+                                        <div class="col-md-6">
+                                            <input type="text" name="npwp_number" class="form-control">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" name="bpjs_number" class="form-control">
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="upload_file">
+                            <div class="form-group">
+                                    <label class="col-md-4">KTP</label>
+                                    <label class="col-md-4">Foto</label>
+                                    <label class="col-md-4">NPWP</label>
+                                    <div class="col-md-4">
+                                        <input type="file" name="file_ktp" class="form-control">
+                                        @if(!empty($data->foto_ktp))
+                                            <div class="col-md-4">
+                                                <img src="{{ asset('file_ktp/'. $data->id .'/'.  $data->foto_ktp)}}" style="width: 200px;">
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="file_photo" class="form-control">
+                                        @if(!empty($data->foto))
+                                            <div class="col-md-4">
+                                                <img src="{{ asset('file_photo/'. $data->id .'/'.  $data->foto)}}" style="width: 200px;">
+                                            </div>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input type="file" name="file_npwp" class="form-control">
+                                        @if(!empty($data->file_npwp))
+                                            <div class="col-md-4">
+                                                <img src="{{ asset('file_npwp/'. $data->id .'/'.  $data->file_npwp)}}" style="width: 200px;">
+                                            </div>
+                                        @endif
+                                    </div>
+                                </div>
+                               
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="simpanan">
 
+                            <div class="col-md-2">
+                                <h3 style="margin-top: 0;"><small>Simpanan Wajib</small>
+                                    <br /> Rp. {{ number_format(simpanan_wajib($data->id)->where('status', 3)->sum('nominal')) }}
+                                                                </h3>
+                            </div>
+                            <div class="col-md-2">
+                                <h3><small>Simpanan Pokok</small><br /> Rp. {{ number_format(simpanan_pokok($data->id)->where('status', 3)->sum('nominal')) }}</h3>
+                            </div>
+                            <div class="col-md-2">
+                                <h3><small>Simpanan Sukarela</small><br /> Rp. {{ number_format(simpanan_sukarela($data->id)->where('status', 3)->sum('nominal')) }}</h3>
+                                <label class="btn btn-info btn-xs" onclick="topup()"><i class="fa fa-plus"></i> Topup</label>
+                            </div>
+                            <div class="clearfix"></div>
+                            <hr />
+                            <br />
+
+                             <div>
+                                <div class="col-md-2">
+                                    <ul class="nav tabs-vertical">
+                                        <li class="tab active">
+                                            <a data-toggle="tab" href="#simpanan_pokok" aria-expanded="true"> <span class="visible-xs"><i class="ti-home"></i></span> <span class="hidden-xs">Simpanan Pokok</span> </a>
+                                        </li>
+                                        <li class="tab">
+                                            <a data-toggle="tab" href="#simpanan_sukarela" aria-expanded="false"> <span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Simpanan Sukarela</span> </a>
+                                        </li>
+                                        <li class="tab">
+                                            <a aria-expanded="false" data-toggle="tab" href="#simpanan_wajib"> <span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Simpanan Wajib</span> </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-10">
+                                    <div class="tab-content">
+                                        <div id="simpanan_pokok" class="tab-pane active">
+                                            <h3>Simpanan Pokok</h3>
+                                            <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Nominal</th>
+                                                        <th>Tanggal</th>
+                                                        <th>User Proses</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                @foreach(simpanan_pokok($data->id)->get() as $no => $item)
+                                                    <tr>
+                                                        <td>{{ $no+1 }}</td>
+                                                        <td>{{ number_format($item->nominal) }}</td>    
+                                                        <td>{{ $item->created_at }}</td>    
+                                                        <td>{{ isset($item->user_proses->name) ? $item->user_proses->name : '' }}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="simpanan_sukarela" class="tab-pane">
+                                            <h3>Simpanan Sukarela</h3>
+                                            <table id="data_table2" class="display nowrap" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Nominal</th>
+                                                        <th>Tanggal</th>
+                                                        <th>User Proses</th>
+                                                        <th>#</th>
+                                                    </tr>
+                                                </thead>
+                                                 <tbody>
+                                                @foreach(simpanan_sukarela($data->id)->get() as $no => $item)
+                                                    <tr>
+                                                        <td>{{ $no+1 }}</td>
+                                                        <td>{{ number_format($item->nominal) }}</td>    
+                                                        <td>{{ $item->created_at }}</td>    
+                                                        <td>{{ isset($item->user_proses->name) ? $item->user_proses->name : '' }}</td>
+                                                        <td>
+                                                            <a href="{{ route('admin.anggota.cetak-kwitansi', $item->id) }}" class="btn btn-default btn-xs"><i class="fa fa-print"></i> cetak kwitansi</a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="simpanan_wajib" class="tab-pane">
+                                            <h3>Simpanan Wajib</h3>
+                                            <table id="data_table3" class="display nowrap" cellspacing="0" width="100%">
+                                                <thead>
+                                                    <tr>
+                                                        <th>No</th>
+                                                        <th>Nominal</th>
+                                                        <th>Tanggal</th>
+                                                        <th>User Proses</th>
+                                                    </tr>
+                                                </thead>
+                                                 <tbody>
+                                                @foreach(simpanan_wajib($data->id)->get() as $no => $item)
+                                                    <tr>
+                                                        <td>{{ $no+1 }}</td>
+                                                        <td>{{ number_format($item->nominal) }}</td>    
+                                                        <td>{{ $item->created_at }}</td>  
+                                                        <td>{{ isset($item->user_proses->name) ? $item->user_proses->name : '' }}</td>  
+                                                    </tr>
+                                                @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
                         </div>
                     </div>
                     <hr />
@@ -254,15 +374,114 @@
     <!-- /.container-fluid -->
     @extends('layout.footer-admin')
 </div>
+
+<!-- sample modal content -->
+<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Topup</h4> </div>
+            <div class="modal-body">
+                <form method="POST" action="">
+                    <div class="form-group">
+                        <label>Nominal</label>
+                        <input type="number" name="nominal" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-success waves-effect" data-dismiss="modal">Submit Topup</button>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
+
 <!-- ============================================================== -->
 <!-- End Page Content -->
 <!-- ============================================================== -->
-
 @section('footer-script')
+    <style type="text/css">
+        table#data_table, table#data_table2,table#data_table3 {
+            font-size: 13px;
+        }
+    </style>
+
     <script src="{{ asset('admin-css/plugins/bower_components/blockUI/jquery.blockUI.js') }}"></script>
     <script type="text/javascript">
         
-        jQuery('.datepicker').datepicker({
+
+        function topup()
+        {
+            var pr = bootbox.prompt({
+                title: "Topup Simpanan Sukarela ",
+                inputType: 'number',
+                callback: function (nominal) 
+                {
+                    if(nominal != null)
+                    {
+                        var confirm = bootbox.confirm({
+                            message: "Apakah anda ingin Topup Simpanan Sukarela ?",
+                            buttons: {
+                                confirm: {
+                                    label: '<i class="fa fa-check"></i> Yes',
+                                    className: 'btn-success btn-sm'
+                                },
+                                cancel: {
+                                    label: '<i class="fa fa-close"></i> No',
+                                    className: 'btn-danger btn-sm'
+                                }
+                            },
+                            callback: function (result) {
+                                
+                                if(result)
+                                {   
+                                    confirm.find('.bootbox-body').html('<p><i class="fa fa-spin fa-spinner"></i> Silahkan tunggu beberapa saat ...</p>');
+
+                                    setTimeout(function(){
+                                         $.ajax({
+                                            url: "{{ route('ajax.admin.submit-simpanan-sukarela') }}", 
+                                            data: {'_token' : '{{csrf_token()}}', 'user_id' : {{ $data->id }}, 'nominal' : nominal },
+                                            type: 'POST',
+                                            success: function(res)
+                                            {
+                                                if(res.message == 'success')
+                                                {
+                                                    confirm.modal('hide');
+                                                    
+                                                    bootbox.alert("Anda Berhasil Topup Simpanan Sukarela sebesar <strong>Rp. "+ numberWithComma(nominal) +"</strong>", function() {
+                                                        location.reload();
+                                                    });
+
+                                                }else{
+                                                    confirm.find('.bootbox-body').html('<p><i class="fa fa-times-octagon"></i> '+ res.data +'</p>');
+                                                }
+                                            }
+                                        })
+                                    }, 2000);
+
+                                    return false;
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+        }
+
+</script>
+<script type="text/javascript">
+    
+    function reload_page()
+    {
+        location.reload();
+    }
+        jQuery('.datepicker').datepicker({  
             format: 'yyyy-mm-dd',
         });
 

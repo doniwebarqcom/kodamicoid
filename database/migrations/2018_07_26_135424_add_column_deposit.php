@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSetting extends Migration
+class AddColumnDeposit extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateSetting extends Migration
      */
     public function up()
     {
-        Schema::create('setting', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('field')->nullable();
-            $table->text('value')->nullable();
-            $table->timestamps();
+        Schema::table('deposit', function (Blueprint $table) {
+            $table->integer('proses_user_id')->nullable();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateSetting extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('setting');
+        Schema::table('deposit', function (Blueprint $table) {
+            //
+        });
     }
 }

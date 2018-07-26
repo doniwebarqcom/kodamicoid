@@ -48,7 +48,7 @@
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label class="col-md-6">No Anggota</label>
-                            <label class="col-md-6">NIK</label>
+                            <label class="col-md-6">KTP Number</label>
                             <div class="col-md-6">
                                 <input type="text" name="no_anggota" value="{{ $no_anggota }}" class="form-control"> 
                             </div>
@@ -194,6 +194,26 @@
                             </div>
                             <div class="form-group">
                                 <textarea class="form-control" name="ktp_alamat" placeholder="Alamat RT / RW"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-6">Passport Number</label>
+                                <label class="col-md-6">KK Number</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="passport_number" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="kk_number" class="form-control">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="col-md-6">NPWP Number</label>
+                                <label class="col-md-6">BPJS Number</label>
+                                <div class="col-md-6">
+                                    <input type="text" name="npwp_number" class="form-control">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" name="bpjs_number" class="form-control">
+                                </div>
                             </div>
                         </div>
                     </div>
