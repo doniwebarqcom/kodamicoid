@@ -13,3 +13,5 @@ yarn-error.log
 /packages
 /template
 /public/file_confirmation/*
+/public/file_ktp/*
+/public/file_photo/*
