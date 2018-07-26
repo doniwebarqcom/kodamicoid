@@ -19,7 +19,7 @@
                 <a href="{{ route('anggota.simpanan-sukarela.create') }}" class="btn btn-success pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"> <i class="fa fa-plus"></i> TAMBAH SIMPANAN SUKARELA</a>
                 
                 <ol class="breadcrumb">
-                    <li><a href="{{ route('anggota.index') }}">Dashboard</a></li>
+                    <li><a href="{{ route('anggota.dashboard') }}">Dashboard</a></li>
                     <li class="active">Simpanan Sukarela</li>
                 </ol>
             </div>

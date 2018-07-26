@@ -100,7 +100,9 @@ class AnggotaController extends ControllerLogin
      */
     public function create()
     {
-        return view('admin.anggota.create');
+        $params['no_anggota'] = date('y').date('m').date('d'). (ModelUser::all()->count() + 1);
+
+        return view('admin.anggota.create')->with($params);
     }
 
     /**
@@ -137,6 +139,18 @@ class AnggotaController extends ControllerLogin
         $data->tempat_lahir = $request->tempat_lahir;
         $data->tanggal_lahir = $request->tanggal_lahir;
 
+        $data->domisili_provinsi_id     = $request->domisili_provinsi_id;
+        $data->domisili_kabupaten_id    = $request->domisili_kabupaten_id;
+        $data->domisili_kecamatan_id    = $request->domisili_kecamatan_id;
+        $data->domisili_kelurahan_id    = $request->domisili_kelurahan_id;
+        $data->domisili_alamat          = $request->domisili_alamat;
+
+        $data->ktp_provinsi_id      = $request->ktp_provinsi_id;
+        $data->ktp_kabupaten_id     = $request->ktp_kabupaten_id;
+        $data->ktp_kecamatan_id     = $request->ktp_kecamatan_id;
+        $data->ktp_kelurahan_id     = $request->ktp_kelurahan_id;
+        $data->ktp_alamat           = $request->ktp_alamat;
+
         if ($request->hasFile('file_ktp')) {
             
             $image = $request->file('file_ktp');
@@ -166,7 +180,7 @@ class AnggotaController extends ControllerLogin
 
         $data->save();
 
-        return redirect()->route('anggota.index')->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('admin.anggota.index')->with('message-success', 'Data berhasil disimpan'); 
     }
 
 
@@ -180,7 +194,7 @@ class AnggotaController extends ControllerLogin
         $data = ModelUser::where('id', $id)->first();
         $data->delete();
 
-        return redirect()->route('anggota.index')->with('message-sucess', 'Data berhasi di hapus');
+        return redirect()->route('admin.anggota.index')->with('message-sucess', 'Data berhasi di hapus');
     }
 
    /**
@@ -191,19 +205,19 @@ class AnggotaController extends ControllerLogin
     */
     public function store(Request $request)
     {
-        $no_anggota = date('y').date('m').date('d'). (ModelUser::all()->count() + 1);
+        //$no_anggota = date('y').date('m').date('d'). (ModelUser::all()->count() + 1);
 
-        $this->validate($request,[
-            'nik'               => 'required|unique:users',
-            'telepon'           => 'required',
-            'name'              => 'required',
-            'email'             => 'required|email|unique:users',
-            'password'          => 'required',
-            'confirmation'      => 'required|same:password',
-        ]);
+        // $this->validate($request,[
+        //     'nik'               => 'required|unique:users',
+        //     'telepon'           => 'required',
+        //     'name'              => 'required',
+        //     'email'             => 'required|email|unique:users',
+        //     'password'          => 'required',
+        //     'confirmation'      => 'required|same:password',
+        // ]);
         
         $data               =  new ModelUser();
-        $data->no_anggota   = $no_anggota;
+        $data->no_anggota   = $request->no_anggota;
         $data->nik          = $request->nik; 
         $data->name         = $request->nama; 
         $data->jenis_kelamin= $request->jenis_kelamin; 
@@ -215,6 +229,19 @@ class AnggotaController extends ControllerLogin
         $data->password             = bcrypt($request->password); 
         $data->access_id    = 2; // Akses sebagai anggota
         $data->status       = 1; // menunggu pembayaran 
+
+        $data->domisili_provinsi_id     = $request->domisili_provinsi_id;
+        $data->domisili_kabupaten_id    = $request->domisili_kabupaten_id;
+        $data->domisili_kecamatan_id    = $request->domisili_kecamatan_id;
+        $data->domisili_kelurahan_id    = $request->domisili_kelurahan_id;
+        $data->domisili_alamat          = $request->domisili_alamat;
+
+        $data->ktp_provinsi_id      = $request->ktp_provinsi_id;
+        $data->ktp_kabupaten_id     = $request->ktp_kabupaten_id;
+        $data->ktp_kecamatan_id     = $request->ktp_kecamatan_id;
+        $data->ktp_kelurahan_id     = $request->ktp_kelurahan_id;
+        $data->ktp_alamat           = $request->ktp_alamat;
+    
         $data->save();
 
         if ($request->hasFile('file_ktp')) {
@@ -246,6 +273,6 @@ class AnggotaController extends ControllerLogin
 
         $data->save();
 
-        return redirect()->route('anggota.index')->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('admin.anggota.index')->with('message-success', 'Data berhasil disimpan'); 
    }
 }

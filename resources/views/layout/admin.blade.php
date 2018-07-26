@@ -163,17 +163,6 @@
                     <li class="devider"></li>
                     <li>
                         <a href="javascript:void(0)" class="waves-effect">
-                            <i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Management User<span class="fa arrow"></span></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ url('admin/user') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="devider"></li>
-                    <li>
-                        <a href="javascript:void(0)" class="waves-effect">
                             <i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Management Anggota<span class="fa arrow"></span></span>
                         </a>
                         <ul class="nav nav-second-level">
@@ -198,6 +187,9 @@
                             </li>
                             <li>
                                 <a href="{{ route('bank.index') }}"><i class="ti-server fa-fw"></i><span class="hide-menu">Bank</span></a>
+                            </li>
+                             <li>
+                                <a href="{{ url('admin/user') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users</span></a>
                             </li>
                          </ul>
                     </li>
@@ -275,6 +267,8 @@
     <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('admin-css/js/custom.min.js') }}"></script>

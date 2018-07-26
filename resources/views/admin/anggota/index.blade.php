@@ -68,7 +68,7 @@
                                                 <a href="{{ route('admin.anggota.confirm', $item->id) }}" class="btn btn-warning btn-xs">Konfirmasi</a><br />
                                             @endif
 
-                                            <a href="{{ route('admin.anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> edit</button></a>
+                                            <a href="{{ route('admin.anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> detail</button></a>
                                             <form action="{{ route('admin.anggota.destroy', $item->id) }}" style="float: left; margin-right: 5px;" onsubmit="return confirm('Hapus data ini?')" method="post">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}                                               

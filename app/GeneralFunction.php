@@ -1,6 +1,28 @@
 <?php 
 
 /**
+ * [get_jabatan description]
+ * @return [type] [description]
+ */
+function get_jabatan($key)
+{
+	$array_map = [
+                  1 => 'Administrator', 
+                  2 => 'Anggota', 
+                  3 => 'Teller', 
+                  4 => 'Customer Service',
+                  5 => 'Operator',
+                  6 => 'Admin Operator',
+                  7 => 'Dropshiper'
+               ];
+
+    if(array_key_exists($key, $array_map))
+    {
+    	return $array_map[$key];
+    }
+}
+
+/**
  * [status_deposit_awal description]
  * @return [type] [description]
  */

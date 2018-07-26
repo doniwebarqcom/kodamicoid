@@ -27,7 +27,7 @@
             
             <!-- .row -->
             <div class="row">
-                <div class="col-md-6 col-sm-12 col-lg-4">
+                <div class="col-md-3">
                     <div class="panel">
                         @if(Auth::user()->status == 2)
                             <span  class="btn btn-rounded btn-success" style="position: absolute;right: 25px;top: 10px;">Active</span>
@@ -77,16 +77,9 @@
                             </div>
                         </div>
                         <hr class="m-t-10" />
-                        <ul class="dp-table profile-social-icons">
-                            <li><a href="javascript:void(0)"><i class="fa fa-globe"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-youtube"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="fa fa-linkedin"></i></a></li>
-                        </ul>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-8 col-sm-12">
+                <div class="col-md-9">
 
                     @if(Auth::user()->status == 1)
                     <div class="panel panel-themecolor">
@@ -430,32 +423,40 @@
                     @endif
 
                     @if(isset($deposit) and Auth::user()->status == 2)
-                        <div class="panel">
-                            <div class="panel-heading">IURAN BULANAN</div>
-                            <div class="table-responsive">
-                                <table class="table table-hover manage-u-table">
-                                    <thead>
-                                        <tr>
-                                            <th style="width: 70px;" class="text-center">#</th>
-                                            <th>NOMINAL</th>
-                                            <th>TANGGAL</th>
-                                            <th>STATUS</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach(simpanan_wajib(Auth::user()->id, 'all') as $item)
-                                        <tr>
-                                            <td class="text-center">1</td>
-                                            <td><span class="font-medium">Rp. 10.000</span></td>
-                                            <td>{{ $item->created_at }}</td>
-                                            <td>
-                                                <span class="btn btn-rounded btn-success"><i class="fa fa-check"></i> Lunas</span>
-                                            </td>
-                                            <td></td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="white-box">
+                                    <div class="col-md-8">
+                                        <h3 class="box-title m-b-0">IURAN BULANAN</h3>
+                                        <div class="table-responsive">
+                                            <table class="table table-hover manage-u-table">
+                                                <thead>
+                                                    <tr>
+                                                        <th style="width: 70px;" class="text-center">#</th>
+                                                        <th>NOMINAL</th>
+                                                        <th>TANGGAL</th>
+                                                        <th>STATUS</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @foreach(simpanan_wajib(Auth::user()->id, 'all') as $item)
+                                                    <tr>
+                                                        <td class="text-center">1</td>
+                                                        <td><span class="font-medium">Rp. 10.000</span></td>
+                                                        <td>{{ $item->created_at }}</td>
+                                                        <td>
+                                                            <span class="btn btn-xs btn-success"><i class="fa fa-check"></i> Lunas</span>
+                                                        </td>
+                                                        <td></td>
+                                                    </tr>
+                                                    @endforeach
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
                             </div>
                         </div>
                     @endif

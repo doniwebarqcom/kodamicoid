@@ -119,12 +119,9 @@
                                     <div class="u-img"><img src="{{ asset('admin-css/images/user.png') }}" alt="user" /></div>
                                     <div class="u-text">
                                         <h4>{{ Auth::user()->name }}</h4>
-                                        <p class="text-muted">{{ Auth::user()->email }}</p><a href="{{ url('admin/profile') }}" class="btn btn-rounded btn-danger btn-sm">View Profile</a></div>
+                                        <p class="text-muted">{{ Auth::user()->email }}</p><a class="btn btn-rounded btn-danger btn-sm">{{ get_jabatan(\Auth::user()->access_id) }}</a></div>
                                 </div>
                             </li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{{ url('profile') }}"><i class="ti-user"></i> My Profile</a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-email"></i> Inbox</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ url('logout') }}"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>

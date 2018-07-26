@@ -49,8 +49,8 @@
                     </div>
                     <div class="clearfix"></div>
                     <hr />
-                    <a href="{{ url('anggota.simpanan-sukarela.index') }}" class="btn btn-default waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Back</a>
-                        <button type="submit" class="btn btn-info waves-effect waves-light m-r-10"><i class="fa fa-arrow-right"></i> Submit Simpanan Sukarela</button>
+                    <a href="{{ route('anggota.simpanan-sukarela.index') }}" class="btn btn-default waves-effect waves-light m-r-10 btn-sm"><i class="fa fa-arrow-left"></i> Back</a>
+                        <button type="submit" class="btn btn-info waves-effect waves-light m-r-10 btn-sm"><i class="fa fa-arrow-right"></i> Submit Simpanan Sukarela</button>
                     <br style="clear: both;" />
                 </form>
               </div>
