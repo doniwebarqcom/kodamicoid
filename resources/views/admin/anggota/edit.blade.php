@@ -128,11 +128,15 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="form-group">
+                                    <div class="form-group"> 
                                         <div class="col-md-12">
                                             <select name="domisili_kabupaten_id" class="form-control">
                                                 <option value=""> - Kota / Kabupaten - </option>
-                                                
+                                                @if($data->domisiliKabupatenByProvinsi)
+                                                    @foreach($data->domisiliKabupatenByProvinsi as $item)
+                                                        <option value="{{ $item->id_kab }}" {{ $item->id_kab == $data->domisili_kabupaten_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
@@ -140,6 +144,11 @@
                                         <div class="col-md-12">
                                             <select name="domisili_kecamatan_id" class="form-control">
                                                 <option value=""> - Kecamatan - </option>
+                                                @if($data->domisiliKecamatanByKabupaten)
+                                                    @foreach($data->domisiliKecamatanByKabupaten as $item)
+                                                        <option value="{{ $item->id_kec }}" {{ $item->id_kec == $data->domisili_kecamatan_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
@@ -147,12 +156,17 @@
                                         <div class="col-md-12">
                                             <select name="domisili_kelurahan_id" class="form-control">
                                                 <option value=""> - Kelurahan - </option>
+                                                @if($data->domisiliKelurahanByKecamatan)
+                                                    @foreach($data->domisiliKelurahanByKecamatan as $item)
+                                                        <option value="{{ $item->id_kel }}" {{ $item->id_kel == $data->domisili_kelurahan_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                    @endforeach
+                                                @endif
                                             </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <div class="col-md-12">
-                                            <textarea class="form-control" name="domisili_alamat" placeholder="Alamat RT / RW"></textarea>
+                                            <textarea class="form-control" name="domisili_alamat" placeholder="Alamat RT / RW">{{ $data->domisili_alamat }}</textarea>
                                         </div>
                                     </div>
                                 </div>
@@ -163,27 +177,42 @@
                                         <select name="ktp_provinsi_id" class="form-control">
                                             <option value=""> - Provinsi - </option>
                                             @foreach(get_provinsi() as $item)
-                                            <option value="{{ $item->id_prov }}">{{ $item->nama }}</option>
+                                            <option value="{{ $item->id_prov }}" {{ $item->id_prov == $data->ktp_provinsi_id ? 'selected' : '' }} >{{ $item->nama }}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <select name="ktp_kabupaten_id" class="form-control">
                                             <option value=""> - Kota / Kabupaten - </option>
+                                            @if($data->ktpKabupatenByProvinsi)
+                                                @foreach($data->ktpKabupatenByProvinsi as $item)
+                                                    <option value="{{ $item->id_kab }}" {{ $item->id_kab == $data->ktp_kabupaten_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <select name="ktp_kecamatan_id" class="form-control">
                                             <option value=""> - Kecamatan - </option>
+                                            @if($data->ktpKecamatanByKabupaten)
+                                                @foreach($data->ktpKecamatanByKabupaten as $item)
+                                                    <option value="{{ $item->id_kec }}" {{ $item->id_kec == $data->ktp_kecamatan_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <select name="ktp_kelurahan_id" class="form-control">
                                             <option value=""> - Kelurahan - </option>
+                                            @if($data->ktpKelurahanByKecamatan)
+                                                @foreach($data->ktpKelurahanByKecamatan as $item)
+                                                    <option value="{{ $item->id_kel }}" {{ $item->id_kel == $data->ktp_kelurahan_id ? 'selected' : '' }}>{{ $item->nama }}</option>
+                                                @endforeach
+                                            @endif
                                         </select>
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" name="ktp_alamat" placeholder="Alamat RT / RW"></textarea>
+                                        <textarea class="form-control" name="ktp_alamat" placeholder="Alamat RT / RW">{{ $data->ktp_alamat }}</textarea>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
@@ -191,20 +220,20 @@
                                         <label class="col-md-6">Passport Number</label>
                                         <label class="col-md-6">KK Number</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="passport_number" class="form-control">
+                                            <input type="text" name="passport_number" class="form-control" value="{{ $data->passport_number }}">
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" name="kk_number" class="form-control">
+                                            <input type="text" name="kk_number" class="form-control" value="{{ $data->kk_number }}">
                                         </div>
                                     </div>
                                     <div class="form-group">
                                         <label class="col-md-6">NPWP Number</label>
                                         <label class="col-md-6">BPJS Number</label>
                                         <div class="col-md-6">
-                                            <input type="text" name="npwp_number" class="form-control">
+                                            <input type="text" name="npwp_number" class="form-control" value="{{ $data->npwp_number }}">
                                         </div>
                                         <div class="col-md-6">
-                                            <input type="text" name="bpjs_number" class="form-control">
+                                            <input type="text" name="bpjs_number" class="form-control" value="{{ $data->bpjs_number }}">
                                         </div>
                                     </div>
                                 </div>
@@ -320,7 +349,7 @@
                                                         <td>{{ $item->created_at }}</td>    
                                                         <td>{{ isset($item->user_proses->name) ? $item->user_proses->name : '' }}</td>
                                                         <td>
-                                                            <a href="{{ route('admin.anggota.cetak-kwitansi', $item->id) }}" class="btn btn-default btn-xs"><i class="fa fa-print"></i> cetak kwitansi</a>
+                                                            <a href="{{ route('admin.anggota.cetak-kwitansi', $item->id) }}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-print"></i> cetak kwitansi</a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

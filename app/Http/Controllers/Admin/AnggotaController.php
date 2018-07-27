@@ -117,7 +117,7 @@ class AnggotaController extends ControllerLogin
      */
     public function edit($id)
     {
-        $user = ModelUser::where('id', $id)->first();
+        $user = \App\UserModel::where('id', $id)->first();
         $data['data'] 	= $user;
         $data['id'] 	= $id;
         
@@ -189,7 +189,7 @@ class AnggotaController extends ControllerLogin
 
         $data->save();
 
-        return redirect()->route('admin.anggota.index')->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('admin.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
     }
 
 
@@ -243,7 +243,7 @@ class AnggotaController extends ControllerLogin
         $data->ktp_kecamatan_id     = $request->ktp_kecamatan_id;
         $data->ktp_kelurahan_id     = $request->ktp_kelurahan_id;
         $data->ktp_alamat           = $request->ktp_alamat;
-    
+        
         $data->save();
 
         if ($request->hasFile('file_ktp'))
