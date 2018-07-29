@@ -105,8 +105,8 @@
                                 <h3>Rekening Bank Anda</h3>
                                 
                                 <!-- <a class="btn btn-sm btn-success" data-toggle="modal" data-target="#modal_rekening_bank"><i class="fa fa-plus"></i> Tambah Rekening Bank</a> -->
-                                <a href="{{ route('rekening-bank-user.create') }}" class="btn btn-sm btn-success"><i class="fa fa-plus"></i> Tambah Rekening Bank</a>
-
+                                <a class="btn btn-sm btn-success" onclick="tambah_rekening_bank()"><i class="fa fa-plus"></i> Tambah Rekening Bank</a>
+                                
                                 <br style="clear:both;" />
                                 <br style="clear:both;" />
                                 <table class="table table-bordered" style="width: 100%;">
@@ -234,22 +234,23 @@
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="exampleModalLabel1">Tambah Rekening Bank</h4> </div>
-                    <div class="modal-body">
-                        <form method="POST" action="{{ route('ajax.add.rekening.bank') }}" id="form-add-rekening">
+                    <form method="POST" action="{{ route('anggota.bayar.add-rekening-bank') }}" id="form-add-rekening">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+                        <h4 class="modal-title" id="exampleModalLabel1">Tambah Rekening Bank</h4> </div>
+                        <div class="modal-body">
                             {{ csrf_field() }}
                             <div class="form-group">
                                 <label for="recipient-name" class="control-label">Nama Akun:</label>
-                                <input type="text" class="form-control" name="nama_akun"> </div>
+                                <input type="text" class="form-control" name="nama_akun" required> </div>
                             
                             <div class="form-group">
                                 <label for="recipient-name" class="control-label">No Rekening:</label>
-                                <input type="text" class="form-control" name="no_rekening"> </div>
+                                <input type="text" class="form-control" name="no_rekening" required> </div>
 
                             <div class="form-group">
                                 <label for="recipient-name" class="control-label">Nama Bank:</label>
-                                <select class="form-control" name="bank_id">
+                                <select class="form-control" name="bank_id" required>
                                     <option value=""> - Bank - </option>
                                     @foreach($bank as $item)
                                         <option value="{{ $item->id }}"> {{ $item->nama }} </option>
@@ -260,13 +261,13 @@
 
                             <div class="form-group">
                                 <label for="recipient-name" class="control-label">Cabang:</label>
-                                <input type="text" class="form-control" name="cabang"> </div>
-                        </form>
+                                <input type="text" class="form-control" name="cabang" required> </div>
+                        </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" id="modal-simpan-rekening">Simpan</button>
                     </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="simpan-rekening">Simpan</button>
-                </div>
+                </form>
             </div>
         </div>
     </div>
@@ -275,6 +276,18 @@
 </div>
 
 @section('footer-script')
+<script type="text/javascript">
+    
+    var tambah_rekening_bank = function(){
+        $("#modal_rekening_bank").modal("show");
+    }
+
+    if (window.location.hash)
+    {
+        $('a[data-toggle=tab][href="' + window.location.hash + '"]').tab('show');
+    }
+</script>
+
     <style type="text/css">
         /**
          * overide style

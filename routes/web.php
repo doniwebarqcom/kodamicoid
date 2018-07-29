@@ -13,8 +13,8 @@
 
 date_default_timezone_set("Asia/Bangkok");
 
-Route::get('/', function () {
-    
+function route_index()
+{
 	if(Auth::check())
     {
         if(Auth::user()->access_id == 2) // Anggota
@@ -26,13 +26,25 @@ Route::get('/', function () {
         {
             return redirect()->route('admin.index');
         }
-           
-    }
 
+        if(Auth::user()->access_id == 4) // CS
+        {
+            return redirect()->route('cs.index');
+        }
+    }
+}
+
+Route::get('/', function () {
+    
+	route_index();
+    
     return view('welcome');
 });
 
 Route::get('home', function () {
+	
+	route_index();
+	
     return view('welcome');
 });
 
@@ -67,17 +79,21 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 	$path = "Admin\\";
 
 	Route::get('/', $path . 'IndexController@index')->name('admin.index');
-	Route::get('profile', $path . 'UserController@profile');
+	Route::get('profile', $path . 'UserController@profile')->name('admin.profile');
 	Route::get('contact-us', $path.'ContactUsController@index')->name('admin.contact-us');
 
-	Route::resource('user', $path . 'UserController');
-	Route::resource('user-group', $path . 'UserGroupController');
+	Route::resource('user', $path . 'UserController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
+	Route::resource('user-group', $path . 'UserGroupController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'user-group']);
 	
 	/**
 	 * Routing Anggota
 	 */
 	Route::resource('anggota', $path . 'AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::get('anggota/cetak-kwitansi/{id}', $path .'AnggotaController@cetakKwitansi')->name('admin.anggota.cetak-kwitansi');
+	Route::post('anggota/topup-simpanan-pokok', $path .'AnggotaController@topupSimpananPokok')->name('admin.anggota.topup-simpanan-pokok');
+	Route::post('anggota/topup-simpanan-wajib', $path .'AnggotaController@topupSimpananWajib')->name('admin.anggota.topup-simpanan-wajib');
+	/* End Routing Anggota*/
+
 
 	Route::resource('bank', $path.'BankController');
 	Route::resource('rekening-bank', $path.'RekeningBankController');
@@ -107,9 +123,27 @@ Route::group(['prefix' => 'anggota', 'middleware' => ['auth', 'access:2']], func
 	Route::post('submitstep1', $path.'BayarController@submitStep1')->name('anggota.submit-step1');
 
 	Route::post('anggota/bayar/submit', $path.'BayarController@submit')->name('anggota.bayar.submit');
+	Route::post('anggota/add-rekening-bank', $path. 'BayarController@addRekeningBank')->name('anggota.bayar.add-rekening-bank');
+
 	Route::resource('rekening-bank-user', $path. 'RekeningBankUserController');
 	Route::post('upload-confirmation', $path.'BayarController@confirmation')->name('anggota.upload.confirmation');
 	Route::resource('simpanan-sukarela', $path. 'SimpananSukarelaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'anggota']);
+});
+
+// ROUTING TELLER / KASIR
+Route::group(['prefix' => 'kasir', 'middleware' => ['auth', 'access:3']], function(){
+	$path = "Kasir\\";
+
+	Route::get('/', $path .'IndexController@index')->name('kasir.index');
+	Route::resource('anggota', $path . 'AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'kasir']);
+});
+
+// ROUTING TELLER / KASIR
+Route::group(['prefix' => 'cs', 'middleware' => ['auth', 'access:4']], function(){
+	$path = "Cs\\";
+
+	Route::get('/', $path .'IndexController@index')->name('cs.index');
+	Route::resource('anggota', $path . 'AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'cs']);
 });
 
 Auth::routes();

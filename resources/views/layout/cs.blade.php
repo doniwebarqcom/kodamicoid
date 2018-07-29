@@ -8,8 +8,8 @@
     <meta name="author" content="">
     <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
     <title>@yield('title')</title>
-    <!-- Bootstrap Core CSS -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Bootstrap Core CSS -->
     <link href="{{ asset('admin-css/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <!-- Menu CSS -->
     <link href="{{ asset('admin-css/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css') }}" rel="stylesheet">
@@ -31,7 +31,7 @@
 
     <link href="{{ asset('admin-css/plugins/bower_components/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
-
+    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -44,7 +44,6 @@
         }
     </style>
 </head>
-
 <body class="fix-header">
 
      <!-- ============================================================== -->
@@ -67,7 +66,7 @@
             <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="{{ url('admin') }}"><b>KODAMI Pocket System</b>
+                    <a class="logo" href="{{ url('anggota') }}"><b>KODAMI Pocket System</b>
                         <span class="hidden-xs">&nbsp;</span> 
                     </a>
                 </div>
@@ -75,43 +74,9 @@
                 <!-- Search input and Toggle icon -->
                 <ul class="nav navbar-top-links navbar-left">
                     <li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i></a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)"> <i class="mdi mdi-gmail"></i>
-                            <div class="notify"></div>
-                        </a>
-                        <ul class="dropdown-menu mailbox animated bounceInDown">
-                            <li>
-                                <div class="drop-title">You have 0 new messages</div>
-                            </li>
-                            <li>
-                                <div class="message-center">
-                                </div>
-                            </li>
-                            <li>
-                                <a class="text-center" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-messages -->
-                    </li>
-                    <!-- .Task dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)"> <i class="mdi mdi-check-circle"></i>
-                            <div class="notify"></div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-tasks animated slideInUp">
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="javascript:void(0)"> <strong>See All Tasks</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- .Megamenu -->
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
-                    <li>
-                        <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
-                            <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
-                    </li>
+                    
                     <li class="dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="javascript:void(0)"> <img src="{{ asset('admin-css/images/user.png') }}" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">{{ Auth::user()->name }}</b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
@@ -123,7 +88,6 @@
                                         <p class="text-muted">{{ Auth::user()->email }}</p><a class="btn btn-rounded btn-danger btn-sm">{{ get_jabatan(\Auth::user()->access_id) }}</a></div>
                                 </div>
                             </li>
-                            <li><a href="{{ route('admin.profile') }}"><i class="ti-user"></i> Profile</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ url('logout') }}"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
@@ -146,7 +110,7 @@
                     <h3><span class="fa-fw open-close"><i class="ti-menu hidden-xs"></i><i class="ti-close visible-xs"></i></span> <span class="hide-menu">Navigation</span></h3> </div>
                 <ul class="nav" id="side-menu">
                     <li class="user-pro">
-                        <a href="javascript:void(0)" class="waves-effect"><img src="../plugins/images/users/varun.jpg" alt="user-img" class="img-circle"> <span class="hide-menu"> {{ Auth::user()->name }}<span class="fa arrow"></span></span>
+                        <a href="javascript:void(0)" class="waves-effect"><img src="{{ asset('admin-css/plugins/images/users/varun.jpg') }}" alt="user-img" class="img-circle"> <span class="hide-menu"> {{ Auth::user()->name }}<span class="fa arrow"></span></span>
                         </a>
                         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
                             <li><a href="javascript:void(0)"><i class="ti-user"></i> <span class="hide-menu">My Profile</span></a></li>
@@ -156,75 +120,25 @@
                             <li><a href="{{ url('logout') }}"><i class="fa fa-power-off"></i> <span class="hide-menu">Logout</span></a></li>
                         </ul>
                     </li>
-                    <li> <a href="{{ url('anggota') }}" class="waves-effect"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span class="label label-rouded label-inverse pull-right">4</span></span></a>
-                    </li>
-                    <li class="devider"></li>
-                    <li>
-                        <a href="javascript:void(0)" class="waves-effect">
-                            <i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Management Anggota<span class="fa arrow"></span></span>
-                        </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ url('admin/anggota') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Anggota</span></a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="last-nav">
-                        <a href="javascript:void(0)" class="waves-effect">
-                            <i class="mdi mdi-settings fa-fw"></i> <span class="hide-menu">Setting<span class="fa arrow"></span></span>
-                        </a>
-                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.setting.index') }}"><i class="ti-settings fa-fw"></i><span class="hide-menu">Setting</span></a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.contact-us') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Submit Kontak Kami</span></a>
-                            </li>
-                            <li>
-                                <a href="{{ route('rekening-bank.index') }}"><i class="ti-book fa-fw"></i><span class="hide-menu">Rekening Bank</span></a>
-                            </li>
-                            <li>
-                                <a href="{{ route('bank.index') }}"><i class="ti-server fa-fw"></i><span class="hide-menu">Bank</span></a>
-                            </li>
-                             <li>
-                                <a href="{{ url('admin/user') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users</span></a>
-                            </li>
-                         </ul>
+                    <li> <a href="{{ url('anggota') }}" class="waves-effect active"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span class="label label-rouded label-inverse pull-right">4</span></span></a>
                     </li>
 
+                    <li class="devider"></li>
+                    <li class="last-nav"><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu">Data Master<span class="fa arrow"></span></span></a>
+                        <ul class="nav nav-second-level">
+                            <!-- <li> <a href="{{ route('rekening-bank-user.index') }}" class="waves-effect"><i class="mdi mdi-calendar-check fa-fw"></i> <span class="hide-menu">Rekening Bank</span></a></li> -->
+                        </ul>
+                    </li>
                 </ul>
             </div>
         </div>
         <!-- ============================================================== -->
         <!-- End Left Sidebar -->
         <!-- ============================================================== -->
-        
+
         @yield('content')
-
+        
         @include('layout.alert')
-
-        <div class="modal fade" id="modal_status_anggota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                  <form method="POST" action="{{ route('anggota.upload.confirmation') }}" enctype="multipart/form-data">
-                    {{ csrf_field() }}            
-                    
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="exampleModalLabel1">Upload Bukti Transfer</h4> </div>
-                    <div class="modal-body">
-                            <div class="form-group">
-                                <label for="recipient-name" class="control-label">File:</label>
-                                <input type="file" name="file" accept="image/*" class="form-control" id="recipient-name1"> </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-                  </form>
-                </div>
-            </div>
-        </div>
 
     <!-- ============================================================== -->
     <!-- End Wrapper -->
@@ -256,6 +170,15 @@
     <script src="{{ asset('admin-css/plugins/bower_components/calendar/dist/cal-init.js') }}"></script>
     <script src="{{ asset('admin-css/plugins/bower_components/toast-master/js/jquery.toast.js') }}"></script>
     
+    <!-- Custom Theme JavaScript -->
+    <script src="{{ asset('admin-css/js/custom.min.js') }}"></script>
+    <script src="{{ asset('admin-css/js/dashboard1.js') }}?time=<?=date('His')?>"></script>
+    <script src="{{ asset('js/bootbox.min.js') }}"></script>
+    <!-- Custom tab JavaScript -->
+    <script src="{{ asset('admin-css/js/cbpFWTabs.js') }}"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    
     <!-- start - This is for export functionality only -->
     <script src="{{ asset('admin-css/plugins/bower_components/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
@@ -265,56 +188,36 @@
     <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="{{ asset('admin-css/js/custom.min.js') }}"></script>
-    <script src="{{ asset('admin-css/js/dashboard1.js') }}?time=<?=date('His')?>"></script>
-    <!-- Custom tab JavaScript -->
-    <script src="{{ asset('admin-css/js/cbpFWTabs.js') }}"></script>
-    <script src="{{ asset('js/bootbox.min.js') }}"></script>
-    <script src="{{ asset('js/general.js?v='. date('His')) }}"></script>
     
     <script type="text/javascript">
-        (function() {
-            [].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {
-                new CBPFWTabs(el);
-            });
-        })();
+    
+    $('#data_table').DataTable({
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel', 'pdf', 'print'
+        ],
+        pageLength : 20
+    });
 
-        $(".myadmin-alert .closed").click(function(event) {
-            $(this).parents(".myadmin-alert").fadeToggle(350);
-            return false;
-        });
+    /**
+     * [numberWithComma description]
+     * @param  {[type]} x [description]
+     * @return {[type]}   [description]
+     */
+    function numberWithComma(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
 
-        $('#data_table').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            pageLength : 20
+    (function() {
+        [].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {
+            new CBPFWTabs(el);
         });
-        $('#data_table2').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            pageLength : 20
-        });
-        $('#data_table3').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            pageLength : 20
-        });
+    })();
 
-        $('#data_table_no_button').DataTable({
-            dom: 'Bfrtip',
-            buttons: [],
-            pageLength : 20
-        });
+    $(".myadmin-alert .closed").click(function(event) {
+        $(this).parents(".myadmin-alert").fadeToggle(350);
+        return false;
+    });
 
     </script>
 

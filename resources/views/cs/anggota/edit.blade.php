@@ -1,6 +1,6 @@
-@extends('layout.admin')
+@extends('layout.cs')
 
-@section('title', 'Admin - Koperasi Daya Masyarakat Indonesia')
+@section('title', 'Customer Service - Koperasi Daya Masyarakat Indonesia')
 
 @section('sidebar')
 
@@ -32,8 +32,7 @@
             <div class="white-box">
                 <h3 class="box-title m-b-0">Data Anggota</h3>
                 <br />
-                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.anggota.update', $data->id) }}" method="POST">
-                    
+                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('cs.anggota.update', $data->id) }}" method="POST">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="active" role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Profile</span></a></li>
                         <li role="presentation" class=""><a href="#simpanan" aria-controls="simpanan" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Simpanan</span></a></li>
@@ -410,8 +409,8 @@
                     <hr />
                     <div class="col-md-12">
                         <div class="form-group">
-                            <a href="{{ route('admin.anggota.index') }}" class="btn btn-default btn-sm waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Back</a>
-                            <button type="submit" class="btn btn-success waves-effect btn-sm waves-light m-r-10"><i class="fa fa-save"></i> Save </button>
+                            <a href="{{ route('cs.anggota.index') }}" class="btn btn-default btn-sm waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Back</a>
+                            <button type="submit" class="btn btn-success waves-effect btn-sm waves-light m-r-10"><i class="fa fa-save"></i> Save Anggota</button>
                         </div>
                     </div>
                     <div style="clear: both;"></div>

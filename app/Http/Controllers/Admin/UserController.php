@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\ControllerLogin;
-use App\ModelUser; 
 
 class UserController extends ControllerLogin
 {
@@ -14,9 +13,9 @@ class UserController extends ControllerLogin
 	 */
     public function index()
     {        
-        $data = ModelUser::all();
+        $params['data'] = \App\UserModel::orderBy('id', 'DESC')->get();
 
-    	return view('admin.user.index', compact('data'));
+    	return view('admin.user.index')->with($params);
     }
 
     /**
@@ -44,7 +43,7 @@ class UserController extends ControllerLogin
      */
     public function edit($id)
     {
-        $data = ModelUser::where('id', $id)->first();
+        $data = \App\UserModel::where('id', $id)->first();
 
         return view('admin.user.edit', compact('data'));
     }
@@ -58,7 +57,7 @@ class UserController extends ControllerLogin
      */
     public function update(Request $request, $id)
     {
-        $data =  ModelUser::where('id', $id)->first();
+        $data =  \App\UserModel::where('id', $id)->first();
         
         if(!empty($request->password))
         {
@@ -69,6 +68,7 @@ class UserController extends ControllerLogin
             $data->password             = bcrypt($request->password);
         }
 
+        $data->no_anggota           = $request->no_anggota;
         $data->nik                  = $request->nik;
         $data->telepon              = $request->telepon;
         $data->name                 = $request->name;
@@ -77,7 +77,7 @@ class UserController extends ControllerLogin
         $data->access_id            = $request->access_id;
         $data->save();
 
-        return redirect()->route('user.index')->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('admin.user.index')->with('message-success', 'Data berhasil disimpan'); 
     }
 
     /**
@@ -91,12 +91,13 @@ class UserController extends ControllerLogin
             'nik'               => 'required|unique:users',
             'telepon'           => 'required',
             'name'              => 'required',
-            'email'             => 'required|email|unique:users',
+            //'email'             => 'required|email|unique:users',
             'password'          => 'required',
             'confirmation'      => 'required|same:password',
         ]);
 
-        $data = new ModelUser();
+        $data = new \App\UserModel();
+        $data->no_anggota           = $request->no_anggota;
         $data->nik                  = $request->nik;
         $data->telepon              = $request->telepon;
         $data->name                 = $request->name;
@@ -106,6 +107,6 @@ class UserController extends ControllerLogin
         $data->access_id            = $request->access_id;
         $data->save();
 
-        return redirect()->route('user.index')->with('message-success', 'User berhasil di buat');
+        return redirect()->route('admin.user.index')->with('message-success', 'User berhasil di buat');
     }
 }

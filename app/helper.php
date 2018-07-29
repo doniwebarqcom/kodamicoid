@@ -46,33 +46,6 @@ if (!function_exists('get_api_response')) {
    }
 }
 
-
-
-/**
- * [access_rules description]
- * @param  [type] $selected [description]
- * @return [type]           [description]
- */
-function access_rules($selected = 0)
-{
-   $array_map = [
-                  1 => 'Administrator', 
-                  2 => 'Anggota', 
-                  3 => 'Teller', 
-                  4 => 'Customer Service',
-                  5 => 'Operator',
-                  6 => 'Admin Operator',
-                  7 => 'Dropshiper'
-               ];
-
-   if($selected != null || $selected != "" || $selected != 0)
-   { 
-      return '<span class="label label-info"><i class="fa fa-key"></i> '. $array_map[$selected] .'</span>';
-   }   
-
-   return $array_map;
-}
-
 /**
  * [status_anggota description]
  * @param  [type] $id [description]

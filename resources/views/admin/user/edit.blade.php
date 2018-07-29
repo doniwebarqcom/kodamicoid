@@ -31,10 +31,9 @@
             
             <div class="col-md-12">
             <div class="white-box">
-                
-                <h3 class="box-title m-b-0">USER</h3>
-                <br />
-                <form class="form-horizontal" action="{{ route('user.update', $data->id) }}" method="POST">
+                <h3 class="box-title m-b-0">FORM USER</h3>
+                <hr />
+                <form class="form-horizontal" action="{{ route('admin.user.update', $data->id) }}" method="POST">
                     <div class="col-md-6">
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="PUT">
@@ -51,18 +50,19 @@
                         @endif
                         
                         <div class="form-group">
-                            <label class="col-md-12">NIK</label>
-                            <div class="col-md-12">
+                            <label class="col-md-6">No Anggota</label>
+                            <label class="col-md-6">NIK</label>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" name="no_anggota" value="{{ $data->no_anggota }}"> </div>
+                            <div class="col-md-6">
                                 <input type="text" class="form-control" name="nik" value="{{ $data->nik }}"> </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-12">Nama</label>
-                            <div class="col-md-12">
+                            <label class="col-md-6">Nama</label>
+                            <label class="col-md-6">Jenis Kelamin</label>
+                            <div class="col-md-6">
                                 <input type="text" class="form-control" name="name"  value="{{ $data->name }}"> </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-12">Jenis Kelamin</label>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <select class="form-control" name="jenis_kelamin" required>
                                     <option value=""> - Jenis Kelamin - </option>
                                     @foreach(['Laki-laki', 'Perempuan'] as $item)
@@ -72,15 +72,16 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-12">Email</label>
-                            <div class="col-md-12">
+                            <label class="col-md-6">Email</label>
+                            <label class="col-md-6">Phone</label>
+                            <div class="col-md-6">
                                 <input type="email" class="form-control" name="email" value="{{ $data->email }}"> </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-md-12">Phone</label>
-                            <div class="col-md-12">
+                            <div class="col-md-6">
                                 <input type="text" class="form-control" name="telepon" value="{{ $data->telepon }}"> </div>
                         </div>
+                    </div>
+                    <div class="col-md-6">
+                        
                         <div class="form-group">
                             <label class="col-md-12">Password</label>
                             <div class="col-md-12">
@@ -92,8 +93,9 @@
                                 <input type="password" class="form-control" name="confirmation"> </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-md-12">Akses</label>
-                            <div class="col-md-12">
+                            <label class="col-md-6">Akses Login</label>
+                            <label class="col-md-6">Status</label>
+                            <div class="col-md-6">
                                 <select class="form-control" name="access_id">
                                     @foreach(access_rules() as $key => $item)
                                         
@@ -105,10 +107,19 @@
                                     @endforeach 
                                 </select>    
                             </div>
+                            <div class="col-md-6">
+                                <select class="form-control" name="status">
+                                    <option value=""> - Status - </option>
+                                    <option value="1" {{ $data->status == 1 ? 'selected' : '' }}>Active</option>
+                                    <option value="0" {{ $data->status == 0 ? 'selected' : '' }}>Inactive</option>
+                                </select>
+                            </div>
                         </div>
-                        <a href="{{ url('angggota.iindex') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>
-                        <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                     </div>
+                    <div class="clearfix"></div>
+                    <hr />
+                    <a href="{{ route('admin.user.index') }}" class="btn btn-default btn-sm waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Back</a>
+                    <button type="submit" class="btn btn-success btn-sm waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Save User</button>
                     <br style="clear: both;" />
                 </form>
               </div>

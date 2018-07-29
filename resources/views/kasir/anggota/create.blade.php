@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.kasir')
 
 @section('title', 'Admin - Koperasi Daya Masyarakat Indonesia')
 
@@ -32,7 +32,7 @@
             <div class="white-box">
                 <h3 class="box-title m-b-0">FORM ANGGOTA</h3>
                 <hr />
-                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.anggota.store') }}" method="POST">
+                <form class="form-horizontal" autocomplete="off" enctype="multipart/form-data" action="{{ route('admin.anggota.store') }}" method="POST">
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <strong>Whoops!</strong> There were some problems with your input.<br><br>

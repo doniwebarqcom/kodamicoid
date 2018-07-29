@@ -1,24 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\AdminOperator;
+namespace App\Http\Controllers\Kasir;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-use Kodami\Models\Mysql\Pulsa;
-
 class IndexController extends Controller
 {	
-    
 	/**
 	 * [index description]
 	 * @return [type] [description]
 	 */
     public function index()
-    {
-        $data = [];
-        $data['pulsa'] = Pulsa::all();
+    {	
+    	$params['data'] = \App\UserModel::where('access_id', 2)->orderBy('id', 'DESC')->get();
 
-    	return view('kasir.index')->with($data);
+    	return view('kasir.index')->with($params);
     }
 }

@@ -101,4 +101,21 @@ class BayarController extends ControllerLogin
 
         return redirect()->route('anggota.dashboard')->with('message-success', "File Konfirmasi berhasil di upload silahkan anda konfirmasi dari Admin");
     }
+
+    /**
+     * [addRekeningBank description]
+     * @param Request $request [description]
+     */
+    public function addRekeningBank(Request $request)
+    {
+        $bank = new \Kodami\Models\Mysql\RekeningBankUser;
+        $bank->nama_akun        = $request->nama_akun;
+        $bank->no_rekening      = $request->no_rekening;
+        $bank->bank_id          = $request->bank_id;
+        $bank->cabang           = $request->cabang;
+        $bank->user_id          = $request->user_id;
+        $bank->save();
+
+        return redirect()->route('anggota.bayar', ['#tab-rekening'])->with('message-success', 'Data Bank berhasil ditambahkan');
+    }
 }

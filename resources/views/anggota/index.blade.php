@@ -27,7 +27,7 @@
             
             <!-- .row -->
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="panel">
                         @if(Auth::user()->status == 2)
                             <span  class="btn btn-rounded btn-success" style="position: absolute;right: 25px;top: 10px;">Active</span>
@@ -53,7 +53,7 @@
                             <div class="row text-center m-t-30">
                                 <div class="col-xs-4 b-r">
                                     <h3>Simpanan Pokok</h3>
-                                    @php($simpanan_pokok = simpanan_pokok(Auth::user()->id))
+                                    @php($simpanan_pokok = simpanan_pokok(Auth::user()->id)->where('status', 3)->sum('nominal'))
                                     @if($simpanan_pokok)
                                         <h4>Rp. {{ number_format($simpanan_pokok) }}</h4>
                                     @else
@@ -62,12 +62,12 @@
                                 </div>
                                 <div class="col-xs-4 b-r">
                                     <h3>Simpanan Sukarela</h3>
-                                    <h4>Rp. {{ number_format(simpanan_sukarela(Auth::user()->id)) }}</h4>
+                                    <h4>Rp. {{ number_format(simpanan_sukarela(Auth::user()->id)->where('status', 3)->sum('nominal')) }}</h4>
                                     <a href="{{ route('anggota.simpanan-sukarela.index') }}" class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> detail</a>
                                 </div>
                                 <div class="col-xs-4 b-r">
                                     <h3>Simpanan Wajib</h3>
-                                    @php($simpanan_wajib = sum_simpanan_wajib(Auth::user()->id,3))
+                                    @php($simpanan_wajib = simpanan_wajib(Auth::user()->id)->where('status', 3)->sum('nominal'))
                                     @if($simpanan_wajib)
                                         <h4>{{ number_format($simpanan_wajib) }}</h4>
                                     @else
@@ -79,7 +79,7 @@
                         <hr class="m-t-10" />
                     </div>
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-8">
 
                     @if(Auth::user()->status == 1)
                     <div class="panel panel-themecolor">
@@ -287,14 +287,12 @@
                                                     <h4> <span class="btn btn-xs btn-rounded btn-danger"><i class="fa fa-close"></i></span> Simpanan Wajib</h4>
                                                     <div class="col-md-4" style="margin:0;padding:0;"><hr /></div><div class="clearfix"></div>
                                                     <p>Simpanan Wajib anggota KODAMI sebesar Rp. 10.000 perbulan ( Rp. 120.000 pertahun )</p>
-                                                    
                                                     <p><label>Durasi Pembayaran</label></p>
                                                     <label style="font-weight: normal;"><input type="radio" name="durasi_pembayaran" value="1" checked="true"> 1 Bulan</label>&nbsp;&nbsp;
                                                     <label style="font-weight: normal;"><input type="radio" name="durasi_pembayaran" value="3"> 3 Bulan</label>&nbsp;&nbsp;
                                                     <label style="font-weight: normal;"><input type="radio" name="durasi_pembayaran" value="6"> 6 Bulan</label>&nbsp;&nbsp;
                                                     <label style="font-weight: normal;"><input type="radio" name="durasi_pembayaran" value="12"> 12 Bulan</label><br />
                                                     <p style="font-size: 15px;margin-top: 10px;"><label style="font-weight: normal;">Rp. </label> <label class="nominal_simpanan_wajib" style="font-weight: normal;">10.000</label></p>
-
                                                 </div>
                                                 <hr />
                                                 <div>

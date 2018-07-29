@@ -1,6 +1,6 @@
-@extends('layout.admin')
+@extends('layout.cs')
 
-@section('title', 'Admin - Koperasi Daya Masyarakat Indonesia')
+@section('title', 'Customer Service - Koperasi Daya Masyarakat Indonesia')
 
 @section('sidebar')
 
@@ -32,7 +32,7 @@
             <div class="white-box">
                 <h3 class="box-title m-b-0">FORM ANGGOTA</h3>
                 <hr />
-                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.anggota.store') }}" method="POST">
+                <form class="form-horizontal" autocomplete="off" enctype="multipart/form-data" action="{{ route('cs.anggota.store') }}" method="POST">
                     @if (count($errors) > 0)
                         <div class="alert alert-danger">
                             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -234,7 +234,7 @@
                     <hr />
                     <div class="col-md-12">
                         <div class="form-group">
-                            <a href="{{ route('admin.anggota.index') }}" class="btn btn-default btn-sm waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Back</a>
+                            <a href="{{ route('cs.anggota.index') }}" class="btn btn-default btn-sm waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Back</a>
                             <button type="submit" class="btn btn-success waves-effect btn-sm waves-light m-r-10"><i class="fa fa-save"></i>  Save Anggota</button>
                         </div>
                     </div>

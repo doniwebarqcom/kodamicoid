@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Kasir;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\ControllerLogin;
-use App\ModelUser; 
+use App\Http\Controllers\Controller;
 
-class AnggotaController extends ControllerLogin
+class AnggotaController extends Controller
 {	
 	/**
 	 * [index description]
@@ -14,89 +13,9 @@ class AnggotaController extends ControllerLogin
 	 */
     public function index()
     {
-    	$data = ModelUser::where('access_id', 2)->orderBy('id', 'DESC')->get();
+    	$data = \App\UserModel::where('access_id', 2)->orderBy('id', 'DESC')->get();
 
-    	return view('admin.anggota.index', compact('data'));
-    }
-
-    /**
-     * [confirm description]
-     * @param  [type] $id [description]
-     * @return [type]     [description]
-     */
-    public function confirm($id)
-    {
-        $params['data']         = Modeluser::where('id', $id)->first();
-        $params['deposit']      = \Kodami\Models\Mysql\Deposit::where('type', 1)->where('user_id', $id)->first();
-
-        return view('admin.anggota.confirm')->with($params);
-    }
-
-    /**
-     * [confirmSubmit description]
-     * @param  Request $request [description]
-     * @return [type]           [description]
-     */
-    public function confirmSubmit(Request $request)
-    {
-        if($request->status == 1)
-        {
-            $status = \Kodami\Models\Mysql\Deposit::where('id', $request->deposit_id)->first();
-            $status->status = 3;
-            $status->proses_user_id = \Auth::user()->id;
-            $status->save(); 
-
-            $user = \App\UserModel::where('id', $status->user_id)->first();
-
-            /** Rubah status angota jadi active */
-            $user = ModelUser::where('id', $status->user_id)->first();
-            $user->status = 2;
-            $user->save();
-
-            // Insert Simpanan Pokok
-            $deposit                = new \Kodami\Models\Mysql\Deposit();
-            $deposit->no_invoice    = $status->no_invoice; 
-            $deposit->status        = 3;
-            $deposit->type          = 3; // Simpanan Pokok
-            $deposit->user_id       = $status->user_id;
-            $deposit->nominal       = get_setting('simpanan_pokok');
-            $deposit->proses_user_id = \Auth::user()->id;
-            $deposit->save();  
-
-            // Insert Simpanan Wajib
-            $deposit                = new \Kodami\Models\Mysql\Deposit();
-            $deposit->no_invoice    = $status->no_invoice; 
-            $deposit->status        = 3; 
-            $deposit->type          = 5; // Simpanan Wajib
-            $deposit->user_id       = $status->user_id;
-            $deposit->nominal       = $user->durasi_pembayaran * get_setting('simpanan_wajib');
-            $deposit->proses_user_id = \Auth::user()->id;
-            $deposit->save();
-
-            // Insert Simpanan Sukarela
-            $deposit                = new \Kodami\Models\Mysql\Deposit();
-            $deposit->no_invoice    = $status->no_invoice; 
-            $deposit->status        = 3; 
-            $deposit->type          = 4; // Simpanan Sukarela
-            $deposit->user_id       = $status->user_id;
-            $deposit->nominal       = $user->first_simpanan_sukarela + $status->code;
-            $deposit->proses_user_id = \Auth::user()->id;
-            $deposit->save();
-        }
-        else
-        {
-            $deposit = \Kodami\Models\Mysql\Deposit::where('id', $id)->first();
-            $deposit->status = 4;
-            $status->proses_user_id = \Auth::user()->id;
-            $deposit->save();
-
-             /** Rubah status angota jadi reject */
-            $user = ModelUser::where('id', $deposit->user_id)->first();
-            $user->status = 3;
-            $user->save();
-        }
-
-        return redirect()->route('admin.anggota.index')->with('message-success', 'Data berhasil di konfirmasi');
+    	return view('kasir.anggota.index', compact('data'));
     }
 
     /**
@@ -105,9 +24,9 @@ class AnggotaController extends ControllerLogin
      */
     public function create()
     {
-        $params['no_anggota'] = date('y').date('m').date('d'). (ModelUser::all()->count() + 1);
+        $params['no_anggota'] = date('y').date('m').date('d'). (\App\UserModel::all()->count() + 1);
 
-        return view('admin.anggota.create')->with($params);
+        return view('kasir.anggota.create')->with($params);
     }
 
     /**
@@ -121,7 +40,7 @@ class AnggotaController extends ControllerLogin
         $data['data'] 	= $user;
         $data['id'] 	= $id;
         
-        return view('admin.anggota.edit')->with($data);
+        return view('kasir.anggota.edit')->with($data);
     }
 
     /**
@@ -133,7 +52,7 @@ class AnggotaController extends ControllerLogin
      */
     public function update(Request $request, $id)
     {
-        $data =  ModelUser::where('id', $id)->first();
+        $data =  \App\UserModel::where('id', $id)->first();
         
         $data->nik          = $request->nik; 
         $data->name         = $request->name; 
@@ -189,7 +108,7 @@ class AnggotaController extends ControllerLogin
         $data->status = $request->status;
         $data->save();
 
-        return redirect()->route('admin.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('kasir.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
     }
 
 
@@ -200,10 +119,10 @@ class AnggotaController extends ControllerLogin
      */
     public function destroy($id)
     {
-        $data = ModelUser::where('id', $id)->first();
+        $data = \App\UserModel::where('id', $id)->first();
         $data->delete();
 
-        return redirect()->route('admin.anggota.index')->with('message-sucess', 'Data berhasi di hapus');
+        return redirect()->route('kasir.anggota.index')->with('message-sucess', 'Data berhasi di hapus');
     }
 
    /**
@@ -214,7 +133,7 @@ class AnggotaController extends ControllerLogin
     */
     public function store(Request $request)
     {
-        $data               =  new ModelUser();
+        $data               =  new \App\UserModel();
         $data->no_anggota   = $request->no_anggota;
         $data->nik          = $request->nik; 
         $data->name         = $request->name; 
@@ -275,7 +194,7 @@ class AnggotaController extends ControllerLogin
         $data->status = $request->status;
         $data->save();
 
-        return redirect()->route('admin.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('kasir.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
    }
 
    /**
@@ -287,7 +206,7 @@ class AnggotaController extends ControllerLogin
    {
         $params['data']     = \Kodami\Models\Mysql\Deposit::where('id', $id)->first();
 
-        return view('admin.anggota.kwitansi')->with($params);
+        return view('kasir.anggota.kwitansi')->with($params);
    }
 
    /**
@@ -306,7 +225,7 @@ class AnggotaController extends ControllerLogin
         $deposit->proses_user_id = \Auth::user()->id;
         $deposit->save();  
 
-        return redirect()->route('admin.anggota.edit', $request->user_id)->with('message-success', 'Topup Simpanan Pokok berhasil !');
+        return redirect()->route('kasir.anggota.edit', $request->user_id)->with('message-success', 'Topup Simpanan Pokok berhasil !');
     }
 
     /**
@@ -330,6 +249,6 @@ class AnggotaController extends ControllerLogin
         $deposit->proses_user_id = \Auth::user()->id;
         $deposit->save();
 
-        return redirect()->route('admin.anggota.edit', $request->user_id)->with('message-success', 'Topup Simpanan Wajib berhasil !');
+        return redirect()->route('kasir.anggota.edit', $request->user_id)->with('message-success', 'Topup Simpanan Wajib berhasil !');
     }
 }

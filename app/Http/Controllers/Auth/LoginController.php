@@ -70,7 +70,7 @@ class LoginController extends Controller
         }
         elseif(auth()->user()->access_id == 3)
         {
-            return $this->redirectTo = '/teller';
+            return $this->redirectTo = '/kasir';
         }
         elseif(auth()->user()->access_id == 4)
         {
