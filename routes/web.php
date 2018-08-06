@@ -45,7 +45,6 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::post('contact-us', 'HomeController@postContactUs')->name('contact-us');
 Route::post('ajax/add-rekening-bank', 'AjaxController@addRekeningBank')->name('ajax.add.rekening.bank');
 
-
 // ROUTING LOGIN
 Route::group(['middleware' => ['auth']], function(){
 	/**
@@ -77,6 +76,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 	 * Routing Anggota
 	 */
 	Route::resource('anggota', $path . 'AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
+	Route::resource('simpanan-sukarela', $path . 'SimpananSukarelaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
+	Route::resource('simpanan-pokok', $path . 'SimpananPokokController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
+	Route::resource('simpanan-wajib', $path . 'SimpananWajibController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
+
 	Route::get('anggota/cetak-kwitansi/{id}', $path .'AnggotaController@cetakKwitansi')->name('admin.anggota.cetak-kwitansi');
 
 	Route::resource('bank', $path.'BankController');
