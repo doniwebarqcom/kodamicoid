@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 /**
  * [access_rules description]
@@ -8,9 +8,9 @@
 function access_rules($selected = 0)
 {
    $array_map = [
-                  1 => 'Administrator', 
-                  2 => 'Anggota', 
-                  3 => 'Teller / Kasir', 
+                  1 => 'Administrator',
+                  2 => 'Anggota',
+                  3 => 'Teller / Kasir',
                   4 => 'Customer Service',
                   5 => 'Operator',
                   6 => 'Admin Operator',
@@ -18,9 +18,9 @@ function access_rules($selected = 0)
                ];
 
    if($selected != null || $selected != "" || $selected != 0)
-   { 
+   {
       return '<span class="label label-info"><i class="fa fa-key"></i> '. $array_map[$selected] .'</span>';
-   }   
+   }
 
    return $array_map;
 }
@@ -33,8 +33,8 @@ function access_rules($selected = 0)
 function type_deposit($key)
 {
 	$array_map = [
-                  3 => 'Simpanan Pokok', 
-                  4 => 'Simpanan Sukarela', 
+                  3 => 'Simpanan Pokok',
+                  4 => 'Simpanan Sukarela',
                   5 => 'Simpanan Wajib'
                ];
 
@@ -51,9 +51,9 @@ function type_deposit($key)
 function get_jabatan($key)
 {
 	$array_map = [
-                  1 => 'Administrator', 
-                  2 => 'Anggota', 
-                  3 => 'Teller', 
+                  1 => 'Administrator',
+                  2 => 'Anggota',
+                  3 => 'Teller',
                   4 => 'Customer Service',
                   5 => 'Operator',
                   6 => 'Admin Operator',
@@ -158,7 +158,7 @@ function sum_simpanan_wajib($id, $status=3)
  */
 function simpanan_pokok($id)
 {
-	return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 3); 
+	return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 3);
 }
 
 /**
@@ -167,7 +167,7 @@ function simpanan_pokok($id)
  */
 function simpanan_sukarela($id)
 {
-	return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 4); 
+	return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 4);
 }
 
 /**
@@ -195,7 +195,7 @@ function get_provinsi()
 {
    return \App\Provinsi::orderBy('nama', 'ASC')->get();
 }
-	
+
 /**
  * [get_kabupaten_by_provinsi description]
  * @param  [type] $id [description]

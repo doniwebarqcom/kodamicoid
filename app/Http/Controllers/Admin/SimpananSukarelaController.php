@@ -1,11 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Cs;
+namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Kodami\Models\Mysql\Deposit;
 
-class AnggotaController extends Controller
+class SimpananSukarelaController extends Controller
 {	
 	/**
 	 * [index description]
@@ -13,9 +14,9 @@ class AnggotaController extends Controller
 	 */
     public function index()
     {
-    	$data = \App\UserModel::where('access_id', 2)->orderBy('id', 'DESC')->get();
+    	$data = Deposit::where('type', 4)->get();
 
-    	return view('cs.anggota.index', compact('data'));
+    	return view('admin.simpanan-sukarela.index', compact('data'));
     }
 
     /**
@@ -24,9 +25,9 @@ class AnggotaController extends Controller
      */
     public function create()
     {
-        $params['no_anggota'] = date('y').date('m').date('d'). (\App\UserModel::all()->count() + 1);
+        $params['no_anggota'] = date('y').date('m').date('d'). (ModelUser::all()->count() + 1);
 
-        return view('cs.anggota.create')->with($params);
+        return view('admin.anggota.create')->with($params);
     }
 
     /**
@@ -40,7 +41,7 @@ class AnggotaController extends Controller
         $data['data'] 	= $user;
         $data['id'] 	= $id;
         
-        return view('cs.anggota.edit')->with($data);
+        return view('admin.anggota.edit')->with($data);
     }
 
     /**
@@ -52,16 +53,16 @@ class AnggotaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data =  \App\UserModel::where('id', $id)->first();
+        $data =  ModelUser::where('id', $id)->first();
         
-        $data->nik          = $request->nik; 
-        $data->name         = $request->name; 
+        $data->nik         = $request->nik; 
+        $data->name        = $request->name; 
         $data->jenis_kelamin= $request->jenis_kelamin; 
         $data->email        = $request->email;
         $data->telepon      = $request->telepon;
         $data->agama        = $request->agama;
         $data->tempat_lahir = $request->tempat_lahir;
-        $data->tanggal_lahir= $request->tanggal_lahir;
+        $data->tanggal_lahir = $request->tanggal_lahir;
         $data->passport_number          = $request->passport_number;
         $data->kk_number                = $request->kk_number;
         $data->npwp_number              = $request->npwp_number;
@@ -105,10 +106,10 @@ class AnggotaController extends Controller
             $image->move($destinationPath, $name);
             $data->file_npwp = $name;
         }
-        $data->status = $request->status;
+
         $data->save();
 
-        return redirect()->route('cs.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('admin.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
     }
 
 
@@ -119,10 +120,10 @@ class AnggotaController extends Controller
      */
     public function destroy($id)
     {
-        $data = \App\UserModel::where('id', $id)->first();
+        $data = ModelUser::where('id', $id)->first();
         $data->delete();
 
-        return redirect()->route('cs.anggota.index')->with('message-sucess', 'Data berhasi di hapus');
+        return redirect()->route('admin.anggota.index')->with('message-sucess', 'Data berhasi di hapus');
     }
 
    /**
@@ -133,7 +134,7 @@ class AnggotaController extends Controller
     */
     public function store(Request $request)
     {
-        $data               =  new \App\UserModel();
+        $data               =  new ModelUser();
         $data->no_anggota   = $request->no_anggota;
         $data->nik          = $request->nik; 
         $data->name         = $request->name; 
@@ -181,7 +182,7 @@ class AnggotaController extends Controller
             $destinationPath = public_path('/file_photo/'. $data->id);
             $image->move($destinationPath, $name);
             $data->foto = $name;
-        } 
+        }
 
         if ($request->hasFile('file_npwp')) 
         {    
@@ -191,64 +192,9 @@ class AnggotaController extends Controller
             $image->move($destinationPath, $name);
             $data->file_npwp = $name;
         }
-        $data->status = $request->status;
+        
         $data->save();
 
-        return redirect()->route('cs.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('admin.anggota.index')->with('message-success', 'Data berhasil disimpan'); 
    }
-
-   /**
-    * [cetakKwitansi description]
-    * @param  [type] $id [description]
-    * @return [type]     [description]
-    */
-   public function cetakKwitansi($id)
-   {
-        $params['data']     = \Kodami\Models\Mysql\Deposit::where('id', $id)->first();
-
-        return view('cs.anggota.kwitansi')->with($params);
-   }
-
-   /**
-    * [topupSimpananPokok description]
-    * @param  Request $request [description]
-    * @return [type]           [description]
-    */
-    public function topupSimpananPokok(Request $request)
-    {
-        $deposit                = new \Kodami\Models\Mysql\Deposit();
-        $deposit->no_invoice    = no_invoice(); 
-        $deposit->status        = 3;
-        $deposit->type          = 3;
-        $deposit->user_id       = $request->user_id;
-        $deposit->nominal       = $request->nominal;
-        $deposit->proses_user_id = \Auth::user()->id;
-        $deposit->save();  
-
-        return redirect()->route('cs.anggota.edit', $request->user_id)->with('message-success', 'Topup Simpanan Pokok berhasil !');
-    }
-
-    /**
-     * [topupSimpananWajib description]
-     * @param  Request $request [description]
-     * @return [type]           [description]
-     */
-    public function topupSimpananWajib(Request $request)
-    {
-        $user                       = \App\UserModel::where('id', $request->user_id)->first();
-        $user->durasi_pembayaran    = $request->durasi_pembayaran;
-        $user->first_durasi_pembayaran_date = date('Y-m-d');
-        $user->save();
-
-        $deposit                = new \Kodami\Models\Mysql\Deposit();
-        $deposit->no_invoice    = no_invoice(); 
-        $deposit->status        = 3; 
-        $deposit->type          = 5; // Simpanan Wajib
-        $deposit->user_id       = $request->user_id;
-        $deposit->nominal       = $request->durasi_pembayaran * $request->nominal;
-        $deposit->proses_user_id = \Auth::user()->id;
-        $deposit->save();
-
-        return redirect()->route('cs.anggota.edit', $request->user_id)->with('message-success', 'Topup Simpanan Wajib berhasil !');
-    }
 }

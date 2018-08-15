@@ -75,37 +75,6 @@
                 <!-- Search input and Toggle icon -->
                 <ul class="nav navbar-top-links navbar-left">
                     <li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i></a></li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)"> <i class="mdi mdi-gmail"></i>
-                            <div class="notify"></div>
-                        </a>
-                        <ul class="dropdown-menu mailbox animated bounceInDown">
-                            <li>
-                                <div class="drop-title">You have 0 new messages</div>
-                            </li>
-                            <li>
-                                <div class="message-center">
-                                </div>
-                            </li>
-                            <li>
-                                <a class="text-center" href="javascript:void(0);"> <strong>See all notifications</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-messages -->
-                    </li>
-                    <!-- .Task dropdown -->
-                    <li class="dropdown">
-                        <a class="dropdown-toggle waves-effect waves-light" data-toggle="dropdown" href="javascript:void(0)"> <i class="mdi mdi-check-circle"></i>
-                            <div class="notify"></div>
-                        </a>
-                        <ul class="dropdown-menu dropdown-tasks animated slideInUp">
-                            <li class="divider"></li>
-                            <li>
-                                <a class="text-center" href="javascript:void(0)"> <strong>See All Tasks</strong> <i class="fa fa-angle-right"></i> </a>
-                            </li>
-                        </ul>
-                    </li>
-                    <!-- .Megamenu -->
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
                     <li>
@@ -123,7 +92,10 @@
                                         <p class="text-muted">{{ Auth::user()->email }}</p><a class="btn btn-rounded btn-danger btn-sm">{{ get_jabatan(\Auth::user()->access_id) }}</a></div>
                                 </div>
                             </li>
+<<<<<<< HEAD
                             <li><a href="{{ route('admin.profile') }}"><i class="ti-user"></i> Profile</a></li>
+=======
+>>>>>>> 1dd15225e6adc73ce84f3a2a8e24b06a34f649db
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ url('logout') }}"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
@@ -166,6 +138,22 @@
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="{{ url('admin/anggota') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Anggota</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)" class="waves-effect">
+                            <i class="mdi mdi-wallet fa-fw"></i> <span class="hide-menu">Simpanan Anggota<span class="fa arrow"></span></span>
+                        </a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.simpanan-sukarela.index') }}"><i class="ti-wallet fa-fw"></i><span class="hide-menu">Simpanan Sukarela</span></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.simpanan-wajib.index') }}"><i class="ti-wallet fa-fw"></i><span class="hide-menu">Simpanan Wajib</span></a>
+                            </li>
+                            <li>
+                                <a href="{{ route('admin.simpanan-pokok.index') }}"><i class="ti-wallet fa-fw"></i><span class="hide-menu">Simpanan Pokok</span></a>
                             </li>
                         </ul>
                     </li>

@@ -12,7 +12,6 @@
 <!-- Page Content -->
 <!-- ============================================================== -->
 <div id="page-wrapper">
-
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
@@ -43,7 +42,7 @@
                         <div class="form-group">
                             <label class="col-md-12">Logo</label>
                             <div class="col-md-12">
-                                <input type="file" name="logo" class="form-control" required />  
+                                <input type="file" name="logo" class="form-control" required />
                             </div>
                         </div>
                         <a href="{{ url('admin/user-group') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>
@@ -52,7 +51,7 @@
                     <br style="clear: both;" />
                 </form>
               </div>
-            </div>                        
+            </div>
         </div>
         <!-- /.row -->
         <!-- ============================================================== -->
