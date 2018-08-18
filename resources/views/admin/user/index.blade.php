@@ -43,10 +43,7 @@
                                     <th>TELEPON</th>
                                     <th>LAST LOGIN</th>
                                     <th>LAST LOGOUT</th>
-<<<<<<< HEAD
-=======
                                     <th>STATUS</th>
->>>>>>> 1dd15225e6adc73ce84f3a2a8e24b06a34f649db
                                     <th>HAK AKSES</th>
                                     <th width="300">MANAGE</th>
                                 </tr>
@@ -63,8 +60,6 @@
                                         <td>{{ $item->telepon }}</td>
                                         <td>{{ date('d F Y', strtotime($item->last_logged_in_at)) }}</td>
                                         <td>{{ date('d F Y', strtotime($item->last_logged_out_at)) }}</td>
-<<<<<<< HEAD
-=======
                                         <td>
                                             @if($item->status == 1)
                                                 <label class="btn btn-success btn-xs"><i class="fa fa-check"></i> Active</label>
@@ -72,7 +67,6 @@
                                                 <label class="btn btn-danger btn-xs"><i class="fa fa-close"></i> Inactive</label>
                                             @endif
                                         </td>
->>>>>>> 1dd15225e6adc73ce84f3a2a8e24b06a34f649db
                                         <td>{!! access_rules($item->access_id) !!}</td>
                                         <td>
                                             <a href="{{ route('admin.user.edit', ['id' => $item->id]) }}"> <button class="btn btn-default btn-xs"><i class="ti-pencil-alt"></i> edit</button></a>

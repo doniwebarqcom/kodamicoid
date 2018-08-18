@@ -92,10 +92,7 @@
                                         <p class="text-muted">{{ Auth::user()->email }}</p><a class="btn btn-rounded btn-danger btn-sm">{{ get_jabatan(\Auth::user()->access_id) }}</a></div>
                                 </div>
                             </li>
-<<<<<<< HEAD
                             <li><a href="{{ route('admin.profile') }}"><i class="ti-user"></i> Profile</a></li>
-=======
->>>>>>> 1dd15225e6adc73ce84f3a2a8e24b06a34f649db
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ url('logout') }}"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
@@ -176,6 +173,17 @@
                             </li>
                              <li>
                                 <a href="{{ url('admin/user') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users</span></a>
+                            </li>
+                         </ul>
+                    </li>
+
+                    <li class="last-nav">
+                        <a href="javascript:void(0)" class="waves-effect">
+                            <i class="mdi mdi-settings fa-fw"></i> <span class="hide-menu">Bank<span class="fa arrow"></span></span>
+                        </a>
+                         <ul class="nav nav-second-level">
+                            <li>
+                                <a href="{{ route('admin.moota-bank.index') }}"><i class="ti-settings fa-fw"></i><span class="hide-menu">List Bank</span></a>
                             </li>
                          </ul>
                     </li>

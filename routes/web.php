@@ -57,6 +57,8 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::post('contact-us', 'HomeController@postContactUs')->name('contact-us');
 Route::post('ajax/add-rekening-bank', 'AjaxController@addRekeningBank')->name('ajax.add.rekening.bank');
 
+Route::post('moota-push', 'Admin\MootaPushController@index')->name('admin.moota-push');
+
 // ROUTING LOGIN
 Route::group(['middleware' => ['auth']], function(){
 	/**
@@ -83,7 +85,15 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 
 	Route::resource('user', $path . 'UserController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('user-group', $path . 'UserGroupController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'user-group']);
+
+	/* MOOTA */
+	Route::get('moote-bank', $path .'MootaBankController@index')->name('admin.moota-bank.index');
+	Route::get('moote-bank-mutasi/{bank_id}/{bank_type}', $path .'MootaBankController@mutasi')->name('admin.moota-bank.mutasi');
 	
+
+	/** END  */
+
+
 	/**
 	 * Routing Anggota
 	 */
