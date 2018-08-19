@@ -35,16 +35,16 @@ function route_index()
 }
 
 Route::get('/', function () {
-    
+
 	route_index();
-    
+
     return view('welcome');
 });
 
 Route::get('home', function () {
-	
+
 	route_index();
-	
+
     return view('welcome');
 });
 
@@ -56,8 +56,6 @@ Route::post('registerPost', 'RegisterController@registerPost');
 Route::get('logout', 'Auth\LoginController@logout');
 Route::post('contact-us', 'HomeController@postContactUs')->name('contact-us');
 Route::post('ajax/add-rekening-bank', 'AjaxController@addRekeningBank')->name('ajax.add.rekening.bank');
-
-Route::post('moota-push', 'Admin\MootaPushController@index')->name('admin.moota-push');
 
 // ROUTING LOGIN
 Route::group(['middleware' => ['auth']], function(){
@@ -89,7 +87,7 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 	/* MOOTA */
 	Route::get('moote-bank', $path .'MootaBankController@index')->name('admin.moota-bank.index');
 	Route::get('moote-bank-mutasi/{bank_id}/{bank_type}', $path .'MootaBankController@mutasi')->name('admin.moota-bank.mutasi');
-	
+
 
 	/** END  */
 
@@ -127,11 +125,11 @@ Route::group(['prefix' => 'anggota', 'middleware' => ['auth', 'access:2']], func
 	Route::get('profile', $path . 'IndexController@profile')->name('anggota.profile');
 	Route::get('user/konfirmasi-pembayaran', $path . 'UserController@konfirmasiPembayaran');
 	Route::post('user/post-konfirmasi-pembayaran', $path.'UserController@postKonfirmasiPembayaran');
-	
+
 	Route::get('user/submit-pembayaran-anggota', $path . 'UserController@submitkonfirmasianggota');
 	Route::get('user/post-submit-pembayaran-anggota', $path . 'UserController@submitkonfirmasianggota');
 	Route::post('save-profile', $path.'IndexController@saveProfile')->name('anggota.index.save.profile');
-	
+
 	Route::get('bayar', $path.'BayarController@step1')->name('anggota.bayar');
 	Route::post('submitstep1', $path.'BayarController@submitStep1')->name('anggota.submit-step1');
 
@@ -163,4 +161,3 @@ Auth::routes();
 
 /* old */
 Route::get('register-v2', 'RegisterController@v2');
-

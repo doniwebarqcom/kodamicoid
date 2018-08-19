@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnDeposit extends Migration
+class AddColumnBank extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class AddColumnDeposit extends Migration
      */
     public function up()
     {
-        Schema::table('deposit', function (Blueprint $table) {
-            $table->smallInteger('qty')->nullable();
+        Schema::table('bank', function (Blueprint $table) {
+            $table->smallInteger('is_active')->nullable();
+            $table->dateTime('last_update')->nullable();
+            $table->string('username', 100)->nullable();
         });
     }
 
@@ -25,7 +27,7 @@ class AddColumnDeposit extends Migration
      */
     public function down()
     {
-        Schema::table('deposit', function (Blueprint $table) {
+        Schema::table('bank', function (Blueprint $table) {
             //
         });
     }
