@@ -38,9 +38,29 @@
                         <li class="active" role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Profile</span></a></li>
                         <li role="presentation" class=""><a href="#simpanan" aria-controls="simpanan" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Simpanan</span></a></li>
                          <li role="presentation" class=""><a href="#upload_file" aria-controls="upload_file" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Upload File</span></a></li>
+                         <li role="presentation" class=""><a href="#rekening_bank" aria-controls="upload_file" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Rekening Bank</span></a></li>
+                         <li role="presentation" class=""><a href="#kartu_anggota" aria-controls="upload_file" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Kartu Anggota</span></a></li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
+
+                        <div role="tabpanel" class="tab-pane" id="kartu_anggota">
+                            <div class="col-md-4">
+                                <div>
+                                    <h2>KARTU ANGGOTA</h2>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <table id="data_table2" class="display nowrap" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th>No</th>
+                                        </tr>
+                                    </thead>
+                                </table>
+                            </div>
+                        </div>
+
                         <div role="tabpanel" class="tab-pane active" id="profile">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="PUT">
@@ -245,40 +265,72 @@
                             </div>
                             <div class="clearfix"></div>
                         </div>
+
+                        <div role="tabpanel" class="tab-pane" id="rekening_bank">
+                            <label class="btn btn-info btn-xs" onclick="add_bank()"><i class="fa fa-plus"></i> Tambah Data Rekening </label>
+                            <br />
+                            <style type="text/css">
+                                .dt-buttons, .dataTables_filter {
+                                    display: none;
+                                }
+                            </style>
+                            <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>No</th>
+                                        <th>Bank</th>
+                                        <th>Nama Pemilik Rekening</th>
+                                        <th>No Rekening</th>
+                                        <th>Cabang</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($data->RekeningBankUser as $no => $item)
+                                        <tr>
+                                            <td>{{ $no + 1 }}</td>
+                                            <td>{{ $item->bank->nama }}</td>
+                                            <td>{{ $item->nama_akun }}</td>
+                                            <td>{{ $item->no_rekening }}</td>
+                                            <td>{{ $item->cabang }}</td>
+                                            <td><a href="{{ route('admin.user.delete-bank', [$item->id, $data->id]) }}" onclick="return confirm('Delete data ini ?')" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
                         <div role="tabpanel" class="tab-pane" id="upload_file">
                             <div class="form-group">
-                                    <label class="col-md-4">KTP</label>
-                                    <label class="col-md-4">Foto</label>
-                                    <label class="col-md-4">NPWP</label>
-                                    <div class="col-md-4">
-                                        <input type="file" name="file_ktp" class="form-control">
-                                        @if(!empty($data->foto_ktp))
-                                            <div class="col-md-4">
-                                                <img src="{{ asset('file_ktp/'. $data->id .'/'.  $data->foto_ktp)}}" style="width: 200px;">
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="file" name="file_photo" class="form-control">
-                                        @if(!empty($data->foto))
-                                            <div class="col-md-4">
-                                                <img src="{{ asset('file_photo/'. $data->id .'/'.  $data->foto)}}" style="width: 200px;">
-                                            </div>
-                                        @endif
-                                    </div>
-                                    <div class="col-md-4">
-                                        <input type="file" name="file_npwp" class="form-control">
-                                        @if(!empty($data->file_npwp))
-                                            <div class="col-md-4">
-                                                <img src="{{ asset('file_npwp/'. $data->id .'/'.  $data->file_npwp)}}" style="width: 200px;">
-                                            </div>
-                                        @endif
-                                    </div>
+                                <label class="col-md-4">KTP</label>
+                                <label class="col-md-4">Foto</label>
+                                <label class="col-md-4">NPWP</label>
+                                <div class="col-md-4">
+                                    <input type="file" name="file_ktp" class="form-control">
+                                    @if(!empty($data->foto_ktp))
+                                        <div class="col-md-4">
+                                            <img src="{{ asset('file_ktp/'. $data->id .'/'.  $data->foto_ktp)}}" style="width: 200px;">
+                                        </div>
+                                    @endif
                                 </div>
-                               
+                                <div class="col-md-4">
+                                    <input type="file" name="file_photo" class="form-control">
+                                    @if(!empty($data->foto))
+                                        <div class="col-md-4">
+                                            <img src="{{ asset('file_photo/'. $data->id .'/'.  $data->foto)}}" style="width: 200px;">
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="col-md-4">
+                                    <input type="file" name="file_npwp" class="form-control">
+                                    @if(!empty($data->file_npwp))
+                                        <div class="col-md-4">
+                                            <img src="{{ asset('file_npwp/'. $data->id .'/'.  $data->file_npwp)}}" style="width: 200px;">
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
                         </div>
                         <div role="tabpanel" class="tab-pane" id="simpanan">
-
                             <div class="col-md-2">
                                 <h3 style="margin-top: 0;"><small>Simpanan Wajib</small>
                                     <br /> Rp. {{ number_format(simpanan_wajib($data->id)->where('status', 3)->sum('nominal')) }}
@@ -520,6 +572,52 @@
 </div>
 <!-- /.modal -->
 
+<!-- modal simpanan wajib-->
+<div id="modal_add_bank" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="POST" action="{{ route('admin.anggota.add-rekening-bank') }}">
+                {{ csrf_field() }}
+                <input type="hidden" name="user_id" value="{{ $data->id }}" />
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h4 class="modal-title" id="myModalLabel">Tambah Rekening Bank</h4> 
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label>Bank</label>
+                        <select class="form-control" name="bank_id">
+                            <option value="">- Select - </option>
+                            @foreach(list_bank() as $item)
+                            <option value="{{ $item->id }}">{{ $item->nama }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Pemilik Rekening</label>
+                        <input type="text" class="form-control" name="nama_akun" />
+                    </div>
+                    <div class="form-group">
+                        <label>No Rekening</label>
+                        <input type="text" class="form-control" name="no_rekening">
+                    </div>
+                    <div class="form-group">
+                        <label>Cabang</label>
+                        <input type="text" class="form-control" name="cabang">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger waves-effect btn-sm" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
+                    <button type="submit" class="btn btn-success waves-effect btn-sm"><i class="fa fa-print"></i> Submit</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<!-- /.modal -->
+
 <!-- ============================================================== -->
 <!-- End Page Content -->
 <!-- ============================================================== -->
@@ -532,6 +630,11 @@
     <script src="{{ asset('admin-css/plugins/bower_components/blockUI/jquery.blockUI.js') }}"></script>
     <script type="text/javascript">
         
+        function add_bank()
+        {
+            $("#modal_add_bank").modal("show");
+        }
+
         $("select[name='durasi_pembayaran']").on('change', function(){
 
             var total = parseInt($(this).val()) * parseInt($('.modal_nominal_simpanan_wajib').val());

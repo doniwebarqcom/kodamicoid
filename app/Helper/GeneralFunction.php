@@ -45,6 +45,15 @@ function type_deposit($key)
 }
 
 /**
+ * [list_bank description]
+ * @return [type] [description]
+ */
+function list_bank()
+{
+  return \Kodami\Models\Mysql\Bank::all();
+}
+
+/**
  * [get_jabatan description]
  * @return [type] [description]
  */

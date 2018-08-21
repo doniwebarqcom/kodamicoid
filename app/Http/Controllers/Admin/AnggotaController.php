@@ -332,4 +332,34 @@ class AnggotaController extends ControllerLogin
 
         return redirect()->route('admin.anggota.edit', $request->user_id)->with('message-success', 'Topup Simpanan Wajib berhasil !');
     }
+
+    /**
+     * [deteleBank description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function deleteBank($id, $user_id)
+    {
+        $bank = \Kodami\Models\Mysql\RekeningBankUser::where('id', $id)->first();
+        $bank->delete();
+
+        return redirect()->route('admin.anggota.edit', $user_id)->with('message-success', 'Data Bank berhasil dihapus !');
+    }
+
+    /**
+     * [addRekeningBank description]
+     * @param Request $request [description]
+     */
+    public function addRekeningBank(Request $request)
+    {
+        $data                   = new \Kodami\Models\Mysql\RekeningBankUser();
+        $data->nama_akun        = $request->nama_akun;
+        $data->no_rekening      = $request->no_rekening;
+        $data->bank_id          = $request->bank_id;
+        $data->cabang           = $request->cabang;
+        $data->user_id          = $request->user_id;
+        $data->save();
+
+        return redirect()->route('admin.anggota.edit', $request->user_id)->with('message-success', 'Data Rekening Bank berhasil disimpan !');
+    }
 }

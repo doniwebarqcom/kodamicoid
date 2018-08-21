@@ -14,7 +14,7 @@ class MootaBankController extends ControllerLogin
 	 */
     public function index()
     {
-        $params['data'] = json_decode(moota_bank());
+        $params['data'] = \Kodami\Models\Mysql\Bank::whereNotNull('moota_bank_id')->orderBy('id', 'DESC')->get();
 
     	return view('admin.moota-bank.index')->with($params);
     }
@@ -23,10 +23,10 @@ class MootaBankController extends ControllerLogin
      * [mutasi description]
      * @return [type] [description]
      */
-    public function mutasi($bank_id, $bank_type)
+    public function mutasi($bank_id)
     {
-        $params['data']     = json_decode(moota_mutasi($bank_id));
-        $params['bank']     = $bank_type;
+        $params['data']     = \Kodami\Models\Mysql\MutasiMoota::where('bank_id', $bank_id)->orderBy('id', 'DESC')->get();
+        $params['bank']     = \Kodami\Models\Mysql\Bank::where('id', $bank_id)->first();
 
         return view('admin.moota-bank.mutasi')->with($params);
     }

@@ -40,6 +40,11 @@
                                 <input type="text" class="form-control" required name="nama"> </div>
                         </div>
                         <div class="form-group">
+                            <label class="col-md-12">Bank Code</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" required name="bank_code"> </div>
+                        </div>
+                        <div class="form-group">
                             <label class="col-md-12">Logo</label>
                             <div class="col-md-12">
                                 <input type="file" name="logo" class="form-control" required />

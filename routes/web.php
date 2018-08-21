@@ -83,10 +83,11 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 
 	Route::resource('user', $path . 'UserController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('user-group', $path . 'UserGroupController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'user-group']);
+	Route::get('user/delete-bank/{id}/{user_id}', $path .'AnggotaController@deleteBank')->name('admin.user.delete-bank');
 
 	/* MOOTA */
 	Route::get('moote-bank', $path .'MootaBankController@index')->name('admin.moota-bank.index');
-	Route::get('moote-bank-mutasi/{bank_id}/{bank_type}', $path .'MootaBankController@mutasi')->name('admin.moota-bank.mutasi');
+	Route::get('moote-bank-mutasi/{bank_id}', $path .'MootaBankController@mutasi')->name('admin.moota-bank.mutasi');
 
 
 	/** END  */
@@ -99,10 +100,10 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 	Route::resource('simpanan-sukarela', $path . 'SimpananSukarelaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('simpanan-pokok', $path . 'SimpananPokokController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('simpanan-wajib', $path . 'SimpananWajibController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
-
 	Route::get('anggota/cetak-kwitansi/{id}', $path .'AnggotaController@cetakKwitansi')->name('admin.anggota.cetak-kwitansi');
 	Route::post('anggota/topup-simpanan-pokok', $path .'AnggotaController@topupSimpananPokok')->name('admin.anggota.topup-simpanan-pokok');
 	Route::post('anggota/topup-simpanan-wajib', $path .'AnggotaController@topupSimpananWajib')->name('admin.anggota.topup-simpanan-wajib');
+	Route::post('anggota/add-rekening-bank', $path .'AnggotaController@addRekeningBank')->name('admin.anggota.add-rekening-bank');
 	/* End Routing Anggota*/
 
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnBank extends Migration
+class AddColumnMutation extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,8 @@ class AddColumnBank extends Migration
      */
     public function up()
     {
-        Schema::table('bank', function (Blueprint $table) {
-            $table->smallInteger('is_active')->nullable();
-            $table->dateTime('last_update')->nullable();
-            $table->string('username', 100)->nullable();
+        Schema::table('mutations', function (Blueprint $table) {
+            $table->dateTime('created_at_mutation')->nullable();
         });
     }
 
@@ -27,7 +25,7 @@ class AddColumnBank extends Migration
      */
     public function down()
     {
-        Schema::table('bank', function (Blueprint $table) {
+        Schema::table('mutations', function (Blueprint $table) {
             //
         });
     }

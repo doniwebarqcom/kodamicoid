@@ -169,7 +169,7 @@
                                 <a href="{{ route('rekening-bank.index') }}"><i class="ti-book fa-fw"></i><span class="hide-menu">Rekening Bank</span></a>
                             </li>
                             <li>
-                                <a href="{{ route('bank.index') }}"><i class="ti-server fa-fw"></i><span class="hide-menu">Bank</span></a>
+                                <a href="{{ route('bank.index') }}"><i class="ti-server fa-fw"></i><span class="hide-menu">Master Bank</span></a>
                             </li>
                              <li>
                                 <a href="{{ url('admin/user') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users</span></a>

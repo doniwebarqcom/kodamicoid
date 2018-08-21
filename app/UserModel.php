@@ -62,4 +62,13 @@ class UserModel extends Model
     	return $this->hasMany('\App\Kelurahan', 'id_kec', 'ktp_kecamatan_id');
     }
 
+    /**
+     * [bank description]
+     * @return [type] [description]
+     */
+    public function RekeningBankUser()
+    {
+        return $this->hasMany('\Kodami\Models\Mysql\RekeningBankUser', 'user_id', 'id');
+    }
+
 }
