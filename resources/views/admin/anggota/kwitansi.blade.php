@@ -2,29 +2,32 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css">
+    <link rel="stylesheet" href="{{ asset('css/kwitansi.css') }}">
 </head>
 <body>
-    <img src="{{ asset('logo-biru.png')}}" style="height: 50px;" />
-    <p>{!! get_setting('alamat') !!}</p>
-    <h3>KWITANSI</h3>
-    <h5>{{ $data->no_invoice }}</h5>
-    <p>{{ date('d F Y') }}</p>
-    <table>
-        <thead>
-            <tr>
-                <th>NO</th>
-                <th>KETERANGAN</th>
-                <th>NOMINAL</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ $no+1 }}</td>
-                <td></td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="face face-front">
+        <img src="{{ asset('logo-biru.png')}}" style="height: 50px;" />
+        <p>{!! get_setting('alamat') !!}</p>
+        <h3>KWITANSI PEMBAYARAN</h3>
+        <hr />
+        <h5>NO KWITANSI : {{ $data->no_invoice }}</h5>
+        <h5>Tanggal : {{ date('d F Y') }}</h5>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>NO</th>
+                    <th>KETERANGAN</th>
+                    <th>NOMINAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>{{ type_deposit($data->type) }}</td>
+                    <td>{{ number_format($data->nominal) }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 </html>
-
