@@ -24,7 +24,7 @@ function route_index()
 
         if(Auth::user()->access_id == 1) // Admin
         {
-            return redirect()->route('admin.index');
+            return redirect()->route('admin.dashboard');
         }
 
         if(Auth::user()->access_id == 4) // CS
@@ -76,24 +76,13 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 
 	Route::resource('user', $path . 'UserController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('user-group', $path . 'UserGroupController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'user-group']);
-<<<<<<< HEAD
+
 	Route::get('autologin/{id}', $path .'AnggotaController@autologin')->name('admin.autologin');
 	/* MOOTA */
 	Route::get('moote-bank', $path .'MootaBankController@index')->name('admin.moota-bank.index');
 	Route::get('moote-bank-mutasi/{bank_id}/{bank_type}', $path .'MootaBankController@mutasi')->name('admin.moota-bank.mutasi');
 	/** END  */ 
-=======
 	Route::get('user/delete-bank/{id}/{user_id}', $path .'AnggotaController@deleteBank')->name('admin.user.delete-bank');
-
-	/* MOOTA */
-	Route::get('moote-bank', $path .'MootaBankController@index')->name('admin.moota-bank.index');
-	Route::get('moote-bank-mutasi/{bank_id}', $path .'MootaBankController@mutasi')->name('admin.moota-bank.mutasi');
-
-
-	/** END  */
-
->>>>>>> 22ef1a0082b87a3c3b154e5d1c6f25aa3e9ec569
-
 	/**
 	 * Routing Anggota
 	 */

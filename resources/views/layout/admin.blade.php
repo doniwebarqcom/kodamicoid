@@ -166,14 +166,7 @@
                                 <a href="{{ route('admin.contact-us') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Submit Kontak Kami</span></a>
                             </li>
                             <li>
-<<<<<<< HEAD
-                                <a href="{{ route('bank.index') }}"><i class="ti-server fa-fw"></i><span class="hide-menu">Data Master Bank</span></a>
-=======
-                                <a href="{{ route('rekening-bank.index') }}"><i class="ti-book fa-fw"></i><span class="hide-menu">Rekening Bank</span></a>
-                            </li>
-                            <li>
                                 <a href="{{ route('bank.index') }}"><i class="ti-server fa-fw"></i><span class="hide-menu">Master Bank</span></a>
->>>>>>> 22ef1a0082b87a3c3b154e5d1c6f25aa3e9ec569
                             </li>
                              <li>
                                 <a href="{{ url('admin/user') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users</span></a>
