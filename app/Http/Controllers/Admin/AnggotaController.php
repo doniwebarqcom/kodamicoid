@@ -334,7 +334,6 @@ class AnggotaController extends ControllerLogin
     }
 
     /**
-<<<<<<< HEAD
      * [autologin description]
      * @param  [type] $id [description]
      * @return [type]     [description]
@@ -345,7 +344,8 @@ class AnggotaController extends ControllerLogin
         \Session::put('is_login_administrator', true);
         
         return redirect()->route('anggota.dashboard');
-=======
+    }
+    /*
      * [deteleBank description]
      * @param  [type] $id [description]
      * @return [type]     [description]
@@ -373,6 +373,5 @@ class AnggotaController extends ControllerLogin
         $data->save();
 
         return redirect()->route('admin.anggota.edit', $request->user_id)->with('message-success', 'Data Rekening Bank berhasil disimpan !');
->>>>>>> 22ef1a0082b87a3c3b154e5d1c6f25aa3e9ec569
     }
 }
