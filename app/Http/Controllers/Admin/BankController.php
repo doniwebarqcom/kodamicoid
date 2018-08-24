@@ -14,9 +14,9 @@ class BankController extends ControllerLogin
 	 */
     public function index()
     {        
-        $data = Bank::all();
+        $params['data']     = Bank::orderBy('is_favorit', 'DESC')->get();
 
-    	return view('admin.bank.index', compact('data'));
+    	return view('admin.bank.index')->with($params);
     }
 
     /**
@@ -50,7 +50,8 @@ class BankController extends ControllerLogin
     public function update(Request $request, $id)
     {
         $data =  Bank::where('id', $id)->first();
-        $data->nama         = $request->nama;
+        $data->nama             = $request->nama;
+        $data->bank_code        = $request->bank_code;
         
         if ($request->hasFile('logo')) {
             
@@ -91,8 +92,9 @@ class BankController extends ControllerLogin
     */
    public function store(Request $request)
    {
-        $data = new Bank();
-        $data->nama  = $request->nama;
+        $data                   = new Bank();
+        $data->nama             = $request->nama;
+        $data->bank_code        = $request->bank_code;
         
         if ($request->hasFile('logo')) {
             

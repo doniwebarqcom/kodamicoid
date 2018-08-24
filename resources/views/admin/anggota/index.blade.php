@@ -44,6 +44,7 @@
                                     <th>LAST LOGOUT</th>
                                     <th>ADDED</th>
                                     <th>STATUS</th>
+                                    <th>ACCESS LOGIN</th>
                                     <th width="300">MANAGE</th>
                                 </tr>
                             </thead>
@@ -62,6 +63,7 @@
                                         <td>
                                             {!! status_anggota($item->id) !!}
                                         </td>
+                                        <td>{!! access_rules($item->access_id) !!}</td>
                                         <td>
                                             @php ($status_deposit_awal = status_deposit_awal($item->id))
                                             @if($status_deposit_awal == 2)

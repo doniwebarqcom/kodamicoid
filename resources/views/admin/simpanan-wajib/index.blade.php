@@ -39,7 +39,7 @@
                                     <th>NOMINAL</th>
                                     <th>STATUS</th>
                                     <th>ADDED</th>
-                                    <th width="300">MANAGE</th>
+                                    <th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -52,9 +52,7 @@
                                         <td>{{ number_format($item->nominal) }}</td>
                                         <td>{!! status_deposit($item->status) !!}</td>
                                         <td>{{ $item->created_at }}</td>
-                                        <td>
-                                            <a href="{{ route('admin.simpanan-wajib.edit', ['id' => $item->id]) }}"> <button class="btn btn-default btn-xs"><i class="fa fa-search-plus"></i> detail</button></a>
-                                        </td>
+                                        <td></td>
                                     </tr>
                                   @endif
                                 @endforeach

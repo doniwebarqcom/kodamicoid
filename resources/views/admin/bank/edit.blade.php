@@ -41,6 +41,11 @@
                             <div class="col-md-12">
                                 <input type="text" class="form-control" name="nama" value="{{ $data->nama }}"> </div>
                         </div>
+                         <div class="form-group">
+                            <label class="col-md-12">Bank Code</label>
+                            <div class="col-md-12">
+                                <input type="text" class="form-control" required name="bank_code" value="{{ $data->bank_code }}"> </div>
+                        </div>
                         <div class="form-group">
                             <label class="col-md-12">Logo</label>
                             <div class="col-md-12">

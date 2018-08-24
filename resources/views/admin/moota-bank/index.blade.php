@@ -45,12 +45,12 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($data->data as $no => $item)
+                                @foreach($data as $no => $item)
                                     <tr>
                                         <td class="text-center">{{ $no+1 }}</td>
-                                        <td>{{ strtoupper($item->bank_type) }}</td>
-                                        <td>{{ $item->atas_nama }}</td>
-                                        <td>{{ $item->account_number }}</td>
+                                        <td>{{ strtoupper($item->nama) }}</td>
+                                        <td>{{ $item->owner }}</td>
+                                        <td>{{ $item->no_rekening }}</td>
                                         <td>
                                             @if($item->is_active == 1)
                                                 <label class="btn btn-success btn-xs">Active</label>
@@ -60,7 +60,7 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.moota-bank.mutasi', [$item->bank_id, $item->bank_type]) }}" class="btn btn-info btn-xs"><i class="fa fa-list"></i> Mutasi</a>
+                                            <a href="{{ route('admin.moota-bank.mutasi', [$item->id]) }}" class="btn btn-info btn-xs"><i class="fa fa-list"></i> Mutasi</a>
                                         </td>
                                     </tr>
                                 @endforeach
