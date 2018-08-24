@@ -50,20 +50,49 @@ class MootaInit extends Command
        if(isset($moota_bank->data)){
          foreach($moota_bank->data as $item)
          {
-           $find = \Kodami\Models\Mysql\Bank::where('nama', 'LIKE', strtoupper($item->bank_type))->first();
+           $find = \Kodami\Models\Mysql\RekeningBank::select('rekening_bank.*')->join('bank', 'bank.id', 'rekening_bank.bank_id')->where('bank.nama', 'LIKE', strtoupper($item->bank_type))->first();
            if($find)
            {
-             $find->username      = $item->username;
-             $find->owner         = $item->atas_nama;
-             $find->no_rekening   = $item->account_number;
-             $find->moota_bank_id       = $item->bank_id;
-             $find->is_active     = $item->is_active;
-             $find->last_update   = $item->last_update;
-             $find->save();
+              $find                = \Kodami\Models\Mysql\RekeningBank::where('id', $find->id)->first();
+              $find->username      = $item->username;
+              $find->owner         = $item->atas_nama;
+              $find->no_rekening   = $item->account_number;
+              $find->moota_bank_id = $item->bank_id;
+              $find->is_active     = $item->is_active;
+              $find->last_update   = $item->last_update;
+              $find->save();
 
-             echo " BANK : ". strtoupper($item->bank_type) ." \n";
-             echo " NO REKENING : ". strtoupper($item->account_number) ." \n";
-             echo " ATAS NAMA : ". strtoupper($item->atas_nama) ." \n\n";
+              echo " BANK : ". strtoupper($item->bank_type) ." \n";
+              echo " NO REKENING : ". strtoupper($item->account_number) ." \n";
+              echo " ATAS NAMA : ". strtoupper($item->atas_nama) ." \n\n";
+           }
+           else
+           {
+              // find type bank
+              $bank_id             = \Kodami\Models\Mysql\Bank::where('nama', $item->bank_type)->first();
+              if($bank_id)
+              {
+                $bank_id = $bank_id->id;
+              }
+              else
+              {
+                $bank_id = 0;
+              }
+
+              $find                = new \Kodami\Models\Mysql\RekeningBank();
+              $find->username      = $item->username;
+              $find->owner         = $item->atas_nama;
+              $find->no_rekening   = $item->account_number;
+              $find->moota_bank_id = $item->bank_id;
+              $find->is_active     = $item->is_active;
+              $find->last_update   = $item->last_update;
+              $find->bank_id       = $bank_id;
+              $find->save();
+
+              echo " ADD NEW BANK \n";
+              echo " BANK : ". strtoupper($item->bank_type) ." \n";
+              echo " NO REKENING : ". strtoupper($item->account_number) ." \n";
+              echo " ATAS NAMA : ". strtoupper($item->atas_nama) ." \n\n";
            }
          }
        }else{

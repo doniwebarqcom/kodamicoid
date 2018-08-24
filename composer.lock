@@ -413,12 +413,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/akhamatvarokah/kodami-package.git",
-                "reference": "1611ab7915a68763f37d923c3985ae1f5907f226"
+                "reference": "0c7461a684852128f2a429b2df76ac1fdded00ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/akhamatvarokah/kodami-package/zipball/1611ab7915a68763f37d923c3985ae1f5907f226",
-                "reference": "1611ab7915a68763f37d923c3985ae1f5907f226",
+                "url": "https://api.github.com/repos/akhamatvarokah/kodami-package/zipball/0c7461a684852128f2a429b2df76ac1fdded00ff",
+                "reference": "0c7461a684852128f2a429b2df76ac1fdded00ff",
                 "shasum": ""
             },
             "require": {
@@ -447,7 +447,7 @@
                 }
             ],
             "description": "it's models kodami aplication",
-            "time": "2018-08-15T00:04:25+00:00"
+            "time": "2018-08-18T07:32:14+00:00"
         },
         {
             "name": "laravel/framework",
@@ -716,16 +716,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.45",
+            "version": "1.0.46",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "a99f94e63b512d75f851b181afcdf0ee9ebef7e6"
+                "reference": "f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a99f94e63b512d75f851b181afcdf0ee9ebef7e6",
-                "reference": "a99f94e63b512d75f851b181afcdf0ee9ebef7e6",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2",
+                "reference": "f3e0d925c18b92cf3ce84ea5cc58d62a1762a2b2",
                 "shasum": ""
             },
             "require": {
@@ -737,7 +737,7 @@
             "require-dev": {
                 "ext-fileinfo": "*",
                 "phpspec/phpspec": "^3.4",
-                "phpunit/phpunit": "^5.7"
+                "phpunit/phpunit": "^5.7.10"
             },
             "suggest": {
                 "ext-fileinfo": "Required for MimeType",
@@ -796,7 +796,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2018-05-07T08:44:23+00:00"
+            "time": "2018-08-22T07:45:22+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -3364,16 +3364,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "6.5.11",
+            "version": "6.5.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "7bab54cb366076023bbf457a2a0d513332cd40f2"
+                "reference": "24da433d7384824d65ea93fbb462e2f31bbb494e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7bab54cb366076023bbf457a2a0d513332cd40f2",
-                "reference": "7bab54cb366076023bbf457a2a0d513332cd40f2",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/24da433d7384824d65ea93fbb462e2f31bbb494e",
+                "reference": "24da433d7384824d65ea93fbb462e2f31bbb494e",
                 "shasum": ""
             },
             "require": {
@@ -3444,7 +3444,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-08-07T07:05:35+00:00"
+            "time": "2018-08-22T06:32:48+00:00"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

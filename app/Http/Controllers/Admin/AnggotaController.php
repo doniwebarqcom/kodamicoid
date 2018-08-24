@@ -332,4 +332,17 @@ class AnggotaController extends ControllerLogin
 
         return redirect()->route('admin.anggota.edit', $request->user_id)->with('message-success', 'Topup Simpanan Wajib berhasil !');
     }
+
+    /**
+     * [autologin description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function autologin($id)
+    {
+        \Auth::loginUsingId($id);
+        \Session::put('is_login_administrator', true);
+        
+        return redirect()->route('anggota.dashboard');
+    }
 }

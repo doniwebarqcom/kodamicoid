@@ -69,11 +69,12 @@
                                             @endif
 
                                             <a href="{{ route('admin.anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> detail</button></a>
-                                            <form action="{{ route('admin.anggota.destroy', $item->id) }}" style="float: left; margin-right: 5px;" onsubmit="return confirm('Hapus data ini?')" method="post">
+                                            <form action="{{ route('admin.anggota.destroy', $item->id) }}" onsubmit="return confirm('Hapus data ini?')" method="post">
                                                 {{ csrf_field() }}
                                                 {{ method_field('DELETE') }}                                               
                                                 <button type="submit" class="btn btn-danger btn-xs"><i class="ti-trash"></i> delete</button>
                                             </form>
+                                            <a class="btn btn-warning btn-xs" onclick="confirm_autologin('{{ route('admin.autologin', $item->id) }}', '{{ $item->name }}')"><i class="fa fa-key"></i> Autologin</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -89,8 +90,16 @@
     <!-- /.container-fluid -->
    @include('layout.footer-admin')
 </div>
-<!-- ============================================================== -->
-<!-- End Page Content -->
-<!-- ============================================================== -->
-
+@section('footer-script')
+<script type="text/javascript">
+    var confirm_autologin = function(url, name){
+        bootbox.confirm("Login sebagai "+ name +" ?", function(res){
+            if(res)
+            {
+                window.location = url;
+            }
+        })
+    }
+</script>
+@endsection
 @endsection

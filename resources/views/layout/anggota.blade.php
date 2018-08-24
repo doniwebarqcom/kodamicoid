@@ -123,6 +123,12 @@
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
+                            @if(\Session::get('is_login_administrator'))
+                                <li>
+                                    <a href="{{ route('anggota.back-to-admin') }}"> <i class="fa fa-key"></i> Back to Admin</a>
+                                </li>
+                                <li role="separator" class="divider"></li>
+                            @endif
                             <li><a href="{{ url('logout') }}"><i class="fa fa-power-off"></i> Logout</a></li>
                         </ul>
                         <!-- /.dropdown-user -->

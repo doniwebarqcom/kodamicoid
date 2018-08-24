@@ -42,11 +42,11 @@ class MootaGrabMutasi extends Command
       echo " MOOTA GRAB MUTASI \n";
       echo " ================================================== \n \n";
 
-      $banks = \Kodami\Models\Mysql\Bank::whereNotNull('moota_bank_id')->get();
+      $banks = \Kodami\Models\Mysql\RekeningBank::whereNotNull('moota_bank_id')->get();
 
       foreach($banks as $bank)
       {
-        echo " BANK : ". strtoupper($bank->nama) ." \n";
+        echo " BANK : ". strtoupper($bank->bank->nama) ." \n";
         echo " NO REKENING : ". strtoupper($bank->no_rekening) ." \n";
         echo " ATAS NAMA : ". strtoupper($bank->owner) ." \n\n";
 
@@ -56,12 +56,12 @@ class MootaGrabMutasi extends Command
         {
           foreach($allmutasi->data as $mutasi)
           {
-            $temp = \Kodami\Models\Mysql\MutasiMoota::where('mutation_id', $mutasi->mutation_id)->first();
+            $temp = \Kodami\Models\Mysql\Mutation::where('mutation_id', $mutasi->mutation_id)->first();
 
             if(!$temp)
             {
-              $temp                   = new \Kodami\Models\Mysql\MutasiMoota();
-              $temp->bank_id          = $bank->id;
+              $temp                   = new \Kodami\Models\Mysql\Mutation();
+              $temp->rekening_bank_id = $bank->id;
               $temp->date_transfer    = $mutasi->date;
               $temp->description      = $mutasi->description;
               $temp->amount           = $mutasi->amount;

@@ -67,7 +67,7 @@
             <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="{{ url('admin') }}"><b>KODAMI Pocket System</b>
+                    <a class="logo" href="{{ route('admin.dashboard') }}"><b>KODAMI Pocket System</b>
                         <span class="hidden-xs">&nbsp;</span> 
                     </a>
                 </div>
@@ -166,10 +166,7 @@
                                 <a href="{{ route('admin.contact-us') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Submit Kontak Kami</span></a>
                             </li>
                             <li>
-                                <a href="{{ route('rekening-bank.index') }}"><i class="ti-book fa-fw"></i><span class="hide-menu">Rekening Bank</span></a>
-                            </li>
-                            <li>
-                                <a href="{{ route('bank.index') }}"><i class="ti-server fa-fw"></i><span class="hide-menu">Bank</span></a>
+                                <a href="{{ route('bank.index') }}"><i class="ti-server fa-fw"></i><span class="hide-menu">Data Master Bank</span></a>
                             </li>
                              <li>
                                 <a href="{{ url('admin/user') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users</span></a>
@@ -178,14 +175,9 @@
                     </li>
 
                     <li class="last-nav">
-                        <a href="javascript:void(0)" class="waves-effect">
-                            <i class="mdi mdi-settings fa-fw"></i> <span class="hide-menu">Bank<span class="fa arrow"></span></span>
+                        <a href="{{ route('admin.rekening-bank.index') }}" class="waves-effect">
+                            <i class="mdi mdi-settings fa-fw"></i> <span class="hide-menu">Rekening Bank KODAMI</span>
                         </a>
-                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.moota-bank.index') }}"><i class="ti-settings fa-fw"></i><span class="hide-menu">List Bank</span></a>
-                            </li>
-                         </ul>
                     </li>
 
                 </ul>

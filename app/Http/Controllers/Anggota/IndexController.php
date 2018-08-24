@@ -92,4 +92,24 @@ class IndexController extends ControllerLogin
    
         return redirect()->route('anggota.dashboard')->with('message-success', 'Profil berhasil disimpan');
     }
+
+    /**
+     * [backtoadmin description]
+     * @return [type] [description]
+     */
+    public function backtoadmin()
+    {
+        $find = \App\User::where('access_id', 1)->first();
+        
+        if($find)
+        {
+            \Auth::loginUsingId($find->id);
+
+            return redirect()->route('admin.dashboard')->with('message-success', 'Welcome Back Admin');
+        }
+        else
+        {
+            return redirect()->route('anggota.dashboard')->with('message-error', 'Access Denied');
+        }
+    }
 }
