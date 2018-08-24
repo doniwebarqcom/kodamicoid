@@ -2,32 +2,32 @@
 <html>
 <head>
     <title></title>
-    <link rel="stylesheet" href="{{ asset('css/kwitansi.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/normalize.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/paper.css') }}?v={{ date('YmdHis') }}">
+    <style>@page { size: A7 }</style>
 </head>
-<body>
-    <div class="face face-front">
-        <img src="{{ asset('logo-biru.png')}}" style="height: 50px;" />
-        <p>{!! get_setting('alamat') !!}</p>
-        <h3>KWITANSI PEMBAYARAN</h3>
-        <hr />
-        <h5>NO KWITANSI : {{ $data->no_invoice }}</h5>
-        <h5>Tanggal : {{ date('d F Y') }}</h5>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>NO</th>
-                    <th>KETERANGAN</th>
-                    <th>NOMINAL</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>{{ type_deposit($data->type) }}</td>
-                    <td>{{ number_format($data->nominal) }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
+<body class="A7">
+    <section class="sheet padding-5mm">
+        <article>
+            <p class="img"><img src="{{ asset('logo-biru.png')}}" /></p>
+            <p class="text-center">KWITANSI PEMBAYARAN</p>
+            <hr />
+            <table class="table">
+                <thead>
+                    <tr>
+                        <td>NO KWITANSI</td>
+                        <td> : {{ $data->no_invoice }}</td>
+                    </tr>
+                    <tr>
+                        <td>TANGGAL</td>
+                        <td> : {{ date('d F Y') }}</td>
+                    </tr>
+                        <td>NOMINAL</td>
+                        <td> : {{ number_format($data->nominal) }}</td>
+                    </tr>
+                </thead>
+            </table>
+        </article>
+    </section>
 </body>
-</html>
+</html> 
