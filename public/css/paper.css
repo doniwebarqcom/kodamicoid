@@ -21,7 +21,7 @@ body.legal            .sheet { width: 216mm; height: 356mm }
 body.legal.landscape  .sheet { width: 357mm; height: 215mm }
 body.A7               .sheet { width: 74mm;  height: 105mm }
 body.A7 {
-  font-size: 10px;
+  font-size: 11px;
 }
 
 body.A7 p.img {
