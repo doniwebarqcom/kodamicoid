@@ -28,7 +28,7 @@
         <div class="row">
             <div class="col-md-12">
                <div class="white-box">
-                    <h3 class="box-title m-b-0">Manage Anggota</h3>
+                    <h3 class="box-title m-b-0"><i class="fa fa-users"></i> Manage Anggota</h3>
                     <br />
                     <div class="table-responsive">
                         <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
