@@ -413,12 +413,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/akhamatvarokah/kodami-package.git",
-                "reference": "0c7461a684852128f2a429b2df76ac1fdded00ff"
+                "reference": "13ee679805ff30a769350f8a313d74c5ddb4387c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/akhamatvarokah/kodami-package/zipball/0c7461a684852128f2a429b2df76ac1fdded00ff",
-                "reference": "0c7461a684852128f2a429b2df76ac1fdded00ff",
+                "url": "https://api.github.com/repos/akhamatvarokah/kodami-package/zipball/13ee679805ff30a769350f8a313d74c5ddb4387c",
+                "reference": "13ee679805ff30a769350f8a313d74c5ddb4387c",
                 "shasum": ""
             },
             "require": {
@@ -447,7 +447,7 @@
                 }
             ],
             "description": "it's models kodami aplication",
-            "time": "2018-08-18T07:32:14+00:00"
+            "time": "2018-08-24T11:37:32+00:00"
         },
         {
             "name": "laravel/framework",
