@@ -1,5 +1,5 @@
 @page { margin: 0 }
-body { margin: 0; font-family: Arial, Helvetica, sans-serif; }
+body { margin: 0; font-family: sans-serif; }
 .sheet {
   margin: 0;
   overflow: hidden;
@@ -24,15 +24,13 @@ body.A7 {
   font-size: 11px;
 }
 
-body.A7 p.img {
-  text-align: center;
-}
-body.A7 p.img img {
-  height: 30px;
-}
+body.A7 p.img { text-align: center; }
+body.A7 p.img img { height: 38px;}
+body.A7 .img { margin-top:0;padding-top:0; }
+
 .text-center { text-align: center;}
 /** Padding area **/
-.sheet.padding-5mm { padding: 5mm }
+.sheet.padding-5mm { padding: 0 5mm 5mm 5mm }  
 .sheet.padding-10mm { padding: 10mm }
 .sheet.padding-15mm { padding: 15mm }
 .sheet.padding-20mm { padding: 20mm }
@@ -50,6 +48,9 @@ body.A7 p.img img {
 
 /** Fix for Chrome issue #273306 **/
 @media print {
+  body {
+    font-family: sans-serif;
+  }
            body.A3.landscape { width: 420mm }
   body.A3, body.A4.landscape { width: 297mm }
   body.A4, body.A5.landscape { width: 210mm }
@@ -59,6 +60,7 @@ body.A7 p.img img {
   body.legal.landscape       { width: 357mm }
   body.A7                    { width: 74mm }
   body.A7 { font-size: 10px;}
+  body.A7 .img { margin-top:0;padding-top:0; }
   .text-center { text-align: center;}
-  
+  .sheet.padding-5mm { padding: 0 5mm 5mm 5mm }  
 }
