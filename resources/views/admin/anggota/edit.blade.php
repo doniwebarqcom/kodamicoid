@@ -18,7 +18,6 @@
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h4 class="page-title">Dashboard</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
                     <li class="active">Anggota</li>
@@ -33,7 +32,6 @@
                 <h3 class="box-title m-b-0">Data Anggota</h3>
                 <br />
                 <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.anggota.update', $data->id) }}" method="POST">
-                    
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="active" role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Profile</span></a></li>
                         <li role="presentation" class=""><a href="#simpanan" aria-controls="simpanan" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-email"></i></span> <span class="hidden-xs">Simpanan</span></a></li>
@@ -60,7 +58,6 @@
                                 </table>
                             </div>
                         </div>
-
                         <div role="tabpanel" class="tab-pane active" id="profile">
                             {{ csrf_field() }}
                             <input type="hidden" name="_method" value="PUT">
@@ -126,16 +123,16 @@
                                 <div class="form-group">
                                     <label class="col-md-4">Password</label>
                                     <label class="col-md-4">Ketik Ulang Password</label>
-                                    <label class="col-md-4">Status</label>
+                                    <label class="col-md-4">Status Login</label>
                                     <div class="col-md-4">
-                                        <input type="password" name="password" class="form-control">
+                                        <input type="password" name="password" class="form-control" value="{{ $data->password }}">
                                     </div>
                                     <div class="col-md-4">
-                                        <input type="password" name="confirmation" class="form-control"> 
+                                        <input type="password" name="confirmation" class="form-control" value="{{ $data->password }}"> 
                                     </div>
                                     <div class="col-md-4">
-                                        <label><input type="radio" name="status" value="2" {{ $data->status == 2 ? 'checked="true"' : '' }} /> Active </label> &nbsp;
-                                        <label><input type="radio" name="status" value="1" {{ $data->status == 1 ? 'checked="true"' : '' }} /> Inactive </label>
+                                        <label><input type="radio" name="status" value="1" {{ $data->status == 1 ? 'checked="true"' : '' }} /> Active </label> &nbsp;
+                                        <label><input type="radio" name="status" value="0" {{ $data->status == 0 ? 'checked="true"' : '' }} /> Inactive </label>
                                     </div>
                                 </div>
                             </div>

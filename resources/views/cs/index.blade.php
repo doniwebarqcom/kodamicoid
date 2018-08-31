@@ -12,66 +12,57 @@
 <!-- ============================================================== -->
 <div id="page-wrapper">
     <div class="container-fluid">
-        <div class="row bg-title">
-            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">Dashboard</h4> </div>
-            <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                <a href="{{ route('cs.anggota.create') }}" class="btn btn-sm btn-success pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"> <i class="fa fa-plus"></i> TAMBAH ANGGOTA</a>
-                <ol class="breadcrumb">
-                    <li><a href="javascript:void(0)">Dashboard</a></li>
-                    <li class="active">Anggota</li>
-                </ol>
-            </div>
-            <!-- /.col-lg-12 -->
-        </div>
+        <br />
+        <div class="clearfix"></div>
         <!-- .row --> 
         <div class="row">
-            <div class="col-md-12">
-               <div class="white-box">
-                    <h3 class="box-title m-b-0">Manage Anggota</h3>
-                    <br />
-                    <div class="table-responsive">
-                        <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
-                            <thead>
-                                <tr>
-                                    <th width="70" class="text-center">#</th>
-                                    <th>NAME</th>
-                                    <th>NO ANGGOTA</th>
-                                    <th>JENIS KELAMIN</th>
-                                    <th>TELEPON</th>
-                                    <th>EMAIL</th>
-                                    <th>LAST LOGIN</th>
-                                    <th>LAST LOGOUT</th>
-                                    <th>ADDED</th>
-                                    <th>STATUS</th>
-                                    <th width="300">MANAGE</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach($data as $no => $item)
-                                    <tr>
-                                        <td class="text-center">{{ $no+1 }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->no_anggota }}</td>
-                                        <td>{{ $item->jenis_kelamin }}</td>
-                                        <td>{{ $item->telepon }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>{{ date('d F Y', strtotime($item->last_logged_in_at)) }}</td>
-                                        <td>{{ date('d F Y', strtotime($item->last_logged_out_at)) }}</td>
-                                        <td>{{ $item->created_at }}</td>
-                                        <td>
-                                            {!! status_anggota($item->id) !!}
-                                        </td>
-                                        <td>
-                                            <a href="{{ route('cs.anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> detail</button></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            </tbody>
-                        </table>
+            <div class="row">
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                    <div class="white-box">
+                        <h3 class="box-title">DATA ANGGOTA</h3>
+                        <ul class="list-inline two-part">
+                            <li><i class="icon-people text-info"></i></li>
+                            <li class="text-right"><span class="counter">23</span></li>
+                        </ul>
+                        <a href="{{ route('cs.anggota.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Anggota</a>
+                        <div class="clearfix"></div>
                     </div>
                 </div>
-            </div>                        
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                    <div class="white-box">
+                        <h3 class="box-title">SIMPANAN POKOK</h3>
+                        <ul class="list-inline two-part">
+                            <li><i class="icon-folder text-purple"></i></li>
+                            <li class="text-right"><span class="counter">169</span></li>
+                        </ul>
+                        <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Pokok</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                    <div class="white-box">
+                        <h3 class="box-title">SIMPANAN SUKARELA</h3>
+                        <ul class="list-inline two-part">
+                            <li><i class="icon-folder-alt text-danger"></i></li>
+                            <li class="text-right"><span class="">311</span></li>
+                        </ul>
+                        <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Sukarela</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-sm-6 col-xs-12">
+                    <div class="white-box">
+                        <h3 class="box-title">SIMPANAN WAJIB</h3>
+                        <ul class="list-inline two-part">
+                            <li><i class="ti-wallet text-success"></i></li>
+                            <li class="text-right"><span class="">117</span></li>
+                        </ul>
+                        <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Wajib</button>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+
         </div>
         <!-- /.row -->
         <!-- ============================================================== -->

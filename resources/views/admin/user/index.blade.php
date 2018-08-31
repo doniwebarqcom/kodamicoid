@@ -29,14 +29,13 @@
             <div class="col-md-12">
                 <div class="white-box">
                     <h3 class="box-title m-b-0">Manage USERS</h3>
-                    <br />
+                    <hr />
                     <div class="table-responsive">
                         <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th width="70" class="text-center">#</th>
                                     <th>NIK</th>
-                                    <th>NO ANGGOTA</th>
                                     <th>NAME</th>
                                     <th>EMAIL</th>
                                     <th>JENIS KELAMIN</th>
@@ -44,7 +43,7 @@
                                     <th>LAST LOGIN</th>
                                     <th>LAST LOGOUT</th>
                                     <th>STATUS</th>
-                                    <th>HAK AKSES</th>
+                                    <th>AKSES LOGIN</th>
                                     <th width="300">MANAGE</th>
                                 </tr>
                             </thead>
@@ -53,7 +52,6 @@
                                     <tr>
                                         <td class="text-center">{{ $no+1 }}</td>
                                         <td>{{ $item->nik }}</td>
-                                        <td>{{ $item->no_anggota }}</td>
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->jenis_kelamin }}</td>

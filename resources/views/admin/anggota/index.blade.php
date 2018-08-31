@@ -16,7 +16,7 @@
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h4 class="page-title">Dashboard</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-                <a href="{{ route('admin.anggota.create') }}" class="btn btn-success pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"> <i class="fa fa-plus"></i> TAMBAH</a>
+                <a href="{{ route('admin.anggota.create') }}" class="btn btn-success btn-sm pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"> <i class="fa fa-plus"></i> TAMBAH</a>
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
                     <li class="active">Anggota</li>
@@ -43,7 +43,7 @@
                                     <th>LAST LOGIN</th>
                                     <th>LAST LOGOUT</th>
                                     <th>ADDED</th>
-                                    <th>STATUS</th>
+                                    <th>STATUS LOGIN</th>
                                     <th>ACCESS LOGIN</th>
                                     <th width="300">MANAGE</th>
                                 </tr>

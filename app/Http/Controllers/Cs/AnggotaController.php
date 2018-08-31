@@ -194,7 +194,7 @@ class AnggotaController extends Controller
         $data->status = $request->status;
         $data->save();
 
-        return redirect()->route('cs.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('cs.anggota.edit', $data->id)->with('message-success-content', 'Data Anggota berhasil di simpan'); 
    }
 
    /**

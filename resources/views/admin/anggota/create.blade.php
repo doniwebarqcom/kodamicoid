@@ -121,7 +121,7 @@
                         <div class="form-group">
                             <label class="col-md-4">Password</label>
                             <label class="col-md-4">Ketik Ulang Password</label>
-                            <label class="col-md-4">Status Anggota</label>
+                            <label class="col-md-4">Status Login</label>
                             <div class="col-md-4">
                                 <input type="password" name="password" class="form-control">
                             </div>
