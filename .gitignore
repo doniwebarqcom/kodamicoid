@@ -2,7 +2,6 @@
 /public/hot
 /public/file_npwp/*
 /public/storage
-/storage
 /vendor
 /.idea
 /.vagrant
