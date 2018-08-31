@@ -114,7 +114,7 @@
 </header>
 <!--===========================-->
 <!--==========Content==========-->
-<div class='main-wrapper content' style="background: url('http://kodami.co.id/public/background/15.png')!important;">
+<div class='main-wrapper content' style="background: url('{{ asset('background/15.png') }} ')!important;">
 	<section class="relative software_slider" style="background: url('{{ asset('18.png')  }}') !important;">
 		<div class="forma-slider">
 			<div class="container">
@@ -127,7 +127,7 @@
 									<h2 class="h-Bold" style="font-size: 24px;opacity: 1;">Kodami Pocket System</h2>
 									<p class='desc' style="font-size: 16px;">Adalah layanan digital Kodami yang memungkinkan seluruh anggota maupun calon anggota untuk dapat mengetahui lebih jauh tentang Kodami. Layanan ini memberikan informasi cukup rinci mengenai profil Kodami, pengurus, badan pengawas, tatacara keanggotaan, manfaat, jenis layanan Kodami, armada, proteksi, bagi hasil usaha<br /> dan kegiatan yang telah dan sedang dilakukan oleh Kodami.</p>
 								</div> -->
-								<div class="img-slider hidden-xs fin_2"><img src="http://kodami.co.id/public/images/banner1.png"></div>
+								<div class="img-slider hidden-xs fin_2"><img src="{{ asset('images/banner1.png') }}"></div>
 							</li>
 						</ul>
 					</div>
