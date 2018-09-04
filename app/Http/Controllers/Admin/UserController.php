@@ -13,7 +13,7 @@ class UserController extends ControllerLogin
 	 */
     public function index()
     {        
-        $params['data'] = \App\UserModel::orderBy('id', 'DESC')->get();
+        $params['data'] = \Kodami\Models\Mysql\Users::where('access_id', '<>', 2)->orderBy('id', 'DESC')->get();
 
     	return view('admin.user.index')->with($params);
     }
@@ -108,5 +108,47 @@ class UserController extends ControllerLogin
         $data->save();
 
         return redirect()->route('admin.user.index')->with('message-success', 'User berhasil di buat');
+    }
+
+    /**
+     * [autologin description]
+     * @param  [type] $encrypt [description]
+     * @return [type]          [description]
+     */
+    public function autologin($id)
+    {
+        $user = \Kodami\Models\Mysql\Users::where('id', $id)->first();
+
+        if($user)
+        {
+            \Auth::loginUsingId($id);
+            \Session::put('is_login_admin', true);
+
+            if($user->access_id == 3)
+            {
+                return redirect()->route('kasir.index')->with('message-success', 'Welcome');
+            }
+            if($user->access_id == 4)
+            {
+                return redirect()->route('cs.index')->with('message-success', 'Welcome');
+            }
+            if($user->access_id == 5)
+            {
+                return redirect()->route('operator.index')->with('message-success', 'Welcome');
+            }
+            if($user->access_id == 6)
+            {
+                return redirect()->route('admin.index')->with('message-success', 'Welcome');
+            }
+            if($user->access_id == 7)
+            {
+                return redirect()->route('dropshiper.index')->with('message-success', 'Welcome');
+            }
+            
+        }
+        else
+        {
+
+        }
     }
 }

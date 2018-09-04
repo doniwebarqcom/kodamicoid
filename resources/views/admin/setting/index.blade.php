@@ -16,9 +16,7 @@
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h4 class="page-title">Dashboard</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-
-                <a href="{{ route('admin.setting.create') }}" class="btn btn-success pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"> <i class="fa fa-plus"></i> TAMBAH</a>
-                
+                <a href="{{ route('admin.general-setting.create') }}" class="btn btn-success pull-right m-l-20 hidden-xs hidden-sm waves-effect waves-light"> <i class="fa fa-plus"></i> TAMBAH</a>
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
                     <li class="active">Setting</li>
@@ -49,7 +47,7 @@
                                             <td>{{ $item->field }}</td>
                                             <td>{{ $item->value }}</td>
                                             <td>
-                                                <a href="{{ route('admin.setting.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> edit</button></a>
+                                                <a href="{{ route('admin.general-setting.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> edit</button></a>
                                             </td>
                                         </tr>
                                     @endforeach

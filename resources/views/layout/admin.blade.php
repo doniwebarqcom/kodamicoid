@@ -77,10 +77,6 @@
                     <li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i></a></li>
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
-                    <li>
-                        <form role="search" class="app-search hidden-sm hidden-xs m-r-10">
-                            <input type="text" placeholder="Search..." class="form-control"> <a href=""><i class="fa fa-search"></i></a> </form>
-                    </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="javascript:void(0)"> <img src="{{ asset('admin-css/images/user.png') }}" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">{{ Auth::user()->name }}</b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
@@ -155,31 +151,10 @@
                         </ul>
                     </li>
                     <li class="last-nav">
-                        <a href="javascript:void(0)" class="waves-effect">
+                        <a href="{{ route('admin.setting.index') }}" class="waves-effect">
                             <i class="mdi mdi-settings fa-fw"></i> <span class="hide-menu">Setting<span class="fa arrow"></span></span>
                         </a>
-                         <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ route('admin.setting.index') }}"><i class="ti-settings fa-fw"></i><span class="hide-menu">Setting</span></a>
-                            </li>
-                            <li>
-                                <a href="{{ route('admin.contact-us') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Submit Kontak Kami</span></a>
-                            </li>
-                            <li>
-                                <a href="{{ route('bank.index') }}"><i class="ti-server fa-fw"></i><span class="hide-menu">Master Bank</span></a>
-                            </li>
-                             <li>
-                                <a href="{{ url('admin/user') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Users</span></a>
-                            </li>
-                         </ul>
                     </li>
-
-                    <li class="last-nav">
-                        <a href="{{ route('admin.rekening-bank.index') }}" class="waves-effect">
-                            <i class="mdi mdi-settings fa-fw"></i> <span class="hide-menu">Rekening Bank KODAMI</span>
-                        </a>
-                    </li>
-
                 </ul>
             </div>
         </div>

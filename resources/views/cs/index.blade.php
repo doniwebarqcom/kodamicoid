@@ -22,7 +22,7 @@
                         <h3 class="box-title">DATA ANGGOTA</h3>
                         <ul class="list-inline two-part">
                             <li><i class="icon-people text-info"></i></li>
-                            <li class="text-right"><span class="counter">23</span></li>
+                            <li class="text-right"><span class="counter">{{ total_anggota('active') }}</span></li>
                         </ul>
                         <a href="{{ route('cs.anggota.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Anggota</a>
                         <div class="clearfix"></div>
@@ -33,7 +33,7 @@
                         <h3 class="box-title">SIMPANAN POKOK</h3>
                         <ul class="list-inline two-part">
                             <li><i class="icon-folder text-purple"></i></li>
-                            <li class="text-right"><span class="counter">169</span></li>
+                            <li class="text-right"><h2 class="counter">{{ all_simpanan_pokok()->where('status', 3)->sum('nominal') }}</h2></li>
                         </ul>
                         <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Pokok</button>
                         <div class="clearfix"></div>
@@ -44,7 +44,7 @@
                         <h3 class="box-title">SIMPANAN SUKARELA</h3>
                         <ul class="list-inline two-part">
                             <li><i class="icon-folder-alt text-danger"></i></li>
-                            <li class="text-right"><span class="">311</span></li>
+                            <li class="text-right"><h2 class="">{{ all_simpanan_sukarela()->where('status', 3)->sum('nominal') }}</h2></li>
                         </ul>
                         <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Sukarela</button>
                         <div class="clearfix"></div>
@@ -55,7 +55,7 @@
                         <h3 class="box-title">SIMPANAN WAJIB</h3>
                         <ul class="list-inline two-part">
                             <li><i class="ti-wallet text-success"></i></li>
-                            <li class="text-right"><span class="">117</span></li>
+                            <li class="text-right"><h2 class="">{{ number_format(all_simpanan_wajib()->where('status', 3)->sum('nominal')) }}</h2></li>
                         </ul>
                         <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Wajib</button>
                         <div class="clearfix"></div>

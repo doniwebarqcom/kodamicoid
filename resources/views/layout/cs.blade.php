@@ -28,10 +28,8 @@
     <link href="{{ asset('admin-css/css/style.css') }}?time=<?=date('His')?>" rel="stylesheet">
     <!-- color CSS -->
     <link href="{{ asset('admin-css/css/colors/green.css') }}" id="theme" rel="stylesheet">
-
     <link href="{{ asset('admin-css/plugins/bower_components/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
-    
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -76,7 +74,6 @@
                     <li><a href="javascript:void(0)" class="open-close waves-effect waves-light visible-xs"><i class="ti-close ti-menu"></i></a></li>
                 </ul>
                 <ul class="nav navbar-top-links navbar-right pull-right">
-                    
                     <li class="dropdown">
                         <a class="dropdown-toggle profile-pic" data-toggle="dropdown" href="javascript:void(0)"> <img src="{{ asset('admin-css/images/user.png') }}" alt="user-img" width="36" class="img-circle"><b class="hidden-xs">{{ Auth::user()->name }}</b><span class="caret"></span> </a>
                         <ul class="dropdown-menu dropdown-user animated flipInY">
@@ -126,7 +123,10 @@
                     <li class="devider"></li>
                     <li class="last-nav"><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu">Data Master<span class="fa arrow"></span></span></a>
                         <ul class="nav nav-second-level">
-                            <!-- <li> <a href="{{ route('rekening-bank-user.index') }}" class="waves-effect"><i class="mdi mdi-calendar-check fa-fw"></i> <span class="hide-menu">Rekening Bank</span></a></li> -->
+                            <li> <a href="{{ route('cs.anggota.index') }}" class="waves-effect"><i class="mdi mdi-account fa-fw"></i> <span class="hide-menu">Anggota</span></a></li>
+                            <li> <a href="{{ route('cs.simpanan-pokok.index') }}" class="waves-effect"><i class="mdi mdi-bank fa-fw"></i> <span class="hide-menu">Simpanan Pokok</span></a></li>
+                            <li> <a href="{{ route('cs.simpanan-sukarela.index') }}" class="waves-effect"><i class="mdi mdi-bank fa-fw"></i> <span class="hide-menu">Simpanan Sukarela</span></a></li>
+                            <li> <a href="{{ route('cs.simpanan-wajib.index') }}" class="waves-effect"><i class="mdi mdi-bank fa-fw"></i> <span class="hide-menu">Simpanan Wajib</span></a></li>
                         </ul>
                     </li>
                 </ul>

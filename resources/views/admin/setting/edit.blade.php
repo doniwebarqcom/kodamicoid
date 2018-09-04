@@ -32,7 +32,7 @@
             <div class="white-box">
                 <h3 class="box-title m-b-0">SETTING</h3>
                 <br />
-                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.setting.update', $data->id) }}" method="POST">
+                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.general-setting.update', $data->id) }}" method="POST">
                     <div class="col-md-6">
                         {{ csrf_field() }}
                         <input type="hidden" name="_method" value="PUT">
@@ -47,7 +47,7 @@
                                 <textarea class="form-control" name="value">{{ $data->value }}</textarea> 
                             </div>
                         </div>
-                        <a href="{{ route('admin.setting.index') }}" class="btn btn-default waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Cancel</a>
+                        <a href="{{ route('admin.general-setting.index') }}" class="btn btn-default waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Cancel</a>
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Update</button>
                     </div>
                     <br style="clear: both;" />

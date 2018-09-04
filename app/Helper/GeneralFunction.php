@@ -1,6 +1,54 @@
 <?php
 
 /**
+ * [all_simpanan_wajib description]
+ * @return [type] [description]
+ */
+function all_simpanan_wajib()
+{
+  return \Kodami\Models\Mysql\Deposit::where('type', 5);
+}
+
+/**
+ * [simpanan_pokok description]
+ * @param  [type] $id [description]
+ * @return [type]     [description]
+ */
+function all_simpanan_sukarela()
+{
+  return \Kodami\Models\Mysql\Deposit::where('type', 4);
+}
+
+/**
+ * [simpanan_pokok description]
+ * @param  [type] $id [description]
+ * @return [type]     [description]
+ */
+function all_simpanan_pokok()
+{
+  return \Kodami\Models\Mysql\Deposit::where('type', 3);
+}
+
+/**
+ * [total_anggota description]
+ * @param  string $status [description]
+ * @return [type]         [description]
+ */
+function total_anggota($status = 'all')
+{
+  if($status == 'all')
+  {
+    $count = \Kodami\Models\Mysql\Users::where('access_id', 2)->count();
+  }
+  if($status == 'active')
+  {
+    $count = \Kodami\Models\Mysql\Users::where('access_id', 2)->where('status', 1)->count();
+  }
+
+  return $count;
+}
+
+/**
  * [access_rules description]
  * @param  [type] $selected [description]
  * @return [type]           [description]

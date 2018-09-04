@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnMutation extends Migration
+class AddColumnUsers extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddColumnMutation extends Migration
      */
     public function up()
     {
-        Schema::table('mutations', function (Blueprint $table) {
-            $table->string('account_number', 100)->nullable();
+        Schema::table('users', function (Blueprint $table) {
+            $table->smallInteger('status_login')->nullable();
         });
     }
 
@@ -25,7 +25,7 @@ class AddColumnMutation extends Migration
      */
     public function down()
     {
-        Schema::table('mutation', function (Blueprint $table) {
+        Schema::table('users', function (Blueprint $table) {
             //
         });
     }

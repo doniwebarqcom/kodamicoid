@@ -32,7 +32,7 @@
             <div class="white-box">
                 <h3 class="box-title m-b-0">SETTING</h3>
                 <br />
-                <form class="form-horizontal" action="{{ route('admin.setting.store') }}" method="POST">
+                <form class="form-horizontal" action="{{ route('admin.general-setting.store') }}" method="POST">
                     <div class="col-md-6">
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -46,7 +46,7 @@
                                 <textarea class="form-control" name="value"></textarea>
                             </div>
                         </div>
-                        <a href="{{ route('admin.setting.index') }}" class="btn btn-default waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Cancel</a>
+                        <a href="{{ route('admin.general-setting.index') }}" class="btn btn-default waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Cancel</a>
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10"><i class="fa fa-save"></i> Save</button>
                     </div>
                     <br style="clear: both;" />

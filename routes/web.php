@@ -35,7 +35,9 @@ function route_index()
 }
 
 Route::get('/', function () {
+	
 	route_index();
+
     return view('welcome');
 });
 Route::get('home', function () {
@@ -73,19 +75,12 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 	Route::get('/', $path . 'IndexController@index')->name('admin.dashboard');
 	Route::get('profile', $path . 'UserController@profile')->name('admin.profile');
 	Route::get('contact-us', $path.'ContactUsController@index')->name('admin.contact-us');
-
 	Route::resource('user', $path . 'UserController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('user-group', $path . 'UserGroupController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'user-group']);
-
 	Route::get('autologin/{id}', $path .'AnggotaController@autologin')->name('admin.autologin');
-	/* MOOTA */
 	Route::get('moote-bank', $path .'MootaBankController@index')->name('admin.moota-bank.index');
 	Route::get('moote-bank-mutasi/{bank_id}/{bank_type}', $path .'MootaBankController@mutasi')->name('admin.moota-bank.mutasi');
-	/** END  */ 
 	Route::get('user/delete-bank/{id}/{user_id}', $path .'AnggotaController@deleteBank')->name('admin.user.delete-bank');
-	/**
-	 * Routing Anggota
-	 */
 	Route::resource('anggota', $path . 'AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('simpanan-sukarela', $path . 'SimpananSukarelaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('simpanan-pokok', $path . 'SimpananPokokController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
@@ -94,15 +89,16 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'access:1']], functi
 	Route::post('anggota/topup-simpanan-pokok', $path .'AnggotaController@topupSimpananPokok')->name('admin.anggota.topup-simpanan-pokok');
 	Route::post('anggota/topup-simpanan-wajib', $path .'AnggotaController@topupSimpananWajib')->name('admin.anggota.topup-simpanan-wajib');
 	Route::post('anggota/add-rekening-bank', $path .'AnggotaController@addRekeningBank')->name('admin.anggota.add-rekening-bank');
-	/* End Routing Anggota*/
-	Route::resource('bank', $path.'BankController');
+	Route::resource('bank', $path.'BankController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('rekening-bank', $path.'RekeningBankController',['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
-	Route::resource('setting', $path.'SettingController',['as' => 'admin']);
+	Route::resource('general-setting', $path.'SettingController',['as' => 'admin']);
 	Route::get('bayar/approve/{id}', $path.'BayarAdminController@approve')->name('admin.bayar.approve');
 	Route::get('bayar/denied/{id}', $path.'BayarAdminController@denied')->name('admin.bayar.denied');
 	Route::get('anggota/confirm/{id}', $path .'AnggotaController@confirm')->name('admin.anggota.confirm');
 	Route::post('anggota/confirm-submit', $path .'AnggotaController@confirmSubmit')->name('admin.anggota.confirm-submit');
 	Route::get('rekening-bank/mutasi/{id}', $path. 'RekeningBankController@mutasi')->name('admin.rekening-bank.mutasi');
+	Route::get('setting', $path .'IndexController@setting')->name('admin.setting.index');
+	Route::get('user/autologin/{id}', $path .'UserController@autologin')->name('admin.user.autologin');
 });
 
 // ROUTING ANGGOTA
@@ -145,9 +141,14 @@ Route::group(['prefix' => 'cs', 'middleware' => ['auth', 'access:4']], function(
 
 	Route::get('/', $path .'IndexController@index')->name('cs.index');
 	Route::resource('anggota', $path . 'AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'cs']);
+	Route::resource('simpanan-wajib', $path . 'SimpananWajibController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'cs']);
+	Route::resource('simpanan-pokok', $path . 'SimpananPokokController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'cs']);
+	Route::resource('simpanan-sukarela', $path . 'SimpananSukarelController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'cs']);
 });
 
 Auth::routes();
 
 /* old */
 Route::get('register-v2', 'RegisterController@v2');
+
+?>

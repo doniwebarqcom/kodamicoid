@@ -21,4 +21,13 @@ class IndexController extends ControllerLogin
 
     	return view('admin.index', compact('total_anggota','total_simpanan_pokok','total_simpanan_sukarela', 'total_simpanan_wajib'));
     }
+
+    /**
+     * [setting description]
+     * @return [type] [description]
+     */
+    public function setting()
+    {
+        return view('admin.setting');
+    }
 }
