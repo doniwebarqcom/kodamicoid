@@ -230,7 +230,6 @@
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('admin-css/js/custom.min.js') }}"></script>
     <script src="{{ asset('admin-css/js/dashboard1.js') }}?time=<?=date('His')?>"></script>
@@ -238,7 +237,6 @@
     <script src="{{ asset('admin-css/js/cbpFWTabs.js') }}"></script>
     <script src="{{ asset('js/bootbox.min.js') }}"></script>
     <script src="{{ asset('js/general.js?v='. date('His')) }}"></script>
-    
     <script type="text/javascript">
         (function() {
             [].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {
@@ -250,38 +248,7 @@
             $(this).parents(".myadmin-alert").fadeToggle(350);
             return false;
         });
-
-        $('#data_table').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            pageLength : 20
-        });
-        $('#data_table2').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            pageLength : 20
-        });
-        $('#data_table3').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            pageLength : 20
-        });
-
-        $('#data_table_no_button').DataTable({
-            dom: 'Bfrtip',
-            buttons: [],
-            pageLength : 20
-        });
-
     </script>
-
     @yield('footer-script')
-
 </body>
 </html>

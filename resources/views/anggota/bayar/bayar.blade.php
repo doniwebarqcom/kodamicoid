@@ -186,22 +186,34 @@
                                                         <tr>
                                                             <td class="text-center">1</td>
                                                             <td>Simpanan Pokok</td>
-                                                            <td class="text-right">Rp. {{ number_format(get_setting('simpanan_pokok')) }} </td>
+                                                            <td class="text-right">
+                                                                Rp. {{ number_format(get_setting('simpanan_pokok')) }} 
+                                                                <input type="hidden" name="simpanan_pokok" value="{{ get_setting('simpanan_pokok') }}">
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="text-center">2</td>
                                                             <td>Simpanan Wajib</td>
-                                                            <td class="text-right">Rp. {{ number_format( (Auth::user()->durasi_pembayaran * get_setting('simpanan_wajib') )) }} ( {{ Auth::user()->durasi_pembayaran }} Bulan )</td>
+                                                            <td class="text-right">
+                                                                Rp. {{ number_format( (Auth::user()->durasi_pembayaran * get_setting('simpanan_wajib') )) }} ( {{ Auth::user()->durasi_pembayaran }} Bulan )
+                                                                <input type="hidden" name="simpanan_wajib" value="{{ (Auth::user()->durasi_pembayaran * get_setting('simpanan_wajib')) }}" >
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="text-center">3</td>
                                                             <td>Kartu Anggota</td>
-                                                            <td class="text-right">Rp. {{ number_format( get_setting('kartu_anggota') ) }} (1 Kali Bayar) </td>
+                                                            <td class="text-right">
+                                                                Rp. {{ number_format( get_setting('kartu_anggota') ) }} (1 Kali Bayar) 
+                                                                <input type="hidden" name="kartu_anggota" value="{{ get_setting('kartu_anggota') }}">
+                                                            </td>
                                                         </tr>
                                                         <tr>
                                                             <td class="text-center">3</td>
                                                             <td>Simpanan Sukarela</td>
-                                                            <td class="text-right">Rp. {{ number_format(Auth::user()->first_simpanan_sukarela ) }} </td>
+                                                            <td class="text-right">
+                                                                Rp. {{ number_format(Auth::user()->first_simpanan_sukarela ) }} 
+                                                                <input type="hidden" name="simpanan_sukarela" value="{{ Auth::user()->first_simpanan_sukarela  }}" />
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

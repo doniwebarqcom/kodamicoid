@@ -5,12 +5,10 @@ namespace App\Http\Controllers\Anggota;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ControllerLogin;
 use App\ModelUser;
-
 use Kodami\Models\Mysql\RekeningBank;
 use Kodami\Models\Mysql\Bank;
 use Kodami\Models\Mysql\RekeningBankUser;
 use Kodami\Models\Mysql\Deposit;
-
 use Auth;
 
 class BayarController extends ControllerLogin
@@ -72,6 +70,8 @@ class BayarController extends ControllerLogin
         $data->due_date                 = $request->due_date;
         $data->code         = $request->code;
         $data->save();
+
+                
 
         return redirect()->route('anggota.dashboard')->with('message-success', 'Pembayaran anda berhasil dilakukan, silahkan melakukan pembayaran');
     }
