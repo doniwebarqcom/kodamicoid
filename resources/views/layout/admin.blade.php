@@ -238,6 +238,7 @@
     <script src="{{ asset('admin-css/js/cbpFWTabs.js') }}"></script>
     <script src="{{ asset('js/bootbox.min.js') }}"></script>
     <script src="{{ asset('js/general.js?v='. date('His')) }}"></script>
+    <script src="{{ asset('js/set-datable.js?v='. date('His')) }}"></script>
     
     <script type="text/javascript">
         (function() {
@@ -250,38 +251,7 @@
             $(this).parents(".myadmin-alert").fadeToggle(350);
             return false;
         });
-
-        $('#data_table').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            pageLength : 20
-        });
-        $('#data_table2').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            pageLength : 20
-        });
-        $('#data_table3').DataTable({
-            dom: 'Bfrtip',
-            buttons: [
-                'copy', 'csv', 'excel', 'pdf', 'print'
-            ],
-            pageLength : 20
-        });
-
-        $('#data_table_no_button').DataTable({
-            dom: 'Bfrtip',
-            buttons: [],
-            pageLength : 20
-        });
-
     </script>
-
     @yield('footer-script')
-
 </body>
 </html>
