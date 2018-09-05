@@ -32,6 +32,64 @@ class AjaxController extends Controller
     }
 
     /**
+     * [getAnggotaById description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function getAnggotaByIdHtml(Request $request)
+    {
+        $this->respon = ['message' => 'error', 'data' => []];
+        
+        if($request->ajax())
+        {
+            $data =  \Kodami\Models\Mysql\Users::where('id',$request->id)->first();
+            if($data)
+            {
+                $data = view('kasir.partial.anggota-search')->with(['data' => $data])->render();
+
+                $this->respon = ['message' => 'success', 'data' => $data];
+            }
+            else
+            {
+                $this->respon = ['message' => 'error', 'data' => []];
+            }
+        }
+
+        return response()->json($this->respon);
+    }
+
+    /**
+     * [getAnggota description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function getAnggota(Request $request)
+    {
+        $this->respon = ['message' => 'error', 'data' => []];
+        
+        if($request->ajax())
+        {
+            $data =  \Kodami\Models\Mysql\Users::where('access_id', 2)->where(function($table) use ($request){
+                $table->where('name', 'LIKE', "%". $request->name . "%")
+                      ->orWhere('no_anggota', 'LIKE', '%'. $request->name .'%');
+            })->get();
+
+            $params = [];
+            foreach($data as $k => $item)
+            {
+                if($k >= 10) continue;
+
+                $params[$k]['id'] = $item->id;
+                $params[$k]['value'] = $item->no_anggota .' - '. $item->name;
+            }
+
+            $this->respon = ['message' => 'success', 'data' => $params];
+        }
+
+        return response()->json($this->respon);
+    }
+
+    /**
      * [getKabupatenByProvinsi description]
      * @param  Request $request [description]
      * @return [type]           [description]

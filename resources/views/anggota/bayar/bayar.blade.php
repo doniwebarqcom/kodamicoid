@@ -171,7 +171,7 @@
                                                     <p><b>Due Date :</b> <i class="fa fa-calendar"></i> {{ date('d F Y', strtotime($due_date)) }}</p>
                                                 </address>
                                             </div>
-                                        </div>
+                                        </div> 
                                         <div class="col-md-12">
                                             <div class="table-responsive m-t-40" style="clear: both;">
                                                 <table class="table table-hover">

@@ -32,6 +32,23 @@ class RekeningBankController extends ControllerLogin
     }
 
     /**
+     * [store description]
+     * @param  Request $request [description]
+     * @return [type]           [description]
+     */
+    public function store(Request $request)
+    {
+        $data = new RekeningBank();
+        $data->no_rekening      = $request->no_rekening;
+        $data->bank_id          = $request->bank_id;
+        $data->cabang           = $request->cabang;
+        $data->owner           = $request->owner;
+        $data->save();
+
+        return redirect()->route('admin.rekening-bank.index')->with('message-success', 'Data Rekening berhasil di tambah');
+    }
+
+    /**
      * [edit description]
      * @param  [type] $id [description]
      * @return [type]     [description]

@@ -188,16 +188,8 @@
     <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    
+    <script src="{{ asset('js/set-datable.js?v='. date('His')) }}"></script>
     <script type="text/javascript">
-    
-    $('#data_table').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        pageLength : 20
-    });
 
     /**
      * [numberWithComma description]

@@ -66,8 +66,6 @@
                                         </td>
                                         <td>{!! access_rules($item->access_id) !!}</td>
                                         <td>
-                                            <a href="{{ route('admin.user.edit', ['id' => $item->id]) }}"> <button class="btn btn-default btn-xs"><i class="ti-pencil-alt"></i> edit</button></a>
-                                            <br />
                                             <a href="{{ route('admin.autologin', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-key"></i> Autologin</a>
                                         </td>
                                     </tr>

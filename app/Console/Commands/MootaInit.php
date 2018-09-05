@@ -47,6 +47,7 @@ class MootaInit extends Command
        echo " ================================================== \n \n";
 
        $moota_bank = moota_bank();
+
        if(isset($moota_bank->data)){
          foreach($moota_bank->data as $item)
          {

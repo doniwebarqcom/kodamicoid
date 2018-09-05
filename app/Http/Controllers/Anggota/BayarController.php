@@ -70,9 +70,7 @@ class BayarController extends ControllerLogin
         $data->due_date                 = $request->due_date;
         $data->code         = $request->code;
         $data->save();
-
-                
-
+        
         return redirect()->route('anggota.dashboard')->with('message-success', 'Pembayaran anda berhasil dilakukan, silahkan melakukan pembayaran');
     }
 

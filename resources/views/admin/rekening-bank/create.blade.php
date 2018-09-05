@@ -32,13 +32,13 @@
             <div class="white-box">
                 <h3 class="box-title m-b-0">REKENING BANK</h3>
                 <br />
-                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('rekening-bank.store') }}" method="POST">
+                <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.rekening-bank.store') }}" method="POST">
                     <div class="col-md-6">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label class="col-md-12">Nama Akun</label>
                             <div class="col-md-12">
-                                <input type="text" class="form-control" required name="nama_akun"> </div>
+                                <input type="text" class="form-control" required name="owner"> </div>
                         </div>
 
                         <div class="form-group">
@@ -63,7 +63,7 @@
                                 <input type="text" class="form-control" required name="cabang"> </div>
                         </div>
 
-                        <a href="{{ url('admin/user-group') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>
+                        <a href="{{ route('admin.rekening-bank.index') }}" class="btn btn-inverse waves-effect waves-light m-r-10">Cancel</a>
                         <button type="submit" class="btn btn-success waves-effect waves-light m-r-10">Submit</button>
                     </div>
                     <br style="clear: both;" />
@@ -75,7 +75,7 @@
         <!-- ============================================================== -->
     </div>
     <!-- /.container-fluid -->
-    @extends('layout.footer-admin')
+    @include('layout.footer-admin')
 </div>
 <!-- ============================================================== -->
 <!-- End Page Content -->

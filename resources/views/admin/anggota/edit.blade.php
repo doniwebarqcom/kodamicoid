@@ -373,7 +373,7 @@
                                     <div class="tab-content" style="margin-top:0;">
                                         <div id="semua_transaksi" class="tab-pane active">
                                             <h3>Semua Transaksi</h3>
-                                            <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
+                                            <table id="data_table4" class="display nowrap" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -400,7 +400,7 @@
                                         </div>
                                         <div id="simpanan_pokok" class="tab-pane">
                                             <h3>Simpanan Pokok</h3>
-                                            <table id="data_table2" class="display nowrap" cellspacing="0" width="100%">
+                                            <table id="data_table5" class="display nowrap" cellspacing="0" width="100%">
                                                 <thead>
                                                     <tr>
                                                         <th>No</th>
@@ -452,7 +452,7 @@
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <div id="simpanan_wajib" class="tab-pane">
+                                        <div id="simpanan_wajib2" class="tab-pane">
                                             <h3>Simpanan Wajib</h3>
                                             <table id="data_table4" class="display nowrap" cellspacing="0" width="100%">
                                                 <thead>
