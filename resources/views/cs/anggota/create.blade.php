@@ -49,7 +49,7 @@
                             <label class="col-md-6">No Anggota</label>
                             <label class="col-md-6">KTP Number</label>
                             <div class="col-md-6">
-                                <input type="text" name="no_anggota" value="{{ $no_anggota }}" class="form-control"> 
+                                <input type="text" name="no_anggota" readonly="true" value="{{ $no_anggota }}" class="form-control"> 
                             </div>
                             <div class="col-md-6">
                                 <input type="text" name="nik" class="form-control"> 
@@ -256,7 +256,9 @@
     <script type="text/javascript">
         
         jQuery('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',
+            dateFormat: 'yy-mm-dd',
+            changeYear : true,
+            changeMonth : true
         });
 
         /**

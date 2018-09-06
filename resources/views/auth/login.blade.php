@@ -6,6 +6,8 @@
   <div class="cssload-speeding-wheel"></div>
 </div>
 <section id="wrapper" class="new-login-register">
+      <a href="{{ url('/') }}" class="back_index"><i class="fa fa-arrow-left"></i></a>
+      
       <div class="lg-info-panel">
               <div class="inner-panel">
                   <a href="javascript:void(0)" class="p-20 di"></a>

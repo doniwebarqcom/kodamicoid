@@ -23,6 +23,20 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 <![endif]-->
+<style type="text/css">
+	.back_index {
+		display: none;
+	}
+	@media (max-width: 480px){
+		.back_index {
+			display: block;
+			position: absolute;
+			top: 10px;
+			font-size: 18px;
+			left: 15px;
+		}
+	}
+</style>
 </head>
 <body>
 

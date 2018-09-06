@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-
 <!-- ============================================================== -->
 <!-- Page Content -->
 <!-- ============================================================== -->
@@ -30,19 +29,14 @@
         <div class="row">
             <div class="col-md-12">
             <div class="white-box">
-
                 @if(Session::has('message-success-content'))
-                    <div class="myadmin-alert myadmin-alert-icon myadmin-alert-click alert-success myadmin-alert-top alerttop" style="display: block;"> <i class="ti-user"></i> {{ Session::get('message-success') }} <a href="javascript:void(0)" class="closed">×</a> </div>
+                    <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="color: black;">&times;</button> 
+                        <strong> <i class="fa fa-info-circle"></i> Data Anggota berhasil disimpan, silahkan melakukan pembayaran ke kasir !</strong>
+                    </div>
                 @endif
-
-                <div class="alert alert-success alert-dismissable">
-                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true" style="color: black;">&times;</button> 
-                    <strong> <i class="fa fa-info-circle"></i> Data Anggota berhasil disimpan, silahkan melakukan pembayaran ke kasir !</strong>
-                </div>
-
-                <h3 class="box-title m-b-0">Data Anggota</h3>
-                <br />
-
+                <h3 class="box-title m-b-0">Data Anggota #<label class="text-danger">{{ $data->no_anggota }}</label></h3>
+                <hr />
                 <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('cs.anggota.update', $data->id) }}" method="POST">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="active" role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Profile</span></a></li>
@@ -433,9 +427,8 @@
         <!-- ============================================================== -->
     </div>
     <!-- /.container-fluid -->
-    @extends('layout.footer-admin')
+    @include('layout.footer-admin')
 </div>
-
 <!-- sample modal content -->
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
