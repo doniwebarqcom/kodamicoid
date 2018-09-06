@@ -99,17 +99,20 @@ class IndexController extends ControllerLogin
      */
     public function backtoadmin()
     {
-        $find = \App\User::where('access_id', 1)->first();
-        
-        if($find)
+        if(\Session::get('is_login_admin'))
         {
-            \Auth::loginUsingId($find->id);
+            $find = \App\User::where('access_id', 1)->first();
+            
+            if($find)
+            {
+                \Auth::loginUsingId($find->id);
 
-            return redirect()->route('admin.dashboard')->with('message-success', 'Welcome Back Admin');
-        }
-        else
-        {
-            return redirect()->route('anggota.dashboard')->with('message-error', 'Access Denied');
+                return redirect()->route('admin.dashboard')->with('message-success', 'Welcome Back Admin');
+            }
+            else
+            {
+                return redirect()->route('anggota.dashboard')->with('message-error', 'Access Denied');
+            }
         }
     }
 }

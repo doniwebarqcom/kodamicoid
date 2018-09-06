@@ -43,7 +43,6 @@
                             </ul>
                         </div>
                     @endif
-                    
                     <div class="col-md-6">
                         {{ csrf_field() }}
                         <div class="form-group">
@@ -247,7 +246,7 @@
         <!-- ============================================================== -->
     </div>
     <!-- /.container-fluid -->
-    @extends('layout.footer-admin')
+    @include('layout.footer-admin')
 </div>
 <!-- ============================================================== -->
 <!-- End Page Content -->

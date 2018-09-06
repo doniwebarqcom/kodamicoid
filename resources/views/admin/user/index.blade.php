@@ -66,7 +66,7 @@
                                         </td>
                                         <td>{!! access_rules($item->access_id) !!}</td>
                                         <td>
-                                            <a href="{{ route('admin.autologin', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-key"></i> Autologin</a>
+                                            <a onclick="return confirm('Login sebagai {{ $item->name }} ?')" href="{{ route('admin.user.autologin', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-key"></i> Autologin</a>
                                         </td>
                                     </tr>
                                 @endforeach
@@ -85,5 +85,4 @@
 <!-- ============================================================== -->
 <!-- End Page Content -->
 <!-- ============================================================== -->
-
 @endsection

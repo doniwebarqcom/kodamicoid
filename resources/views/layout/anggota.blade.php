@@ -45,8 +45,7 @@
     </style>
 </head>
 <body class="fix-header">
-
-     <!-- ============================================================== -->
+    <!-- ============================================================== -->
     <!-- Preloader -->
     <!-- ============================================================== -->
     <div class="preloader">
@@ -54,7 +53,6 @@
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
         </svg>
     </div>
-     
     <!-- ============================================================== -->
     <!-- Wrapper -->
     <!-- ============================================================== -->
@@ -123,7 +121,7 @@
                                 </div>
                             </li>
                             <li role="separator" class="divider"></li>
-                            @if(\Session::get('is_login_administrator'))
+                            @if(\Session::get('is_login_admin'))
                                 <li>
                                     <a href="{{ route('anggota.back-to-admin') }}"> <i class="fa fa-key"></i> Back to Admin</a>
                                 </li>

@@ -130,6 +130,7 @@ Route::group(['prefix' => 'kasir', 'middleware' => ['auth', 'access:3']], functi
 
 	Route::get('/', $path .'IndexController@index')->name('kasir.index');
 	Route::resource('anggota', $path . 'AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'kasir']);
+	Route::get('back-to-admin', $path .'IndexController@backtoadmin')->name('kasir.back-to-admin');
 });
 
 // ROUTING TELLER / KASIR
@@ -141,6 +142,7 @@ Route::group(['prefix' => 'cs', 'middleware' => ['auth', 'access:4']], function(
 	Route::resource('simpanan-wajib', $path . 'SimpananWajibController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'cs']);
 	Route::resource('simpanan-pokok', $path . 'SimpananPokokController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'cs']);
 	Route::resource('simpanan-sukarela', $path . 'SimpananSukarelController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'cs']);
+	Route::get('back-to-admin', $path .'IndexController@backtoadmin')->name('cs.back-to-admin');
 });
 
 Auth::routes();

@@ -353,7 +353,7 @@ class AnggotaController extends ControllerLogin
     public function autologin($id)
     {
         \Auth::loginUsingId($id);
-        \Session::put('is_login_administrator', true);
+        \Session::put('is_login_admin', true);
         
         return redirect()->route('anggota.dashboard');
     }

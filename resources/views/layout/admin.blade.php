@@ -31,7 +31,6 @@
 
     <link href="{{ asset('admin-css/plugins/bower_components/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
-
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -46,16 +45,14 @@
 </head>
 
 <body class="fix-header">
-
-     <!-- ============================================================== -->
+    <!-- ============================================================== -->
     <!-- Preloader -->
     <!-- ============================================================== -->
     <div class="preloader">
         <svg class="circular" viewBox="25 25 50 50">
             <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10" />
         </svg>
-    </div>
-     
+    </div> 
     <!-- ============================================================== -->
     <!-- Wrapper -->
     <!-- ============================================================== -->
@@ -161,11 +158,8 @@
         <!-- ============================================================== -->
         <!-- End Left Sidebar -->
         <!-- ============================================================== -->
-        
         @yield('content')
-
         @include('layout.alert')
-
         <div class="modal fade" id="modal_status_anggota" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel1">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -218,7 +212,6 @@
     <script src="{{ asset('admin-css/plugins/bower_components/calendar/dist/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('admin-css/plugins/bower_components/calendar/dist/cal-init.js') }}"></script>
     <script src="{{ asset('admin-css/plugins/bower_components/toast-master/js/jquery.toast.js') }}"></script>
-    
     <!-- start - This is for export functionality only -->
     <script src="{{ asset('admin-css/plugins/bower_components/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
@@ -244,7 +237,6 @@
                 new CBPFWTabs(el);
             });
         })();
-
         $(".myadmin-alert .closed").click(function(event) {
             $(this).parents(".myadmin-alert").fadeToggle(350);
             return false;

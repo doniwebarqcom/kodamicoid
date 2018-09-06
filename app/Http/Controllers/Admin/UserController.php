@@ -126,25 +126,24 @@ class UserController extends ControllerLogin
 
             if($user->access_id == 3)
             {
-                return redirect()->route('kasir.index')->with('message-success', 'Welcome');
+                return redirect()->route('kasir.index')->with('message-success', 'Welcome '. $user->name);
             }
             if($user->access_id == 4)
             {
-                return redirect()->route('cs.index')->with('message-success', 'Welcome');
+                return redirect()->route('cs.index')->with('message-success', 'Welcome '. $user->name);
             }
             if($user->access_id == 5)
             {
-                return redirect()->route('operator.index')->with('message-success', 'Welcome');
+                return redirect()->route('operator.index')->with('message-success', 'Welcome ' .$user->name);
             }
             if($user->access_id == 6)
             {
-                return redirect()->route('admin.index')->with('message-success', 'Welcome');
+                return redirect()->route('admin.index')->with('message-success', 'Welcome '. $user->name);
             }
             if($user->access_id == 7)
             {
-                return redirect()->route('dropshiper.index')->with('message-success', 'Welcome');
+                return redirect()->route('dropshiper.index')->with('message-success', 'Welcome '.$user->name);
             }
-            
         }
         else
         {
