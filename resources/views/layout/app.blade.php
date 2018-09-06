@@ -14,27 +14,25 @@
 	<link rel="stylesheet" href="{{ asset('advisa/css/bootstrap.css') }}">
 	<!--<link rel="stylesheet" href="{{ asset('advisa/css/font-awesome.css') }}"> -->
 	<link rel="stylesheet" href="{{ asset('advisa/fontawesome/css/fontawesome-all.css') }}">
-	
+
 	<link rel="stylesheet" href="{{ asset('advisa/css/main.css') }}?v=2">
 	<link rel="stylesheet" href="{{ asset('advisa/css/responsive.css') }}">
-	
 	<?php 
 		$chek_url = @$_SERVER['HTTP_HOST'];
 		if (strpos($chek_url, '.local') == false) {
-		?>
-		<!-- Global site tag (gtag.js) - Google Analytics -->
-		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114760510-1"></script>
-		<script>
-		  window.dataLayer = window.dataLayer || [];
-		  function gtag(){dataLayer.push(arguments);}
-		  gtag('js', new Date());
+	?>
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114760510-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
 
-		  gtag('config', 'UA-114760510-1');
-		</script>
+	  gtag('config', 'UA-114760510-1');
+	</script>
 	<?php } ?>
 </head>
 <body>
-
 <!--===========================-->
 <!--==========Header===========-->
 <div id="preloader">
