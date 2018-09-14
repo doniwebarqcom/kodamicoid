@@ -85,7 +85,6 @@
                                         <input type="text" name="telepon" class="form-control" value="{{ $data->telepon }}">
                                     </div>
                                 </div>
-                                
                                 <div class="form-group">
                                     <label class="col-md-4">Agama</label>
                                     <label class="col-md-4">Tempat Lahir</label>
@@ -106,24 +105,17 @@
                                         <input type="text" name="tanggal_lahir" class="form-control datepicker" value="{{ $data->tanggal_lahir }}"> 
                                     </div>
                                 </div>
-                                
                                 <div class="form-group">
-                                    <label class="col-md-4">Password</label>
-                                    <label class="col-md-4">Ketik Ulang Password</label>
-                                    <label class="col-md-4">Status</label>
-                                    <div class="col-md-4">
+                                    <label class="col-md-6">Password</label>
+                                    <label class="col-md-6">Ketik Ulang Password</label>
+                                    <div class="col-md-6">
                                         <input type="password" name="password" class="form-control">
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <input type="password" name="confirmation" class="form-control"> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label><input type="radio" name="status" value="2" {{ $data->status == 2 ? 'checked="true"' : '' }} /> Active </label> &nbsp;
-                                        <label><input type="radio" name="status" value="1" {{ $data->status == 1 ? 'checked="true"' : '' }} /> Inactive </label>
                                     </div>
                                 </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="col-md-6">
                                     <div class="form-group">

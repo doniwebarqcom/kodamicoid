@@ -90,6 +90,29 @@
 									</a>
 								</li>
 								@endguest
+								
+								@if(Auth::check())
+								  @if(Auth::user()->access_id == 3)
+									<li>
+										<a data-toggle="modal" role="button" href="{{ route('kasir.index') }}">
+											<div class="inside">
+												<div class="backside"> Kasir </div>
+												<div class="frontside"> Kasir </div>
+											</div>
+										</a>
+									</li>
+								  @endif
+								  @if(Auth::user()->access_id == 4)
+									<li>
+										<a data-toggle="modal" role="button" href="{{ route('cs.index') }}">
+											<div class="inside">
+												<div class="backside"> Customer Service </div>
+												<div class="frontside"> Customer Service </div>
+											</div>
+										</a>
+									</li>
+								  @endif
+								@endif
 							</ul>
 						</nav>
 						<div class="wr-soc">

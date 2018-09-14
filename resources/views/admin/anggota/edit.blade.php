@@ -135,8 +135,10 @@
                                         <label><input type="radio" name="status" value="0" {{ $data->status == 0 ? 'checked="true"' : '' }} /> Inactive </label>
                                     </div>
                                 </div>
+                                <div class="form-group">
+                                    <label class="col-md-6"><input type="checkbox" name="is_dropshiper" value="1"> Aktifkan Sebagai Dropshiper</label>
+                                </div>
                             </div>
-
                             <div class="col-md-6">
                                 <div class="col-md-6">
                                     <div class="form-group">

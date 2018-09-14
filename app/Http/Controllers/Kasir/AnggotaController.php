@@ -19,6 +19,19 @@ class AnggotaController extends Controller
     }
 
     /**
+     * [detail description]
+     * @param  [type] $id [description]
+     * @return [type]     [description]
+     */
+    public function detail($id)
+    {
+        $params['data']         = \Kodami\Models\Mysql\Users::where('id', $id)->first(); 
+        $params['transaksi']    = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->get();
+
+        return view('kasir.anggota.detail')->with($params);
+    }
+
+    /**
      * [create description]
      * @return [type] [description]
      */

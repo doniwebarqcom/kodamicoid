@@ -131,6 +131,9 @@ Route::group(['prefix' => 'kasir', 'middleware' => ['auth', 'access:3']], functi
 	Route::get('/', $path .'IndexController@index')->name('kasir.index');
 	Route::resource('anggota', $path . 'AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'kasir']);
 	Route::get('back-to-admin', $path .'IndexController@backtoadmin')->name('kasir.back-to-admin');
+	Route::get('anggota/detail/{id}', $path .'AnggotaController@detail')->name('kasir.anggota.detail');
+	Route::get('anggota/cetak-kwitansi/{id}', $path .'AnggotaController@cetakKwitansi')->name('kasir.anggota.cetak-kwitansi');
+
 });
 
 // ROUTING TELLER / KASIR

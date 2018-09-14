@@ -66,13 +66,11 @@ class AnggotaController extends Controller
         $data->kk_number                = $request->kk_number;
         $data->npwp_number              = $request->npwp_number;
         $data->bpjs_number              = $request->bpjs_number; 
-
         $data->domisili_provinsi_id     = $request->domisili_provinsi_id;
         $data->domisili_kabupaten_id    = $request->domisili_kabupaten_id;
         $data->domisili_kecamatan_id    = $request->domisili_kecamatan_id;
         $data->domisili_kelurahan_id    = $request->domisili_kelurahan_id;
         $data->domisili_alamat          = $request->domisili_alamat;
-
         $data->ktp_provinsi_id      = $request->ktp_provinsi_id;
         $data->ktp_kabupaten_id     = $request->ktp_kabupaten_id;
         $data->ktp_kecamatan_id     = $request->ktp_kecamatan_id;
@@ -145,7 +143,6 @@ class AnggotaController extends Controller
         $data->tanggal_lahir= $request->tanggal_lahir;
         $data->password             = bcrypt($request->password); 
         $data->access_id    = 2; // Akses sebagai anggota
-        $data->status       = 1; // menunggu pembayaran 
         $data->passport_number          = $request->passport_number;
         $data->kk_number                = $request->kk_number;
         $data->npwp_number              = $request->npwp_number;

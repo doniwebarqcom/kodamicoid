@@ -120,16 +120,11 @@
                         <div class="form-group">
                             <label class="col-md-4">Password</label>
                             <label class="col-md-4">Ketik Ulang Password</label>
-                            <label class="col-md-4">Status Anggota</label>
                             <div class="col-md-4">
                                 <input type="password" name="password" class="form-control">
                             </div>
                             <div class="col-md-4">
                                 <input type="password" name="confirmation" class="form-control"> 
-                            </div>
-                            <div class="col-md-4">
-                                <label><input type="radio" name="status" value="1" /> Active </label> &nbsp;
-                                <label><input type="radio" name="status" value="0" /> Inactive </label>
                             </div>
                         </div>
                     </div>
