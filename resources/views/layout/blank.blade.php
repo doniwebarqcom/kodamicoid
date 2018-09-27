@@ -43,6 +43,21 @@
             font-size: 12px;
         }
     </style>
+    <?php 
+         $chek_url = @$_SERVER['HTTP_HOST'];
+         if (strpos($chek_url, '.local') == false) {
+      ?>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126553963-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'UA-126553963-1');
+        </script>
+
+    <?php } ?>
 </head>
 <body class="fix-header">
 

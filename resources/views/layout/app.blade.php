@@ -18,19 +18,20 @@
 	<link rel="stylesheet" href="{{ asset('advisa/css/main.css') }}?v=2">
 	<link rel="stylesheet" href="{{ asset('advisa/css/responsive.css') }}">
 	<?php 
-		$chek_url = @$_SERVER['HTTP_HOST'];
-		if (strpos($chek_url, '.local') == false) {
-	?>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114760510-1"></script>
-	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
+         $chek_url = @$_SERVER['HTTP_HOST'];
+         if (strpos($chek_url, '.local') == false) {
+      ?>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-126553963-1"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
 
-	  gtag('config', 'UA-114760510-1');
-	</script>
-	<?php } ?>
+          gtag('config', 'UA-126553963-1');
+        </script>
+
+    <?php } ?>
 </head>
 <body>
 <!--===========================-->
@@ -92,6 +93,16 @@
 								@endguest
 								
 								@if(Auth::check())
+								  @if(Auth::user()->access_id == 1)
+									<li>
+										<a data-toggle="modal" role="button" href="{{ route('admin.dashboard') }}">
+											<div class="inside">
+												<div class="backside"> Admin </div>
+												<div class="frontside"> Admin </div>
+											</div>
+										</a>
+									</li>
+								  @endif
 								  @if(Auth::user()->access_id == 3)
 									<li>
 										<a data-toggle="modal" role="button" href="{{ route('kasir.index') }}">
