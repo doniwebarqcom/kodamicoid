@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Mail\RegisterMail;
 use Mail;
+use Kodami\Models\Mysql\Users;
 
 class RegisterController extends Controller
 {
@@ -31,7 +32,7 @@ class RegisterController extends Controller
     		//'nik' 				=> 'required|unique:users',
     		'telepon'			=> 'required',
             'name'				=> 'required',
-    		//'email'				=> 'required|email|unique:users',
+    		'email'				=> 'required|email|unique:users',
     		'password'			=> 'required',
     		'confirmation'		=> 'required|same:password',
     	]);
