@@ -16,3 +16,6 @@ yarn-error.log
 /public/file_ktp/*
 /public/file_photo/*
 /config/database.php
+error.log
+requests.log
+composer.lock
