@@ -170,15 +170,15 @@
 							<h3 class='xsmall-h text-center'>Daftar disini untuk menjadi anggota Kodami. </h3>
 							@if($errors)
 								@if(!empty($errors->first('email')))
-								<span class="item-error"><?php echo $errors->first('email') ?></span>
+								<span class="item-error">Email anda sudah terdaftar</span>
 								@endif
 								@if(!empty($errors->first('nama')))
 								<span class="item-error"><?php echo $errors->first('nama') ?></span>
 								@endif
-								@if(!empty($errors->first('email')))
+								@if(!empty($errors->first('password')))
 								<span class="item-error"><?php echo $errors->first('password') ?></span>
 								@endif
-								@if(!empty($errors->first('email')))
+								@if(!empty($errors->first('password')))
 								<span class="item-error"><?php echo $errors->first('confirmation') ?></span>
 								@endif
 							@endif

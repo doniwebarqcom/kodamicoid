@@ -48,8 +48,8 @@ class RegisterController extends Controller
     	$data->password 			= bcrypt($request->password); 
         $data->access_id            = 2; // User Sebagai Anggota
         $data->status               = 1; // menunggu pembayaran
+        $data->status_login         = 1;
     	$data->save();
-
         $data->password = $request->password;
         // send email
         Mail::to($data->email)->send(new RegisterMail($data));
