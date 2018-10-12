@@ -156,52 +156,47 @@
 			<div class="container">
 				<div class="row">
 					<div id="form_slider" data-anchor="form_slider">
-
 						<ul class="form-bxslider list-unstyled">
 							<li>
-								<!-- <div class="list-forstart fin_1">
-									<h2 class="h-Bold" style="font-size: 24px;opacity: 1;">Kodami Pocket System</h2>
-									<p class='desc' style="font-size: 16px;">Adalah layanan digital Kodami yang memungkinkan seluruh anggota maupun calon anggota untuk dapat mengetahui lebih jauh tentang Kodami. Layanan ini memberikan informasi cukup rinci mengenai profil Kodami, pengurus, badan pengawas, tatacara keanggotaan, manfaat, jenis layanan Kodami, armada, proteksi, bagi hasil usaha<br /> dan kegiatan yang telah dan sedang dilakukan oleh Kodami.</p>
-								</div> -->
 								<div class="img-slider hidden-xs fin_2"><img src="{{ asset('images/banner1.png') }}"></div>
 							</li>
 						</ul>
 					</div>
-
 					<div class="clearfix visible-xs visible-md"></div>
-
 					<div class="container relative fin_3" id='elem-portable'>
 						<div class="reg-now" style="top: 100px;">
 						@guest
 							<h2 class='medium-h text-center'>Registrasi Form</h2>
 							<h3 class='xsmall-h text-center'>Daftar disini untuk menjadi anggota Kodami. </h3>
-
+							@if($errors)
+								@if(!empty($errors->first('email')))
+								<span class="item-error">Email anda sudah terdaftar</span>
+								@endif
+								@if(!empty($errors->first('nama')))
+								<span class="item-error"><?php echo $errors->first('nama') ?></span>
+								@endif
+								@if(!empty($errors->first('password')))
+								<span class="item-error"><?php echo $errors->first('password') ?></span>
+								@endif
+								@if(!empty($errors->first('password')))
+								<span class="item-error"><?php echo $errors->first('confirmation') ?></span>
+								@endif
+							@endif
 							<form class='reg-now-visible' action="{{ url('registerPost') }}" autocomplete="off" method="POST">
-
 		  						<input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>" />
-
-								<!-- <div class='control-group'>
-									<span class="error"><?php echo $errors->first('nik') ?></span>
-									<input type="text" name="nik" placeholder="NIK" required class="insert-attr"  value="<?=Form::old('nik')?>" />
-								</div> -->
 								<div class="control-group">
-									<span class="error"><?php echo $errors->first('nama') ?></span>
 		    						<input type="text" name="name" placeholder="Nama" required class="insert-attr" value="<?=Form::old('name')?>" />
 								</div>
 								<div class='control-group'>
-									<span class="error"><?php echo $errors->first('email') ?></span>
 		    						<input type="text" name="email" placeholder="Email" value="<?=Form::old('email')?>" />
 								</div>
 								<div class='control-group'>
-									<span class="error"><?php echo $errors->first('telepon') ?></span>
 		    						<input type="text" name="telepon" placeholder="Telepon" value="<?=Form::old('telepon')?>" />
 								</div>
 								<div class="control-group">
-									<span class="error"><?php echo $errors->first('password') ?></span>
 								    <input type="password" name="password" placeholder="Password" />
 								</div>
 								<div class="control-group">
-								    <span class="error"><?php echo $errors->first('confirmation') ?></span>
 								    <input type="password" name="confirmation" placeholder="Confirmation Password" />
 								</div>
 								<button type="submit" value="Register Now" class='btn submit sub-form' name="submit">DAFTAR</button>
@@ -375,6 +370,12 @@
 </div>
 <!-- Animasi -->
 <style type="text/css">
+
+.item-error {
+    color: #c54242;
+    background: white;
+    padding: 10px 20px;
+}
 
 .xmedium-h {
 	margin-bottom: 30px;

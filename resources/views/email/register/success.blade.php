@@ -27,8 +27,8 @@
               <p>Terima kasih kepada anda yang sudah bergabung di Koperasi Daya Masyarakat Indonesia ( KODAMI ), berikut data pendaftaran anda.</p>
               <table style="width: 100%;max-width: 100%;margin-bottom: 20px;">
                 <tr>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">NIK</td>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->nik }}</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">No Anggota</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->no_anggota }}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Nama</td>

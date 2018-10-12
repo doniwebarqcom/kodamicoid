@@ -28,9 +28,8 @@
             <div class="col-md-12">
                 <div class="white-box">
                     <h3 class="box-title m-b-0">Manage USERS KARYAWAN</h3>
-                    <hr />
                     <div class="table-responsive">
-                        <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
+                        <table id="data_table_no_button" class="display nowrap" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th width="70" class="text-center">#</th>
@@ -39,9 +38,6 @@
                                     <th>EMAIL</th>
                                     <th>JENIS KELAMIN</th>
                                     <th>TELEPON</th>
-                                    <th>LAST LOGIN</th>
-                                    <th>LAST LOGOUT</th>
-                                    <th>STATUS</th>
                                     <th>AKSES LOGIN</th>
                                     <th width="300">MANAGE</th>
                                 </tr>
@@ -55,15 +51,6 @@
                                         <td>{{ $item->email }}</td>
                                         <td>{{ $item->jenis_kelamin }}</td>
                                         <td>{{ $item->telepon }}</td>
-                                        <td>{{ date('d F Y', strtotime($item->last_logged_in_at)) }}</td>
-                                        <td>{{ date('d F Y', strtotime($item->last_logged_out_at)) }}</td>
-                                        <td>
-                                            @if($item->status == 1)
-                                                <label class="btn btn-success btn-xs"><i class="fa fa-check"></i> Active</label>
-                                            @else
-                                                <label class="btn btn-danger btn-xs"><i class="fa fa-close"></i> Inactive</label>
-                                            @endif
-                                        </td>
                                         <td>{!! access_rules($item->access_id) !!}</td>
                                         <td>
                                             <a onclick="return confirm('Login sebagai {{ $item->name }} ?')" href="{{ route('admin.user.autologin', $item->id) }}" class="btn btn-warning btn-xs"><i class="fa fa-key"></i> Autologin</a>

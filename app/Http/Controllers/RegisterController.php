@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 use App\Mail\RegisterMail;
 use Mail;
+use Kodami\Models\Mysql\Users;
 
 class RegisterController extends Controller
 {
@@ -31,7 +32,7 @@ class RegisterController extends Controller
     		//'nik' 				=> 'required|unique:users',
     		'telepon'			=> 'required',
             'name'				=> 'required',
-    		//'email'				=> 'required|email|unique:users',
+    		'email'				=> 'required|email|unique:users',
     		'password'			=> 'required',
     		'confirmation'		=> 'required|same:password',
     	]);
@@ -47,8 +48,8 @@ class RegisterController extends Controller
     	$data->password 			= bcrypt($request->password); 
         $data->access_id            = 2; // User Sebagai Anggota
         $data->status               = 1; // menunggu pembayaran
+        $data->status_login         = 1;
     	$data->save();
-
         $data->password = $request->password;
         // send email
         Mail::to($data->email)->send(new RegisterMail($data));

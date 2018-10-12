@@ -31,9 +31,9 @@ class RegisterMail extends Mailable
      */
     public function build()
     {
-        return $this->markdown('emails.register.success')
+        return $this->markdown('email.register.success')
                 ->subject('Registrasi - Kodami Pocket System')
-                ->from('info@kodami.co.id')
+                ->from('services@kodami.co.id')
                 ;
     }
 }
