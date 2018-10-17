@@ -93,7 +93,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 	Route::resource('general-setting','SettingController',['as' => 'admin']);
 });
 // ROUTING ANGGOTA
-Route::group(['prefix' => 'anggota', 'namaspace' => 'Anggota', 'middleware' => ['auth', 'access:2']], function(){
+Route::group(['prefix' => 'anggota', 'namespace' => 'Anggota', 'middleware' => ['auth', 'access:2']], function(){
 	Route::get('/','IndexController@index')->name('anggota.dashboard');
 	Route::get('profile','IndexController@profile')->name('anggota.profile');
 	Route::get('user/konfirmasi-pembayaran','UserController@konfirmasiPembayaran');
