@@ -30,6 +30,7 @@
     <link href="{{ asset('admin-css/css/colors/green.css') }}" id="theme" rel="stylesheet">
     <link href="{{ asset('admin-css/plugins/bower_components/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin-css/vendor/css/ui/jquery-ui.min.css') }}" rel="stylesheet">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -190,16 +191,13 @@
     <script src="{{ asset('admin-css/plugins/bower_components/calendar/dist/fullcalendar.min.js') }}"></script>
     <script src="{{ asset('admin-css/plugins/bower_components/calendar/dist/cal-init.js') }}"></script>
     <script src="{{ asset('admin-css/plugins/bower_components/toast-master/js/jquery.toast.js') }}"></script>
-    
     <!-- Custom Theme JavaScript -->
     <script src="{{ asset('admin-css/js/custom.min.js') }}"></script>
     <script src="{{ asset('admin-css/js/dashboard1.js') }}?time=<?=date('His')?>"></script>
     <script src="{{ asset('js/bootbox.min.js') }}"></script>
     <!-- Custom tab JavaScript -->
     <script src="{{ asset('admin-css/js/cbpFWTabs.js') }}"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
+    <script src="{{ asset('admin-css/vendor/js/ui/jquery-ui.min.js') }}"></script>
     <!-- start - This is for export functionality only -->
     <script src="{{ asset('admin-css/plugins/bower_components/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
@@ -209,16 +207,8 @@
     <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
-    
+    <script src="{{ asset('js/set-datable.js?v='. date('His')) }}"></script>
     <script type="text/javascript">
-    
-    $('#data_table').DataTable({
-        dom: 'Bfrtip',
-        buttons: [
-            'copy', 'csv', 'excel', 'pdf', 'print'
-        ],
-        pageLength : 20
-    });
 
     /**
      * [numberWithComma description]
@@ -239,9 +229,16 @@
         $(this).parents(".myadmin-alert").fadeToggle(350);
         return false;
     });
-
     </script>
-
+    <script type="text/javascript">
+        @if(Session::has('message-success'))
+            bootbox.alert('<h3 class="text-success pull-left"><i class="fa fa-check"></i></h3><h4 class="pull-left" style="margin-left: 10px;"> {{ Session::get('message-success') }}</h4><br class="clearfix" /><br class="clearfix" />');
+        @endif
+        
+        @if(Session::has('message-error'))
+            bootbox.alert('<h3 class="text-danger pull-left"><i class="fa fa-check"></i></h3><h4 class="pull-left" style="margin-left: 10px;"> {{ Session::get('message-error') }}</h4><br class="clearfix" /><br class="clearfix" />');
+        @endif
+    </script>
     @yield('footer-script')
 
 </body>

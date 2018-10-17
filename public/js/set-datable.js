@@ -50,4 +50,10 @@ function init_datatable(){
         pageLength : 20
     });
 
+    $('.data_table').DataTable({
+        dom: 'Bfrtip',
+        buttons: [],
+        pageLength : 20,
+        searching: false
+    });
 }

@@ -116,9 +116,13 @@ Route::group(['prefix' => 'kasir', 'namespace' => 'Kasir', 'middleware' => ['aut
 	Route::get('back-to-admin','IndexController@backtoadmin')->name('kasir.back-to-admin');
 	Route::get('anggota/detail/{id}','AnggotaController@detail')->name('kasir.anggota.detail');
 	Route::get('anggota/cetak-kwitansi/{id}','AnggotaController@cetakKwitansi')->name('kasir.anggota.cetak-kwitansi');
+	Route::post('anggota/topup-simpanan-pokok', 'AnggotaController@topupSimpananPokok')->name('kasir.anggota.topup-simpanan-pokok');
+	Route::post('anggota/topup-simpanan-wajib', 'AnggotaController@topupSimpananWajib')->name('kasir.anggota.topup-simpanan-wajib');
+	Route::post('anggota/topup-simpanan-sukarela', 'AnggotaController@topupSimpananSukarela')->name('kasir.anggota.topup-simpanan-sukarela');
+	Route::post('ajax/submit-simpanan-sukarela', 'AjaxController@submitSimpananSukarela')->name('ajax.kasir.submit-simpanan-sukarela');
 	Route::resource('anggota','AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'kasir']);
 });
-// ROUTING TELLER / KASIR
+// ROUTING CS
 Route::group(['prefix' => 'cs', 'namespace' => 'Cs', 'middleware' => ['auth', 'access:4']], function(){
 	Route::get('/','IndexController@index')->name('cs.index');
 	Route::get('back-to-admin','IndexController@backtoadmin')->name('cs.back-to-admin');

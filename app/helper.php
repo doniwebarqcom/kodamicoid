@@ -45,28 +45,3 @@ if (!function_exists('get_api_response')) {
       return (object) $result_respon;
    }
 }
-
-/**
- * [status_anggota description]
- * @param  [type] $id [description]
- * @return [type]     [description]
- */
-function status_anggota($id)
-{
-   $user = App\ModelUser::where('id', $id)->first();
-
-   switch ($user->status) {
-      case 1:
-         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Inactive</a>";
-         break;
-      case 2:
-            return "<a class=\"btn btn-success btn-xs\"><i class=\"fa fa-check\"></i> Active</a>";
-         break;
-      case 3:
-         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Reject</a>";
-         break;
-      default:
-         return "<a class=\"btn btn-warning btn-xs\"><i class=\"fa fa-ban\"></i> Inactive</a>";
-         break;
-   }
-}

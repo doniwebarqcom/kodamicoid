@@ -28,10 +28,9 @@
     <link href="{{ asset('admin-css/css/style.css') }}?time=<?=date('His')?>" rel="stylesheet">
     <!-- color CSS -->
     <link href="{{ asset('admin-css/css/colors/green.css') }}" id="theme" rel="stylesheet">
-
     <link href="{{ asset('admin-css/plugins/bower_components/datatables/jquery.dataTables.min.css') }}" rel="stylesheet" type="text/css" />
     <link href="https://cdn.datatables.net/buttons/1.2.2/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
-    
+    <link href="{{ asset('admin-css/vendor/css/ui/jquery-ui.min.css') }}" rel="stylesheet"> 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -141,20 +140,9 @@
                 </ul>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- End Left Sidebar -->
-        <!-- ============================================================== -->
-
-        @yield('content')
-        
-        @include('layout.alert')
-
-    <!-- ============================================================== -->
-    <!-- End Wrapper -->
-    <!-- ============================================================== -->
-    <!-- ============================================================== -->
-    <!-- All Jquery -->
-    <!-- ============================================================== -->
+    
+    @yield('content')
+    
     <script src="{{ asset('admin-css/plugins/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ asset('admin-css/bootstrap/dist/js/bootstrap.min.js') }}"></script>
@@ -185,9 +173,7 @@
     <script src="{{ asset('js/bootbox.min.js') }}"></script>
     <!-- Custom tab JavaScript -->
     <script src="{{ asset('admin-css/js/cbpFWTabs.js') }}"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    
+    <script src="{{ asset('admin-css/vendor/js/ui/jquery-ui.min.js') }}"></script>
     <!-- start - This is for export functionality only -->
     <script src="{{ asset('admin-css/plugins/bower_components/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/dataTables.buttons.min.js"></script>
@@ -219,9 +205,17 @@
         $(this).parents(".myadmin-alert").fadeToggle(350);
         return false;
     });
-
     </script>
-
+    
+    <script type="text/javascript">
+        @if(Session::has('message-success'))
+            bootbox.alert('<h3 class="text-success pull-left" style="margin-top: -4px;"><i class="fa fa-check"></i></h3><p class="pull-left" style="margin-left: 10px;"> {{ Session::get('message-success') }}</p><br class="clearfix" /><br class="clearfix" />');
+        @endif
+        
+        @if(Session::has('message-error'))
+            bootbox.alert('<h3 class="text-danger pull-left" style="margin-top: -4px;"><i class="fa fa-check"></i></h3><p class="pull-left" style="margin-left: 10px;"> {{ Session::get('message-error') }}</p><br class="clearfix" /><br class="clearfix" />');
+        @endif
+    </script>
     @yield('footer-script')
 
 </body>

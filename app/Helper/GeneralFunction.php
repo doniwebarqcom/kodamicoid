@@ -1,6 +1,31 @@
 <?php
 
 /**
+ * [status_anggota description]
+ * @param  [type] $id [description]
+ * @return [type]     [description]
+ */
+function status_anggota($id)
+{
+   $user = App\ModelUser::where('id', $id)->first();
+
+   switch ($user->status) {
+      case 1:
+         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Inactive</a>";
+         break;
+      case 2:
+            return "<a class=\"btn btn-success btn-xs\"><i class=\"fa fa-check\"></i> Active</a>";
+         break;
+      case 3:
+         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Reject</a>";
+         break;
+      default:
+         return "<a class=\"btn btn-warning btn-xs\"><i class=\"fa fa-ban\"></i> Inactive</a>";
+         break;
+   }
+}
+
+/**
  * [all_simpanan_wajib description]
  * @return [type] [description]
  */
@@ -62,12 +87,13 @@ function access_rules($selected = 0)
                   4 => 'Customer Service',
                   5 => 'Operator',
                   6 => 'Admin Operator',
-                  7 => 'Dropshiper'
+                  7 => 'Dropshiper',
+                  8 => 'Admin Produk'
                ];
 
    if($selected != null || $selected != "" || $selected != 0)
    {
-      return '<span class="label label-info"><i class="fa fa-key"></i> '. $array_map[$selected] .'</span>';
+      return '<span class="label label-info"><i class="fa fa-key"></i> '. @$array_map[$selected] .'</span>';
    }
 
    return $array_map;

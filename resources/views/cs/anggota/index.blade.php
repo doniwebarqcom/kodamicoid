@@ -31,7 +31,7 @@
                     <h3 class="box-title m-b-0">Manage Anggota</h3>
                     <br />
                     <div class="table-responsive">
-                        <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
+                        <table class="display nowrap data_table" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th width="70" class="text-center">#</th>
@@ -44,7 +44,7 @@
                                     <th>LAST LOGOUT</th>
                                     <th>ADDED</th>
                                     <th>STATUS</th>
-                                    <th width="300">MANAGE</th>
+                                    <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -63,7 +63,7 @@
                                             {!! status_anggota($item->id) !!}
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> detail</button></a>
+                                            <a href="{{ route('cs.anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> detail</button></a>
                                         </td>
                                     </tr>
                                 @endforeach

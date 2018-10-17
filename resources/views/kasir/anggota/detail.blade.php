@@ -1,15 +1,8 @@
 @extends('layout.kasir')
 
-@section('title', 'Kasir - Koperasi Daya Masyarakat Indonesia')
-
-@section('sidebar')
-
-@endsection
+@section('title', 'Kasir')
 
 @section('content')
-<!-- ============================================================== -->
-<!-- Page Content -->
-<!-- ============================================================== -->
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -30,12 +23,45 @@
                     <h2># {{ $data->name }} / {{ $data->no_anggota }}</h2>
                     <hr style="margin-top:0;" >
                     <h3 class="pull-right" style="position: absolute;top:0;right:30px;cursor:pointer;" onclick="delete_el(this)"><i class="fa fa-close"></i></h3>
+                    <div class="col-md-4">
+                        <div class="col-md-4">
+                            @if(!empty($data->foto))
+                                <img src="{{ asset('file_photo/'. $data->id .'/'. $data->foto) }}" style="width: 100%;" />
+                            @else
+                                <img src="{{ asset('images/default-user.png') }}" style="width: 100%;">
+                            @endif
+                        </div>
+                        <div class="col-md-7">
+                            @if($data->status == 1)
+                                <label class="btn btn-success btn-sm"><i class="fa fa-check"></i> Aktif</label>
+                            @else
+                                <label class="btn btn-danger btn-sm"><i class="fa fa-close"></i> Inaktif</label>
+                            @endif
+                            <table class="table">
+                                <tr>
+                                    <th style="padding-bottom: 8px;">No Anggota</th>
+                                    <th style="padding-bottom: 8px;">{{ $data->no_anggota }}</th>
+                                </tr>
+                                <tr>
+                                    <th style="padding-bottom: 8px;">Name</th>
+                                    <th style="padding-bottom: 8px;">{{ $data->name }}</th>
+                                </tr>
+                                <tr>
+                                    <th style="padding-bottom: 8px;">Email</th>
+                                    <th style="padding-bottom: 8px;">{{ $data->email }}</th>
+                                </tr>
+                                <tr>
+                                    <th style="padding-bottom: 8px;">Jenis Kelamin</th>
+                                    <th style="padding-bottom: 8px;">{{ $data->jenis_kelamin }}</th>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
                     <div class="col-md-2">
                         <h3 style="margin-top: 0;"><small>Simpanan Wajib</small>
                             <br /> Rp. {{ number_format(simpanan_wajib($data->id)->where('status', 3)->sum('nominal')) }}
-                                                        </h3>
+                        </h3>
                         <label class="btn btn-info btn-xs" onclick="topup_simpanan_wajib()"><i class="fa fa-plus"></i> Topup</label>
-                    
                         <p>Jatuh tempo pembayaran selanjutnya<br /> <label class="text-danger">{{ date('d F Y', strtotime($data->first_durasi_pembayaran_date ." + ". $data->durasi_pembayaran ." month") ) }}</label></p>
                     </div>
                     <div class="col-md-2">
@@ -72,7 +98,7 @@
                             <div class="tab-content" style="margin-top:0;">
                                 <div id="transaksi" class="tab-pane active">
                                     <h3>Transaksi</h3>
-                                    <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
+                                    <table class="display nowrap data_table" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -86,6 +112,7 @@
                                             @foreach($transaksi as $no => $item)
                                                 <tr>
                                                     <td>{{ $no+1 }}</td>
+                                                    <td>{{ number_format($item->nominal) }}</td>
                                                     <td>{{ date('d F Y H:i:s', strtotime($item->created_at)) }}</td>    
                                                     <td>{{ isset($item->user_proses->name) ? $item->user_proses->name : '' }}</td>
                                                     <td>
@@ -99,7 +126,7 @@
 
                                 <div id="simpanan_pokok" class="tab-pane">
                                     <h3>Simpanan Pokok</h3>
-                                    <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
+                                    <table class="display nowrap data_table" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -126,7 +153,7 @@
                                 </div>
                                 <div id="simpanan_sukarela" class="tab-pane">
                                     <h3>Simpanan Sukarela</h3>
-                                    <table id="data_table2" class="display nowrap" cellspacing="0" width="100%">
+                                    <table class="display nowrap data_table" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -153,7 +180,7 @@
                                 </div>
                                 <div id="simpanan_wajib" class="tab-pane">
                                     <h3>Simpanan Wajib</h3>
-                                    <table id="data_table3" class="display nowrap" cellspacing="0" width="100%">
+                                    <table class="display nowrap data_table" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -261,12 +288,11 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
 <!-- modal simpanan pokok-->
 <div id="modal_simpanan_pokok" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST" action="{{ route('admin.anggota.topup-simpanan-pokok') }}">
+            <form method="POST" action="{{ route('kasir.anggota.topup-simpanan-pokok') }}" onsubmit="return confirm('Topup Simpanan Pokok ?')">
                 {{ csrf_field() }}
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -274,13 +300,17 @@
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label>Nominal</label>
+                        <label>Nominal (Rp. )</label>
                         <input type="number" name="nominal" class="form-control" value="{{ get_setting('simpanan_pokok') }}">
                     </div>
+                    <p>
+                        *Catatan: <br /> Saldo Simpanan Pokok Minimal Rp. 100.000
+                    </p>
+                    <input type="hidden" name="user_id" value="{{ $data->id }}">
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger waves-effect btn-sm" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
-                    <button type="submit" class="btn btn-success waves-effect btn-sm"><i class="fa fa-print"></i> Topup Simpanan Pokok</button>
+                    <button type="button" class="btn btn-danger waves-effect btn-sm" data-dismiss="modal"><i class="fa fa-close"></i> Batal</button>
+                    <button type="submit" class="btn btn-success waves-effect btn-sm"><i class="fa fa-check"></i> Topup Simpanan Pokok</button>
                 </div>
             </form>
         </div>
@@ -293,7 +323,7 @@
 <div id="modal_simpanan_wajib" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form method="POST" action="{{ route('admin.anggota.topup-simpanan-wajib') }}">
+            <form method="POST" action="{{ route('kasir.anggota.topup-simpanan-wajib') }}" onsubmit="return confirm('Topup Simpanan Wajib ?')">
                 {{ csrf_field() }}
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -314,6 +344,7 @@
                     <br />
                     <label>Total : </label>
                     <input type="input" name="total" class="form-control total_simpanan_wajib" readonly="true" value="{{ get_setting('simpanan_wajib') }}" />
+                    <input type="hidden" name="user_id" value="{{ $data->id }}" >
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger waves-effect btn-sm" data-dismiss="modal"><i class="fa fa-close"></i> Cancel</button>
@@ -326,12 +357,9 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
-
 @include('layout.footer-admin')
 </div>
 @section('footer-script')
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script type="text/javascript">
     function delete_el(el)
     {
@@ -371,7 +399,6 @@
                     }, 500);
                 }
             });
-
             $(".autocomplete-anggota" ).val("");
         }
     }).on('focus', function () {
@@ -398,6 +425,16 @@
             var pr = bootbox.prompt({
                 title: "Topup Simpanan Sukarela ",
                 inputType: 'number',
+                buttons: {
+                        confirm: {
+                            label: '<i class="fa fa-check"></i> TOPUP',
+                            className: 'btn-success btn-sm'
+                        },
+                        cancel: {
+                            label: '<i class="fa fa-close"></i> BATAL',
+                            className: 'btn-danger btn-sm'
+                        }
+                    },
                 callback: function (nominal) 
                 {
                     if(nominal != null)
@@ -406,11 +443,11 @@
                             message: "Apakah anda ingin Topup Simpanan Sukarela ?",
                             buttons: {
                                 confirm: {
-                                    label: '<i class="fa fa-check"></i> Yes',
+                                    label: '<i class="fa fa-check"></i> Ya',
                                     className: 'btn-success btn-sm'
                                 },
                                 cancel: {
-                                    label: '<i class="fa fa-close"></i> No',
+                                    label: '<i class="fa fa-close"></i> Tidak',
                                     className: 'btn-danger btn-sm'
                                 }
                             },
@@ -418,12 +455,13 @@
                                 
                                 if(result)
                                 {   
+                                    $(".modal-footer").hide();
                                     confirm.find('.bootbox-body').html('<p><i class="fa fa-spin fa-spinner"></i> Silahkan tunggu beberapa saat ...</p>');
 
                                     setTimeout(function(){
                                          $.ajax({
-                                            url: "{{ route('ajax.admin.submit-simpanan-sukarela') }}", 
-                                            data: {'_token' : '{{csrf_token()}}','nominal' : nominal },
+                                            url: "{{ route('ajax.kasir.submit-simpanan-sukarela') }}", 
+                                            data: {'_token' : '{{csrf_token()}}','nominal' : nominal, 'user_id' : {{ $data->id }} },
                                             type: 'POST',
                                             success: function(res)
                                             {
@@ -431,7 +469,7 @@
                                                 {
                                                     confirm.modal('hide');
                                                     
-                                                    bootbox.alert("Anda Berhasil Topup Simpanan Sukarela sebesar <strong>Rp. "+ numberWithComma(nominal) +"</strong>", function() {
+                                                       bootbox.alert("Anda Berhasil Topup Simpanan Sukarela sebesar <strong>Rp. "+ numberWithComma(nominal) +"</strong> <br /><a href=\""+ res.link_cetak +"\" class=\"btn btn-default btn-sm\" target=\"_blank\"><i class=\"fa fa-print\"></i> Cetak Kwitansi</a>", function() {
                                                         location.reload();
                                                     });
 
@@ -440,7 +478,7 @@
                                                 }
                                             }
                                         })
-                                    }, 2000);
+                                    }, 1000);
 
                                     return false;
                                 }
