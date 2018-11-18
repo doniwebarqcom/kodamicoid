@@ -80,7 +80,7 @@
             <div class="navbar-header">
                 <div class="top-left-part">
                     <!-- Logo -->
-                    <a class="logo" href="{{ url('anggota') }}"><b>KODAMI Pocket System</b>
+                    <a class="logo" href="{{ url('cs') }}"><b>KODAMI Pocket System</b>
                         <span class="hidden-xs">&nbsp;</span> 
                     </a>
                 </div>
@@ -139,7 +139,7 @@
                             <li><a href="{{ url('logout') }}"><i class="fa fa-power-off"></i> <span class="hide-menu">Logout</span></a></li>
                         </ul>
                     </li>
-                    <li> <a href="{{ url('anggota') }}" class="waves-effect active"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span class="label label-rouded label-inverse pull-right">4</span></span></a>
+                    <li> <a href="{{ url('cs') }}" class="waves-effect active"><i class="mdi mdi-av-timer fa-fw" data-icon="v"></i> <span class="hide-menu"> Dashboard <span class="fa arrow"></span> <span class="label label-rouded label-inverse pull-right">4</span></span></a>
                     </li>
 
                     <li class="devider"></li>
