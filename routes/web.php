@@ -15,6 +15,11 @@ date_default_timezone_set("Asia/Bangkok");
 
 function route_index()
 {
+	
+}
+
+Route::get('/', function () {
+	
 	if(Auth::check())
     {
         if(Auth::user()->access_id == 2) // Anggota
@@ -32,16 +37,28 @@ function route_index()
             return redirect()->route('cs.index');
         }
     }
-}
-
-Route::get('/', function () {
-	
-	route_index();
 
     return view('welcome');
 });
 Route::get('home', function () {
-	route_index();
+	if(Auth::check())
+    {
+        if(Auth::user()->access_id == 2) // Anggota
+        {
+            return redirect()->route('anggota.dashboard');
+        }
+
+        if(Auth::user()->access_id == 1) // Admin
+        {
+            return redirect()->route('admin.dashboard');
+        }
+
+        if(Auth::user()->access_id == 4) // CS
+        {
+            return redirect()->route('cs.index');
+        }
+    }
+    
     return view('welcome');
 });
 
