@@ -8,7 +8,7 @@
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">Dashboard</h4> </div>
+                <h4 class="page-title">Data Anggota</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
@@ -21,8 +21,6 @@
         <div class="row">
             <div class="col-md-12">
             <div class="white-box">
-                <h3 class="box-title m-b-0">Data Anggota</h3>
-                <hr />
                 <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('cs.anggota.update', $data->id) }}" method="POST">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="active" role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Profile</span></a></li>
