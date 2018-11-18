@@ -2,12 +2,7 @@
 
 @section('title', 'Pembayaran Anggota - Koperasi Daya Masyarakat Indonesia')
 
-@section('sidebar')
-
-@endsection
-
 @section('content')
-
 <div id="page-wrapper" style="min-height: 439px;">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -308,7 +303,8 @@
             width: 100%;
         }
         .active-bank{
-            background-color: #cfe1ec !important;
+            border:1px solid #cfe1ec !important;
+            padding: 5px;
         }
         .checklist-bank {
             position: absolute;
