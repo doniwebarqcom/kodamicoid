@@ -33,9 +33,9 @@
             </table>
             <p class="text-center">SIMPAN KWITANSI INI SEBAGAI BUKTI TRANSAKSI TERIMAKASIH</p>
             <hr />
-            <p class="text-center">Koperasi Produsen Daya Masyarakat Indonesia</p>
+            <p class="text-center">Koperasi Daya Masyarakat Indonesia</p>
             <p class="text-center">
-               Jalan Raya Maospati - Gorang Gareng Ds Belot<br /> RT 34 / 12 - Kabupaten Magetan 63384 <br />
+               Jalan Raya Maospati - Gorang Gareng Ds Belotan<br /> RT 34 / 12 - Kabupaten Magetan 63384 <br />
                Telpon : (0351) 4360 167 / 4360 661<br />
                Email : services@kodami.co.id<br />
                http://kodami.co.id
