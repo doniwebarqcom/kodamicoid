@@ -1,4 +1,4 @@
-@extends('layout.admin')
+@extends('layout.cs')
 
 @section('title', 'Customer Service')
 
