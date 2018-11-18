@@ -45,6 +45,19 @@ Route::get('home', function () {
     return view('welcome');
 });
 
+Route::get('sendemail', function(){
+	
+	$params['text'] = 'Hellooo.....';
+
+	\Mail::send('email.default', $params,
+        function($message){
+            $message->from('info@kodami.co.id');
+            $message->to('doni.enginer@gmail.com');
+            $message->subject('Testing');
+        }
+    );   
+});
+
 Route::get('register/success', 'RegisterController@success');
 Route::get('register', 'RegisterController@index');
 Route::get('logout', 'Auth\LoginController@logout');
