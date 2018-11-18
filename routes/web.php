@@ -13,11 +13,6 @@
 
 date_default_timezone_set("Asia/Bangkok");
 
-function route_index()
-{
-	
-}
-
 Route::get('/', function () {
 	
 	if(Auth::check())
@@ -58,7 +53,7 @@ Route::get('home', function () {
             return redirect()->route('cs.index');
         }
     }
-    
+
     return view('welcome');
 });
 
