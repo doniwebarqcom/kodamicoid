@@ -31,7 +31,7 @@
                     <h3 class="box-title m-b-0">Manage Anggota</h3>
                     <br />
                     <div class="table-responsive">
-                        <table class="display nowrap data_table" cellspacing="0" width="100%">
+                        <table class="display nowrap" id="data_table_no_button" cellspacing="0" width="100%">
                             <thead>
                                 <tr>
                                     <th width="70" class="text-center">#</th>
