@@ -52,7 +52,7 @@ class RegisterController extends Controller
     	$data->save();
         $data->password = $request->password;
         // send email
-        //Mail::to($data->email)->send(new RegisterMail($data));
+        Mail::to($data->email)->send(new RegisterMail($data));
 
     	return redirect('register/success')->with('success-register', 'Berhasil melakukan registrasi');
     }
