@@ -55,7 +55,7 @@
                                                     <h3>Bank Transfer</h3>
                                                     <p>Pilih salah satu bank yang akan anda transfer</p>  
                                                     @foreach($rekening_bank as $item)
-                                                    <div class="col-md-4 list-bank" style="margin-right: 20px; cursor: pointer;">
+                                                    <div class="list-bank" style="margin-right: 20px; padding: 10px; cursor: pointer;">
                                                         <input type="hidden" class="hidden-rekening_bank_id" value="{{ $item->id }}">
                                                         <input type="hidden" class="hidden-rekening_bank_nama_akun" value="{{ $item->nama_akun }}">
                                                         <input type="hidden" class="hidden-rekening_bank_no_rekening" value="{{ $item->no_rekening }}">
