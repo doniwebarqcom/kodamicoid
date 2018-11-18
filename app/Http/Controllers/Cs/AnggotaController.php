@@ -13,7 +13,7 @@ class AnggotaController extends Controller
 	 */
     public function index()
     {
-    	$data = \App\UserModel::where('access_id', 2)->orderBy('id', 'DESC')->get();
+    	$data = \App\UserModel::where('access_id', 2)->orWhere('access_id', 7)->orderBy('id', 'DESC')->get();
 
     	return view('cs.anggota.index', compact('data'));
     }
