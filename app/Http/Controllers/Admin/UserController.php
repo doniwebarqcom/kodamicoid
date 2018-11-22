@@ -71,7 +71,7 @@ class UserController extends ControllerLogin
         $data->no_anggota           = $request->no_anggota;
         $data->nik                  = $request->nik;
         $data->telepon              = $request->telepon;
-        $data->name                 = $request->name;
+        $data->name                 = strtoupper($request->name);
         $data->email                = $request->email; 
         $data->jenis_kelamin        = $request->jenis_kelamin;
         $data->access_id            = $request->access_id;
@@ -100,7 +100,7 @@ class UserController extends ControllerLogin
         $data->no_anggota           = $request->no_anggota;
         $data->nik                  = $request->nik;
         $data->telepon              = $request->telepon;
-        $data->name                 = $request->name;
+        $data->name                 = strtoupper($request->name);
         $data->email                = $request->email;
         $data->jenis_kelamin        = $request->jenis_kelamin;
         $data->password             = bcrypt($request->password); 

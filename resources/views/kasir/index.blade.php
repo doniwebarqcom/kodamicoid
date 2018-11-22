@@ -2,14 +2,7 @@
 
 @section('title', 'Kasir - Koperasi Daya Masyarakat Indonesia')
 
-@section('sidebar')
-
-@endsection
-
 @section('content')
-<!-- ============================================================== -->
-<!-- Page Content -->
-<!-- ============================================================== -->
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -33,7 +26,7 @@
                             <li><i class="icon-people text-info"></i></li>
                             <li class="text-right"><span class="counter">{{ total_anggota('active') }}</span></li>
                         </ul>
-                        <a href="{{ route('cs.anggota.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Anggota</a>
+                        <!-- <a href="{{ route('cs.anggota.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Anggota</a> -->
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -44,7 +37,7 @@
                             <li><i class="icon-folder text-purple"></i></li>
                             <li class="text-right"><h2 class="counter">{{ all_simpanan_pokok()->where('status', 3)->sum('nominal') }}</h2></li>
                         </ul>
-                        <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Pokok</button>
+                        <!-- <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Pokok</button> -->
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -55,7 +48,7 @@
                             <li><i class="icon-folder-alt text-danger"></i></li>
                             <li class="text-right"><h2 class="">{{ all_simpanan_sukarela()->where('status', 3)->sum('nominal') }}</h2></li>
                         </ul>
-                        <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Sukarela</button>
+                        <!-- <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Sukarela</button> -->
                         <div class="clearfix"></div>
                     </div>
                 </div>
@@ -66,16 +59,13 @@
                             <li><i class="ti-wallet text-success"></i></li>
                             <li class="text-right"><h2 class="">{{ number_format(all_simpanan_wajib()->where('status', 3)->sum('nominal')) }}</h2></li>
                         </ul>
-                        <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Wajib</button>
+                        <!-- <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Wajib</button> -->
                         <div class="clearfix"></div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- /.row -->
-        <!-- ============================================================== -->
     </div>
-    <!-- /.container-fluid -->
 </div>
 
 <!-- sample modal content -->

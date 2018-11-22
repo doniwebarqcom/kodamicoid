@@ -1,6 +1,16 @@
 <?php
 
 /**
+ * [getInvoicePulsa description]
+ * @param  [type] $no_invoice [description]
+ * @return [type]             [description]
+ */
+function getInvoicePulsa($no_invoice)
+{
+  return \Kodami\Models\Mysql\PPulsaTransaksi::where('no_invoice', $no_invoice)->first();
+}
+
+/**
  * [status_anggota description]
  * @param  [type] $id [description]
  * @return [type]     [description]

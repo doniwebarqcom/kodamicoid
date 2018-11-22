@@ -104,6 +104,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 	Route::resource('simpanan-wajib','SimpananWajibController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('general-setting','SettingController',['as' => 'admin']);
 });
+
 // ROUTING ANGGOTA
 Route::group(['prefix' => 'anggota', 'namespace' => 'Anggota', 'middleware' => ['auth', 'access:2']], function(){
 	Route::get('/','IndexController@index')->name('anggota.dashboard');

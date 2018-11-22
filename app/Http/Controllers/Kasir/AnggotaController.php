@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Kodami\Models\Mysql\Users;
 use Kodami\Models\Mysql\Deposit;
+use Kodami\Models\Mysql\PPulsaTransaksi;
 
 class AnggotaController extends Controller
 {	
@@ -27,8 +28,11 @@ class AnggotaController extends Controller
      */
     public function detail($id)
     {
+        $deposit                = Deposit::select('id','user_id','nominal','created_at', \DB::raw(' 0 as jenis_transaksi'),'type','no_invoice')->where('user_id', $id)->orderBy('id', 'DESC')->get(); 
+        $pulsa                  = PPulsaTransaksi::select('id','user_id',\DB::raw('harga_beli as nominal'), 'created_at', \DB::raw('1 as jenis_transaksi'), \DB::raw('p_pulsa_id as type'),'no_invoice')->where('user_id', $id)->orderBy('id', 'DESC')->get(); 
+        
         $params['data']         = Users::where('id', $id)->first(); 
-        $params['transaksi']    = Deposit::where('user_id', $id)->orderBy('id', 'DESC')->get();
+        $params['transaksi']    = $deposit->union($pulsa);
 
         return view('kasir.anggota.detail')->with($params);
     }

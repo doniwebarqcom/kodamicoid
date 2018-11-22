@@ -43,7 +43,7 @@ class RegisterController extends Controller
     	//$data->nik 					= $request->nik;
     	$data->telepon 				= $request->telepon;
     	$data->no_anggota 			= $no_anggota;
-    	$data->name 				= $request->name;
+    	$data->name 				= strtoupper($request->name);
     	$data->email 				= $request->email;
     	$data->password 			= bcrypt($request->password); 
         $data->access_id            = 2; // User Sebagai Anggota

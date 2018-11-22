@@ -69,7 +69,9 @@ class AjaxController extends Controller
         
         if($request->ajax())
         {
-            $data =  \Kodami\Models\Mysql\Users::where('access_id', 2)->where(function($table) use ($request){
+            $data =  \Kodami\Models\Mysql\Users::where(function($table){
+                $table->orWhere('access_id',2)->orWhere('access_id', 7);
+            })->where(function($table) use ($request){
                 $table->where('name', 'LIKE', "%". $request->name . "%")
                       ->orWhere('no_anggota', 'LIKE', '%'. $request->name .'%');
             })->get();
@@ -80,7 +82,7 @@ class AjaxController extends Controller
                 if($k >= 10) continue;
 
                 $params[$k]['id'] = $item->id;
-                $params[$k]['value'] = $item->no_anggota .' - '. $item->name;
+                $params[$k]['value'] = (!empty($item->no_anggota) ? $item->no_anggota .' - ' : '') .$item->name;
             }
 
             $this->respon = ['message' => 'success', 'data' => $params];

@@ -62,17 +62,20 @@
                             <br /> Rp. {{ number_format(simpanan_wajib($data->id)->where('status', 3)->sum('nominal')) }}
                         </h3>
                         <label class="btn btn-info btn-xs" onclick="topup_simpanan_wajib()"><i class="fa fa-plus"></i> Topup</label>
-                        <p>Jatuh tempo pembayaran selanjutnya<br /> <label class="text-danger">{{ date('d F Y', strtotime($data->first_durasi_pembayaran_date ." + ". $data->durasi_pembayaran ." month") ) }}</label></p>
+                        <label class="btn btn-danger btn-xs"  onclick="alert('Maaf Fitur masih dalam pengembangan.')"><i class="fa fa-minus"></i> Withdraw</label>
+                        <!-- <p>Jatuh tempo pembayaran selanjutnya<br /> <label class="text-danger">{{ date('d F Y', strtotime($data->first_durasi_pembayaran_date ." + ". $data->durasi_pembayaran ." month") ) }}</label></p> -->
                     </div>
                     <div class="col-md-2">
                         <h3><small>Simpanan Pokok</small><br /> Rp. {{ number_format(simpanan_pokok($data->id)->where('status', 3)->sum('nominal')) }}</h3>
                         @if(simpanan_pokok($data->id)->where('status', 3)->sum('nominal') == 0)
                             <label class="btn btn-info btn-xs" onclick="topup_simpanan_pokok()"><i class="fa fa-plus"></i> Topup</label>
+                            <label class="btn btn-danger btn-xs" onclick="alert('Maaf Fitur masih dalam pengembangan.')"><i class="fa fa-minus"></i> Withdraw</label>
                         @endif
                     </div>
                     <div class="col-md-2">
                         <h3><small>Simpanan Sukarela</small><br /> Rp. {{ number_format(simpanan_sukarela($data->id)->where('status', 3)->sum('nominal')) }}</h3>
                         <label class="btn btn-info btn-xs" onclick="topup()"><i class="fa fa-plus"></i> Topup</label>
+                        <label class="btn btn-danger btn-xs"  onclick="alert('Maaf Fitur masih dalam pengembangan.')"><i class="fa fa-minus"></i> Withdraw</label>
                     </div>
                     <div class="clearfix"></div>
                     <hr />
@@ -102,28 +105,43 @@
                                         <thead>
                                             <tr>
                                                 <th>No</th>
+                                                <th>Jenis Transaksi</th>
                                                 <th>Nominal</th>
                                                 <th>Tanggal</th>
-                                                <th>User Proses</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach($transaksi as $no => $item)
-                                                <tr>
-                                                    <td>{{ $no+1 }}</td>
-                                                    <td>{{ number_format($item->nominal) }}</td>
-                                                    <td>{{ date('d F Y H:i:s', strtotime($item->created_at)) }}</td>    
-                                                    <td>{{ isset($item->user_proses->name) ? $item->user_proses->name : '' }}</td>
-                                                    <td>
-                                                        <a href="{{ route('kasir.anggota.cetak-kwitansi', $item->id) }}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-print"></i> cetak kwitansi</a>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                        @foreach($transaksi as $no => $item)
+                                            <tr>
+                                                <td>{{ $no+1 }}</td>
+                                                <td>
+                                                    @if($item->jenis_transaksi == 0)
+                                                        {{ @type_deposit($item->type) }}
+                                                    @endif
+
+                                                    @if($item->jenis_transaksi == 1)
+                                                        @php($pulsa = getInvoicePulsa($item->no_invoice))
+                                                        {{ isset($pulsa->pulsa->provider->keterangan) ? $pulsa->pulsa->provider->keterangan .' - ' : '' }} {{ isset($pulsa->pulsa->kode_produk) ? $pulsa->pulsa->kode_produk : '' }}  
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($no==0)
+                                                        <!-- <label class="text-danger"><i class="fa fa-minus"></i> </label>  -->
+                                                    @else
+                                                        <!-- <label class="text-info"><i class="fa fa-plus"></i> </label>  -->
+                                                    @endif
+                                                    {{ number_format($item->nominal) }}
+                                                </td>
+                                                <td>{{ date('d F Y H:i:s', strtotime($item->created_at)) }}</td>    
+                                                <td>
+                                                    <a href="{{ route('kasir.anggota.cetak-kwitansi', $item->id) }}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-print"></i> cetak</a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
                                         </tbody>
                                     </table>
                                 </div>
-
                                 <div id="simpanan_pokok" class="tab-pane">
                                     <h3>Simpanan Pokok</h3>
                                     <table class="display nowrap data_table" cellspacing="0" width="100%">
@@ -186,7 +204,7 @@
                                                 <th>No</th>
                                                 <th>Nominal</th>
                                                 <th>Tanggal</th>
-                                                <th>User Proses</th>
+                                                <th>Jatuh Tempo Pembayaran</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -196,7 +214,9 @@
                                                 <td>{{ $no+1 }}</td>
                                                 <td>{{ number_format($item->nominal) }}</td>    
                                                 <td>{{ date('d F Y H:i:s', strtotime($item->created_at)) }}</td>  
-                                                <td>{{ isset($item->user_proses->name) ? $item->user_proses->name : '' }}</td>  
+                                                <td>
+                                                    {{ date('d F Y', strtotime($data->first_durasi_pembayaran_date ." + ". $data->durasi_pembayaran ." month") ) }}
+                                                </td>  
                                                 <td>
                                                     <a href="{{ route('admin.anggota.cetak-kwitansi', $item->id) }}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-print"></i> cetak kwitansi</a>
                                                 </td>
@@ -211,58 +231,10 @@
                     </div>
                 </div>
             </div>
-            <div class="row">
-                <div class="col-lg-3 col-sm-6 col-xs-12">
-                    <div class="white-box">
-                        <h3 class="box-title">DATA ANGGOTA</h3>
-                        <ul class="list-inline two-part">
-                            <li><i class="icon-people text-info"></i></li>
-                            <li class="text-right"><span class="counter">{{ total_anggota('active') }}</span></li>
-                        </ul>
-                        <a href="{{ route('cs.anggota.create') }}" class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Anggota</a>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-xs-12">
-                    <div class="white-box">
-                        <h3 class="box-title">SIMPANAN POKOK</h3>
-                        <ul class="list-inline two-part">
-                            <li><i class="icon-folder text-purple"></i></li>
-                            <li class="text-right"><h2 class="counter">{{ all_simpanan_pokok()->where('status', 3)->sum('nominal') }}</h2></li>
-                        </ul>
-                        <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Pokok</button>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-xs-12">
-                    <div class="white-box">
-                        <h3 class="box-title">SIMPANAN SUKARELA</h3>
-                        <ul class="list-inline two-part">
-                            <li><i class="icon-folder-alt text-danger"></i></li>
-                            <li class="text-right"><h2 class="">{{ all_simpanan_sukarela()->where('status', 3)->sum('nominal') }}</h2></li>
-                        </ul>
-                        <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Sukarela</button>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6 col-xs-12">
-                    <div class="white-box">
-                        <h3 class="box-title">SIMPANAN WAJIB</h3>
-                        <ul class="list-inline two-part">
-                            <li><i class="ti-wallet text-success"></i></li>
-                            <li class="text-right"><h2 class="">{{ number_format(all_simpanan_wajib()->where('status', 3)->sum('nominal')) }}</h2></li>
-                        </ul>
-                        <button class="btn btn-success pull-right"><i class="fa fa-plus"></i> Tambah Simpanan Wajib</button>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-            </div>
         </div>
-        <!-- /.row -->
-        <!-- ============================================================== -->
     </div>
-    <!-- /.container-fluid -->
 </div>
+
 <!-- sample modal content -->
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -288,6 +260,7 @@
     <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
+
 <!-- modal simpanan pokok-->
 <div id="modal_simpanan_pokok" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
