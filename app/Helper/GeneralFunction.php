@@ -11,6 +11,22 @@ function getInvoicePulsa($no_invoice)
 }
 
 /**
+ * Status Login
+ * @return String
+ */
+function status_login_anggota($status)
+{
+  switch ($status) {
+    case 1:
+       return "<a class=\"btn btn-success btn-xs\"><i class=\"fa fa-check\"></i> Aktif</a>";
+       break;
+    default:
+       return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Tidak Aktif</a>";
+      break;
+ }
+} 
+
+/**
  * [status_anggota description]
  * @param  [type] $id [description]
  * @return [type]     [description]
@@ -21,16 +37,16 @@ function status_anggota($id)
 
    switch ($user->status) {
       case 1:
-         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Inactive</a>";
+         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Tidak Aktif</a>";
          break;
       case 2:
-            return "<a class=\"btn btn-success btn-xs\"><i class=\"fa fa-check\"></i> Active</a>";
+            return "<a class=\"btn btn-success btn-xs\"><i class=\"fa fa-check\"></i> Aktif</a>";
          break;
       case 3:
-         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Reject</a>";
+         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Ditolak</a>";
          break;
       default:
-         return "<a class=\"btn btn-warning btn-xs\"><i class=\"fa fa-ban\"></i> Inactive</a>";
+         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Tidak Aktif</a>";
          break;
    }
 }

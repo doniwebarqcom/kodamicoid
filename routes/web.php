@@ -90,6 +90,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 	Route::get('setting','IndexController@setting')->name('admin.setting.index');
 	Route::get('user/autologin/{id}','UserController@autologin')->name('admin.user.autologin');
 	Route::get('anggota/cetak-kwitansi/{id}','AnggotaController@cetakKwitansi')->name('admin.anggota.cetak-kwitansi');
+	Route::get('anggota/destroy/{id}', 'AnggotaController@destroy')->name('admin.anggota.destroy');
 	Route::post('anggota/topup-simpanan-pokok','AnggotaController@topupSimpananPokok')->name('admin.anggota.topup-simpanan-pokok');
 	Route::post('anggota/topup-simpanan-wajib','AnggotaController@topupSimpananWajib')->name('admin.anggota.topup-simpanan-wajib');
 	Route::post('anggota/add-rekening-bank','AnggotaController@addRekeningBank')->name('admin.anggota.add-rekening-bank');

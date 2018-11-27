@@ -2,35 +2,22 @@
 
 @section('title', 'Admin - Koperasi Daya Masyarakat Indonesia')
 
-@section('sidebar')
-
-@endsection
-
 @section('content')
-
-<!-- ============================================================== -->
-<!-- Page Content -->
-<!-- ============================================================== -->
 <div id="page-wrapper">
-
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">Dashboard</h4> </div>
+                <h4 class="page-title">Data Anggota</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
                     <li class="active">Anggota</li>
                 </ol>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- .row -->
         <div class="row">
             <div class="col-md-12">
             <div class="white-box">
-                <h3 class="box-title m-b-0">Data Anggota</h3>
-                <hr />
                 <form class="form-horizontal" enctype="multipart/form-data" action="{{ route('admin.anggota.update', $data->id) }}" method="POST">
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="active" role="presentation" class=""><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab" aria-expanded="false"><span class="visible-xs"><i class="ti-user"></i></span> <span class="hidden-xs">Profile</span></a></li>
@@ -131,8 +118,8 @@
                                         <input type="password" name="confirmation" class="form-control" value="{{ $data->password }}"> 
                                     </div>
                                     <div class="col-md-4">
-                                        <label><input type="radio" name="status" value="1" {{ $data->status == 1 ? 'checked="true"' : '' }} /> Active </label> &nbsp;
-                                        <label><input type="radio" name="status" value="0" {{ $data->status == 0 ? 'checked="true"' : '' }} /> Inactive </label>
+                                        <label><input type="radio" name="status_login" value="1" {{ $data->status_login == 1 ? 'checked="true"' : '' }} /> Active </label> &nbsp;
+                                        <label><input type="radio" name="status_login" value="0" {{ $data->status_login == 0 ? 'checked="true"' : '' }} /> Inactive </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -499,13 +486,9 @@
               </div>
             </div>                        
         </div>
-        <!-- /.row -->
-        <!-- ============================================================== -->
     </div>
-    <!-- /.container-fluid -->
     @include('layout.footer-admin')
 </div>
-
 <!-- sample modal content -->
 <div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -526,9 +509,7 @@
                 <button type="button" class="btn btn-success waves-effect" data-dismiss="modal">Submit Topup</button>
             </div>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 
@@ -555,9 +536,7 @@
                 </div>
             </form>
         </div>
-        <!-- /.modal-content -->
     </div>
-    <!-- /.modal-dialog -->
 </div>
 <!-- /.modal -->
 

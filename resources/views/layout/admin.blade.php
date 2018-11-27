@@ -136,14 +136,9 @@
                     </li>
                     <li class="devider"></li>
                     <li>
-                        <a href="javascript:void(0)" class="waves-effect">
+                        <a href="{{ url('admin/anggota') }}" class="waves-effect">
                             <i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Management Anggota<span class="fa arrow"></span></span>
                         </a>
-                        <ul class="nav nav-second-level">
-                            <li>
-                                <a href="{{ url('admin/anggota') }}"><i class="ti-user fa-fw"></i><span class="hide-menu">Anggota</span></a>
-                            </li>
-                        </ul>
                     </li>
                     <li>
                         <a href="javascript:void(0)" class="waves-effect">

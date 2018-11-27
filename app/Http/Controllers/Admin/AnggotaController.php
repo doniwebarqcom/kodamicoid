@@ -198,17 +198,17 @@ class AnggotaController extends ControllerLogin
             $image->move($destinationPath, $name);
             $data->file_npwp = $name;
         }
-        $data->status = $request->status;
+
+        $data->status       = $request->status;
+        $data->status_login = $request->status_login;
         $data->save();
 
         return redirect()->route('admin.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
     }
 
-
     /**
-     * [desctroy description]
-     * @param  [type] $id [description]
-     * @return [type]     [description]
+     * Delete Item
+     * @return redirect
      */
     public function destroy($id)
     {
