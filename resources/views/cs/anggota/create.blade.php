@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                <h4 class="page-title">Data Anggota</h4> </div>
+                <h4 class="page-title">Daftar Anggota</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
 
                 <ol class="breadcrumb">
@@ -109,12 +109,20 @@
                         <div class="form-group">
                             <label class="col-md-4">Password</label>
                             <label class="col-md-4">Ketik Ulang Password</label>
+                            <label class="col-md-4">Status Login</label>
                             <div class="col-md-4">
                                 <input type="password" name="password" class="form-control">
                             </div>
                             <div class="col-md-4">
                                 <input type="password" name="confirmation" class="form-control"> 
                             </div>
+                            <div class="col-md-4">
+                                <label><input type="radio" name="status_login" value="1" /> Active </label> &nbsp;
+                                <label><input type="radio" name="status_login" value="0" /> Inactive </label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="col-md-6"><input type="checkbox" name="is_dropshiper" value="1"> Aktifkan Sebagai Dropshiper</label>
                         </div>
                     </div>
 
@@ -218,7 +226,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <a href="{{ route('cs.anggota.index') }}" class="btn btn-default btn-sm waves-effect waves-light m-r-10"><i class="fa fa-arrow-left"></i> Back</a>
-                            <button type="submit" class="btn btn-success waves-effect btn-sm waves-light m-r-10"><i class="fa fa-save"></i>  Save Anggota</button>
+                            <button type="submit" class="btn btn-success waves-effect btn-sm waves-light m-r-10"><i class="fa fa-save"></i>  Simpan Anggota</button>
                         </div>
                     </div>
                     <div style="clear: both;"></div>

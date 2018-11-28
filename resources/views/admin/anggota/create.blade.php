@@ -129,8 +129,8 @@
                                 <input type="password" name="confirmation" class="form-control"> 
                             </div>
                             <div class="col-md-4">
-                                <label><input type="radio" name="status" value="1" /> Active </label> &nbsp;
-                                <label><input type="radio" name="status" value="0" /> Inactive </label>
+                                <label><input type="radio" name="status_login" value="1" /> Active </label> &nbsp;
+                                <label><input type="radio" name="status_login" value="0" /> Inactive </label>
                             </div>
                         </div>
                     </div>

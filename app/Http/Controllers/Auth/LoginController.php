@@ -85,6 +85,10 @@ class LoginController extends Controller
         {
             return $this->redirectTo = 'admin-operator';
         }
+        elseif(auth()->user()->access_id == 7)
+        {
+            return $this->redirectTo = '/dropshiper';
+        }
         
         return $this->redirectTo = '/home';
     }

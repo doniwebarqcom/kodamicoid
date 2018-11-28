@@ -103,10 +103,21 @@ class AnggotaController extends Controller
             $image->move($destinationPath, $name);
             $data->file_npwp = $name;
         }
-        $data->status = $request->status;
+        $data->status       = $request->status;
+        $data->status_login = $request->status_login;
+        $data->is_dropshiper    = $request->is_dropshiper;
+
+        if($data->is_dropshiper == 1)
+        {
+            $data->access_id = 7; # set access login sebagai dropshiper
+        }
+        else
+        {
+            $data->access_id = 2; # set access login sebagai anggota
+        }
         $data->save();
 
-        return redirect()->route('cs.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('cs.anggota.edit', $data->id)->with('message-success', 'Data Anggota berhasil disimpan'); 
     }
 
 
@@ -142,18 +153,15 @@ class AnggotaController extends Controller
         $data->tempat_lahir = $request->tempat_lahir;
         $data->tanggal_lahir= $request->tanggal_lahir;
         $data->password             = bcrypt($request->password); 
-        $data->access_id    = 2; // Akses sebagai anggota
         $data->passport_number          = $request->passport_number;
         $data->kk_number                = $request->kk_number;
         $data->npwp_number              = $request->npwp_number;
         $data->bpjs_number              = $request->bpjs_number;
-
         $data->domisili_provinsi_id     = $request->domisili_provinsi_id;
         $data->domisili_kabupaten_id    = $request->domisili_kabupaten_id;
         $data->domisili_kecamatan_id    = $request->domisili_kecamatan_id;
         $data->domisili_kelurahan_id    = $request->domisili_kelurahan_id;
         $data->domisili_alamat          = $request->domisili_alamat;
-
         $data->ktp_provinsi_id      = $request->ktp_provinsi_id;
         $data->ktp_kabupaten_id     = $request->ktp_kabupaten_id;
         $data->ktp_kecamatan_id     = $request->ktp_kecamatan_id;
@@ -188,10 +196,22 @@ class AnggotaController extends Controller
             $image->move($destinationPath, $name);
             $data->file_npwp = $name;
         }
-        $data->status = $request->status;
+        $data->status           = $request->status;
+        $data->status_login     = $request->status_login;
+        $data->is_dropshiper    = $request->is_dropshiper;
+
+        if($data->is_dropshiper == 1)
+        {
+            $data->access_id = 7; # set access login sebagai dropshiper
+        }
+        else
+        {
+            $data->access_id = 2; # set access login sebagai anggota
+        }
+
         $data->save();
 
-        return redirect()->route('cs.anggota.edit', $data->id)->with('message-success-content', 'Data Anggota berhasil di simpan'); 
+        return redirect()->route('cs.anggota.edit', $data->id)->with('message-success', 'Data Anggota berhasil disimpan.'); 
    }
 
    /**

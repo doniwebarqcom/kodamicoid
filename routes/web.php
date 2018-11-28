@@ -31,6 +31,11 @@ Route::get('/', function () {
         {
             return redirect()->route('cs.index');
         }
+        
+        if(Auth::user()->access_id == 7) // CS
+        {
+            return redirect()->route('dropshiper.dashboard');
+        }
     }
 
     return view('welcome');
@@ -51,6 +56,11 @@ Route::get('home', function () {
         if(Auth::user()->access_id == 4) // CS
         {
             return redirect()->route('cs.index');
+        }
+
+        if(Auth::user()->access_id == 7) // CS
+        {
+            return redirect()->route('dropshiper.dashboard');
         }
     }
 
@@ -124,6 +134,26 @@ Route::group(['prefix' => 'anggota', 'namespace' => 'Anggota', 'middleware' => [
 	Route::resource('rekening-bank-user','RekeningBankUserController');
 	Route::resource('simpanan-sukarela','SimpananSukarelaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'anggota']);
 });
+
+// ROUTING DROPSHIPER
+Route::group(['prefix' => 'dropshiper', 'namespace' => 'Dropshiper', 'middleware' => ['auth', 'access:7']], function(){
+	Route::get('/','IndexController@index')->name('dropshiper.dashboard');
+	Route::get('profile','IndexController@profile')->name('dropshiper.profile');
+	Route::get('user/konfirmasi-pembayaran','UserController@konfirmasiPembayaran');
+	Route::get('user/submit-pembayaran-anggota','UserController@submitkonfirmasianggota');
+	Route::get('user/post-submit-pembayaran-anggota','UserController@submitkonfirmasianggota');
+	Route::get('bayar','BayarController@step1')->name('dropshiper.bayar');
+	Route::get('back-to-admin','IndexController@backtoadmin')->name('dropshiper.back-to-admin');
+	Route::post('user/post-konfirmasi-pembayaran','UserController@postKonfirmasiPembayaran');
+	Route::post('save-profile','IndexController@saveProfile')->name('dropshiper.index.save.profile');
+	Route::post('submitstep1','BayarController@submitStep1')->name('dropshiper.submit-step1');
+	Route::post('anggota/bayar/submit','BayarController@submit')->name('dropshiper.bayar.submit');
+	Route::post('anggota/add-rekening-bank','BayarController@addRekeningBank')->name('dropshiper.bayar.add-rekening-bank');
+	Route::post('upload-confirmation','BayarController@confirmation')->name('dropshiper.upload.confirmation');\
+	Route::resource('rekening-bank-user','RekeningBankUserController');
+	Route::resource('simpanan-sukarela','SimpananSukarelaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'dropshiper']);
+});
+
 // ROUTING TELLER / KASIR
 Route::group(['prefix' => 'kasir', 'namespace' => 'Kasir', 'middleware' => ['auth', 'access:3']], function(){
 	Route::get('/','IndexController@index')->name('kasir.index');
