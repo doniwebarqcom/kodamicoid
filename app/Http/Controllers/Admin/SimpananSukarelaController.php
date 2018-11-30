@@ -14,7 +14,7 @@ class SimpananSukarelaController extends Controller
 	 */
     public function index()
     {
-    	$data = Deposit::where('type', 4)->get();
+    	$data = Deposit::where('type', 4)->orderBy('id','DESC')->paginate(50);
 
     	return view('admin.simpanan-sukarela.index', compact('data'));
     }

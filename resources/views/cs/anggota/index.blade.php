@@ -38,10 +38,9 @@
                                     <th>JENIS KELAMIN</th>
                                     <th>TELEPON</th>
                                     <th>EMAIL</th>
-                                    <th>LAST LOGIN</th>
-                                    <th>LAST LOGOUT</th>
                                     <th>ADDED</th>
-                                    <th>STATUS</th>
+                                    <th>STATUS LOGIN</th>
+                                    <th>STATUS ANGGOTA</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
@@ -54,12 +53,9 @@
                                         <td>{{ $item->jenis_kelamin }}</td>
                                         <td>{{ $item->telepon }}</td>
                                         <td>{{ $item->email }}</td>
-                                        <td>{{ date('d F Y', strtotime($item->last_logged_in_at)) }}</td>
-                                        <td>{{ date('d F Y', strtotime($item->last_logged_out_at)) }}</td>
                                         <td>{{ $item->created_at }}</td>
-                                        <td>
-                                            {!! status_anggota($item->id) !!}
-                                        </td>
+                                        <td>{!! status_login_anggota($item->status_login) !!}</td>
+                                        <td>{!! status_anggota($item->id) !!}</td>
                                         <td>
                                             <a href="{{ route('cs.anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> detail</button></a>
                                         </td>

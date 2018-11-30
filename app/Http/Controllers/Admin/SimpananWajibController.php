@@ -13,7 +13,7 @@ class SimpananWajibController extends ControllerLogin
 	 */
     public function index()
     {
-    	$params['data'] = \Kodami\Models\Mysql\Deposit::where('type', 5)->get();
+    	$params['data'] = \Kodami\Models\Mysql\Deposit::where('type', 5)->orderBy('id','DESC')->paginate(50);
 
     	return view('admin.simpanan-wajib.index')->with($params);
     }

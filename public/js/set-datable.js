@@ -43,7 +43,7 @@ function init_datatable(){
         ],
         pageLength : 20
     });
-
+ 
     $('#data_table_no_button').DataTable({
         dom: 'Bfrtip',
         buttons: [],
@@ -55,5 +55,12 @@ function init_datatable(){
         buttons: [],
         pageLength : 20,
         searching: false
+    });
+
+    $('#data_table_no_attribute').DataTable({
+        dom: 'Bfrtip',
+        buttons: [],
+        paging: false,
+        bInfo: false,
     });
 }

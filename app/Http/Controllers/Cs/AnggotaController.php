@@ -55,7 +55,7 @@ class AnggotaController extends Controller
         $data =  \App\UserModel::where('id', $id)->first();
         
         $data->nik          = $request->nik; 
-        $data->name         = $request->name; 
+        $data->name         = strtoupper($request->name); 
         $data->jenis_kelamin= $request->jenis_kelamin; 
         $data->email        = $request->email;
         $data->telepon      = $request->telepon;
@@ -145,7 +145,7 @@ class AnggotaController extends Controller
         $data               =  new \App\UserModel();
         $data->no_anggota   = $request->no_anggota;
         $data->nik          = $request->nik; 
-        $data->name         = $request->name; 
+        $data->name         = strtoupper($request->name); 
         $data->jenis_kelamin= $request->jenis_kelamin; 
         $data->email        = $request->email;
         $data->telepon      = $request->telepon;
