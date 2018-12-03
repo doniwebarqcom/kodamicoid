@@ -135,7 +135,7 @@
                                                 </td>
                                                 <td>{{ date('d F Y H:i:s', strtotime($item->created_at)) }}</td>    
                                                 <td>
-                                                    <a href="{{ route('kasir.anggota.cetak-kwitansi', $item->id) }}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-print"></i> cetak</a>
+                                                    <a href="{{ route('kasir.anggota.cetak-kwitansi', ['id'=> $item->id, 'jenis_transaksi'=> $item->jenis_transaksi]) }}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-print"></i> cetak</a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -144,7 +144,7 @@
                                 </div>
                                 <div id="simpanan_pokok" class="tab-pane">
                                     <h3>Simpanan Pokok</h3>
-                                    <table class="display nowrap data_table" cellspacing="0" width="100%">
+                                    <table class="display nowrap data_table1" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -171,7 +171,7 @@
                                 </div>
                                 <div id="simpanan_sukarela" class="tab-pane">
                                     <h3>Simpanan Sukarela</h3>
-                                    <table class="display nowrap data_table" cellspacing="0" width="100%">
+                                    <table class="display nowrap data_table2" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -198,7 +198,7 @@
                                 </div>
                                 <div id="simpanan_wajib" class="tab-pane">
                                     <h3>Simpanan Wajib</h3>
-                                    <table class="display nowrap data_table" cellspacing="0" width="100%">
+                                    <table class="display nowrap data_table3" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>

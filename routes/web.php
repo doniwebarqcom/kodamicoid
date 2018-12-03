@@ -160,7 +160,7 @@ Route::group(['prefix' => 'kasir', 'namespace' => 'Kasir', 'middleware' => ['aut
 	Route::get('/','IndexController@index')->name('kasir.index');
 	Route::get('back-to-admin','IndexController@backtoadmin')->name('kasir.back-to-admin');
 	Route::get('anggota/detail/{id}','AnggotaController@detail')->name('kasir.anggota.detail');
-	Route::get('anggota/cetak-kwitansi/{id}','AnggotaController@cetakKwitansi')->name('kasir.anggota.cetak-kwitansi');
+	Route::get('anggota/cetak-kwitansi/{id}/{jenis_transaksi}','AnggotaController@cetakKwitansi')->name('kasir.anggota.cetak-kwitansi');
 	Route::post('anggota/topup-simpanan-pokok', 'AnggotaController@topupSimpananPokok')->name('kasir.anggota.topup-simpanan-pokok');
 	Route::post('anggota/topup-simpanan-wajib', 'AnggotaController@topupSimpananWajib')->name('kasir.anggota.topup-simpanan-wajib');
 	Route::post('anggota/topup-simpanan-sukarela', 'AnggotaController@topupSimpananSukarela')->name('kasir.anggota.topup-simpanan-sukarela');

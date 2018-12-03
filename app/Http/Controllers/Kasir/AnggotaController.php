@@ -42,9 +42,18 @@ class AnggotaController extends Controller
     * @param  [type] $id [description]
     * @return [type]     [description]
     */
-   public function cetakKwitansi($id)
+   public function cetakKwitansi($id, $jenis_transaksi)
    {
-        $params['data']     = Deposit::where('id', $id)->first();
+        $params['jenis_transaksi'] = $jenis_transaksi;
+
+        if($jenis_transaksi == 1)
+        {
+            $params['data']       = PPulsaTransaksi::where('id', $id)->first();
+        }
+        else
+        {
+            $params['data']     = Deposit::where('id', $id)->first();
+        }
 
         return view('kasir.anggota.kwitansi')->with($params);
    }

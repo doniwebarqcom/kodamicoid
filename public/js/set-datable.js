@@ -57,6 +57,31 @@ function init_datatable(){
         searching: false
     });
 
+    $('.data_table1').DataTable({
+        dom: 'Bfrtip',
+        buttons: [],
+        pageLength : 20,
+        searching: false
+    });
+    $('.data_table2').DataTable({
+        dom: 'Bfrtip',
+        buttons: [],
+        pageLength : 20,
+        searching: false
+    });
+    $('.data_table3').DataTable({
+        dom: 'Bfrtip',
+        buttons: [],
+        pageLength : 20,
+        searching: false
+    });
+    $('.data_table4').DataTable({
+        dom: 'Bfrtip',
+        buttons: [],
+        pageLength : 20,
+        searching: false
+    });
+
     $('#data_table_no_attribute').DataTable({
         dom: 'Bfrtip',
         buttons: [],
