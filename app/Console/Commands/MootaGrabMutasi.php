@@ -103,6 +103,9 @@ class MootaGrabMutasi extends Command
 
                 $params['text'] = '<p>Dear Ibu/Bapak '. $deposit->user->name .'<br />Pembayaran Data Anggota Anda berhasil</p>';
 
+                // Update status anggota aktif ketika bayar simpanan
+                \Kodami\Models\Mysql\Users::where('id', $deposit->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1]);
+                
                 # send email
                 \Mail::send('email.default', $params,
                   function($message) use($deposit) {

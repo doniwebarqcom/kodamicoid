@@ -29,11 +29,11 @@
             <div class="row">
                 <div class="col-md-4">
                     <div class="panel">
-                        @if(Auth::user()->status == 2)
+                        @if(Auth::user()->status_anggota == 1)
                             <span  class="btn btn-rounded btn-success" style="position: absolute;right: 25px;top: 10px;">Active</span>
                         @endif
 
-                        @if(Auth::user()->status == 1)
+                        @if(Auth::user()->status_anggota == 0 || Auth::user()->status_anggota === NULL)
                             <span  class="btn btn-rounded btn-danger" style="position: absolute;right: 25px;top: 10px;">Inactive</span>
                         @endif
 
@@ -81,7 +81,7 @@
                 </div>
                 <div class="col-md-8">
 
-                    @if(Auth::user()->status == 1)
+                    @if(Auth::user()->status_anggota == 0 || Auth::user()->status_anggota === NULL)
                     <div class="panel panel-themecolor">
                         <div class="panel-heading">AKTIVASI KEANGGOTAAN</div>
                         <div class="panel-body">                            
@@ -420,7 +420,7 @@
 
                     @endif
 
-                    @if(isset($deposit) and Auth::user()->status == 2)
+                    @if(isset($deposit) and Auth::user()->status_anggota == 1)
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="white-box">
@@ -510,6 +510,7 @@
         /* override paksa */
         .blockUI.blockMsg.blockElement {
             top: 0 !important;
+            width: 50% !important;
         }
     </style>
     <script src="{{ asset('admin-css/plugins/bower_components/blockUI/jquery.blockUI.js') }}"></script>
@@ -715,7 +716,7 @@
             });
         });
 
-        @if(isset($deposit) and $deposit->status >= 2)
+        @if(isset($deposit) and $deposit->status_anggota == 1)
             $('div.block1').block({
                 message: $('#confirmation_messages .pricing-plan').html()
             });
@@ -730,8 +731,7 @@
                 message: $('#counting_message .pricing-plan').html()
             });
 
-                        // Set the date we're counting down to
-            var countDownDate = new Date("Sep 5, 2018 15:37:25").getTime();
+            // Set the date we're counting down to
             var countDownDate = new Date("{{ date('M d, Y H:i:s', strtotime($tagihan->due_date)) }}").getTime();
 
             // Update the count down every 1 second

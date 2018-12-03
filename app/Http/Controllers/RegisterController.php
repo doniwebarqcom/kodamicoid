@@ -49,6 +49,7 @@ class RegisterController extends Controller
         $data->access_id            = 2; // User Sebagai Anggota
         $data->status               = 1; // menunggu pembayaran
         $data->status_login         = 1;
+        $data->status_anggota       = 0;
     	$data->save();
         $data->password = $request->password;
 

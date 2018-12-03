@@ -19,7 +19,7 @@
     </table>
     <div style="padding: 40px; background: #fff;">
         @yield('content')
-        <p>Email ini terkirim otomatis oleh sistem anda tidak bisa membalas pesan ini, silahkan login ke akun anda untuk info lebih lanjut</p>
+        <p><small>Email ini terkirim otomatis oleh sistem anda tidak bisa membalas pesan ini, silahkan login ke akun anda untuk info lebih lanjut</small></p>
          <br />
           <b>Thanks,<br /> KOPERASI PRODUSEN DAYA MASYARAKAT INDONESIA</b>
     </div>

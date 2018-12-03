@@ -61,13 +61,17 @@
                                                         <input type="hidden" class="hidden-rekening_bank_no_rekening" value="{{ $item->no_rekening }}">
                                                         <input type="hidden" class="hidden-rekening_bank_image" value="{{ asset('bank/'.$item->bank->image) }}">
                                                         <input type="hidden" class="hidden-rekening_bank_bank_id" value="{{ $item->bank_id }}">
-
                                                         <span class="btn btn-xs btn-rounded btn-success checklist-bank"><i class="fa fa-check"></i></span>
-
                                                         <img src="{{ asset('bank/'. $item->bank->image) }}">
                                                         <p>
-                                                            No Rekening : <strong>{{ $item->no_rekening }}</strong><br />
-                                                            <strong>{{ $item->nama_akun }}</strong>
+                                                            <table>
+                                                                <tr>
+                                                                    <td style="color:black;">No Rekening </td><td style="color:black;"> : <strong>{{ $item->no_rekening }}</strong></td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="color:black;">Atas Nama </td><td style="color:black;">: <strong>{{ $item->owner }}</strong></td>
+                                                                </tr>
+                                                            </table>
                                                         </p>
                                                     </div>
                                                     @endforeach  
@@ -217,12 +221,12 @@
                                         <div class="col-md-12">
                                             <div class="pull-right m-t-30 text-right">
                                                 <h4>Unique Code <label class="label label-success">{{ $code }}</label></h4>
-                                                <h3><b>Total :</b> Rp. {{ number_format($total_pembayaran) }}</h3> </div>
+                                                <h3>Total Rp. {{ number_format($total_pembayaran) }}</h3> </div>
                                             <div class="clearfix"></div>
                                             <hr>
                                             <div class="text-right">
-                                                <span class="btn btn-danger" id="submit_payment"> Proceed to payment </span>
-                                                <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Print</span> </button>
+                                                <span class="btn btn-danger" id="submit_payment"> Proses Pembayaran </span>
+                                                <button id="print" class="btn btn-default btn-outline" type="button"> <span><i class="fa fa-print"></i> Cetak</span> </button>
                                             </div>
                                         </div>
                                     </div>
@@ -304,6 +308,7 @@
         }
         .active-bank{
             border:1px solid #cfe1ec !important;
+            background: #eee;
             padding: 5px;
         }
         .checklist-bank {

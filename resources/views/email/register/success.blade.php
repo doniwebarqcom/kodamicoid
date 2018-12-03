@@ -55,7 +55,7 @@
                 </li>
               </ol>
 
-              <p>Email ini otomatis terkirim otomatis oleh sistem anda tidak bisa membalas pesan ini, silahkan login ke akun profile anda untuk info lebih lanjut</p>
+              <p><small>Email ini otomatis terkirim otomatis oleh sistem anda tidak bisa membalas pesan ini, silahkan login ke akun profile anda untuk info lebih lanjut</small></p>
               <a href="javascript: void(0);" style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #1e88e5; border-radius: 60px; text-decoration:none;"> Login Anggota</a><br />
               <b>Thanks,<br /> Kodami Pocket System</b> </td>
           </tr>
