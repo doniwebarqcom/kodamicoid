@@ -51,8 +51,19 @@ class RegisterController extends Controller
         $data->status_login         = 1;
     	$data->save();
         $data->password = $request->password;
+
+        $params['user'] = $data;
+        
         // send email
-        Mail::to($data->email)->send(new RegisterMail($data));
+        //Mail::to($data->email)->send(new RegisterMail($data));
+        //
+        \Mail::send('email.register.success', $params,
+                function($message) use($data) {
+                    $message->from('services@kodami.co.id');
+                    $message->to($data->email);
+                    $message->subject('Registrasi - Kodami Pocket System');
+                }
+            );
 
     	return redirect('register/success')->with('success-register', 'Berhasil melakukan registrasi');
     }
