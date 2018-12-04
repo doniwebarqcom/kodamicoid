@@ -722,8 +722,10 @@
     {
         location.reload();
     }
-        jQuery('.datepicker').datepicker({  
-            format: 'yyyy-mm-dd',
+        jQuery('.datepicker').datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeYear : true,
+            changeMonth : true
         });
 
         /**
