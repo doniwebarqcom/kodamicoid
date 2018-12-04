@@ -12,7 +12,7 @@
       <tbody>
         <tr>
           <td style="vertical-align: top;">
-            <a href="#" target="_blank" style="text-decoration: none;color: #484848;"><img src="http://kodami.co.id/public/logo.png" style="border:none; width: 150px; ">
+            <a href="#" target="_blank" style="text-decoration: none;color: #484848;"><img src="{{ asset('logo.png') }}" style="border:none; width: 150px; ">
           </td>
         </tr>
       </tbody>

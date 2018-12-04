@@ -201,7 +201,7 @@ class AnggotaController extends ControllerLogin
             $data->file_npwp = $name;
         }
 
-        $data->status       = $request->status;
+        #$data->status       = $request->status;
         $data->status_login = $request->status_login;
         if($data->is_dropshiper == 1)
         {

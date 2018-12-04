@@ -87,35 +87,77 @@ class MootaGrabMutasi extends Command
               $temp->mutation_id      = $mutasi->mutation_id;
               $temp->created_at_mutation=$mutasi->created_at;
               $temp->save();
-              
-              $deposit                  = \Kodami\Models\Mysql\Deposit::where('id', $deposit_awal->id)->first();
-              $deposit->mutation_id     = $temp->id;
-              $deposit->mutation_datesyn= date('Y-m-d H:i:s');
-              $deposit->status          = 3; // Rubah status menjadi lunas
-              $deposit->save();
 
-              echo " =================================================\n";
-              echo " NOMINAL : ". @$mutasi->amount ."\n";
-              echo " NAME : ". @$deposit->user->name ."\n";
-              echo " NIK : ". @$deposit->user->nik ."\n";
-              echo " SEND EMAIL KE ANGGOTA ...  \n";
+              $data_deposit                  = \Kodami\Models\Mysql\Deposit::where('id', $deposit_awal->id)->first();
+              $data_deposit->mutation_id     = $temp->id;
+              $data_deposit->mutation_datesyn= date('Y-m-d H:i:s');
+              $data_deposit->status          = 3; // Rubah status menjadi lunas
+              $data_deposit->save();
 
-              $params['text'] = '<p>Dear Ibu/Bapak '. $deposit->user->name .'<br />Pembayaran Data Anggota Anda berhasil</p>';
+              if(isset($data_deposit->user->name))
+              {
+                // Insert Simpanan Pokok
+                $deposit                = new \Kodami\Models\Mysql\Deposit();
+                $deposit->no_invoice    = $data_deposit->no_invoice; 
+                $deposit->status        = 3;
+                $deposit->type          = 3; // Simpanan Pokok
+                $deposit->user_id       = $data_deposit->user_id;
+                $deposit->nominal       = get_setting('simpanan_pokok');
+                //$deposit->proses_user_id = \Auth::user()->id;
+                $deposit->save();  
 
-              // Update status anggota aktif ketika bayar simpanan
-              \Kodami\Models\Mysql\Users::where('id', $deposit->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1]);
-              
-              # send email
-              \Mail::send('email.default', $params,
-                function($message) use($deposit) {
-                    $message->from('services@kodami.co.id', 'Kodami Pocket System');
-                    $message->to($deposit->user->email);
-                    $message->subject('Koperasi Produsen Daya  Masyarakat Indonesia - Pembayaran Anggota Berhasil');
-                }
-              );
-              
-              echo " SUCCESS EMAIL : ". $deposit->user->email ."\n";
-              echo " =================================================\n\n";
+                // Insert Simpanan Wajib
+                $deposit                = new \Kodami\Models\Mysql\Deposit();
+                $deposit->no_invoice    = $data_deposit->no_invoice; 
+                $deposit->status        = 3; 
+                $deposit->type          = 5; // Simpanan Wajib
+                $deposit->user_id       = $data_deposit->user_id;
+                $deposit->nominal       = $data_deposit->user->durasi_pembayaran * get_setting('simpanan_wajib');
+                //$deposit->proses_user_id = \Auth::user()->id;
+                $deposit->save();
+
+                // Insert Simpanan Sukarela
+                $deposit                = new \Kodami\Models\Mysql\Deposit();
+                $deposit->no_invoice    = $data_deposit->no_invoice; 
+                $deposit->status        = 3; 
+                $deposit->type          = 4; // Simpanan Sukarela
+                $deposit->user_id       = $data_deposit->user_id;
+                $deposit->nominal       = $data_deposit->user->first_simpanan_sukarela + $data_deposit->code;
+                //$deposit->proses_user_id = \Auth::user()->id;
+                $deposit->save();
+
+                echo " =================================================\n";
+                echo " NOMINAL : ". @$mutasi->amount ."\n";
+                echo " NAME : ". @$data_deposit->user->name ."\n";
+                echo " NIK : ". @$data_deposit->user->nik ."\n";
+                echo " SEND EMAIL KE ANGGOTA ...  \n";
+
+                $params['text'] = '<p>Dear Ibu/Bapak '. $data_deposit->user->name .'<br />Pembayaran Data Anggota Anda berhasil</p>';
+
+                // Update status anggota aktif ketika bayar simpanan
+                \Kodami\Models\Mysql\Users::where('id', $data_deposit->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1]);
+                
+                # send email
+                \Mail::send('email.default', $params,
+                  function($message) use($data_deposit) {
+                      $message->from('services@kodami.co.id', 'Kodami Pocket System');
+                      $message->to($data_deposit->user->email);
+                      $message->subject('Koperasi Produsen Daya  Masyarakat Indonesia - Pembayaran Anggota Berhasil');
+                  }
+                );
+                // send email notifikasi
+                $params['text'] = '<p>Dear Ibu/Bapak '. $data_deposit->user->name .'<br />Sudah melakuan Pembayaran Data Anggota dan berhasil</p>';
+                \Mail::send('email.default', $params,
+                  function($message){
+                      $message->from('services@kodami.co.id', 'Kodami Pocket System');
+                      $message->to('ramdoni@stalavista.com');
+                      $message->subject('Koperasi Produsen Daya  Masyarakat Indonesia - Pembayaran Anggota Berhasil');
+                  }
+                );
+                
+                echo " SUCCESS EMAIL : ". $data_deposit->user->email ."\n";
+                echo " =================================================\n\n";
+              }
             }
           }
         }
