@@ -35,7 +35,7 @@ function moota_bank()
  */
 function moota_mutasi($bank_id)
 {
-	return moota_api('bank/'. $bank_id .'/mutation/');
+	return moota_api('bank/'. $bank_id .'/mutation/recent/20');
 }
 
 ?>

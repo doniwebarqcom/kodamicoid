@@ -378,7 +378,7 @@
                                                                         </div>
                                                                         <div id="countdown">
                                                                             <p>Bukti Pembayaran Anda</p>
-                                                                            <img src="{{ asset('file_confirmation/'. Auth::user()->id.'/'. $deposit->file_confirmation) }}" style="width: 90%;" />
+                                                                            <img src="{{ asset('file_confirmation/'. Auth::user()->id.'/'. $deposit->file_confirmation) }}" style="height: 350px;" />
                                                                         </div>
                                                                     </div>
                                                                 </div>
