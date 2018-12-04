@@ -55,9 +55,6 @@ class RegisterController extends Controller
 
         $params['user'] = $data;
         
-        // send email
-        //Mail::to($data->email)->send(new RegisterMail($data));
-        
         \Mail::send('email.register.success', $params,
                 function($message) use($data) {
                     $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');

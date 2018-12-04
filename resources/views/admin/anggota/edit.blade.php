@@ -123,7 +123,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-6"><input type="checkbox" name="is_dropshiper" value="1"> Aktifkan Sebagai Dropshiper</label>
+                                    <label class="col-md-6"><input type="checkbox" name="is_dropshiper" value="1" {{ $data->is_dropshiper == 1 ? 'checked="true"' : '' }}> Aktifkan Sebagai Dropshiper</label>
                                 </div>
                             </div>
                             <div class="col-md-6">
