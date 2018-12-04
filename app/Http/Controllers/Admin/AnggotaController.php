@@ -51,6 +51,7 @@ class AnggotaController extends ControllerLogin
             /** Rubah status angota jadi active */
             $user = ModelUser::where('id', $status->user_id)->first();
             $user->status = 2;
+            $user->status_anggota = 1;
             $user->save();
 
             // Insert Simpanan Pokok
@@ -91,8 +92,9 @@ class AnggotaController extends ControllerLogin
             $deposit->save();
 
              /** Rubah status angota jadi reject */
-            $user = ModelUser::where('id', $deposit->user_id)->first();
-            $user->status = 3;
+            $user                   = ModelUser::where('id', $deposit->user_id)->first();
+            $user->status           = 3;
+            $user->status_anggota   = 3;
             $user->save();
         }
 

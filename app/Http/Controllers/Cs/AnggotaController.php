@@ -103,7 +103,6 @@ class AnggotaController extends Controller
             $image->move($destinationPath, $name);
             $data->file_npwp = $name;
         }
-        $data->status       = $request->status;
         $data->status_login = $request->status_login;
         $data->is_dropshiper    = $request->is_dropshiper;
 
@@ -196,7 +195,6 @@ class AnggotaController extends Controller
             $image->move($destinationPath, $name);
             $data->file_npwp = $name;
         }
-        $data->status           = $request->status;
         $data->status_login     = $request->status_login;
         $data->is_dropshiper    = $request->is_dropshiper;
 
