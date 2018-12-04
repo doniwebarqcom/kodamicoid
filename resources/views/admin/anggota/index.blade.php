@@ -56,7 +56,7 @@
                                                     <li><a href="{{ route('admin.anggota.confirm', $item->id) }}">Konfirmasi</a></li>
                                                 @endif
                                                     <li><a href="{{ route('admin.anggota.edit', ['id' => $item->id]) }}"> <i class="ti-pencil-alt"></i> detail</a></li>
-                                                    <li><a href="{{ route('admin.anggota.destroy', ['id' => $item->id]) }}"> <i class="fa fa-trash"></i> delete</a></li>
+                                                    <li><a href="{{ route('admin.anggota.destroy', ['id' => $item->id]) }}" onclick="return confirm('Hapus data anggota ?')"> <i class="fa fa-trash"></i> delete</a></li>
                                                     <li><a onclick="confirm_autologin('{{ route('admin.autologin', $item->id) }}', '{{ $item->name }}')"><i class="fa fa-key"></i> Autologin</a></li>
                                                 </ul>
                                             </div>
