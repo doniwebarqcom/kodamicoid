@@ -21,7 +21,7 @@ class IndexController extends ControllerLogin
     public function index()
     {
         $data = [];
-        $data['tagihan']    = Deposit::where('user_id', Auth::user()->id)->where('status',1) ->where('due_date', '>=', date('Y-m-d'))->where('type', 1)->first();
+        $data['tagihan']    = Deposit::where('user_id', Auth::user()->id)->where('status',2) ->where('due_date', '>=', date('Y-m-d'))->where('type', 1)->first();
         $data['deposit']    = Deposit::where('user_id', Auth::user()->id)->where('type', 1)->first();
         $data['user']       = \App\UserModel::where('id', Auth::user()->id)->first();
 

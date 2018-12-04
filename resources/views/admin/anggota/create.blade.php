@@ -257,8 +257,11 @@
     <script type="text/javascript">
         
         jQuery('.datepicker').datepicker({
-            format: 'yyyy-mm-dd',
+            dateFormat: 'yy-mm-dd',
+            changeYear : true,
+            changeMonth : true
         });
+
 
         /**
          * DOMISILI LOKASI
