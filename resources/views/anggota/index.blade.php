@@ -716,7 +716,7 @@
             });
         });
 
-        @if(isset($deposit) and $deposit->status_anggota == 1)
+        @if(isset($deposit) and $deposit->status_anggota == 0)
             $('div.block1').block({
                 message: $('#confirmation_messages .pricing-plan').html()
             });
