@@ -201,6 +201,14 @@ class AnggotaController extends ControllerLogin
 
         $data->status       = $request->status;
         $data->status_login = $request->status_login;
+        if($data->is_dropshiper == 1)
+        {
+            $data->access_id = 7; # set access login sebagai dropshiper
+        }
+        else
+        {
+            $data->access_id = 2; # set access login sebagai anggota
+        }
         $data->is_dropshiper = $request->is_dropshiper;
         $data->save();
 
@@ -238,7 +246,6 @@ class AnggotaController extends ControllerLogin
         $data->tempat_lahir = $request->tempat_lahir;
         $data->tanggal_lahir= $request->tanggal_lahir;
         $data->password             = bcrypt($request->password); 
-        $data->access_id    = 2; // Akses sebagai anggota
         $data->status       = 1; // menunggu pembayaran 
         $data->passport_number          = $request->passport_number;
         $data->kk_number                = $request->kk_number;
@@ -287,6 +294,14 @@ class AnggotaController extends ControllerLogin
         }
         $data->status = $request->status;
         $data->is_dropshiper = $request->is_dropshiper;
+        if($data->is_dropshiper == 1)
+        {
+            $data->access_id = 7; # set access login sebagai dropshiper
+        }
+        else
+        {
+            $data->access_id = 2; # set access login sebagai anggota
+        }
         $data->save();
 
         return redirect()->route('admin.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
