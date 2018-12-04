@@ -201,6 +201,7 @@ class AnggotaController extends ControllerLogin
 
         $data->status       = $request->status;
         $data->status_login = $request->status_login;
+        $data->is_dropshiper = $request->is_dropshiper;
         $data->save();
 
         return redirect()->route('admin.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
@@ -285,6 +286,7 @@ class AnggotaController extends ControllerLogin
             $data->file_npwp = $name;
         }
         $data->status = $request->status;
+        $data->is_dropshiper = $request->is_dropshiper;
         $data->save();
 
         return redirect()->route('admin.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
