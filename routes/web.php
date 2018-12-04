@@ -67,7 +67,6 @@ Route::get('home', function () {
     return view('welcome');
 });
 
-
 Route::get('register/success', 'RegisterController@success');
 Route::get('register', 'RegisterController@index');
 Route::get('logout', 'Auth\LoginController@logout');
