@@ -59,18 +59,6 @@ class MootaGrabMutasi extends Command
 
           if(!$temp)
           {
-            $temp                   = new \Kodami\Models\Mysql\Mutation();
-            $temp->rekening_bank_id = $bank->id;
-            $temp->date_transfer    = $mutasi->date;
-            $temp->description      = $mutasi->description;
-            $temp->amount           = $mutasi->amount;
-            $temp->type             = $mutasi->type == 'DB' ? 2 : 1;
-            $temp->note             = $mutasi->note;
-            $temp->account_number   = $mutasi->account_number;
-            $temp->mutation_id      = $mutasi->mutation_id;
-            $temp->created_at_mutation=$mutasi->created_at;
-            $temp->save();
-
             echo " DATE TRANSFER : ". strtoupper($bank->atas_nama) ." \n";
             echo " DESCRIPTION : ". strtoupper($mutasi->description) ." \n";
             echo " AMOUNT : ". strtoupper($mutasi->amount) ." \n";
@@ -88,6 +76,18 @@ class MootaGrabMutasi extends Command
 
             if($deposit_awal)
             {
+              $temp                   = new \Kodami\Models\Mysql\Mutation();
+              $temp->rekening_bank_id = $bank->id;
+              $temp->date_transfer    = $mutasi->date;
+              $temp->description      = $mutasi->description;
+              $temp->amount           = $mutasi->amount;
+              $temp->type             = $mutasi->type == 'DB' ? 2 : 1;
+              $temp->note             = $mutasi->note;
+              $temp->account_number   = $mutasi->account_number;
+              $temp->mutation_id      = $mutasi->mutation_id;
+              $temp->created_at_mutation=$mutasi->created_at;
+              $temp->save();
+              
               $deposit                  = \Kodami\Models\Mysql\Deposit::where('id', $deposit_awal->id)->first();
               $deposit->mutation_id     = $temp->id;
               $deposit->mutation_datesyn= date('Y-m-d H:i:s');
