@@ -26,9 +26,8 @@
                     <!-- Tab panes -->
                     <div class="tab-content mt-1">
                         <div role="tabpanel" class="tab-pane in active" id="anggota">
-
                             <div class="table-responsive mt-5">
-                                <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
+                                <table class="display nowrap data_table" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
                                             <th width="25" class="text-center">#</th>
@@ -90,6 +89,31 @@
                                 <div class="col-md-6 pull-right text-right">{{ $data->appends($_GET)->render() }}</div><div class="clearfix"></div>
                             </div>
                         </div>
+
+                        <div role="tabpanel" class="tab-pane in active" id="pendiri">
+                            <div class="table-responsive mt-5">
+                                <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
+                                    <thead>
+                                        <tr>
+                                            <th width="25" class="text-center">#</th>
+                                            <th>NAME</th>
+                                            <th>NO REG</th>
+                                            <th>NO ANGGOTA</th>
+                                            <th>TELEPON</th>
+                                            <th>EMAIL</th>
+                                            <th>TERDAFTAR</th>
+                                            <th>LOGIN</th>
+                                            <th title="Status Anggota">STATUS</th>
+                                            <th title="Kuota Anggota">KUOTA</th>
+                                            <th>#</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>                  

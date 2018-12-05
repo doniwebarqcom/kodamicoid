@@ -25,7 +25,7 @@ class IndexController extends ControllerLogin
         $data['deposit']    = Deposit::where('user_id', Auth::user()->id)->where('type', 1)->first();
         $data['user']       = \App\UserModel::where('id', Auth::user()->id)->first();
 
-    	return view('anggota.index')->with($data);
+    	return view('dropshiper.index')->with($data);
     }
 
     /**
@@ -34,7 +34,7 @@ class IndexController extends ControllerLogin
      */
     public function profile()
     {
-        return view('anggota.profile');
+        return view('dropshiper.profile');
     }
 
     /**
@@ -90,7 +90,7 @@ class IndexController extends ControllerLogin
         
         $data->save();
    
-        return redirect()->route('anggota.dashboard')->with('message-success', 'Profil berhasil disimpan');
+        return redirect()->route('dropshiper.dashboard')->with('message-success', 'Profil berhasil disimpan');
     }
 
     /**
@@ -111,7 +111,7 @@ class IndexController extends ControllerLogin
             }
             else
             {
-                return redirect()->route('anggota.dashboard')->with('message-error', 'Access Denied');
+                return redirect()->route('dropshiper.dashboard')->with('message-error', 'Access Denied');
             }
         }
     }

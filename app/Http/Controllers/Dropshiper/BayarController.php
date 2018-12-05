@@ -32,7 +32,7 @@ class BayarController extends ControllerLogin
         $data['due_date']               = date('Y-m-d', strtotime("+3 days"));
         $data['no_invoice']             = no_invoice();
 
-    	return view('anggota.bayar.bayar')->with($data);
+    	return view('dropshiper.bayar.bayar')->with($data);
     }
 
     /**
@@ -48,7 +48,7 @@ class BayarController extends ControllerLogin
         $user->first_simpanan_sukarela      = $request->first_simpanan_sukarela;
         $user->save();
 
-        return redirect()->route('anggota.bayar');
+        return redirect()->route('dropshiper.bayar');
     }
 
 
@@ -71,7 +71,7 @@ class BayarController extends ControllerLogin
         $data->code         = $request->code;
         $data->save();
         
-        return redirect()->route('anggota.dashboard')->with('message-success', 'Pembayaran anda berhasil dilakukan, silahkan melakukan pembayaran');
+        return redirect()->route('dropshiper.dashboard')->with('message-success', 'Pembayaran anda berhasil dilakukan, silahkan melakukan pembayaran');
     }
 
     /**
@@ -97,7 +97,7 @@ class BayarController extends ControllerLogin
         }
         $data->save();
 
-        return redirect()->route('anggota.dashboard')->with('message-success', "File Konfirmasi berhasil di upload silahkan anda konfirmasi dari Admin");
+        return redirect()->route('dropshiper.dashboard')->with('message-success', "File Konfirmasi berhasil di upload silahkan anda konfirmasi dari Admin");
     }
 
     /**
@@ -114,6 +114,6 @@ class BayarController extends ControllerLogin
         $bank->user_id          = $request->user_id;
         $bank->save();
 
-        return redirect()->route('anggota.bayar', ['#tab-rekening'])->with('message-success', 'Data Bank berhasil ditambahkan');
+        return redirect()->route('dropshiper.bayar', ['#tab-rekening'])->with('message-success', 'Data Bank berhasil ditambahkan');
     }
 }

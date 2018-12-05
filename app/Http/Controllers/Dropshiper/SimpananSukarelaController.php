@@ -15,7 +15,7 @@ class SimpananSukarelaController extends Controller
     {   
         $params['data'] = \Kodami\Models\Mysql\Deposit::where('user_id', \Auth::user()->id)->where('type', 3)->get();
 
-    	return view('anggota.simpanan-sukarela.index')->with($params);
+    	return view('dropshiper.simpanan-sukarela.index')->with($params);
     }
 
      /**
@@ -24,7 +24,7 @@ class SimpananSukarelaController extends Controller
      */
     public function create()
     {
-        return view('anggota.simpanan-sukarela.create');
+        return view('dropshiper.simpanan-sukarela.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class SimpananSukarelaController extends Controller
 
         $data = RekeningBankUser::where('id', $id)->first();
 
-        return view('anggota.rekening-bank-user.edit', compact('data', 'bank'));
+        return view('dropshiper.rekening-bank-user.edit', compact('data', 'bank'));
     }
 
     /**
@@ -57,7 +57,7 @@ class SimpananSukarelaController extends Controller
         $data->cabang               = $request->cabang;
         $data->save();
 
-        return redirect()->route('rekening-bank-user.index')->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('dropshiper.rekening-bank-user.index')->with('message-success', 'Data berhasil disimpan'); 
     }
     /**
      * [desctroy description]
@@ -69,7 +69,7 @@ class SimpananSukarelaController extends Controller
         $data = RekeningBankUser::where('id', $id)->first();
         $data->delete();
 
-        return redirect()->route('rekening-bank-user.index')->with('message-sucess', 'Data berhasi di hapus');
+        return redirect()->route('dropshiper.rekening-bank-user.index')->with('message-sucess', 'Data berhasi di hapus');
     }
 
    /**
@@ -102,6 +102,6 @@ class SimpananSukarelaController extends Controller
         $data->user_id              = \Auth::user()->id;
         $data->save();
 
-        return redirect()->route('anggota.simpanan-sukarela.index')->with('messages-success', 'Simpana Sukarela berhasil submit');
+        return redirect()->route('dropshiper.simpanan-sukarela.index')->with('messages-success', 'Simpana Sukarela berhasil submit');
    }
 }

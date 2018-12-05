@@ -21,7 +21,7 @@ class RekeningBankController extends ControllerLogin
     {
         $data = RekeningBankUser::where('user_id', Auth::user()->id)->all();
 
-    	return view('anggota.rekening-bank.index', compact('data'));
+    	return view('dropshiper.rekening-bank.index', compact('data'));
     }
 
     /**
@@ -30,6 +30,6 @@ class RekeningBankController extends ControllerLogin
      */
     public function create()
     {
-        return view('anggota.rekening-bank.create');
+        return view('dropshiper.rekening-bank.create');
     }
 }

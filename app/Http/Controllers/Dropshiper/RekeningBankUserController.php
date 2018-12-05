@@ -18,7 +18,7 @@ class RekeningBankUserController extends ControllerLogin
     {
         $data = RekeningBankUser::where('user_id', Auth::user()->id)->get();
 
-    	return view('anggota.rekening-bank-user.index', compact('data'));
+    	return view('dropshiper.rekening-bank-user.index', compact('data'));
     }
 
      /**
@@ -29,7 +29,7 @@ class RekeningBankUserController extends ControllerLogin
     {
         $bank = Bank::all();
 
-        return view('anggota.rekening-bank-user.create', compact('bank'));
+        return view('dropshiper.rekening-bank-user.create', compact('bank'));
     }
 
     /**
@@ -43,7 +43,7 @@ class RekeningBankUserController extends ControllerLogin
 
         $data = RekeningBankUser::where('id', $id)->first();
 
-        return view('anggota.rekening-bank-user.edit', compact('data', 'bank'));
+        return view('dropshiper.rekening-bank-user.edit', compact('data', 'bank'));
     }
 
     /**
@@ -62,7 +62,7 @@ class RekeningBankUserController extends ControllerLogin
         $data->cabang               = $request->cabang;
         $data->save();
 
-        return redirect()->route('rekening-bank-user.index')->with('message-success', 'Data berhasil disimpan'); 
+        return redirect()->route('dropshiper.rekening-bank-user.index')->with('message-success', 'Data berhasil disimpan'); 
     }
     /**
      * [desctroy description]
@@ -74,7 +74,7 @@ class RekeningBankUserController extends ControllerLogin
         $data = RekeningBankUser::where('id', $id)->first();
         $data->delete();
 
-        return redirect()->route('rekening-bank-user.index')->with('message-sucess', 'Data berhasi di hapus');
+        return redirect()->route('dropshiper.rekening-bank-user.index')->with('message-sucess', 'Data berhasi di hapus');
     }
 
    /**
@@ -93,6 +93,6 @@ class RekeningBankUserController extends ControllerLogin
         $data->user_id             = Auth::user()->id;
         $data->save();
 
-        return redirect()->route('rekening-bank-user.index')->with('messages-success', 'Data berhasil disimpan');
+        return redirect()->route('dropshiper.rekening-bank-user.index')->with('messages-success', 'Data berhasil disimpan');
    }
 }

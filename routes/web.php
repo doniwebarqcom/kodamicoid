@@ -145,9 +145,9 @@ Route::group(['prefix' => 'anggota', 'namespace' => 'Anggota', 'middleware' => [
 Route::group(['prefix' => 'dropshiper', 'namespace' => 'Dropshiper', 'middleware' => ['auth', 'access:7']], function(){
 	Route::get('/','IndexController@index')->name('dropshiper.dashboard');
 	Route::get('profile','IndexController@profile')->name('dropshiper.profile');
-	Route::get('user/konfirmasi-pembayaran','UserController@konfirmasiPembayaran');
-	Route::get('user/submit-pembayaran-anggota','UserController@submitkonfirmasianggota');
-	Route::get('user/post-submit-pembayaran-anggota','UserController@submitkonfirmasianggota');
+	Route::get('user/konfirmasi-pembayaran','UserController@konfirmasiPembayaran')->name('dropshiper.user.konfirmasi-pembayaran');
+	Route::get('user/submit-pembayaran-anggota','UserController@submitkonfirmasianggota')->name('dropshiper.user.submit-pembayaran-anggota');
+	Route::get('user/post-submit-pembayaran-anggota','UserController@submitkonfirmasianggota')->name('dropshiper.user.post-submit-pembayaran-anggota');
 	Route::get('bayar','BayarController@step1')->name('dropshiper.bayar');
 	Route::get('back-to-admin','IndexController@backtoadmin')->name('dropshiper.back-to-admin');
 	Route::post('user/post-konfirmasi-pembayaran','UserController@postKonfirmasiPembayaran');

@@ -25,7 +25,7 @@ class UserController extends ControllerLogin
 	 */
     public function index()
     {
-    	return view('anggota.index');
+    	return view('dropshiper.index');
     }
 
     /**
@@ -34,7 +34,7 @@ class UserController extends ControllerLogin
      */
     public function konfirmasiPembayaran()
     {
-    	return view('anggota.user.konfirmasi-pembayaran');
+    	return view('dropshiper.user.konfirmasi-pembayaran');
     }
     
     /**
@@ -52,6 +52,6 @@ class UserController extends ControllerLogin
 
         request()->image->move(public_path('images'), $imageName);
         
-    	return redirect('anggota')->with('messages', 'Konfirmasi pembayaran anda berhasil, silahkan menunggu sistem akan mengecek bukti pembayaran anda terlebih dahulu.');
+    	return redirect('dropshiper')->with('messages', 'Konfirmasi pembayaran anda berhasil, silahkan menunggu sistem akan mengecek bukti pembayaran anda terlebih dahulu.');
     } 
 }
