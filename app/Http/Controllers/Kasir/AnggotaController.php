@@ -32,7 +32,7 @@ class AnggotaController extends Controller
         $pulsa                  = PPulsaTransaksi::select('id','user_id',\DB::raw('harga_beli as nominal'), 'created_at', \DB::raw('1 as jenis_transaksi'), \DB::raw('p_pulsa_id as type'),'no_invoice')->where('user_id', $id)->orderBy('id', 'DESC')->get(); 
         
         $params['data']         = Users::where('id', $id)->first(); 
-        $params['transaksi']    = $deposit->union($pulsa);
+        $params['transaksi']    = $deposit;//$deposit->union($pulsa);
 
         return view('kasir.anggota.detail')->with($params);
     }
@@ -85,6 +85,19 @@ class AnggotaController extends Controller
         $deposit->proses_user_id = \Auth::user()->id;
         $deposit->save();
 
+        # cek simpanan wajib
+        $cek = Deposit::where('status',3)->where('user_id', $request->user_id)->where('type', 5)->count();
+        if($cek > 0)
+        {
+            $no_anggota = generate_no_anggota($request->user_id);
+
+            if($no_anggota['status'] == 'success')
+            {
+                # set no anggota
+                Users::where('id', $request->user_id)->update(['no_anggota', $no_anggota['data']]);
+            }
+        }
+
         return redirect()->route('kasir.anggota.detail', $request->user_id)->with('message-success', 'Topup Simpanan Pokok berhasil !');
     }
 
@@ -119,6 +132,19 @@ class AnggotaController extends Controller
         $deposit->nominal       = $request->durasi_pembayaran * $request->nominal;
         $deposit->proses_user_id = \Auth::user()->id;
         $deposit->save();
+
+        # cek simpanan pokok
+        $cek = Deposit::where('status',3)->where('user_id', $request->user_id)->where('type', 3)->count();
+        if($cek > 0)
+        {
+            $no_anggota = generate_no_anggota($request->user_id);
+
+            if($no_anggota['status'] == 'success')
+            {
+                # set no anggota
+                Users::where('id', $request->user_id)->update(['no_anggota', $no_anggota['data']]);
+            }
+        }
 
         return redirect()->route('kasir.anggota.detail', $request->user_id)->with('message-success', 'Topup Simpanan Wajib berhasil !');
     }

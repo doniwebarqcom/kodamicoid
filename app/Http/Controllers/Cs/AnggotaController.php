@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Cs;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Kodami\Models\Mysql\Users;
 
 class AnggotaController extends Controller
 {	
@@ -16,6 +17,28 @@ class AnggotaController extends Controller
     	$data = \App\UserModel::where('access_id', 2)->orWhere('access_id', 7)->orderBy('id', 'DESC')->get();
 
     	return view('cs.anggota.index', compact('data'));
+    }
+
+    /**
+     * Active Anggota
+     */
+    public function active($id)
+    {
+        $user =  Users::where('id', $id)->first();
+        $user->status_login = 1;
+        $user->save();
+
+        return redirect()->route('cs.anggota.index')->with('message-success', 'Login Anggota berhasil di Aktifkan');
+    }
+
+    /**
+     * Inactive Anggota
+     */
+    public function inactive($id)
+    {
+        Users::where('id', $id)->update(['status_login'=> '0']);
+
+        return redirect()->route('cs.anggota.index')->with('message-success', 'Login Anggota berhasil di Non Aktifkan');
     }
 
     /**
@@ -114,6 +137,7 @@ class AnggotaController extends Controller
         {
             $data->access_id = 2; # set access login sebagai anggota
         }
+        $data->durasi_pembayaran = $request->durasi_pembayaran;
         $data->save();
 
         return redirect()->route('cs.anggota.edit', $data->id)->with('message-success', 'Data Anggota berhasil disimpan'); 
@@ -206,7 +230,7 @@ class AnggotaController extends Controller
         {
             $data->access_id = 2; # set access login sebagai anggota
         }
-
+        $data->durasi_pembayaran = $request->durasi_pembayaran;
         $data->save();
 
         return redirect()->route('cs.anggota.edit', $data->id)->with('message-success', 'Data Anggota berhasil disimpan.'); 

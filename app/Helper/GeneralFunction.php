@@ -1,6 +1,15 @@
 <?php
 
 /**
+ * Remove Number Format
+ * @return number
+ */
+function remove_number_format($number)
+{
+  return str_replace(',', '',$number);
+}
+
+/**
  * 
  * @return [type] [description]
  */
@@ -193,7 +202,7 @@ function status_anggota($id)
          return "<a class=\"btn btn-danger btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-ban\"></i> Ditolak</a>";
          break;
       case 3:
-         return "<a class=\"btn btn-danger btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-ban\"></i> Ditolak</a>";
+         return "<a class=\"btn btn-danger btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-ban\"></i> Non Aktif</a>";
          break;
       default:
          return "<a class=\"btn btn-danger btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-ban\"></i> Tidak Aktif</a>";
@@ -256,6 +265,7 @@ function total_anggota($status = 'all')
  */
 function access_rules($selected = 0)
 {
+
    $array_map = [
                   1 => 'Administrator',
                   2 => 'Anggota',
@@ -266,6 +276,8 @@ function access_rules($selected = 0)
                   7 => 'Dropshiper',
                   8 => 'Admin Produk'
                ];
+               
+  $array_map = \Kodami\Models\Mysql\Users::access();
 
    if($selected != null || $selected != "" || $selected != 0)
    {

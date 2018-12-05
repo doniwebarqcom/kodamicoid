@@ -107,21 +107,25 @@
                         </div>
                        
                         <div class="form-group">
-                            <label class="col-md-4">Password</label>
-                            <label class="col-md-4">Ketik Ulang Password</label>
-                            <label class="col-md-4">Status Login</label>
-                            <div class="col-md-4">
+                            <label class="col-md-6">Password</label>
+                            <label class="col-md-6">Ketik Ulang Password</label>
+                            <div class="col-md-6">
                                 <input type="password" name="password" class="form-control">
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <input type="password" name="confirmation" class="form-control"> 
-                            </div>
-                            <div class="col-md-4">
-                                <label><input type="radio" name="status_login" value="1" /> Active </label> &nbsp;
-                                <label><input type="radio" name="status_login" value="0" /> Inactive </label>
                             </div>
                         </div>
                         <div class="form-group">
+                            <div class="col-md-6">
+                                <label>Durasi Pembayaran Simpanan Wajib</label>
+                                <select class="form-control" name="durasi_pembayaran">
+                                    <option value="1">1 Bulan</option>                        
+                                    <option value="3">3 Bulan</option>                        
+                                    <option value="6">6 Bulan</option>                        
+                                    <option value="12">12 Bulan</option> 
+                                </select>
+                            </div>
                             <label class="col-md-6"><input type="checkbox" name="is_dropshiper" value="1"> Aktifkan Sebagai Dropshiper</label>
                         </div>
                     </div>

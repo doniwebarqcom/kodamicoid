@@ -106,6 +106,8 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
     Route::get('kemitraan/add-kuota/{id}','KemitraanController@addKuota')->name('admin.kemitraan.add-kuota');
     Route::get('kemitraan/dropshiper-active/{id}','KemitraanController@dropshiperActive')->name('admin.kemitraan.dropshiper-active');
     Route::get('kemitraan/dropshiper-inactive/{id}','KemitraanController@dropshiperInactive')->name('admin.kemitraan.dropshiper-inactive');
+	Route::get('active/{id}','AnggotaController@active')->name('admin.anggota.active');
+	Route::get('inactive/{id}','AnggotaController@inactive')->name('admin.anggota.inactive');
 	Route::post('anggota/topup-simpanan-pokok','AnggotaController@topupSimpananPokok')->name('admin.anggota.topup-simpanan-pokok');
 	Route::post('anggota/topup-simpanan-wajib','AnggotaController@topupSimpananWajib')->name('admin.anggota.topup-simpanan-wajib');
 	Route::post('anggota/add-rekening-bank','AnggotaController@addRekeningBank')->name('admin.anggota.add-rekening-bank');
@@ -172,10 +174,13 @@ Route::group(['prefix' => 'kasir', 'namespace' => 'Kasir', 'middleware' => ['aut
 	Route::post('ajax/submit-simpanan-sukarela', 'AjaxController@submitSimpananSukarela')->name('ajax.kasir.submit-simpanan-sukarela');
 	Route::resource('anggota','AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'kasir']);
 });
+
 // ROUTING CS
 Route::group(['prefix' => 'cs', 'namespace' => 'Cs', 'middleware' => ['auth', 'access:4']], function(){
 	Route::get('/','IndexController@index')->name('cs.index');
 	Route::get('back-to-admin','IndexController@backtoadmin')->name('cs.back-to-admin');
+	Route::get('active/{id}','AnggotaController@active')->name('cs.anggota.active');
+	Route::get('inactive/{id}','AnggotaController@inactive')->name('cs.anggota.inactive');
 	Route::resource('anggota','AnggotaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'cs']);
 	Route::resource('simpanan-wajib','SimpananWajibController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'cs']);
 	Route::resource('simpanan-pokok','SimpananPokokController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'cs']);

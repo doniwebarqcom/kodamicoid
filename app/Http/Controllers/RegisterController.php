@@ -30,7 +30,7 @@ class RegisterController extends Controller
     {
     	$this->validate($request,[
     		//'nik' 				=> 'required|unique:users',
-    		'telepon'			=> 'required',
+    		'telepon'			=> 'required|unique:users',
             'name'				=> 'required',
     		'email'				=> 'required|email|unique:users',
     		'password'			=> 'required',

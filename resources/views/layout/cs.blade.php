@@ -139,13 +139,7 @@
                     </li>
 
                     <li class="devider"></li>
-                    <li class="last-nav"><a href="javascript:void(0)" class="waves-effect"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu">Data Master<span class="fa arrow"></span></span></a>
-                        <ul class="nav nav-second-level">
-                            <li> <a href="{{ route('cs.anggota.index') }}" class="waves-effect"><i class="mdi mdi-account fa-fw"></i> <span class="hide-menu">Anggota</span></a></li>
-                            <!-- <li> <a href="{{ route('cs.simpanan-pokok.index') }}" class="waves-effect"><i class="mdi mdi-bank fa-fw"></i> <span class="hide-menu">Simpanan Pokok</span></a></li>
-                            <li> <a href="{{ route('cs.simpanan-sukarela.index') }}" class="waves-effect"><i class="mdi mdi-bank fa-fw"></i> <span class="hide-menu">Simpanan Sukarela</span></a></li>
-                            <li> <a href="{{ route('cs.simpanan-wajib.index') }}" class="waves-effect"><i class="mdi mdi-bank fa-fw"></i> <span class="hide-menu">Simpanan Wajib</span></a></li> -->
-                        </ul>
+                    <li class="last-nav"><a href="{{ route('cs.anggota.index') }}" class="waves-effect"><i class="mdi mdi-apps fa-fw"></i> <span class="hide-menu">Anggota<span class="fa arrow"></span></span></a>
                     </li>
                 </ul>
             </div>
@@ -203,6 +197,8 @@
     <script src="https://cdn.rawgit.com/bpampuch/pdfmake/0.1.18/build/vfs_fonts.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.2.2/js/buttons.print.min.js"></script>
+    <script src="{{ asset('js/jquery.priceformat.min.js') }}"></script>
+    <script src="{{ asset('js/general.js?v='. date('His')) }}"></script>
     <script src="{{ asset('js/set-datable.js?v='. date('His')) }}"></script>
     <script type="text/javascript">
 

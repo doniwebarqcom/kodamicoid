@@ -20,13 +20,24 @@
             <div class="col-md-12">
                <div class="white-box">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li class="active" role="presentation" class=""><a href="#anggota" aria-controls="anggota" role="tab" data-toggle="tab" aria-expanded="false"><i class="ti-user"></i>&nbsp;&nbsp; Dropshiper</a></li>
+                        <li class="active" role="presentation" class=""><a href="#anggota" aria-controls="anggota" role="tab" data-toggle="tab" aria-expanded="false"><i class="ti-user"></i>&nbsp;&nbsp; Anggota</a></li>
                         <li role="presentation"><a href="#pendiri" aria-controls="pendiri" role="tab" data-toggle="tab" aria-expanded="false"><i class="ti-user"></i>&nbsp;&nbsp; Pendiri dan Pengurus</a></li>
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content mt-1">
                         <div role="tabpanel" class="tab-pane in active" id="anggota">
-                            <div class="table-responsive mt-5">
+                            <form method="GET" action="">
+                                <div class="form-group">
+                                    <div class="col-md-2">
+                                        <input type="text" class="form-control" name="name" value="{{ (isset($_GET['name']) and !empty($_GET['name'])) ? $_GET['name'] : '' }}" placeholder="Nama" />
+                                    </div>
+                                    <div class="col-md-1 pl-0">
+                                        <button type="submit" class="btn btn-info"><i class="fa fa-search-plus"></i></button>
+                                    </div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </form>
+                            <div class="table-responsive mt-0">
                                 <table class="display nowrap data_table" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
@@ -48,19 +59,38 @@
                                             <tr>
                                                 <td class="text-center">{{ $no+1 }}</td>
                                                 <td>{{ $item->name }}</td>
-                                                <td>{{ $item->no_pendaftaran }}</td>
+                                                <td>{{ empty($item->no_pendaftaran) ? $item->no_anggota : $item->no_pendaftaran }}</td>
                                                 <td>{{ $item->no_anggota }}</td>
                                                 <td>{{ explode_telepon($item->telepon) }}</td>
                                                 <td>{{ $item->email }}</td>
                                                 <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
-                                                <td>{!! status_login_anggota($item->status_login) !!}</td>
+                                                <td>
+                                                    @switch ($item->status_login)
+                                                        @case(0)
+                                                            <a href="{{ route('admin.anggota.active', $item->id) }}" onclick="return confirm('Aktifkan Login Anggota ini ?')" class="btn btn-danger btn-xs" style="font-size:11px"><i class="fa fa-ban"></i> Tidak Aktif</a>
+                                                        @break
+                                                        @case(1)
+                                                            <a href="{{ route('admin.anggota.inactive', $item->id) }}" onclick="return confirm('Non Aktifkan Login Anggota ini ?')" class="btn btn-success btn-xs" style="font-size:11px"><i class="fa fa-check"></i> Aktif</a>
+                                                        @break
+                                                        @case(2)
+                                                            <a class="btn btn-danger btn-xs" style="font-size:11px"><i class="fa fa-ban"></i> Ditolak</a>
+                                                        @break;
+                                                        @case(3)
+                                                            <a class="btn btn-danger btn-xs" style="font-size:11px"><i class="fa fa-ban"></i> Non Aktif</a>
+                                                        @break
+                                                        @default
+                                                            <a href="{{ route('admin.anggota.inactive', $item->id) }}" onclick="return confirm('Aktifkan Anggota ini ?')" class="btn btn-danger btn-xs" style="font-size:11px"><i class="fa fa-ban"></i> Tidak Aktif</a>
+                                                        @break
+                                                    @endswitch
+                                                </td>
                                                 <td>{!! status_anggota($item->id) !!}</td>
                                                 <td>
-                                                    @php($simpanan_pokok = simpanan_pokok($item->id)->where('status', 3)->sum('nominal'))
-                                                    @if($simpanan_pokok)
-                                                        <label>Rp. {{ number_format($simpanan_pokok) }}</label><!--set sisa kuota dikurangi dengan jumlah transaksi -->
+                                                    @if($item->access_id==2)
+                                                        @php($simpanan_pokok = simpanan_pokok($item->id)->where('status', 3)->sum('nominal'))
+                                                        @if($simpanan_pokok)
+                                                            <label>Rp. {{ number_format($simpanan_pokok) }}</label><!--set sisa kuota dikurangi dengan jumlah transaksi -->
+                                                        @endif
                                                     @endif
-                                                    
                                                     @if($item->access_id == 7)
                                                         <label class="btn btn-info btn-xs btn-circle" title="Aktif Dropshiper" style="width: 23px;height: 23px;padding: 4px 0;font-size:10px;">DS</label>
                                                     @endif
@@ -89,8 +119,7 @@
                                 <div class="col-md-6 pull-right text-right">{{ $data->appends($_GET)->render() }}</div><div class="clearfix"></div>
                             </div>
                         </div>
-
-                        <div role="tabpanel" class="tab-pane in active" id="pendiri">
+                        <div role="tabpanel" class="tab-pane in" id="pendiri">
                             <div class="table-responsive mt-5">
                                 <table id="data_table" class="display nowrap" cellspacing="0" width="100%">
                                     <thead>

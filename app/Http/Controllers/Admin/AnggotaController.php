@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ControllerLogin;
 use App\ModelUser; 
+use Kodami\Models\Mysql\Users;
 
 class AnggotaController extends ControllerLogin
 {	
@@ -16,9 +17,38 @@ class AnggotaController extends ControllerLogin
     {
     	$data = ModelUser::where(function($table){
                                     $table->where('access_id', 2)->orWhere('access_id', 7);
-                                })->orderBy('id', 'DESC')->paginate(50);
+                                })->orderBy('id', 'DESC');
+
+        if(isset($_GET['name']) and !empty($_GET['name']))
+        {
+            $data = $data->where('name','LIKE','%'. $_GET['name'] .'%');
+        }
+        
+        $data = $data->paginate(50);
 
     	return view('admin.anggota.index', compact('data'));
+    }
+
+    /**
+     * Active Anggota
+     */
+    public function active($id)
+    {
+        $user =  Users::where('id', $id)->first();
+        $user->status_login = 1;
+        $user->save();
+
+        return redirect()->route('admin.anggota.index')->with('message-success', 'Login Anggota berhasil di Aktifkan');
+    }
+
+    /**
+     * Inactive Anggota
+     */
+    public function inactive($id)
+    {
+        Users::where('id', $id)->update(['status_login'=> '0']);
+
+        return redirect()->route('admin.anggota.index')->with('message-success', 'Login Anggota berhasil di Non Aktifkan');
     }
 
     /**
@@ -214,6 +244,7 @@ class AnggotaController extends ControllerLogin
             $data->access_id = 2; # set access login sebagai anggota
         }
         $data->is_dropshiper = $request->is_dropshiper;
+        $data->durasi_pembayaran = $request->durasi_pembayaran;
         $data->save();
 
         return redirect()->route('admin.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 
@@ -306,6 +337,7 @@ class AnggotaController extends ControllerLogin
         {
             $data->access_id = 2; # set access login sebagai anggota
         }
+        $data->durasi_pembayaran = $request->durasi_pembayaran;
         $data->save();
 
         return redirect()->route('admin.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 

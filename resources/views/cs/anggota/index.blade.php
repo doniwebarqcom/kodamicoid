@@ -2,14 +2,7 @@
 
 @section('title', 'Admin - Koperasi Daya Masyarakat Indonesia')
 
-@section('sidebar')
- 
-@endsection
-
 @section('content')
-<!-- ============================================================== -->
-<!-- Page Content -->
-<!-- ============================================================== -->
 <div id="page-wrapper">
     <div class="container-fluid">
         <div class="row bg-title">
@@ -34,47 +27,60 @@
                                 <tr>
                                     <th width="70" class="text-center">#</th>
                                     <th>NAME</th>
+                                    <th>NO REG</th>
                                     <th>NO ANGGOTA</th>
                                     <th>JENIS KELAMIN</th>
                                     <th>TELEPON</th>
                                     <th>EMAIL</th>
-                                    <th>ADDED</th>
+                                    <th>TERDAFTAR</th>
                                     <th>LOGIN</th>
                                     <th>STATUS ANGGOTA</th>
                                     <th>#</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($data as $no => $item)
-                                    <tr>
-                                        <td class="text-center">{{ $no+1 }}</td>
-                                        <td>{{ $item->name }}</td>
-                                        <td>{{ $item->no_anggota }}</td>
-                                        <td>{{ $item->jenis_kelamin }}</td>
-                                        <td>{{ $item->telepon }}</td>
-                                        <td>{{ $item->email }}</td>
-                                        <td>{{ $item->created_at }}</td>
-                                        <td>{!! status_login_anggota($item->status_login) !!}</td>
-                                        <td>{!! status_anggota($item->id) !!}</td>
-                                        <td>
-                                            <a href="{{ route('cs.anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> detail</button></a>
-                                        </td>
-                                    </tr>
-                                @endforeach
+                            @foreach($data as $no => $item)
+                                <tr>
+                                    <td class="text-center">{{ $no+1 }}</td>
+                                    <td>{{ $item->name }}</td>
+                                    <td>{{ empty($item->no_pendaftaran) ? $item->no_anggota : $item->no_pendaftaran }}</td>
+                                    <td>{{ $item->no_anggota }}</td>
+                                    <td>{{ $item->jenis_kelamin }}</td>
+                                    <td>{{ $item->telepon }}</td>
+                                    <td>{{ $item->email }}</td>
+                                    <td>{{ $item->created_at }}</td>
+                                    <td>
+                                        @switch ($item->status_login)
+                                            @case(0)
+                                                <a href="{{ route('cs.anggota.active', $item->id) }}" onclick="return confirm('Aktifkan Login Anggota ini ?')" class="btn btn-danger btn-xs" style="font-size:11px"><i class="fa fa-ban"></i> Tidak Aktif</a>
+                                            @break
+                                            @case(1)
+                                                <a href="{{ route('cs.anggota.inactive', $item->id) }}" onclick="return confirm('Non Aktifkan Login Anggota ini ?')" class="btn btn-success btn-xs" style="font-size:11px"><i class="fa fa-check"></i> Aktif</a>
+                                            @break
+                                            @case(2)
+                                                <a class="btn btn-danger btn-xs" style="font-size:11px"><i class="fa fa-ban"></i> Ditolak</a>
+                                            @break;
+                                            @case(3)
+                                                <a class="btn btn-danger btn-xs" style="font-size:11px"><i class="fa fa-ban"></i> Non Aktif</a>
+                                            @break
+                                            @default
+                                                <a href="{{ route('cs.anggota.inactive', $item->id) }}" onclick="return confirm('Aktifkan Anggota ini ?')" class="btn btn-danger btn-xs" style="font-size:11px"><i class="fa fa-ban"></i> Tidak Aktif</a>
+                                            @break
+                                        @endswitch
+                                    </td>
+                                    <td>{!! status_anggota($item->id) !!}</td>
+                                    <td>
+                                        <a href="{{ route('cs.anggota.edit', ['id' => $item->id]) }}"> <button class="btn btn-info btn-xs"><i class="ti-pencil-alt"></i> detail</button></a>
+                                    </td>
+                                </tr>
+                            @endforeach
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>                        
         </div>
-        <!-- /.row -->
-        <!-- ============================================================== -->
     </div>
-    <!-- /.container-fluid -->
    @include('layout.footer-admin')
 </div>
-<!-- ============================================================== -->
-<!-- End Page Content -->
-<!-- ============================================================== -->
-
 @endsection

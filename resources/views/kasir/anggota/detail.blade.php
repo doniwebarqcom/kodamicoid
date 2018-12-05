@@ -307,18 +307,18 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Nominal</label>
-                        <input type="number" readonly="true" name="nominal" class="form-control modal_nominal_simpanan_wajib" value="{{ get_setting('simpanan_wajib') }}">
+                        <input type="text" readonly="true" name="nominal" class="form-control modal_nominal_simpanan_wajib" value="{{ number_format(get_setting('simpanan_wajib')) }}">
                     </div>
                     Durasi Pembayaran : 
-                    <select class="form-control" name="durasi_pembayaran">
-                        <option value="1">1 Bulan</option>                        
-                        <option value="3">3 Bulan</option>                        
-                        <option value="6">6 Bulan</option>                        
-                        <option value="12">12 Bulan</option>                        
+                    <select class="form-control" name="durasi_pembayaran" {{ $data->durasi_pembayaran !== NULL ? 'disabled' : '' }}>
+                        <option value="1" {{ $data->durasi_pembayaran == 1 ? 'selected' : '' }}>1 Bulan</option>                        
+                        <option value="3" {{ $data->durasi_pembayaran == 3 ? 'selected' : '' }}>3 Bulan</option>                        
+                        <option value="6" {{ $data->durasi_pembayaran == 6 ? 'selected' : '' }}>6 Bulan</option>                        
+                        <option value="12" {{ $data->durasi_pembayaran == 12 ? 'selected' : '' }}>12 Bulan</option>                        
                     </select>
                     <br />
                     <label>Total : </label>
-                    <input type="input" name="total" class="form-control total_simpanan_wajib" readonly="true" value="{{ get_setting('simpanan_wajib') }}" />
+                    <input type="input" name="total" class="form-control total_simpanan_wajib" readonly="true" value="{{ number_format(get_setting('simpanan_wajib')) }}" />
                     <input type="hidden" name="user_id" value="{{ $data->id }}" >
                 </div>
                 <div class="modal-footer">

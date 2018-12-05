@@ -107,22 +107,32 @@
                                 </div>
                                 
                                 <div class="form-group">
-                                    <label class="col-md-4">Password</label>
-                                    <label class="col-md-4">Ketik Ulang Password</label>
-                                    <label class="col-md-4">Status Login</label>
-                                    <div class="col-md-4">
+                                    <label class="col-md-6">Password</label>
+                                    <label class="col-md-6">Ketik Ulang Password</label>
+                                    <div class="col-md-6">
                                         <input type="password" name="password" class="form-control" value="{{ $data->password }}">
                                     </div>
-                                    <div class="col-md-4">
+                                    <div class="col-md-6">
                                         <input type="password" name="confirmation" class="form-control" value="{{ $data->password }}"> 
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label><input type="radio" name="status_login" value="1" {{ $data->status_login == 1 ? 'checked="true"' : '' }} /> Active </label> &nbsp;
-                                        <label><input type="radio" name="status_login" value="0" {{ $data->status_login == 0 ? 'checked="true"' : '' }} /> Inactive </label>
                                     </div>
                                 </div>
                                 <div class="form-group">
-                                    <label class="col-md-6"><input type="checkbox" name="is_dropshiper" value="1" {{ $data->access_id == 7 ? 'checked="true"' : '' }}> Aktifkan Sebagai Dropshiper</label>
+                                    <div class="col-md-6">
+                                        <label>Durasi Pembayaran Simpanan Wajib</label>
+                                        <select class="form-control" name="durasi_pembayaran">
+                                            <option value="1" {{ $data->durasi_pembayaran == 1 ? 'selected' : '' }}>1 Bulan</option>                        
+                                            <option value="3"  {{ $data->durasi_pembayaran == 3 ? 'selected' : '' }}>3 Bulan</option>                        
+                                            <option value="6"  {{ $data->durasi_pembayaran == 6 ? 'selected' : '' }}>6 Bulan</option>                        
+                                            <option value="12"  {{ $data->durasi_pembayaran == 12 ? 'selected' : '' }}>12 Bulan</option> 
+                                        </select>
+                                    </div>
+                                    <label class="col-md-6">
+                                        @if($data->access_id == 7)
+                                            <input type="checkbox" name="is_dropshiper" value="1" checked="true"> Aktifkan Sebagai Dropshiper
+                                        @else
+                                            <input type="checkbox" name="is_dropshiper" value="1" {{ $data->access_id == 7 ? 'checked="true"' : '' }}> Aktifkan Sebagai Dropshiper</label>
+                                        @endif
+                                    </label>
                                 </div>
                             </div>
                             <div class="col-md-6">

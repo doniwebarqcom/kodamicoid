@@ -13,7 +13,7 @@ class UserController extends ControllerLogin
 	 */
     public function index()
     {        
-        $params['data'] = \Kodami\Models\Mysql\Users::where('access_id', '<>', 2)->orderBy('id', 'DESC')->get();
+        $params['data'] = \Kodami\Models\Mysql\Users::where('access_id', '<>', 2)->where('access_id', '<>', 7)->orderBy('id', 'DESC')->get();
 
     	return view('admin.user.index')->with($params);
     }

@@ -240,6 +240,7 @@
     <!-- Custom tab JavaScript -->
     <script src="{{ asset('admin-css/js/cbpFWTabs.js') }}"></script>
     <script src="{{ asset('js/bootbox.min.js') }}"></script>
+    <script src="{{ asset('js/jquery.priceformat.min.js') }}"></script>
     <script src="{{ asset('js/general.js?v='. date('His')) }}"></script>
     <script src="{{ asset('js/set-datable.js?v='. date('His')) }}"></script>
     <script type="text/javascript">
