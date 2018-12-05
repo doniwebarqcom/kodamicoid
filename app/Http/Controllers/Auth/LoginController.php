@@ -46,6 +46,16 @@ class LoginController extends Controller
     protected function credentials(Request $request)
     {
         if($request->get('email')){
+
+            #cek user
+            /*
+            $user = \Kodami\Models\Mysql\User::where('no_pendaftaran', $request->email)->first();
+            if($user)
+            {
+                
+            }
+            */
+
             return ['no_anggota'=>$request->get('email'),'password'=> $request->get('password'), 'status_login' => 1];
         }
 

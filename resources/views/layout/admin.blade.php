@@ -126,9 +126,6 @@
                         </a>
                         <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
                             <li><a href="javascript:void(0)"><i class="ti-user"></i> <span class="hide-menu">My Profile</span></a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-wallet"></i> <span class="hide-menu">My Balance</span></a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-email"></i> <span class="hide-menu">Inbox</span></a></li>
-                            <li><a href="javascript:void(0)"><i class="ti-settings"></i> <span class="hide-menu">Account Setting</span></a></li>
                             <li><a href="{{ url('logout') }}"><i class="fa fa-power-off"></i> <span class="hide-menu">Logout</span></a></li>
                         </ul>
                     </li>
@@ -138,6 +135,11 @@
                     <li>
                         <a href="{{ url('admin/anggota') }}" class="waves-effect">
                             <i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Management Anggota<span class="fa arrow"></span></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('admin.kemitraan.index') }}" class="waves-effect">
+                            <i class="mdi mdi-account-multiple fa-fw"></i> <span class="hide-menu">Kemitraan<span class="fa arrow"></span></span>
                         </a>
                     </li>
                     <li>
@@ -241,6 +243,11 @@
     <script src="{{ asset('js/general.js?v='. date('His')) }}"></script>
     <script src="{{ asset('js/set-datable.js?v='. date('His')) }}"></script>
     <script type="text/javascript">
+
+        $( function() {
+            $( document ).tooltip();
+        } );
+            
         (function() {
             [].slice.call(document.querySelectorAll('.sttabs')).forEach(function(el) {
                 new CBPFWTabs(el);

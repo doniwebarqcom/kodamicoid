@@ -1,6 +1,153 @@
 <?php
 
 /**
+ * 
+ * @return [type] [description]
+ */
+function generate_no_anggota($user_id)
+{
+  $user = \Kodami\Models\Mysql\Users::where('id', $user_id)->first();
+
+  if($user)
+  { 
+    $no_anggota = '';
+
+    # Register Source
+    if($user->register_source == 1)
+    {
+      $no_anggota = 12;
+    }
+    else
+    {
+      $no_anggota = 11;      
+    }
+
+    if(!empty($user->domisili_kelurahan_id))
+    {
+      $no_anggota .= floor($user->domisili_kelurahan_id / 123456);
+    }
+    else
+    {
+      return ['status'=>'error','message'=>'Kecamatan belum diset.'];
+    }
+
+    # Get Tanggal Lahir
+    if(!empty($user->tanggal_lahir))
+    {
+      $no_anggota .= date('d', strtotime($user->tanggal_lahir));
+      $no_anggota .= date('m', strtotime($user->tanggal_lahir));
+      $no_anggota .= date('y', strtotime($user->tanggal_lahir));
+    }
+    else
+    {
+      return ['status'=>'error','message'=>'Tanggal lahir belum diset.'];
+    }
+
+    $no_anggota .= rand(100, 999);
+
+    return ['status'=>'success', 'data'=> $no_anggota];
+  }
+}
+
+/**
+ * Parsing No Telpon
+ * @return string
+ */
+function explode_telepon($no_telpon)
+{
+  $str = explode('/', $no_telpon);
+
+  if(count($str) == 1)
+  {
+    return $no_telpon;
+  }
+  else
+  {
+    return @$str[0];
+  }
+}
+
+/**
+ * [total_transaksi_sukses_dropshiper description]
+ * @param  [type] $user_id [description]
+ * @return [type]          [description]
+ */
+function total_transaksi_gagal_dropshiper($user_id)
+{
+  return \Kodami\Models\Mysql\PPulsaTransaksi::whereNotNull('simko_reff_id')->where('user_id', $user_id)->where('status', 3)->count();
+}
+
+/**
+ * [total_transaksi_sukses_dropshiper description]
+ * @param  [type] $user_id [description]
+ * @return [type]          [description]
+ */
+function total_transaksi_sukses_dropshiper($user_id)
+{
+  return \Kodami\Models\Mysql\PPulsaTransaksi::whereNotNull('simko_reff_id')->where('user_id', $user_id)->where('status', 2)->count();
+}
+
+/**
+ * [total_transaksi description]
+ * @return [type] [description]
+ */
+function total_transaksi_dropshiper($user_id)
+{
+  return \Kodami\Models\Mysql\PPulsaTransaksi::whereNotNull('simko_reff_id')->where('user_id', $user_id)->count();
+}
+
+/**
+ * [saldo_dropshiper description]
+ * @param  [type] $user_id [description]
+ * @return [type]          [description]
+ */
+function saldo_dropshiper($user_id)
+{
+  $saldo = \Kodami\Models\Mysql\UserDropshiper::where('user_id', $user_id)->first();
+  
+  if($saldo)
+  {
+    return $saldo->saldo;
+  }
+
+  return "0";
+} 
+
+/**
+ * [saldo_terpakai_dropshiper description]
+ * @param  [type] $user_id [description]
+ * @return [type]          [description]
+ */
+function saldo_terpakai_dropshiper($user_id)
+{
+  $saldo = \Kodami\Models\Mysql\UserDropshiper::where('user_id', $user_id)->first();
+  
+  if($saldo)
+  {
+    return $saldo->saldo_terpakai;
+  }
+
+  return "0";
+} 
+
+/**
+ * [total_saldo_terpakai_dropshiper description]
+ * @param  [type] $user_id [description]
+ * @return [type]          [description]
+ */
+function total_saldo_terpakai_dropshiper($user_id)
+{
+  $saldo = \Kodami\Models\Mysql\UserDropshiper::where('user_id', $user_id)->first();
+  
+  if($saldo)
+  {
+    return $saldo->total_saldo_terpakai;
+  }
+
+  return "0";
+} 
+
+/**
  * [getInvoicePulsa description]
  * @param  [type] $no_invoice [description]
  * @return [type]             [description]
@@ -18,10 +165,10 @@ function status_login_anggota($status)
 {
   switch ($status) {
     case 1:
-       return "<a class=\"btn btn-success btn-xs\"><i class=\"fa fa-check\"></i> Aktif</a>";
+       return "<a class=\"btn btn-success btn-xs\" title='Aktif'><i class=\"fa fa-check\"></i></a>";
        break;
     default:
-       return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Tidak Aktif</a>";
+       return "<a class=\"btn btn-danger btn-xs\" title='Tidak Aktif'><i class=\"fa fa-close\"></i></a>";
       break;
  }
 } 
@@ -37,16 +184,16 @@ function status_anggota($id)
 
    switch ($user->status) {
       case 1:
-         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Tidak Aktif</a>";
+         return "<a class=\"btn btn-danger btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-ban\"></i> Tidak Aktif</a>";
          break;
       case 2:
-            return "<a class=\"btn btn-success btn-xs\"><i class=\"fa fa-check\"></i> Aktif</a>";
+            return "<a class=\"btn btn-success btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-check\"></i> Aktif</a>";
          break;
       case 3:
-         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Ditolak</a>";
+         return "<a class=\"btn btn-danger btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-ban\"></i> Ditolak</a>";
          break;
       default:
-         return "<a class=\"btn btn-danger btn-xs\"><i class=\"fa fa-ban\"></i> Tidak Aktif</a>";
+         return "<a class=\"btn btn-danger btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-ban\"></i> Tidak Aktif</a>";
          break;
    }
 }

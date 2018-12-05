@@ -32,7 +32,6 @@
                     <div class="panel-heading"> SIMPANAN SUKARELA</div>
                     <div class="table-responsive">
                         <div class="col-md-12">
-                        
                             <table id="data_table" class="table table-hover manage-u-table">
                                 <thead>
                                     <tr>

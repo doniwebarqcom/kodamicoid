@@ -58,5 +58,11 @@
 <script src="{{ asset('admin-css/js/custom.min.js') }}"></script>
 <!--Style Switcher -->
 <script src="{{ asset('admin-css/plugins/bower_components/styleswitcher/jQuery.style.switcher.js') }}"></script>
+<script src="{{ asset('js/bootbox.min.js') }}"></script>
+<script type="text/javascript">
+@if(Session::has('message-success'))
+	bootbox.alert('{{ Session::get('message-success') }}');
+@endif
+</script>
 </body>
 </html>

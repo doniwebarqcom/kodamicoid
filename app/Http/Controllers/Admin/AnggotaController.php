@@ -14,7 +14,9 @@ class AnggotaController extends ControllerLogin
 	 */
     public function index()
     {
-    	$data = ModelUser::where('access_id', 2)->orderBy('id', 'DESC')->get();
+    	$data = ModelUser::where(function($table){
+                                    $table->where('access_id', 2)->orWhere('access_id', 7);
+                                })->orderBy('id', 'DESC')->paginate(50);
 
     	return view('admin.anggota.index', compact('data'));
     }

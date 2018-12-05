@@ -73,6 +73,8 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::post('registerPost', 'RegisterController@registerPost');
 Route::post('contact-us', 'HomeController@postContactUs')->name('contact-us');
 Route::post('ajax/add-rekening-bank', 'AjaxController@addRekeningBank')->name('ajax.add.rekening.bank');
+Route::get('aktivasi/{no_pendaftaran}', 'HomeController@aktivasi')->name('aktivasi');
+
 // ROUTING LOGIN
 Route::group(['middleware' => ['auth']], function(){
 	Route::post('ajax/get-kabupaten-by-provinsi', 'AjaxController@getKabupatenByProvinsi')->name('ajax.get-kabupaten-by-provinsi-id');
@@ -101,6 +103,9 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 	Route::get('user/autologin/{id}','UserController@autologin')->name('admin.user.autologin');
 	Route::get('anggota/cetak-kwitansi/{id}','AnggotaController@cetakKwitansi')->name('admin.anggota.cetak-kwitansi');
 	Route::get('anggota/destroy/{id}', 'AnggotaController@destroy')->name('admin.anggota.destroy');
+    Route::get('kemitraan/add-kuota/{id}','KemitraanController@addKuota')->name('admin.kemitraan.add-kuota');
+    Route::get('kemitraan/dropshiper-active/{id}','KemitraanController@dropshiperActive')->name('admin.kemitraan.dropshiper-active');
+    Route::get('kemitraan/dropshiper-inactive/{id}','KemitraanController@dropshiperInactive')->name('admin.kemitraan.dropshiper-inactive');
 	Route::post('anggota/topup-simpanan-pokok','AnggotaController@topupSimpananPokok')->name('admin.anggota.topup-simpanan-pokok');
 	Route::post('anggota/topup-simpanan-wajib','AnggotaController@topupSimpananWajib')->name('admin.anggota.topup-simpanan-wajib');
 	Route::post('anggota/add-rekening-bank','AnggotaController@addRekeningBank')->name('admin.anggota.add-rekening-bank');
@@ -113,6 +118,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 	Route::resource('simpanan-sukarela','SimpananSukarelaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('simpanan-pokok','SimpananPokokController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('simpanan-wajib','SimpananWajibController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
+	Route::resource('kemitraan','KemitraanController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('general-setting','SettingController',['as' => 'admin']);
 });
 
@@ -131,7 +137,7 @@ Route::group(['prefix' => 'anggota', 'namespace' => 'Anggota', 'middleware' => [
 	Route::post('anggota/bayar/submit','BayarController@submit')->name('anggota.bayar.submit');
 	Route::post('anggota/add-rekening-bank','BayarController@addRekeningBank')->name('anggota.bayar.add-rekening-bank');
 	Route::post('upload-confirmation','BayarController@confirmation')->name('anggota.upload.confirmation');\
-	Route::resource('rekening-bank-user','RekeningBankUserController');
+	Route::resource('rekening-bank-user','RekeningBankUserController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'anggota']);
 	Route::resource('simpanan-sukarela','SimpananSukarelaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'anggota']);
 });
 
@@ -150,7 +156,7 @@ Route::group(['prefix' => 'dropshiper', 'namespace' => 'Dropshiper', 'middleware
 	Route::post('anggota/bayar/submit','BayarController@submit')->name('dropshiper.bayar.submit');
 	Route::post('anggota/add-rekening-bank','BayarController@addRekeningBank')->name('dropshiper.bayar.add-rekening-bank');
 	Route::post('upload-confirmation','BayarController@confirmation')->name('dropshiper.upload.confirmation');\
-	Route::resource('rekening-bank-user','RekeningBankUserController');
+	Route::resource('rekening-bank-user','RekeningBankUserController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'dropshiper']);
 	Route::resource('simpanan-sukarela','SimpananSukarelaController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'dropshiper']);
 });
 

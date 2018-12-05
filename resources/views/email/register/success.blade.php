@@ -12,7 +12,7 @@
       <tbody>
         <tr>
           <td style="vertical-align: top; padding-bottom:30px;">
-            <a href="http://www.kodami.co.id" target="_blank" style="text-decoration: none;color: #484848;"><img src="{{ asset('kodami-co-id.png') }}" alt="Admin Responsive web app kit" style="border:none; width: 270px; "><br/>
+            <a href="http://www.kodami.co.id" target="_blank" style="text-decoration: none;color: #484848;"><img src="{{ asset('kodami-co-id.png') }}" alt="Kodami Pocket System" style="border:none; width: 270px; "><br/>
             <h2 style="margin-top: 5px; padding-top: 5px;">Koperasi Daya Masyarakat</h2>
             </a>
           </td>
@@ -27,8 +27,8 @@
               <p>Terima kasih kepada anda yang sudah bergabung di Koperasi Daya Masyarakat Indonesia ( KODAMI ), berikut data pendaftaran anda.</p>
               <table style="width: 100%;max-width: 100%;margin-bottom: 20px;">
                 <tr>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">No Anggota</td>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->no_anggota }}</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">No Pendaftaran</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->no_pendaftaran }}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Nama</td>
@@ -56,7 +56,7 @@
               </ol>
 
               <p><small>Email ini otomatis terkirim otomatis oleh sistem anda tidak bisa membalas pesan ini, silahkan login ke akun profile anda untuk info lebih lanjut</small></p>
-              <a href="{{ route('login') }}" style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #1e88e5; border-radius: 60px; text-decoration:none;"> Login Anggota</a><br />
+              <a href="{{ route('aktivasi', $user->no_pendaftaran) }}" style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #1e88e5; border-radius: 60px; text-decoration:none;"> Aktivasi Data Anggota</a><br />
               <b>Thanks,<br /> Kodami Pocket System</b> </td>
           </tr>
         </tbody>

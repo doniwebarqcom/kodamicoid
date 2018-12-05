@@ -37,12 +37,12 @@ class RegisterController extends Controller
     		'confirmation'		=> 'required|same:password',
     	]);
 
-    	$no_anggota = date('y').date('m').date('d'). (ModelUser::all()->count() + 1);
+    	$no_pendaftaran = date('y').date('m').date('d'). (ModelUser::all()->count() + 1);
     
     	$data = new ModelUser();
-    	//$data->nik 					= $request->nik;
     	$data->telepon 				= $request->telepon;
-    	$data->no_anggota 			= $no_anggota;
+        $data->no_pendaftaran       = $no_pendaftaran;
+    	$data->no_anggota 		    = $no_pendaftaran;
     	$data->name 				= strtoupper($request->name);
     	$data->email 				= $request->email;
     	$data->password 			= bcrypt($request->password); 
@@ -50,6 +50,7 @@ class RegisterController extends Controller
         $data->status               = 1; // menunggu pembayaran
         $data->status_login         = 1;
         $data->status_anggota       = 0;
+        $data->register_source      = 1; // Register Source via Online
     	$data->save();
         $data->password = $request->password;
 

@@ -34,4 +34,32 @@ class HomeController extends Controller
 
         return redirect('/')->with('messages', 'Pertanyaan dan Kritik anda akan kami proses dengan segera.');
     }
+
+    /**
+     * Aktivasi Link
+     * @return redirect
+     */
+    public function aktivasi($no_pendaftaran)
+    {
+        $user = \Kodami\Models\Mysql\Users::where('no_pendaftaran', $no_pendaftaran)->first();
+
+        if($user)
+        {
+            if($user->aktivasi_link == 1)
+            {
+                return redirect()->route('login')->with('message-success', 'Anda sudah melakukan aktivasi silahkan login.');                
+            }
+            else
+            {
+                $user->aktivasi_link = 1;
+                $user->save();
+                
+                return redirect()->route('login')->with('message-success', 'Aktivasi Anda sudah berhasil silahkan login.');                
+            }
+        }
+        else
+        {
+            return redirect('/')->with('message-success', 'Maaf link aktivasi anda sudah tidak berlaku lagi.');
+        }
+    }
 }

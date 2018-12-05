@@ -114,6 +114,6 @@ class BayarController extends ControllerLogin
         $bank->user_id          = $request->user_id;
         $bank->save();
 
-        return redirect()->route('anggota.bayar', ['#tab-rekening'])->with('message-success', 'Data Bank berhasil ditambahkan');
+        return redirect()->route('anggota.bayar')->with('message-success', 'Data Bank berhasil ditambahkan');
     }
 }

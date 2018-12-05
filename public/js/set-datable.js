@@ -6,7 +6,8 @@ function init_datatable(){
         buttons: [
             'copy', 'csv', 'excel', 'pdf', 'print'
         ],
-        pageLength : 20
+        paging: false,
+        bInfo: false
     });
     $('#data_table2').DataTable({
         dom: 'Bfrtip',
