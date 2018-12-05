@@ -28,7 +28,7 @@ function generate_no_anggota($user_id)
     }
     else
     {
-      return ['status'=>'error','message'=>'Kecamatan belum diset.'];
+      return ['status'=>'error','message'=>'Data Kecamatan Domisili belum lengkap.'];
     }
 
     # Get Tanggal Lahir
@@ -40,7 +40,7 @@ function generate_no_anggota($user_id)
     }
     else
     {
-      return ['status'=>'error','message'=>'Tanggal lahir belum diset.'];
+      return ['status'=>'error','message'=>'Data Tanggal lahir belum lengkap.'];
     }
 
     $no_anggota .= rand(100, 999);
@@ -182,12 +182,15 @@ function status_anggota($id)
 {
    $user = App\ModelUser::where('id', $id)->first();
 
-   switch ($user->status) {
-      case 1:
+   switch ($user->status_anggota) {
+      case 0:
          return "<a class=\"btn btn-danger btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-ban\"></i> Tidak Aktif</a>";
          break;
-      case 2:
+      case 1:
             return "<a class=\"btn btn-success btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-check\"></i> Aktif</a>";
+         break;
+      case 2:
+         return "<a class=\"btn btn-danger btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-ban\"></i> Ditolak</a>";
          break;
       case 3:
          return "<a class=\"btn btn-danger btn-xs\" style=\"font-size:11px\"><i class=\"fa fa-ban\"></i> Ditolak</a>";

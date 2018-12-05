@@ -132,18 +132,18 @@ class MootaGrabMutasi extends Command
                 echo " NIK : ". @$data_deposit->user->nik ."\n";
                 echo " SEND EMAIL KE ANGGOTA ...  \n";
 
-                $params['text'] = '<p>Dear Ibu/Bapak '. $data_deposit->user->name .'<br />Pembayaran Data Anggota Anda berhasil</p>';
-
                 # Generata No Anggota
                 $no_anggota = generate_no_anggota($data_deposit->user_id);
                 if($no_anggota['status'] == 'success')
                 {
-                  $no_anggota = $no_anggota['data'];
+                  $no_anggota = '<p>No Anggota Anda : <strong></strong></p>'. $no_anggota['data'];
                 }
                 else
                 {
-                  $no_anggota = 0;;
+                  $no_anggota = '<p>No Anggota Anda belum bisa dibuat karna </p>'. $no_anggota['message'] .' silahkan hubungi Customer Services.';
                 }
+
+                $params['text'] = '<p>Dear Ibu/Bapak '. $data_deposit->user->name .'<br /> Pembayaran Data Anggota Anda berhasil </p>'. $no_anggota;
 
                 // Update status anggota aktif ketika bayar simpanan
                 \Kodami\Models\Mysql\Users::where('id', $data_deposit->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'no_anggota'=> $no_anggota]);

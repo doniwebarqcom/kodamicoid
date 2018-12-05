@@ -2,33 +2,21 @@
 
 @section('title', 'Admin - Koperasi Daya Masyarakat Indonesia')
 
-@section('sidebar')
-
-@endsection
-
 @section('content')
-
-<!-- ============================================================== -->
-<!-- Page Content -->
-<!-- ============================================================== -->
 <div id="page-wrapper">
-
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <h4 class="page-title">Dashboard</h4> </div>
             <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
-
                 <ol class="breadcrumb">
                     <li><a href="javascript:void(0)">Dashboard</a></li>
                     <li class="active">Home</li>
                 </ol>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
         <!-- .row -->
         <div class="row">
-            
             <div class="col-md-12">
             <div class="white-box">
                 <h3 class="box-title m-b-0">FORM USER</h3>
@@ -81,7 +69,6 @@
                         </div>
                     </div>
                     <div class="col-md-6">
-                        
                         <div class="form-group">
                             <label class="col-md-12">Password</label>
                             <div class="col-md-12">
@@ -125,13 +112,7 @@
               </div>
             </div>                        
         </div>
-        <!-- /.row -->
-        <!-- ============================================================== -->
     </div>
-    <!-- /.container-fluid -->
-    @extends('layout.footer-admin')
+    @include('layout.footer-admin')
 </div>
-<!-- ============================================================== -->
-<!-- End Page Content -->
-<!-- ============================================================== -->
 @endsection
