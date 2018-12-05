@@ -117,8 +117,8 @@
                                         <input type="password" name="confirmation" class="form-control" value="{{ $data->password }}"> 
                                     </div>
                                     <div class="col-md-4">
-                                        <label><input type="radio" name="status_login" value="1" {{ $data->status == 1 ? 'checked="true"' : '' }} /> Active </label> &nbsp;
-                                        <label><input type="radio" name="status_login" value="0" {{ $data->status == 0 ? 'checked="true"' : '' }} /> Inactive </label>
+                                        <label><input type="radio" name="status_login" value="1" {{ $data->status_login == 1 ? 'checked="true"' : '' }} /> Active </label> &nbsp;
+                                        <label><input type="radio" name="status_login" value="0" {{ $data->status_login == 0 ? 'checked="true"' : '' }} /> Inactive </label>
                                     </div>
                                 </div>
                                 <div class="form-group">

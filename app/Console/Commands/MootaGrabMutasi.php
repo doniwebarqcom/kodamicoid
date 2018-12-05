@@ -161,7 +161,7 @@ class MootaGrabMutasi extends Command
                 \Mail::send('email.default', $params,
                   function($message){
                       $message->from('services@kodami.co.id', 'Kodami Pocket System');
-                      $message->to('ramdoni@stalavista.com');
+                      $message->to('noreply.kodami@gmail.com');
                       $message->subject('Koperasi Produsen Daya  Masyarakat Indonesia - Pembayaran Anggota Berhasil');
                   }
                 );

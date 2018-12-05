@@ -65,6 +65,17 @@ class AnggotaController extends Controller
     */
     public function topupSimpananPokok(Request $request)
     {
+        $user                       = Users::where('id', $request->user_id)->first();
+        # cek jika profile belum lengkap
+        if($user->domisili_kelurahan_id === NULL)
+        {
+            return redirect()->route('kasir.anggota.detail', $request->user_id)->with('message-error', 'Pembayaran belum bisa dilakukan alamat domisili Anda belum lengkap, silahkan hubungi Customer Service untuk melengkapi data Anda. !'); 
+        }
+        if($user->tanggal_lahir === NULL)
+        {
+            return redirect()->route('kasir.anggota.detail', $request->user_id)->with('message-error', 'Pembayaran belum bisa dilakukan tanggal lahir Anda belum lengkap, silahkan hubungi Customer Service untuk melengkapi data Anda. !'); 
+        }
+
         $deposit                = new Deposit();
         $deposit->no_invoice    = no_invoice(); 
         $deposit->status        = 3;
@@ -85,6 +96,17 @@ class AnggotaController extends Controller
     public function topupSimpananWajib(Request $request)
     {
         $user                       = Users::where('id', $request->user_id)->first();
+
+        # cek jika profile belum lengkap
+        if($user->domisili_kelurahan_id === NULL)
+        {
+            return redirect()->route('kasir.anggota.detail', $request->user_id)->with('message-error', 'Pembayaran belum bisa dilakukan alamat domisili Anda belum lengkap, silahkan hubungi Customer Service untuk melengkapi data Anda. !'); 
+        }
+        if($user->tanggal_lahir === NULL || $user->domisili_kelurahan_id === NULL)
+        {
+            return redirect()->route('kasir.anggota.detail', $request->user_id)->with('message-error', 'Pembayaran belum bisa dilakukan tanggal lahir Anda belum lengkap, silahkan hubungi Customer Service untuk melengkapi data Anda. !'); 
+        }
+
         $user->durasi_pembayaran    = $request->durasi_pembayaran;
         $user->first_durasi_pembayaran_date = date('Y-m-d');
         $user->save();

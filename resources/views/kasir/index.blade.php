@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-md-1">
-                <h4 class="page-title">PENCARIAN : </h4> 
+                <h4 class="page-title">PENCARIAN</h4> 
             </div>
             <div class="col-md-6">
                 <form method="POST">

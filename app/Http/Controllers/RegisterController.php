@@ -57,12 +57,21 @@ class RegisterController extends Controller
         $params['user'] = $data;
         
         \Mail::send('email.register.success', $params,
-                function($message) use($data) {
-                    $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');
-                    $message->to($data->email);
-                    $message->subject('Registrasi - Kodami Pocket System');
-                }
-            );
+            function($message) use($data) {
+                $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');
+                $message->to($data->email);
+                $message->subject('Registrasi - Kodami Pocket System');
+            }
+        );
+
+        // send notifikasi ke admin ketika ada registrasi baru
+        \Mail::send('email.register.success', $params,
+            function($message) use($data) {
+                $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');
+                $message->to('noreply.kodami@gmail.com');
+                $message->subject('Pendaftaran Baru Anggota #'. $data->name .' - Kodami Pocket System');
+            }
+        );
 
     	return redirect('register/success')->with('success-register', 'Berhasil melakukan registrasi');
     }

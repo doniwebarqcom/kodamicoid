@@ -7,7 +7,7 @@
     <div class="container-fluid">
         <div class="row bg-title">
             <div class="col-md-1">
-                <h4 class="page-title">PENCARIAN : </h4> 
+                <h4 class="page-title">PENCARIAN</h4> 
             </div>
             <div class="col-md-6">
                 <form method="POST">
@@ -17,42 +17,51 @@
         </div>
         <!-- .row --> 
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 mx-0 px-0">
                 <!-- .tmp-search -->
                 <div class="white-box" style="position:relative;">
-                    <h2># {{ $data->name }} / {{ $data->no_anggota }}</h2>
+                    <h2># {{ $data->name }} {{ !empty($data->no_anggota) ? ' / '. $data->no_anggota : '' }}</h2>
                     <hr style="margin-top:0;" >
                     <h3 class="pull-right" style="position: absolute;top:0;right:30px;cursor:pointer;" onclick="delete_el(this)"><i class="fa fa-close"></i></h3>
                     <div class="col-md-4">
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             @if(!empty($data->foto))
                                 <img src="{{ asset('file_photo/'. $data->id .'/'. $data->foto) }}" style="width: 100%;" />
                             @else
                                 <img src="{{ asset('images/default-user.png') }}" style="width: 100%;">
                             @endif
                         </div>
-                        <div class="col-md-7">
-                            @if($data->status == 1)
-                                <label class="btn btn-success btn-sm"><i class="fa fa-check"></i> Aktif</label>
-                            @else
-                                <label class="btn btn-danger btn-sm"><i class="fa fa-close"></i> Inaktif</label>
-                            @endif
-                            <table class="table">
+                        <div class="col-md-8">
+                            <table class="table" style="margin-top:-26px">
                                 <tr>
-                                    <th style="padding-bottom: 8px;">No Anggota</th>
-                                    <th style="padding-bottom: 8px;">{{ $data->no_anggota }}</th>
+                                    <th style="padding-bottom: 2px;border:0;">Status</th>
+                                    <th style="padding-bottom: 2px;border:0">
+                                        @if($data->status == 1)
+                                            <label class="btn btn-success btn-xs"><i class="fa fa-check"></i> Aktif</label>
+                                        @else
+                                            <label class="btn btn-danger btn-xs"><i class="fa fa-close"></i> Tidak Aktif</label>
+                                        @endif
+                                    </th>
                                 </tr>
                                 <tr>
-                                    <th style="padding-bottom: 8px;">Name</th>
-                                    <th style="padding-bottom: 8px;">{{ $data->name }}</th>
+                                    <th style="padding-bottom: 2px;padding-top:7px;">No Anggota</th>
+                                    <th style="padding-bottom: 2px;padding-top:7px;">{{ $data->no_anggota }}</th>
                                 </tr>
                                 <tr>
-                                    <th style="padding-bottom: 8px;">Email</th>
-                                    <th style="padding-bottom: 8px;">{{ $data->email }}</th>
+                                    <th style="padding-bottom: 2px;padding-top:7px;">Name</th>
+                                    <th style="padding-bottom: 2px;padding-top:7px;">{{ $data->name }}</th>
                                 </tr>
                                 <tr>
-                                    <th style="padding-bottom: 8px;">Jenis Kelamin</th>
-                                    <th style="padding-bottom: 8px;">{{ $data->jenis_kelamin }}</th>
+                                    <th style="padding-bottom: 2px;padding-top:7px;">Email</th>
+                                    <th style="padding-bottom: 2px;padding-top:7px;">{{ $data->email }}</th>
+                                </tr>
+                                <tr>
+                                    <th style="padding-bottom: 2px;padding-top:7px;">Jenis Kelamin</th>
+                                    <th style="padding-bottom: 2px;padding-top:7px;">{{ $data->jenis_kelamin }}</th>
+                                </tr>
+                                <tr>
+                                    <th style="padding-bottom: 2px;padding-top:7px;">Tanggal Lahir</th>
+                                    <th style="padding-bottom: 2px;padding-top:7px;">{{ $data->tanggal_lahir }}</th>
                                 </tr>
                             </table>
                         </div>
@@ -62,14 +71,14 @@
                             <br /> Rp. {{ number_format(simpanan_wajib($data->id)->where('status', 3)->sum('nominal')) }}
                         </h3>
                         <label class="btn btn-info btn-xs" onclick="topup_simpanan_wajib()"><i class="fa fa-plus"></i> Topup</label>
-                        <label class="btn btn-danger btn-xs"  onclick="alert('Maaf Fitur masih dalam pengembangan.')"><i class="fa fa-minus"></i> Withdraw</label>
+                        <!-- <label class="btn btn-danger btn-xs"  onclick="alert('Maaf Fitur masih dalam pengembangan.')"><i class="fa fa-minus"></i> Withdraw</label> -->
                         <!-- <p>Jatuh tempo pembayaran selanjutnya<br /> <label class="text-danger">{{ date('d F Y', strtotime($data->first_durasi_pembayaran_date ." + ". $data->durasi_pembayaran ." month") ) }}</label></p> -->
                     </div>
                     <div class="col-md-2">
                         <h3><small>Simpanan Pokok</small><br /> Rp. {{ number_format(simpanan_pokok($data->id)->where('status', 3)->sum('nominal')) }}</h3>
                         @if(simpanan_pokok($data->id)->where('status', 3)->sum('nominal') == 0)
                             <label class="btn btn-info btn-xs" onclick="topup_simpanan_pokok()"><i class="fa fa-plus"></i> Topup</label>
-                            <label class="btn btn-danger btn-xs" onclick="alert('Maaf Fitur masih dalam pengembangan.')"><i class="fa fa-minus"></i> Withdraw</label>
+                            <!-- <label class="btn btn-danger btn-xs" onclick="alert('Maaf Fitur masih dalam pengembangan.')"><i class="fa fa-minus"></i> Withdraw</label> -->
                         @endif
                     </div>
                     <div class="col-md-2">
@@ -79,7 +88,6 @@
                     </div>
                     <div class="clearfix"></div>
                     <hr />
-                    <br />
                      <div>
                         <div class="col-md-2">
                             <ul class="nav tabs-vertical">
@@ -97,11 +105,10 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-md-10">
+                        <div class="col-md-10 mt-0 pt-0">
                             <div class="tab-content" style="margin-top:0;">
                                 <div id="transaksi" class="tab-pane active">
-                                    <h3>Transaksi</h3>
-                                    <table class="display nowrap data_table" cellspacing="0" width="100%">
+                                    <table class="display nowrap data_table mt-0" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -143,8 +150,7 @@
                                     </table>
                                 </div>
                                 <div id="simpanan_pokok" class="tab-pane">
-                                    <h3>Simpanan Pokok</h3>
-                                    <table class="display nowrap data_table1" cellspacing="0" width="100%">
+                                    <table class="display nowrap data_table1 mt-0" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -170,8 +176,7 @@
                                     </table>
                                 </div>
                                 <div id="simpanan_sukarela" class="tab-pane">
-                                    <h3>Simpanan Sukarela</h3>
-                                    <table class="display nowrap data_table2" cellspacing="0" width="100%">
+                                    <table class="display nowrap data_table2 mt-0" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -197,8 +202,7 @@
                                     </table>
                                 </div>
                                 <div id="simpanan_wajib" class="tab-pane">
-                                    <h3>Simpanan Wajib</h3>
-                                    <table class="display nowrap data_table3" cellspacing="0" width="100%">
+                                    <table class="display nowrap data_table3  mt-0" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>No</th>
@@ -276,9 +280,7 @@
                         <label>Nominal (Rp. )</label>
                         <input type="number" name="nominal" class="form-control" value="{{ get_setting('simpanan_pokok') }}">
                     </div>
-                    <p>
-                        *Catatan: <br /> Saldo Simpanan Pokok Minimal Rp. 100.000
-                    </p>
+                    <p>Catatan: Saldo Simpanan Pokok Minimal Rp. 100.000</p>
                     <input type="hidden" name="user_id" value="{{ $data->id }}">
                 </div>
                 <div class="modal-footer">
@@ -291,7 +293,7 @@
     </div>
     <!-- /.modal-dialog -->
 </div>
-<!-- /.modal -->
+<!-- /.modal --> 
 <!-- modal simpanan wajib-->
 <div id="modal_simpanan_wajib" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -355,7 +357,7 @@
         },
         select: function( event, ui ) {
 
-            window.location = '{{ url('kasir/anggota/detail') }}/'+ ui.item.id;
+            window.location = '{{ url('kasir/anggota/detail') }}/'+ ui.item.id; return false;
 
             $.ajax({
                 type: 'POST',

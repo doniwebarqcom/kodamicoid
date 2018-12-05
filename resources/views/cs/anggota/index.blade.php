@@ -39,7 +39,7 @@
                                     <th>TELEPON</th>
                                     <th>EMAIL</th>
                                     <th>ADDED</th>
-                                    <th>STATUS LOGIN</th>
+                                    <th>LOGIN</th>
                                     <th>STATUS ANGGOTA</th>
                                     <th>#</th>
                                 </tr>
