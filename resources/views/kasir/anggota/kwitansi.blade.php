@@ -16,16 +16,16 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <td>NO KWITANSI</td>
+                        <td> : {{ $data->no_invoice }}</td>
+                    </tr>
+                    <tr>
                         <td>NO ANGGOTA</td>
                         <td> : {{ $data->user->no_anggota }}</td>
                     </tr>
                     <tr>
                         <td>NAMA</td>
                         <td> : {{ $data->user->name }}</td>
-                    </tr>
-                    <tr>
-                        <td>NO KWITANSI</td>
-                        <td> : {{ $data->no_invoice }}</td>
                     </tr>
                     <tr>
                         <td>TANGGAL</td>
