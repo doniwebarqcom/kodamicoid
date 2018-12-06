@@ -310,7 +310,7 @@
                         <input type="text" readonly="true" name="nominal" class="form-control modal_nominal_simpanan_wajib" value="{{ number_format(get_setting('simpanan_wajib')) }}">
                     </div>
                     Durasi Pembayaran : 
-                    <select class="form-control" name="durasi_pembayaran" {{ $data->durasi_pembayaran !== NULL ? 'disabled' : '' }}>
+                    <select class="form-control" name="durasi_pembayaran" {{ $data->durasi_pembayaran !== NULL ? 'readonly="true"' : '' }}>
                         <option value="1" {{ $data->durasi_pembayaran == 1 ? 'selected' : '' }}>1 Bulan</option>                        
                         <option value="3" {{ $data->durasi_pembayaran == 3 ? 'selected' : '' }}>3 Bulan</option>                        
                         <option value="6" {{ $data->durasi_pembayaran == 6 ? 'selected' : '' }}>6 Bulan</option>                        
