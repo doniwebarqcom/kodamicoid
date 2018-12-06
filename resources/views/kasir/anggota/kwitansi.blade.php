@@ -17,11 +17,11 @@
                 <thead>
                     <tr>
                         <td>NO ANGGOTA</td>
-                        <td> : {{ $data->no_anggota }}</td>
+                        <td> : {{ $data->user->no_anggota }}</td>
                     </tr>
                     <tr>
                         <td>NAMA</td>
-                        <td> : {{ $data->name }}</td>
+                        <td> : {{ $data->user->name }}</td>
                     </tr>
                     <tr>
                         <td>NO KWITANSI</td>
