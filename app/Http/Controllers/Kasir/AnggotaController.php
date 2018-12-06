@@ -32,7 +32,7 @@ class AnggotaController extends Controller
         $pulsa                  = PPulsaTransaksi::select('id','user_id',\DB::raw('harga_beli as nominal'), 'created_at', \DB::raw('1 as jenis_transaksi'), \DB::raw('p_pulsa_id as type'),'no_invoice')->where('user_id', $id)->orderBy('id', 'DESC')->get(); 
         
         $params['data']         = Users::where('id', $id)->first(); 
-        $params['transaksi']    = $deposit;//$deposit->union($pulsa);
+        $params['transaksi']    = $deposit->union($pulsa);
 
         return view('kasir.anggota.detail')->with($params);
     }
