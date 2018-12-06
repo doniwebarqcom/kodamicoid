@@ -81,7 +81,7 @@ class AnggotaController extends Controller
         $deposit->status        = 3;
         $deposit->type          = 3;
         $deposit->user_id       = $request->user_id;
-        $deposit->nominal       = $request->nominal;
+        $deposit->nominal       = remove_number_format($request->nominal);
         $deposit->proses_user_id = \Auth::user()->id;
         $deposit->save();
 
@@ -129,7 +129,7 @@ class AnggotaController extends Controller
         $deposit->status        = 3; 
         $deposit->type          = 5; // Simpanan Wajib
         $deposit->user_id       = $request->user_id;
-        $deposit->nominal       = $request->durasi_pembayaran * $request->nominal;
+        $deposit->nominal       = $request->durasi_pembayaran * remove_number_format($request->nominal);
         $deposit->proses_user_id = \Auth::user()->id;
         $deposit->save();
 
