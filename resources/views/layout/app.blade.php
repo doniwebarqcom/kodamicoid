@@ -166,13 +166,14 @@
 					<div class="container relative fin_3" id='elem-portable'>
 						<div class="reg-now" style="top: 100px;">
 						@guest
-							<h2 class='medium-h text-center'>Registrasi Form</h2>
-							<h3 class='xsmall-h text-center'>Daftar disini untuk menjadi anggota Kodami. </h3>
+							<h2 class='medium-h text-center'>LOGIN Form</h2>
+							<h3 class='xsmall-h text-center'>Login disini untuk melihat status anggota Anda. </h3>
 							@if($errors)
 								@if(!empty($errors->first('email')))
-								<span class="item-error">Email anda sudah terdaftar</span>
+								<span class="item-error">No Anggota / Password anda salah silahka dicoba kembali.</span>
 								@endif
-								@if(!empty($errors->first('nama')))
+								
+								<!-- @if(!empty($errors->first('nama')))
 								<span class="item-error"><?php echo $errors->first('nama') ?></span>
 								@endif
 								@if(!empty($errors->first('password')))
@@ -180,11 +181,19 @@
 								@endif
 								@if(!empty($errors->first('password')))
 								<span class="item-error"><?php echo $errors->first('confirmation') ?></span>
-								@endif
+								@endif -->
 							@endif
-							<form class='reg-now-visible' action="{{ url('registerPost') }}" autocomplete="off" method="POST">
+
+							<form class='reg-now-visible' action="{{ url('login') }}" autocomplete="off" method="POST">
 		  						<input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>" />
-								<div class="control-group">
+		  						<div class="control-group">
+								    <input type="text" name="email" placeholder="No Anggota" />
+								</div>
+		  						<div class="control-group">
+								    <input type="password" name="password" placeholder="Password" />
+								</div>
+
+								<!-- <div class="control-group">
 		    						<input type="text" name="name" placeholder="Nama" required class="insert-attr" value="<?=Form::old('name')?>" />
 								</div>
 								<div class='control-group'>
@@ -198,8 +207,8 @@
 								</div>
 								<div class="control-group">
 								    <input type="password" name="confirmation" placeholder="Confirmation Password" />
-								</div>
-								<button type="submit" value="Register Now" class='btn submit sub-form' name="submit">DAFTAR</button>
+								</div> -->
+								<button type="submit" value="Register Now" class='btn submit sub-form' name="submit">LOGIN</button>
 							</form>
                         @endguest
 						</div>

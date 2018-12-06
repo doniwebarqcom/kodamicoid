@@ -50,7 +50,7 @@ class AjaxController extends Controller
             $deposit->proses_user_id    = \Auth::user()->id;
             $deposit->save(); 
 
-            $this->respon = ['message' => 'success', 'link_cetak' => route('kasir.anggota.cetak-kwitansi', $deposit->id)];
+            $this->respon = ['message' => 'success', 'link_cetak' => route('kasir.anggota.cetak-kwitansi', ['id'=>$deposit->id,'jenis_transaksi'=>'0'])];
 
             return response()->json($this->respon);
         }
