@@ -1,6 +1,17 @@
 <?php
 
 /**
+ * Parsing Yearmonth
+ * @return string
+ */
+function parsing_pln_periode($periode)
+{
+  $str = substr($periode, 4);
+
+  return date('M', mktime(0, 0, 0, $str, 10)) .' - '.substr($periode, 0,4);
+} 
+
+/**
  * Remove Number Format
  * @return number
  */
