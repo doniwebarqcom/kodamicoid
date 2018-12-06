@@ -16,6 +16,14 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <td>NO ANGGOTA</td>
+                        <td> : {{ $data->no_anggota }}</td>
+                    </tr>
+                    <tr>
+                        <td>NAMA</td>
+                        <td> : {{ $data->name }}</td>
+                    </tr>
+                    <tr>
                         <td>NO KWITANSI</td>
                         <td> : {{ $data->no_invoice }}</td>
                     </tr>
