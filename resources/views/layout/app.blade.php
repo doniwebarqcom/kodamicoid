@@ -166,8 +166,8 @@
 					<div class="container relative fin_3" id='elem-portable'>
 						<div class="reg-now" style="top: 100px;">
 						@guest
-							<h2 class='medium-h text-center'>LOGIN Form</h2>
-							<h3 class='xsmall-h text-center'>Login disini untuk melihat status anggota Anda. </h3>
+							<h2 class='medium-h text-left'>LOGIN Form</h2>
+							<p style="text-align: justify;color: white;font-size:12px;margin-top:10px;">Pendaftaran Anggota untuk saat ini dapat dilakukan melalui kantor Pusat Kodami Jl. Maospati-Goranggareng No.RT 34, RW.12, Pilang, Belotan, Kecamatan, Kabupaten Magetan, Jawa Timur 63384 dan Customer Service kami yang sedang bertugas. </p>
 							@if($errors)
 								@if(!empty($errors->first('email')))
 								<span class="item-error">No Anggota / Password anda salah silahka dicoba kembali.</span>
