@@ -98,7 +98,7 @@
                     </tr>
                   @endif
 
-                  @if($data->status == 2 and $data->pulsa->simko_provider_id==6)
+                  @if($data->status == 2 and $data->pulsa->simko_provider_id==6 and $data->pulsa->jenis_product != "PLN PASCABAYAR")
                     <tr>
                       <td><span class="gray-muted">Nama</span> </td>
                       <td>{{ isset($data->plnToken->nama) ? $data->plnToken->nama : '' }}</td>
