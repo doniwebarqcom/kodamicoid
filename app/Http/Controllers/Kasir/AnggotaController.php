@@ -142,7 +142,10 @@ class AnggotaController extends Controller
             if($no_anggota['status'] == 'success')
             {
                 # set no anggota
-                Users::where('id', $request->user_id)->update(['no_anggota', $no_anggota['data']]);
+                
+                $user = Users::where('id', $request->user_id)->first(); //update(['no_anggota', $no_anggota['data']]);
+                $user->no_anggota = $no_anggota['data'];
+                $user->save();
             }
         }
 
