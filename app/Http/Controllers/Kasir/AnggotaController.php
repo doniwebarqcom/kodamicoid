@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Kodami\Models\Mysql\Users;
 use Kodami\Models\Mysql\Deposit;
 use Kodami\Models\Mysql\PPulsaTransaksi;
+use Kodami\Models\Mysql\UserAnggota;
 
 class AnggotaController extends Controller
 {	
@@ -85,6 +86,20 @@ class AnggotaController extends Controller
         $deposit->proses_user_id = \Auth::user()->id;
         $deposit->save();
 
+        
+        # update table user anggota
+        $user_anggota = UserAnggota::where('user_id', $request->user_id)->first();
+        if(!$user_anggota)
+        {
+            $user_anggota = new UserAnggota();
+            $user_anggota->simpanan_pokok = $request->nominal;
+        }
+        else
+        {
+            $user_anggota->simpanan_pokok = $user_anggota->simpanan_pokok + $request->nominal;
+        }
+        $user_anggota->save();
+
         # cek simpanan wajib
         $cek = Deposit::where('status',3)->where('user_id', $request->user_id)->where('type', 5)->count();
         if($cek > 0)
@@ -94,7 +109,11 @@ class AnggotaController extends Controller
             if($no_anggota['status'] == 'success')
             {
                 # set no anggota
-                Users::where('id', $request->user_id)->update(['no_anggota', $no_anggota['data']]);
+                $user = Users::where('id', $request->user_id)->first(); //update(['no_anggota', $no_anggota['data']]);
+                $user->no_anggota       = $no_anggota['data'];
+                $user->status_login     = 1;
+                $user->status_anggota   = 1;
+                $user->save();
             }
         }
 
@@ -133,6 +152,19 @@ class AnggotaController extends Controller
         $deposit->proses_user_id = \Auth::user()->id;
         $deposit->save();
 
+         # update table user anggota
+        $user_anggota = UserAnggota::where('user_id', $request->user_id)->first();
+        if(!$user_anggota)
+        {
+            $user_anggota = new UserAnggota();
+            $user_anggota->simpanan_wajib = $request->durasi_pembayaran * remove_number_format($request->nominal);
+        }
+        else
+        {
+            $user_anggota->simpanan_wajib = $user_anggota->simpanan_wajib + ($request->durasi_pembayaran * remove_number_format($request->nominal));
+        }
+        $user_anggota->save();
+
         # cek simpanan pokok
         $cek = Deposit::where('status',3)->where('user_id', $request->user_id)->where('type', 3)->count();
         if($cek > 0)
@@ -142,9 +174,10 @@ class AnggotaController extends Controller
             if($no_anggota['status'] == 'success')
             {
                 # set no anggota
-                
                 $user = Users::where('id', $request->user_id)->first(); //update(['no_anggota', $no_anggota['data']]);
-                $user->no_anggota = $no_anggota['data'];
+                $user->no_anggota       = $no_anggota['data'];
+                $user->status_login     = 1;
+                $user->status_anggota   = 1;
                 $user->save();
             }
         }
