@@ -14,8 +14,7 @@
 	<link rel="stylesheet" href="{{ asset('advisa/css/bootstrap.css') }}">
 	<!--<link rel="stylesheet" href="{{ asset('advisa/css/font-awesome.css') }}"> -->
 	<link rel="stylesheet" href="{{ asset('advisa/fontawesome/css/fontawesome-all.css') }}">
-
-	<link rel="stylesheet" href="{{ asset('advisa/css/main.css') }}?v=2">
+	<link rel="stylesheet" href="{{ asset('advisa/css/main.css') }}?rand={{ rand(1,1000) }}">
 	<link rel="stylesheet" href="{{ asset('advisa/css/responsive.css') }}">
 	<?php 
          $chek_url = @$_SERVER['HTTP_HOST'];
@@ -47,15 +46,14 @@
 </div>
 
 <div class="main-holder">
-<header class='main-wrapper header'>
+<header class='main-wrapper header' style="background: url('{{ asset('18.png')  }}') !important; ">
 	<div class="container apex">
 		<div class="row">
-
 			<nav class="navbar header-navbar" role="navigation">
 				<!-- Brand and toggle get grouped for better mobile display -->
 				<div class="navbar-header">
 					<div class="logo navbar-brand">
-						<img src="{{ asset('images/logo.png') }}" style="width: 200px;" />
+						<img src="{{ asset('images/logo.png') }}" style="width: 153px;margin-top: 7px;" />
 					</div>
 		      <button class='toggle-slide-left visible-xs collapsed navbar-toggle' type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><i class="fa fa-bars"></i></button>
 				</div>
@@ -64,12 +62,12 @@
 		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<div class="navbar-right">
 						<nav class='nav-menu navbar-left main-nav trig-mob slide-menu-left'>
-							<ul class='list-unstyled'>
+							<ul class='list-unstyled nav_atas'>
 								<li>
 									<a href="#" data-scroll="about_kodami">
 										<div class="inside">
-											<div class="backside"> About Kodami </div>
-											<div class="frontside"> About Kodami </div>
+											<div class="backside"> Tentang Kodami </div>
+											<div class="frontside"> Tentang Kodami </div>
 										</div>
 									</a>
 								</li>
@@ -126,21 +124,6 @@
 								@endif
 							</ul>
 						</nav>
-						<div class="wr-soc">
-							<div class="header-social">
-								<ul class='social-transform unstyled'>
-								<li>
-									<a href='#' target='blank' class='front'><div class="fab fa-facebook-f"></div></a>
-								</li>
-								<li>
-									<a href='#' target='blank' class='front'><i class="fab fa-twitter"></i></a>
-								</li>
-								<li>
-									<a href='#' target='blank' class='front'><i class="fab fa-google-plus"></i></a>
-								</li>
-								</ul>
-							</div>
-						</div>
 					</div>
 		    </div><!-- /.navbar-collapse -->
 			</nav>
@@ -150,192 +133,70 @@
 </header>
 <!--===========================-->
 <!--==========Content==========-->
-<div class='main-wrapper content' style="background: url('{{ asset('background/15.png') }} ')!important;">
-	<section class="relative software_slider" style="background: url('{{ asset('18.png')  }}') !important;">
+<div class='main-wrapper content'>
+	<section class="relative software_slider">
 		<div class="forma-slider">
+			<div id="form_slider" data-anchor="form_slider">
+				<ul class="form-bxslider list-unstyled">
+					<li>
+						<div class="img-slider fin_2"><img src="https://bpjs-kesehatan.go.id/bpjs/application/modules/post/images/banner_website_kerja_sehat_bersama.jpg"></div>
+					</li>
+					<li>
+						<div class="img-slider fin_3"><img src="https://bpjs-kesehatan.go.id/bpjs/./application/modules/post/images/banner_website_tular_kebaikan.jpg"></div>
+					</li>
+					<li>
+						<div class="img-slider fin_3"><img src="https://bpjs-kesehatan.go.id/bpjs/./application/modules/post/images/banner_website_kerja_sehat_bersama.jpg"></div>
+					</li>
+					<li>
+						<div class="img-slider fin_3"><img src="https://bpjs-kesehatan.go.id/bpjs/./application/modules/post/images/hut_ke_50.jpg"></div>
+					</li>
+				</ul>
+			</div>
 			<div class="container">
 				<div class="row">
-					<div id="form_slider" data-anchor="form_slider">
-						<ul class="form-bxslider list-unstyled">
-							<li>
-								<div class="img-slider hidden-xs fin_2"><img src="{{ asset('images/banner1.png') }}"></div>
-							</li>
-						</ul>
-					</div>
 					<div class="clearfix visible-xs visible-md"></div>
-					<div class="container relative fin_3" id='elem-portable'>
-						<div class="reg-now" style="top: 100px;">
-						@guest
-							<h2 class='medium-h text-left'>LOGIN Form</h2>
-							<p style="text-align: justify;color: white;font-size:12px;margin-top:10px;">Pendaftaran Anggota untuk saat ini dapat dilakukan melalui kantor Pusat Kodami Jl. Maospati-Goranggareng No.RT 34, RW.12, Pilang, Belotan, Kecamatan, Kabupaten Magetan, Jawa Timur 63384 dan Customer Service kami yang sedang bertugas. </p>
-							@if($errors)
-								@if(!empty($errors->first('email')))
-								<span class="item-error">No Anggota / Password anda salah silahka dicoba kembali.</span>
-								@endif
-								
-								<!-- @if(!empty($errors->first('nama')))
-								<span class="item-error"><?php echo $errors->first('nama') ?></span>
-								@endif
-								@if(!empty($errors->first('password')))
-								<span class="item-error"><?php echo $errors->first('password') ?></span>
-								@endif
-								@if(!empty($errors->first('password')))
-								<span class="item-error"><?php echo $errors->first('confirmation') ?></span>
-								@endif -->
-							@endif
+					<div class="relative fin_3" id='elem-portable'>
+						<div class="reg-now menu-right" style="background: url('{{ asset('background-transparent.png?v=1') }}')">
+							<div class="item">
+								<img src="{{ asset('images/icon-2.png') }}" style="height: 40px;max-width: none;" />
+								<div class="sub-title sub-title-1"><p>Pendaftaran Anggota</p></div>
+							</div>
+							<div class="item">
+								<img src="{{ asset('images/icon-1.png') }}" style="height: 40px;max-width: none;" />
+								<div class="sub-title sub-title-5">Konfirmasi Pembayaran</div>
+							</div>
+							<div class="item">
+								<h1><a href="http://pulsa.kodami.id/login"><i class="fa fa-sign-in-alt"></i></a></h1>
+								<h5 class="sub-title sub-title-1">Login Kodami ID</h5>
+							</div>
+							<div class="item">
+								<h1><i class="fa fa-user"></i></h1>
+								<div class="sub-title sub-title-2"><p>Status Keanggotaan</p></div>
+							</div>
+							<div class="item">
+								<h1><i class="fa fa-university"></i></h1>
+								<div class="sub-title sub-title-3">Modal Penyertaan</div>
+							</div>
+							<div class="item">
+								<h1><i class="fa fa-file"></i></h1>
+								<div class="sub-title sub-title-4">Status Pembayaran</div>
+							</div>
+							<div class="item">
+								<img src="{{ asset('images/icon-4.png') }}" style="height: 40px;max-width: none;" />
+								<div class="sub-title sub-title-5">Pendaftaran Kemitraan</div>
+							</div>
+							<div class="item">
+								<h1><i class="fa fa-users"></i></h1>
+								<div class="sub-title sub-title-6">Request Kemitraan</div>
+							</div>
 
-							<form class='reg-now-visible' action="{{ url('login') }}" autocomplete="off" method="POST">
-		  						<input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>" />
-		  						<div class="control-group">
-								    <input type="text" name="email" placeholder="No Anggota" />
-								</div>
-		  						<div class="control-group">
-								    <input type="password" name="password" placeholder="Password" />
-								</div>
-
-								<!-- <div class="control-group">
-		    						<input type="text" name="name" placeholder="Nama" required class="insert-attr" value="<?=Form::old('name')?>" />
-								</div>
-								<div class='control-group'>
-		    						<input type="text" name="email" placeholder="Email" value="<?=Form::old('email')?>" />
-								</div>
-								<div class='control-group'>
-		    						<input type="text" name="telepon" placeholder="Telepon" value="<?=Form::old('telepon')?>" />
-								</div>
-								<div class="control-group">
-								    <input type="password" name="password" placeholder="Password" />
-								</div>
-								<div class="control-group">
-								    <input type="password" name="confirmation" placeholder="Confirmation Password" />
-								</div> -->
-								<button type="submit" value="Register Now" class='btn submit sub-form' name="submit">LOGIN</button>
-							</form>
-                        @endguest
 						</div>
 					</div>
 				</div>
 			</div><!-- end container -->
 		</div>
 	</section>
-	<section style="position:relative;" class="content-middle">
-		<img src="{{ asset('background/text-1.png') }}" style="position: absolute;top: 8%;left:4%;" class="text-middle" />
-		<img src="{{ asset('background/14.png') }}" class="background-middle" />
-		<button type="submit" value="Register Now" class="btn submit sub-form info_kodami_btn" name="submit" style="color: #415306; border:1px solid #415306; width: 300px; position: absolute; left: 41%; bottom: 25%; ">INFO</button>
-	</section>
-	<section class="container" data-anchor="about_kodami">
-		<div class="spacer1"></div>
-			<h2 class='text-center xxh-Bold' style="color: white;">kodami</h2>
-			<h3 class='text-center xmedium-h' style="color: white;">Adalah Koperasi Daya Masyarakat Indonesia, merupakan salah satu koperasi produsen yang modern, bekerja dengan memberdayakan masyarakat Indonesia dalam rangka menjadi pelaku ekonomi yang tangguh dan profesional, dengan mengembangkan sistem ekonomi kerakyatan yang bertumpu pada mekanisme pasar yang berkeadilan, dengan suatu tujuan untuk Indonesia yang lebih baik. Layanan Kodami berupa penjualan offline dan online didukung armada kuper (kurir koperasi) dan eskop (ekspedisi koperasi) yang akan membantu masyarakat untuk kemudahan bertransaksi dengan harga yang lebih kompetitif.</h3>
-		<div class="clearfix"></div>
-		<br />
-		<br />
-	</section>
-	<div class="container">
-		<div class="row trainings" id='trainings'>
-				<div class="col-md-4">
-					<div class="view view-fifth" onclick="slidetoogle_section_keanggotaan()">
-						<img src="{{ asset('banner-middle/keanggotaan.png')}}">
-						<h4 class='xxsmall-h text-center transition-h'>Keanggotaan</h4>
-						<div class="mask col-md-12">
-	                        <h2>Keanggotaan</h2>
-	                    </div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="view view-fifth">
-						<img src="{{ asset('banner-middle/modern.png')}}">
-						<h4 class='xxsmall-h text-center transition-h'>Modern</h4>
-						<div class="mask col-md-12">
-	                        <h2>Modern</h2>
-	                    </div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="view view-fifth">
-						<img src="{{ asset('banner-middle/profesional.png')}}">
-						<h4 class='xxsmall-h text-center transition-h'>Profesional</h4>
-						<div class="mask col-md-12">
-	                        <h2>Profesional</h2>
-	                    </div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-				<br />
-				<div class="col-md-4">
-					<div class="view view-fifth">
-						<img src="{{ asset('banner-middle/berbagi.png')}}">
-						<h4 class='xxsmall-h text-center transition-h'>Berbagi</h4>
-						<div class="mask col-md-12">
-	                        <h2>Berbagi</h2>
-	                    </div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="view view-fifth">
-						<img src="{{ asset('banner-middle/proteksi.png')}}">
-						<h4 class='xxsmall-h text-center transition-h'>Proteksi</h4>
-						<div class="mask col-md-12">
-	                        <h2>Proteksi</h2>
-	                    </div>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="view view-fifth">
-						<img src="{{ asset('banner-middle/edukasi.png')}}">
-						<h4 class='xxsmall-h text-center transition-h'>Edukasi</h4>
-						<div class="mask col-md-12">
-	                        <h2>Edukasi</h2>
-	                    </div>
-					</div>
-				</div>
-				<div class="content_keanggotaan" style="display: none;">
-					<img src="{{ asset('background/18.png') }}">
-				</div>
-			</div>
-		<br />
-		<br />
-	</div>
-	<section style="position:relative;" id="slider_bottom">
-		<div>
-			<ul class="slider-bottom1 unstyled">
-				<li><img src="{{ asset('background/13.png') }}" /></li>
-				<li><img src="{{ asset('background/16.jpg') }}" /></li>
-			</ul>
-		</div>
-	</section>
 </div>
-<!--===========================-->
-<!--=========Footer============-->
-<footer class='main-wrapper footer'>
-	<div class="container">
-		<a href="#" data-scroll="form_slider" class='btn submit a-trig reg-footer'>Daftar sekarang</a>
-	</div>
-	<div class="container bottom">
-
-		<ul class='social-transform footer-soc list-unstyled'>
-			<li>
-				<a href='#' target='blank' class='front'><div class="fab fa-facebook-f"></div></a>
-			</li>
-			<li>
-				<a href='#' target='blank' class='front'><i class="fab fa-twitter"></i></a>
-			</li>
-			<li>
-				<a href='#' target='blank' class='front'><i class="fab fa-google-plus"></i></a>
-			</li>
-			<li>
-				<a href='#' target='blank' class='front'><i class='fab fa-youtube'></i></a>
-			</li>
-		</ul>
-		<div class="clearifx"></div>
-		<span class="copyright">
-			&#169; <?=date('Y')?> Koperasi Daya Masyarakat Indonesia
-		</span>
-		<div class="container-fluid responsive-switcher hidden-md hidden-lg">
-			<i class="fa fa-mobile"></i>
-			Mobile version: Enabled
-		</div>
-	</div>
-</footer>
 <!-- Top -->
 <div id="back-top-wrapper" class="visible-lg">
 	<p id="back-top" class='bounceOut'>
@@ -379,7 +240,47 @@
 </div>
 <!-- Animasi -->
 <style type="text/css">
-
+.menu-right .item h1,.menu-right .item h1 a  {color: white;}
+.menu-right .item {position: relative;cursor: pointer;margin-top: 30px;}
+.menu-right .item .sub-title {
+	display: none;
+	position: absolute;
+    top: 0px;
+    right: 50px;
+	background-image: url('{{ asset('background-transparent.png?v=1') }}');
+	color: white;
+	padding: 15px 0px 15px 10px;
+	min-height: 66px;
+	max-height: 66px;
+}
+.menu-right .item h1:hover, .menu-right .item h1 a:hover {
+	color: #ccc;
+}
+.sub-title-1 {width: 145px;}
+.sub-title-2 {width: 145px;}
+.sub-title-3 {width: 145px;}
+.sub-title-4 {width: 145px;}
+.sub-title-5 {width: 145px;}
+.sub-title-6 {width: 145px;}
+.reg-now {
+	height: -webkit-fill-available;
+	top: 71px;
+	width: 70px;
+	min-height:100vh;
+}
+.forma-slider {
+	-min-height: 100vh;
+}
+header {
+	-webkit-box-shadow: 0px 0px 5px 2px rgba(197, 197, 197, 0.5);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(197, 197, 197, 0.5);
+    box-shadow: 0px 0px 5px 2px rgba(107, 104, 104, 0.5);
+    z-index: 999999
+    padding:0 !important;
+}
+.bx-controls {
+	display: none;
+}
 .item-error {
     color: #c54242;
     background: white;
@@ -522,136 +423,135 @@
    opacity: 1;
 }
 </style>
-
-
-
-	<div class="mask"></div>
-	<script src="{{ asset('advisa/js/libs/jquery-1.10.1.min.js') }}"></script>
-	<script src="{{ asset('advisa/js/libs/bootstrap.min.js') }}"></script>
-	<script src="{{ asset('advisa/js/cross/modernizr.js') }}"></script>
-	<script src="{{ asset('advisa/js/jquery.bxslider.min.js') }}"></script>
-	<script src="{{ asset('advisa/js/jquery.customSelect.js') }}"></script>
-	<script src="{{ asset('advisa/js/jquery.validate.min.js') }}"></script>
-	<script src="{{ asset('advisa/js/jquery.colorbox-min.js') }}"></script>
-	<script src="{{ asset('advisa/js/jquery.waypoints.min.js') }}"></script>
-	<script src="{{ asset('advisa/js/jquery.parallax-1.1.3.js') }}"></script>
-	<script src="{{ asset('advisa/js/custom.js?v=2') }}"></script>
-	<!-- file loader -->
-	<script src="{{ asset('advisa/js/loader.js?v=2') }}"></script>
-	<script type="text/javascript">
-			
-
-		function slidetoogle_section_keanggotaan()
-		{
-			// $('.content_keanggotaan').slideToggle();
-		}
-
-		$( ".hover_btn" ).hover(
-		  function() {
-		    $( this ).find('img').src('{{ asset('background/middle/btn.png') }}');
-		  }, function() {
-		    $( this ).find('img').src('{{ asset('background/middle/btn_hover.png') }}');
-		  }
-		);
-
-		@if(Session::has('messages'))
-		$("#modal_success").modal('show');
-		@endif;
-
-
-		$('.slider-bottom1').bxSlider({
-			mode: 'horizontal',
-			pause: 2500,
-			autoHover: true,
-			pager: false,
-			auto: true
+<div class="mask"></div>
+<script src="{{ asset('advisa/js/libs/jquery-1.10.1.min.js') }}"></script>
+<script src="{{ asset('advisa/js/libs/bootstrap.min.js') }}"></script>
+<script src="{{ asset('advisa/js/cross/modernizr.js') }}"></script>
+<script src="{{ asset('advisa/js/jquery.bxslider.min.js') }}"></script>
+<script src="{{ asset('advisa/js/jquery.customSelect.js') }}"></script>
+<script src="{{ asset('advisa/js/jquery.validate.min.js') }}"></script>
+<script src="{{ asset('advisa/js/jquery.colorbox-min.js') }}"></script>
+<script src="{{ asset('advisa/js/jquery.waypoints.min.js') }}"></script>
+<script src="{{ asset('advisa/js/jquery.parallax-1.1.3.js') }}"></script>
+<script src="{{ asset('advisa/js/custom.js?v=2') }}"></script>
+<!-- file loader -->
+<script src="{{ asset('advisa/js/loader.js?v=2') }}"></script>
+<script type="text/javascript">
+	
+	$('.menu-right .item').each(function(){
+		$(this).on('mouseenter', function(){
+			$(this).find('.sub-title').show();
+		}).on('mouseleave', function(){
+			$(this).find('.sub-title').hide();
 		});
+	});
+
+	var documentHeight = $(window).height();
+	var header = $('header').height();
+
+	setTimeout(function(){
+		$('.forma-slider').height((documentHeight - header));
+		console.log(documentHeight);
+	});
+
+	function slidetoogle_section_keanggotaan()
+	{
+		// $('.content_keanggotaan').slideToggle();
+	}
+
+	$( ".hover_btn" ).hover(
+	  function() {
+	    $( this ).find('img').src('{{ asset('background/middle/btn.png') }}');
+	  }, function() {
+	    $( this ).find('img').src('{{ asset('background/middle/btn_hover.png') }}');
+	  }
+	);
+
+	@if(Session::has('messages'))
+	$("#modal_success").modal('show');
+	@endif;
+
+</script>
+<style type="text/css">
 
 
-	</script>
-	<style type="text/css">
+	@media (min-width: 1281px) {  }
+	@media (min-width: 1025px) and (max-width: 1280px) {}
+	@media (min-width: 768px) and (max-width: 1024px) {}
+	@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+	@media (min-width: 481px) and (max-width: 767px) {
+	  
+	}
 
+	@media (min-width: 320px) and (max-width: 480px) 
+	{
+	  .content-middle .text-middle {
+	  	width: 179px;
+	  	top: 2% !important;
+	  }
+	  .info_kodami_btn {
+	  	width: 85px !important;
+	  	left: 35% !important;
+	  	color: white !important;
+	  	bottom: 5% !important;
+	  	height: 26px !important;
+	  	padding-top: 2px !important;
+	  	font-size: 10px !important;
+	  }
 
-		@media (min-width: 1281px) {  }
-		@media (min-width: 1025px) and (max-width: 1280px) {}
-		@media (min-width: 768px) and (max-width: 1024px) {}
-		@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
-		@media (min-width: 481px) and (max-width: 767px) {
-		  
-		}
-
-		@media (min-width: 320px) and (max-width: 480px) 
-		{
-		  .content-middle .text-middle {
-		  	width: 179px;
-		  	top: 2% !important;
-		  }
-		  .info_kodami_btn {
-		  	width: 85px !important;
-		  	left: 35% !important;
-		  	color: white !important;
-		  	bottom: 5% !important;
-		  	height: 26px !important;
-		  	padding-top: 2px !important;
-		  	font-size: 10px !important;
-		  }
-
-		  	.trainings .col-md-4 .view-fifth
-			{
-				background: transparent;
-			}
-			.trainings .col-md-4 .view {
-				margin-bottom: 15px;
-				float: none;
-			}
-			.trainings .col-md-4 .view img {
-				display: inline;
-			}
-
-			.trainings div.clearfix {
-				min-height: 0;
-			}
-		}
-
-		#slider_bottom .bx-wrapper .bx-controls-direction a {
-	       margin-top: -9%;
-	    }
-		.info_kodami_btn:hover
+	  	.trainings .col-md-4 .view-fifth
 		{
 			background: transparent;
 		}
-		.software_slider {
-			padding-top: 94px;
+		.trainings .col-md-4 .view {
+			margin-bottom: 15px;
+			float: none;
 		}
-		.trainings > div
-		{
-			margin-bottom: 0;
-		}
-		.thumbnails {
-		    background: #f7efef;
-		    border: 1px solid #ffffff;
-		}
-		.trainings i {
-			color: #de2c23;
+		.trainings .col-md-4 .view img {
+			display: inline;
 		}
 
-		.xxsmall-h {
-			color: white;
+		.trainings div.clearfix {
+			min-height: 0;
 		}
-		.list-forstart .desc  {
-			font: 20px/28px 'OpenSans_Regular',Arial
-		}
-		 .xmedium-h {
-		 	font: 14px/19px 'OpenSans_Regular',Arial	
-		 }
-		
-		/*.list-forstart {
-			width: 55%;
-		}*/
+	}
 
-		.fa-share-alt:before {
-		    content: "\f1e0";
-		}
-	</style>
+	#slider_bottom .bx-wrapper .bx-controls-direction a {
+       margin-top: -9%;
+    }
+	.info_kodami_btn:hover
+	{
+		background: transparent;
+	}
+	.trainings > div
+	{
+		margin-bottom: 0;
+	}
+	.thumbnails {
+	    background: #f7efef;
+	    border: 1px solid #ffffff;
+	}
+	.trainings i {
+		color: #de2c23;
+	}
+
+	.xxsmall-h {
+		color: white;
+	}
+	.list-forstart .desc  {
+		font: 20px/28px 'OpenSans_Regular',Arial
+	}
+	 .xmedium-h {
+	 	font: 14px/19px 'OpenSans_Regular',Arial	
+	 }
+	
+	/*.list-forstart {
+		width: 55%;
+	}*/
+
+	.fa-share-alt:before {
+	    content: "\f1e0";
+	}
+</style>
 </body>
 </html>

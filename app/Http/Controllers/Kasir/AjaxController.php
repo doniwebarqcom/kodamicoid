@@ -50,6 +50,19 @@ class AjaxController extends Controller
             $deposit->proses_user_id    = \Auth::user()->id;
             $deposit->save(); 
 
+            # update table user anggota
+            $user_anggota = UserAnggota::where('user_id', $request->user_id)->first();
+            if(!$user_anggota)
+            {
+                $user_anggota = new UserAnggota();
+                $user_anggota->simpanan_sukarela = $request->nominal;
+            }
+            else
+            {
+                $user_anggota->simpanan_sukarela = $user_anggota->simpanan_sukarela + $request->nominal;
+            }
+            $user_anggota->save();
+
             $this->respon = ['message' => 'success', 'link_cetak' => route('kasir.anggota.cetak-kwitansi', ['id'=>$deposit->id,'jenis_transaksi'=>'0'])];
 
             return response()->json($this->respon);

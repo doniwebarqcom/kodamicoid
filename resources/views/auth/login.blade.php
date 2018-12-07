@@ -5,19 +5,13 @@
 <div class="preloader">
   <div class="cssload-speeding-wheel"></div>
 </div>
-<section id="wrapper" class="new-login-register">
+<header class="navbar">
+ <a href="{{ url('/') }}">
+  <img src="{{ asset('logo.png')}}" style="width: 152px;margin-left: 112px;margin-top: 0px;" />
+  </a> 
+</header>
+<section id="wrapper" class="new-login-register" style="background: url('{{ asset('images/bg-1.png?v=1') }}') !important; background-size:auto 100% !important;background-position:left bottom !important;background-repeat: no-repeat !important; ">
       <a href="{{ url('/') }}" class="back_index"><i class="fa fa-arrow-left"></i></a>
-      
-      <div class="lg-info-panel">
-              <div class="inner-panel">
-                  <a href="javascript:void(0)" class="p-20 di"></a>
-                  <div class="lg-content">
-                      <h2>KODAMI POCKET SYSTEM</h2>
-                      <p class="text-muted">Kodami memberikan solusi kepada Usaha Anda<br />kami fokus memberikan layanan untuk Penjualan, Permodalan dan Perkembangan Bisnis Anda.</p>
-                      <a href="javascript:void(0)" class="btn btn-rounded btn-danger p-l-20 p-r-20"> Register</a>
-                  </div>
-              </div>
-      </div>
       <div class="new-login-box">
           <div class="white-box">
               <h3 class="box-title m-b-0">Kodami Pocket System</h3>
@@ -96,6 +90,22 @@
           </div>
       </div>              
 </section>
+<style type="text/css">
+  .navbar {
+    padding:5px 0;
+    -webkit-box-shadow: 0px 0px 5px 2px rgba(197, 197, 197, 0.5);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(197, 197, 197, 0.5);
+    box-shadow: 0px 0px 5px 2px rgba(197, 197, 197, 0.5);
+    
+    background-color: white;
+  }
+  .new-login-register .new-login-box {
+    margin-top: 10%;
+    width: 400px;
+    float: right;
+    margin-right: 10%;
+  }
+</style>
 @endsection
 
 
