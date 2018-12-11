@@ -420,37 +420,48 @@
 
                     @endif
 
-                    @if(isset($deposit) and Auth::user()->status_anggota == 1)
+                    @if(Auth::user()->status_anggota == 1)
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="white-box">
-                                    <div class="col-md-8">
-                                        <h3 class="box-title m-b-0">IURAN BULANAN</h3>
-                                        <div class="table-responsive">
-                                            <table class="table table-hover manage-u-table">
-                                                <thead>
-                                                    <tr>
-                                                        <th style="width: 70px;" class="text-center">#</th>
-                                                        <th>NOMINAL</th>
-                                                        <th>TANGGAL</th>
-                                                        <th>STATUS</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    @foreach(simpanan_wajib(Auth::user()->id, 'all') as $item)
-                                                    <tr>
-                                                        <td class="text-center">1</td>
-                                                        <td><span class="font-medium">Rp. 10.000</span></td>
-                                                        <td>{{ $item->created_at }}</td>
-                                                        <td>
-                                                            <span class="btn btn-xs btn-success"><i class="fa fa-check"></i> Lunas</span>
-                                                        </td>
-                                                        <td></td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                    <h3 class="box-title m-b-0">TRANSAKSI</h3>
+                                    <div class="table-responsive">
+                                        <table id="data_table" class="table" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr>
+                                                    <th>No</th>
+                                                    <th>Jenis Transaksi</th>
+                                                    <th>Nominal</th>
+                                                    <th>Tanggal</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            @foreach($transaksi as $no => $item)
+                                                <tr>
+                                                    <td>{{ $no+1 }}</td>
+                                                    <td>
+                                                        @if($item->jenis_transaksi == 0)
+                                                            {{ @type_deposit($item->type) }}
+                                                        @endif
+
+                                                        @if($item->jenis_transaksi == 1)
+                                                            @php($pulsa = getInvoicePulsa($item->no_invoice))
+                                                            {{ isset($pulsa->pulsa->provider->keterangan) ? $pulsa->pulsa->provider->keterangan .' - ' : '' }} {{ isset($pulsa->pulsa->kode_produk) ? $pulsa->pulsa->kode_produk : '' }}  
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if($no==0)
+                                                            <!-- <label class="text-danger"><i class="fa fa-minus"></i> </label>  -->
+                                                        @else
+                                                            <!-- <label class="text-info"><i class="fa fa-plus"></i> </label>  -->
+                                                        @endif
+                                                        {{ number_format($item->nominal) }}
+                                                    </td>
+                                                    <td>{{ date('d F Y H:i:s', strtotime($item->created_at)) }}</td>    
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
                                         <div class="clearfix"></div>
                                     </div>
                                     <div class="clearfix"></div>

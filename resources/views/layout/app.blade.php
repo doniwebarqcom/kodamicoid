@@ -170,18 +170,8 @@
 							<h3 class='xsmall-h text-center'>Login disini untuk melihat status anggota Anda. </h3>
 							@if($errors)
 								@if(!empty($errors->first('email')))
-								<span class="item-error">No Anggota / Password anda salah silahka dicoba kembali.</span>
+								<div class="item-error">No Anggota / Password anda salah silahka dicoba kembali.</div>
 								@endif
-								
-								<!-- @if(!empty($errors->first('nama')))
-								<span class="item-error"><?php echo $errors->first('nama') ?></span>
-								@endif
-								@if(!empty($errors->first('password')))
-								<span class="item-error"><?php echo $errors->first('password') ?></span>
-								@endif
-								@if(!empty($errors->first('password')))
-								<span class="item-error"><?php echo $errors->first('confirmation') ?></span>
-								@endif -->
 							@endif
 
 							<form class='reg-now-visible' action="{{ url('login') }}" autocomplete="off" method="POST">

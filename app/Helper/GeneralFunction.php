@@ -1,6 +1,22 @@
 <?php
 
 /**
+ * Get Kabupaten
+ */
+function getKabupatenById($id)
+{
+  return \Kodami\Models\Mysql\Kabupaten::where('id_kab', $id)->first();
+}
+
+
+/**
+ * Generate Password
+ */
+function generateRandomString($length = 10) {
+    return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
+}
+
+/**
  * Parsing Yearmonth
  * @return string
  */
@@ -305,7 +321,7 @@ function access_rules($selected = 0)
  */
 function type_deposit($key)
 {
-	$array_map = [
+  $array_map = [
                   3 => 'Simpanan Pokok',
                   4 => 'Simpanan Sukarela',
                   5 => 'Simpanan Wajib'
@@ -313,7 +329,7 @@ function type_deposit($key)
 
     if(array_key_exists($key, $array_map))
     {
-    	return $array_map[$key];
+      return $array_map[$key];
     }
 }
 
@@ -332,7 +348,7 @@ function list_bank()
  */
 function get_jabatan($key)
 {
-	$array_map = [
+  $array_map = [
                   1 => 'Administrator',
                   2 => 'Anggota',
                   3 => 'Teller',
@@ -344,7 +360,7 @@ function get_jabatan($key)
 
     if(array_key_exists($key, $array_map))
     {
-    	return $array_map[$key];
+      return $array_map[$key];
     }
 }
 
@@ -354,16 +370,16 @@ function get_jabatan($key)
  */
 function status_deposit_awal($user_id)
 {
-	$status = \Kodami\Models\Mysql\Deposit::where('type', 1)->where('user_id', $user_id)->first();
+  $status = \Kodami\Models\Mysql\Deposit::where('type', 1)->where('user_id', $user_id)->first();
 
-	if($status)
-	{
-		return $status->status;
-	}
-	else
-	{
-		return 0;
-	}
+  if($status)
+  {
+    return $status->status;
+  }
+  else
+  {
+    return 0;
+  }
 }
 
 /**
@@ -372,9 +388,9 @@ function status_deposit_awal($user_id)
  */
 function no_invoice()
 {
-	$no = (\Kodami\Models\Mysql\Deposit::count()+1);
+  $no = (\Kodami\Models\Mysql\Deposit::count()+1);
 
-	return  $no . \Auth::user()->id.'/INV/KDM/'. date('d').date('m').date('y');
+  return  $no . \Auth::user()->id.'/INV/KDM/'. date('d').date('m').date('y');
 }
 
 /**
@@ -384,7 +400,7 @@ function no_invoice()
  */
 function status_deposit($status)
 {
-	switch ($status) {
+  switch ($status) {
       case 1:
          return "<a class=\"btn btn-warning btn-xs\"><i class=\"fa fa-ban\"></i> Menunggu Konfirmasi Pembayaran</a>";
          break;
@@ -410,7 +426,7 @@ function status_deposit($status)
  */
 function simpanan_wajib($id)
 {
-	return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 5);
+  return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 5);
 }
 
 /**
@@ -420,17 +436,17 @@ function simpanan_wajib($id)
  */
 function sum_simpanan_wajib($id, $status=3)
 {
-	if($status == 'all')
-	{
-		$simpanan_wajib = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->sum('nominal');
-	}
-	else
-	{
-		$simpanan_wajib = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('status', $status)->where('type', 5)->sum('nominal');
+  if($status == 'all')
+  {
+    $simpanan_wajib = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->sum('nominal');
+  }
+  else
+  {
+    $simpanan_wajib = \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('status', $status)->where('type', 5)->sum('nominal');
 
-	}
+  }
 
-	return $simpanan_wajib;
+  return $simpanan_wajib;
 }
 
 /**
@@ -440,7 +456,7 @@ function sum_simpanan_wajib($id, $status=3)
  */
 function simpanan_pokok($id)
 {
-	return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 3);
+  return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 3);
 }
 
 /**
@@ -449,7 +465,7 @@ function simpanan_pokok($id)
  */
 function simpanan_sukarela($id)
 {
-	return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 4);
+  return \Kodami\Models\Mysql\Deposit::where('user_id', $id)->where('type', 4);
 }
 
 /**
@@ -459,14 +475,14 @@ function simpanan_sukarela($id)
  */
 function get_setting($field)
 {
-	$item = \App\Setting::where('field', $field)->first();
+  $item = \App\Setting::where('field', $field)->first();
 
-	if($item)
-	{
-		return $item->value;
-	}
+  if($item)
+  {
+    return $item->value;
+  }
 
-	return;
+  return;
 }
 
 /**
@@ -485,7 +501,7 @@ function get_provinsi()
  */
 function get_kabupaten_by_provinsi($id)
 {
-	return \App\Kabupaten::where('id_prov', $id)->get();
+  return \App\Kabupaten::where('id_prov', $id)->get();
 }
 
 /**
@@ -495,7 +511,7 @@ function get_kabupaten_by_provinsi($id)
  */
 function get_kecamatan_by_kabupaten($id)
 {
-	return \App\Kecamatan::where('id_kab', $id)->get();
+  return \App\Kecamatan::where('id_kab', $id)->get();
 }
 
 /**
@@ -505,7 +521,7 @@ function get_kecamatan_by_kabupaten($id)
  */
 function get_kelurahan_by_kecamatan($id)
 {
-	return \App\Kelurahan::where('id_kec', $id)->get();
+  return \App\Kelurahan::where('id_kec', $id)->get();
 }
 
 ?>

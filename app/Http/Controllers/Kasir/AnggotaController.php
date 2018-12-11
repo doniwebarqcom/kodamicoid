@@ -91,11 +91,13 @@ class AnggotaController extends Controller
         $user_anggota = UserAnggota::where('user_id', $request->user_id)->first();
         if(!$user_anggota)
         {
-            $user_anggota = new UserAnggota();
-            $user_anggota->simpanan_pokok = $request->nominal;
+            $user_anggota                   = new UserAnggota();
+            $user_anggota->user_id          = $request->user_id;
+            $user_anggota->simpanan_pokok   = $request->nominal;
         }
         else
         {
+            $user_anggota->kuota = $request->nominal;
             $user_anggota->simpanan_pokok = $user_anggota->simpanan_pokok + $request->nominal;
         }
         $user_anggota->save();
@@ -105,6 +107,10 @@ class AnggotaController extends Controller
         if($cek > 0)
         {
             $no_anggota = generate_no_anggota($request->user_id);
+
+            $user_anggota = UserAnggota::where('user_id', $request->user_id)->first();
+            $user_anggota->kuota = $request->nominal;
+            $user_anggota->save();
 
             if($no_anggota['status'] == 'success')
             {
@@ -156,8 +162,9 @@ class AnggotaController extends Controller
         $user_anggota = UserAnggota::where('user_id', $request->user_id)->first();
         if(!$user_anggota)
         {
-            $user_anggota = new UserAnggota();
-            $user_anggota->simpanan_wajib = $request->durasi_pembayaran * remove_number_format($request->nominal);
+            $user_anggota                   = new UserAnggota();
+            $user_anggota->user_id          = $request->user_id;
+            $user_anggota->simpanan_wajib   = $request->durasi_pembayaran * remove_number_format($request->nominal);
         }
         else
         {

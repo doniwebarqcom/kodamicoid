@@ -36,7 +36,7 @@
                                 <tr>
                                     <th style="padding-bottom: 2px;border:0;">Status</th>
                                     <th style="padding-bottom: 2px;border:0">
-                                        @if($data->status == 1)
+                                        @if($data->status_anggota == 1)
                                             <label class="btn btn-success btn-xs"><i class="fa fa-check"></i> Aktif</label>
                                         @else
                                             <label class="btn btn-danger btn-xs"><i class="fa fa-close"></i> Tidak Aktif</label>
