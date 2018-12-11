@@ -9,7 +9,6 @@
 	<title>@yield('title')</title>
 	<meta content="" name="keywords">
 	<meta content="" name="description">
-
 	<link type="image/x-icon" href="img/favicon.ico" rel="shortcut icon">
 	<link rel="stylesheet" href="{{ asset('advisa/css/bootstrap.css') }}">
 	<!--<link rel="stylesheet" href="{{ asset('advisa/css/font-awesome.css') }}"> -->
@@ -158,7 +157,9 @@
 					<div class="relative fin_3" id='elem-portable'>
 						<div class="reg-now menu-right" style="background: url('{{ asset('background-transparent.png?v=1') }}')">
 							<div class="item">
-								<img src="{{ asset('images/icon-2.png') }}" style="height: 40px;max-width: none;" />
+								<a href="{{ route('daftar') }}">
+									<img src="{{ asset('images/icon-2.png') }}" style="height: 40px;max-width: none;" />
+								</a>
 								<div class="sub-title sub-title-1"><p>Pendaftaran Anggota</p></div>
 							</div>
 							<div class="item">

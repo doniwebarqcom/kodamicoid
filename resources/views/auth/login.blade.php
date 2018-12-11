@@ -1,5 +1,7 @@
 @extends('layout.login')
 
+@section('title', 'Pendaftaran Anggota')
+
 @section('content')
 <!-- Preloader -->
 <div class="preloader">
@@ -65,7 +67,7 @@
               -->
               <div class="form-group m-b-0">
                 <div class="col-sm-12 text-center">
-                  <p>Belum menjadi anggota? <a href="{{ url('home') }}" class="text-primary m-l-5"><b>Daftar</b></a></p>
+                  <p>Belum menjadi anggota? <a href="{{ route('daftar') }}" class="text-primary m-l-5"><b>Daftar</b></a></p>
                 </div>
               </div>
             </form>

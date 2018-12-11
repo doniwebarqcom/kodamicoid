@@ -27,10 +27,6 @@
               <p>Terima kasih kepada anda yang sudah bergabung di Koperasi Daya Masyarakat Indonesia ( KODAMI ), berikut data pendaftaran anda.</p>
               <table style="width: 100%;max-width: 100%;margin-bottom: 20px;">
                 <tr>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">No Pendaftaran</td>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->no_pendaftaran }}</td>
-                </tr>
-                <tr>
                   <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Nama</td>
                   <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->name }}</td>
                 </tr>
@@ -42,19 +38,14 @@
                   <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Telepon</td>
                   <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->telepon }}</td>
                 </tr>
-                <tr>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Password</td>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->password }}</td>
-                </tr>
               </table>
               <p>Informasi Keanggotaan:</p>
               <ol>
+                <li>Konfirmasi Email Anda.</li>
                 <li>Data Keanggotaan anda belum aktif, sebelum anda membayar biaya keanggotaan sebesar Rp. 100.000, anda bisa melakukan pembayaran dengan cara login ke sistem keanggotaan anda dengan akun yang sudah anda daftarkan dan lihat di menu profile anda ada tombol "Bayar Keanggotaan" dan ikuti proses selanjutnya.</li>
-
                 <li>Anda diwajibkan membayar iuran bulanan yaitu sebesar Rp. 10.000, untuk iuran bulanan, anda bisa melihat di menu "Iuran Bulanan" apakah anda sudah melakukan pembayaran atau belum, jika anda sudah melakukan pembayaran maka anda bisa menekan tombol "Konfirmasi Pembayaran" maka kami akan mengecek pembayaran anda.
                 </li>
               </ol>
-
               <p><small>Email ini otomatis terkirim otomatis oleh sistem anda tidak bisa membalas pesan ini, silahkan login ke akun profile anda untuk info lebih lanjut</small></p>
               <a href="{{ route('aktivasi', $user->no_pendaftaran) }}" style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #1e88e5; border-radius: 60px; text-decoration:none;"> Aktivasi Data Anggota</a><br />
               <b>Thanks,<br /> Kodami Pocket System</b> </td>

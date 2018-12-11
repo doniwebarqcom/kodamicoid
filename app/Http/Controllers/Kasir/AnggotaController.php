@@ -151,7 +151,6 @@ class AnggotaController extends Controller
         $deposit->proses_user_id = \Auth::user()->id;
         $deposit->save();
 
-        # update table user anggota
         $user_anggota = UserAnggota::where('user_id', $request->user_id)->first();
         if(!$user_anggota)
         {

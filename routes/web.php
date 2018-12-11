@@ -75,8 +75,11 @@ Route::post('contact-us', 'HomeController@postContactUs')->name('contact-us');
 Route::post('ajax/add-rekening-bank', 'AjaxController@addRekeningBank')->name('ajax.add.rekening.bank');
 Route::get('aktivasi/{no_pendaftaran}', 'HomeController@aktivasi')->name('aktivasi');
 
+Route::get('daftar', 'HomeController@daftar')->name('daftar');
+Route::post('daftar-store', 'HomeController@daftarStore')->name('daftar-store');
+
 // ROUTING LOGIN
-Route::group(['middleware' => ['auth']], function(){
+// Route::group(['middleware' => ['auth']], function(){
 	Route::post('ajax/get-kabupaten-by-provinsi', 'AjaxController@getKabupatenByProvinsi')->name('ajax.get-kabupaten-by-provinsi-id');
 	Route::post('ajax/get-kecamatan-by-kabupaten', 'AjaxController@getKecamatanByKabupaten')->name('ajax.get-kecamatan-by-kabupaten-id');
 	Route::post('ajax/get-kelurahan-by-kecamatan', 'AjaxController@getKelurahanByKecamatan')->name('ajax.get-kelurahan-by-kecamatan-id');
@@ -84,7 +87,8 @@ Route::group(['middleware' => ['auth']], function(){
 	Route::post('ajax/get-anggota', 'AjaxController@getAnggota')->name('ajax.get-anggota');
 	Route::post('ajax/get-anggota-by-id', 'AjaxController@getAnggotaById')->name('ajax.get-anggota-by-id');
 	Route::post('ajax/get-anggota-by-id-html', 'AjaxController@getAnggotaByIdHtml')->name('ajax.get-anggota-by-id-html');
-});
+// });
+// 	
 // ROUTING ADMIN
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['auth', 'access:1']], function(){
 	Route::get('/','IndexController@index')->name('admin.index');

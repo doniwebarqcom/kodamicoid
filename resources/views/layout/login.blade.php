@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>  
 <html lang="en">
 <head>
@@ -7,8 +6,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="">
 <meta name="author" content="">
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="icon" type="image/png" sizes="16x16" href="../plugins/images/favicon.png">
-<title>LOGIN - Kodami Pocket System</title>
+<title>@yield('title') - Kodami Pocket System</title>
 <!-- Bootstrap Core CSS -->
 <link href="{{ asset('admin-css/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 <!-- animation CSS -->
@@ -50,6 +50,9 @@
 <!-- Menu Plugin JavaScript -->
 <script src="{{ asset('admin-css/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js') }}"></script>
 
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">    
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
 <!--slimscroll JavaScript -->
 <script src="{{ asset('admin-css/js/jquery.slimscroll.js') }}"></script>
 <!--Wave Effects -->
@@ -64,5 +67,6 @@
 	bootbox.alert('{{ Session::get('message-success') }}');
 @endif
 </script>
+@yield('footer-script')
 </body>
 </html>
