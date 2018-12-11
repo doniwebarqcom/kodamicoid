@@ -27,7 +27,7 @@
                                 <tr>
                                     <th width="70" class="text-center">#</th>
                                     <th>NAME</th>
-                                    <th>NO REG</th>
+                                    <th>DOMISILI</th>
                                     <th>NO ANGGOTA</th>
                                     <th>JENIS KELAMIN</th>
                                     <th>TELEPON</th>
@@ -43,7 +43,7 @@
                                 <tr>
                                     <td class="text-center">{{ $no+1 }}</td>
                                     <td>{{ $item->name }}</td>
-                                    <td>{{ empty($item->no_pendaftaran) ? $item->no_anggota : $item->no_pendaftaran }}</td>
+                                    <td>{{ isset(getKabupatenById($item->domisili_kabupaten_id)->nama) ? getKabupatenById($item->domisili_kabupaten_id)->nama : '' }}</td>
                                     <td>{{ $item->no_anggota }}</td>
                                     <td>{{ $item->jenis_kelamin }}</td>
                                     <td>{{ $item->telepon }}</td>

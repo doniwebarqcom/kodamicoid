@@ -14,7 +14,7 @@ class AnggotaController extends Controller
 	 */
     public function index()
     {
-    	$data = \App\UserModel::where('access_id', 2)->orWhere('access_id', 7)->orderBy('id', 'DESC')->get();
+    	$data = Users::where('access_id', 2)->orWhere('access_id', 7)->orderBy('id', 'DESC')->get();
 
     	return view('cs.anggota.index', compact('data'));
     }
@@ -77,6 +77,18 @@ class AnggotaController extends Controller
     {
         $data =  \App\UserModel::where('id', $id)->first();
         
+        if($request->password != $data->password)
+        {
+            if(!empty($request->password))
+            {
+                $this->validate($request,[
+                    'confirmation'      => 'same:password',
+                ]);
+
+                $data->password             = bcrypt($request->password);
+            }
+        }
+        
         $data->nik          = $request->nik; 
         $data->name         = strtoupper($request->name); 
         $data->jenis_kelamin= $request->jenis_kelamin; 
@@ -126,7 +138,7 @@ class AnggotaController extends Controller
             $image->move($destinationPath, $name);
             $data->file_npwp = $name;
         }
-        $data->status_login = $request->status_login;
+
         $data->is_dropshiper    = $request->is_dropshiper;
 
         if($data->is_dropshiper == 1)
@@ -219,7 +231,7 @@ class AnggotaController extends Controller
             $image->move($destinationPath, $name);
             $data->file_npwp = $name;
         }
-        $data->status_login     = $request->status_login;
+        
         $data->is_dropshiper    = $request->is_dropshiper;
 
         if($data->is_dropshiper == 1)

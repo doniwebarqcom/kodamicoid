@@ -37,6 +37,6 @@ class GenerateNoAnggota extends Command
      */
     public function handle()
     {
-      dd(generate_no_anggota(80));
+      dd(generate_no_anggota(191));
     }
 }

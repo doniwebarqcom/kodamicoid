@@ -154,6 +154,7 @@
 			<div class="container">
 				<div class="row">
 					<div class="clearfix visible-xs visible-md"></div>
+<<<<<<< HEAD
 					<div class="relative fin_3" id='elem-portable'>
 						<div class="reg-now menu-right" style="background: url('{{ asset('background-transparent.png?v=1') }}')">
 							<div class="item">
@@ -190,6 +191,27 @@
 								<h1><i class="fa fa-users"></i></h1>
 								<div class="sub-title sub-title-6">Request Kemitraan</div>
 							</div>
+=======
+					<div class="container relative fin_3" id='elem-portable'>
+						<div class="reg-now" style="top: 100px;">
+						@guest
+							<h2 class='medium-h text-center'>LOGIN Form</h2>
+							<h3 class='xsmall-h text-center'>Login disini untuk melihat status anggota Anda. </h3>
+							@if($errors)
+								@if(!empty($errors->first('email')))
+								<div class="item-error">No Anggota / Password anda salah silahka dicoba kembali.</div>
+								@endif
+							@endif
+
+							<form class='reg-now-visible' action="{{ url('login') }}" autocomplete="off" method="POST">
+		  						<input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>" />
+		  						<div class="control-group">
+								    <input type="text" name="email" placeholder="No Anggota" />
+								</div>
+		  						<div class="control-group">
+								    <input type="password" name="password" placeholder="Password" />
+								</div>
+>>>>>>> cb690e2f8402acf9225ece2df622c9aaeead4a3c
 
 						</div>
 					</div>

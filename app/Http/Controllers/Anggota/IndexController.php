@@ -23,6 +23,7 @@ class IndexController extends ControllerLogin
         $data = [];
         $data['tagihan']    = Deposit::where('user_id', Auth::user()->id)->where('status',1) ->where('due_date', '>=', date('Y-m-d'))->where('type', 1)->first();
         $data['deposit']    = Deposit::where('user_id', Auth::user()->id)->where('type', 1)->first();
+        $data['transaksi']  = Deposit::where('user_id', Auth::user()->id)->get();
         $data['user']       = \App\UserModel::where('id', Auth::user()->id)->first();
 
     	return view('anggota.index')->with($data);
