@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddColumnUsers14 extends Migration
+class AddColumnKodamiUsers18 extends Migration
 {
     /**
      * Run the migrations.
@@ -15,6 +15,7 @@ class AddColumnUsers14 extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('password_temp',10)->nullable();
+            $table->string('aktivasi_code', 100)->nullable();
         });
     }
 

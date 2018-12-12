@@ -1,6 +1,28 @@
 <?php
 
 /**
+ * Delimiter No Anggota
+ */
+function delimiterNoAnggota($str)
+{
+  $res = substr($str, 0,4). '-';
+  $res .= substr($str, 4,4). '-';
+  $res .= substr($str, 8,4). '-';
+  $res .= substr($str, 12,4);
+
+  return $res;
+}
+
+/**
+ * Rekening Bank
+ * @return object
+ */
+function rekening_bank()
+{
+    return \Kodami\Models\Mysql\RekeningBank::all();
+}
+
+/**
  * Get Kabupaten
  */
 function getKabupatenById($id)
@@ -32,7 +54,10 @@ function parsing_pln_periode($periode)
  */
 function remove_number_format($number)
 {
-  return str_replace(',', '',$number);
+  $number = str_replace(',', '',$number);
+  $number = str_replace('Rp. ', '',$number);
+
+  return $number;
 }
 
 /**

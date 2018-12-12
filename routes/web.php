@@ -73,7 +73,8 @@ Route::get('logout', 'Auth\LoginController@logout');
 Route::post('registerPost', 'RegisterController@registerPost');
 Route::post('contact-us', 'HomeController@postContactUs')->name('contact-us');
 Route::post('ajax/add-rekening-bank', 'AjaxController@addRekeningBank')->name('ajax.add.rekening.bank');
-Route::get('aktivasi/{no_pendaftaran}', 'HomeController@aktivasi')->name('aktivasi');
+Route::get('konfirmasi/{aktivasi_code}', 'HomeController@konfirmasi')->name('konfirmasi');
+Route::post('konfirmasi-store/{id}', 'HomeController@konfirmasiStore')->name('konfirmasi-store');
 
 Route::get('daftar', 'HomeController@daftar')->name('daftar');
 Route::post('daftar-store', 'HomeController@daftarStore')->name('daftar-store');

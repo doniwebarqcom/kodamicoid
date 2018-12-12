@@ -12,19 +12,19 @@
       <tbody>
         <tr>
           <td style="vertical-align: top;">
-            <a href="#" target="_blank" style="text-decoration: none;color: #484848;"><img src="{{ asset('logo.png') }}" style="border:none; width: 150px; ">
+            <a href="#" target="_blank" style="text-decoration: none;color: #484848;"><img src="{{ asset('logo.png') }}" style="border:none; width: 90px; ">
           </td>
         </tr>
       </tbody>
     </table>
     <div style="padding: 40px; background: #fff;">
         @yield('content')
-        <p><small>Email ini terkirim otomatis oleh sistem anda tidak bisa membalas pesan ini, silahkan login ke akun anda untuk info lebih lanjut</small></p>
-         <br />
-          <b>Thanks,<br /> KOPERASI PRODUSEN DAYA MASYARAKAT INDONESIA</b>
+        <br />
+        <b>Ttd,<br /> Pengurus</b>
+        @include('email.footer')
     </div>
     <div style="text-align: center; font-size: 12px; color: #b2b2b5; margin-top: 20px">
-      <p> KOPERASI PRODUSEN DAYA MASYARAKAT INDONESIA</p>
+      <p> Powered by Kodami Pocket System</p>
     </div>
   </div>
 </div>

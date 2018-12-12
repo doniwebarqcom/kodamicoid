@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="{{ asset('advisa/css/bootstrap.css') }}">
 	<!--<link rel="stylesheet" href="{{ asset('advisa/css/font-awesome.css') }}"> -->
 	<link rel="stylesheet" href="{{ asset('advisa/fontawesome/css/fontawesome-all.css') }}">
-	<link rel="stylesheet" href="{{ asset('advisa/css/main.css') }}?rand={{ rand(1,1000) }}">
+	<link rel="stylesheet" href="{{ asset('advisa/css/main.css') }}?rand={{ rand(1,10000) }}">
 	<link rel="stylesheet" href="{{ asset('advisa/css/responsive.css') }}">
 	<?php 
          $chek_url = @$_SERVER['HTTP_HOST'];
@@ -138,9 +138,12 @@
 			<div id="form_slider" data-anchor="form_slider">
 				<ul class="form-bxslider list-unstyled">
 					<li>
-						<div class="img-slider fin_2"><img src="https://bpjs-kesehatan.go.id/bpjs/application/modules/post/images/banner_website_kerja_sehat_bersama.jpg"></div>
+						<div class="img-slider fin_2"><img src="{{ asset('images/banner/1.jpg') }}?v=1"></div>
 					</li>
 					<li>
+						<div class="img-slider fin_3"><img src="{{ asset('images/banner/2.jpg') }}?v=1"></div>
+					</li>
+					<!-- <li>
 						<div class="img-slider fin_3"><img src="https://bpjs-kesehatan.go.id/bpjs/./application/modules/post/images/banner_website_tular_kebaikan.jpg"></div>
 					</li>
 					<li>
@@ -148,13 +151,12 @@
 					</li>
 					<li>
 						<div class="img-slider fin_3"><img src="https://bpjs-kesehatan.go.id/bpjs/./application/modules/post/images/hut_ke_50.jpg"></div>
-					</li>
+					</li> -->
 				</ul>
 			</div>
 			<div class="container">
 				<div class="row">
-					<div class="clearfix visible-xs visible-md"></div>
-<<<<<<< HEAD
+		
 					<div class="relative fin_3" id='elem-portable'>
 						<div class="reg-now menu-right" style="background: url('{{ asset('background-transparent.png?v=1') }}')">
 							<div class="item">
@@ -163,56 +165,30 @@
 								</a>
 								<div class="sub-title sub-title-1"><p>Pendaftaran Anggota</p></div>
 							</div>
-							<div class="item">
+							<!-- <div class="item">
 								<img src="{{ asset('images/icon-1.png') }}" style="height: 40px;max-width: none;" />
 								<div class="sub-title sub-title-5">Konfirmasi Pembayaran</div>
-							</div>
+							</div> -->
 							<div class="item">
 								<h1><a href="http://pulsa.kodami.id/login"><i class="fa fa-sign-in-alt"></i></a></h1>
 								<h5 class="sub-title sub-title-1">Login Kodami ID</h5>
 							</div>
-							<div class="item">
+							<!-- <div class="item">
 								<h1><i class="fa fa-user"></i></h1>
 								<div class="sub-title sub-title-2"><p>Status Keanggotaan</p></div>
-							</div>
+							</div> -->
 							<div class="item">
 								<h1><i class="fa fa-university"></i></h1>
 								<div class="sub-title sub-title-3">Modal Penyertaan</div>
 							</div>
-							<div class="item">
+							<!-- <div class="item">
 								<h1><i class="fa fa-file"></i></h1>
 								<div class="sub-title sub-title-4">Status Pembayaran</div>
-							</div>
+							</div> -->
 							<div class="item">
 								<img src="{{ asset('images/icon-4.png') }}" style="height: 40px;max-width: none;" />
 								<div class="sub-title sub-title-5">Pendaftaran Kemitraan</div>
 							</div>
-							<div class="item">
-								<h1><i class="fa fa-users"></i></h1>
-								<div class="sub-title sub-title-6">Request Kemitraan</div>
-							</div>
-=======
-					<div class="container relative fin_3" id='elem-portable'>
-						<div class="reg-now" style="top: 100px;">
-						@guest
-							<h2 class='medium-h text-center'>LOGIN Form</h2>
-							<h3 class='xsmall-h text-center'>Login disini untuk melihat status anggota Anda. </h3>
-							@if($errors)
-								@if(!empty($errors->first('email')))
-								<div class="item-error">No Anggota / Password anda salah silahka dicoba kembali.</div>
-								@endif
-							@endif
-
-							<form class='reg-now-visible' action="{{ url('login') }}" autocomplete="off" method="POST">
-		  						<input type = "hidden" name = "_token" value = "<?php echo csrf_token() ?>" />
-		  						<div class="control-group">
-								    <input type="text" name="email" placeholder="No Anggota" />
-								</div>
-		  						<div class="control-group">
-								    <input type="password" name="password" placeholder="Password" />
-								</div>
->>>>>>> cb690e2f8402acf9225ece2df622c9aaeead4a3c
-
 						</div>
 					</div>
 				</div>
@@ -220,6 +196,7 @@
 		</div>
 	</section>
 </div>
+
 <!-- Top -->
 <div id="back-top-wrapper" class="visible-lg">
 	<p id="back-top" class='bounceOut'>
@@ -228,6 +205,11 @@
 		</a>
 	</p>
 </div>
+<!-- 
+<div class="footer-banner">
+	<img src="{{ asset('images/banner/footer.png') }}?v=1" />
+</div> -->
+
 <!-- Modal -->
 <div id="myModal" class="modal fade" tabindex="-1" aria-hidden="true">
 	<div class="modal-wr" style="width: 525px; left: 40%;">
@@ -263,6 +245,14 @@
 </div>
 <!-- Animasi -->
 <style type="text/css">
+.footer-banner {
+	position: absolute;
+	bottom:0;
+	z-index: 9999;
+}
+.footer-banner img {
+	width: 352px;
+}
 .menu-right .item h1,.menu-right .item h1 a  {color: white;}
 .menu-right .item {position: relative;cursor: pointer;margin-top: 30px;}
 .menu-right .item .sub-title {
@@ -473,7 +463,7 @@ header {
 	var header = $('header').height();
 
 	setTimeout(function(){
-		$('.forma-slider').height((documentHeight - header));
+		$('.forma-slider').height((documentHeight - header - 14));
 		console.log(documentHeight);
 	});
 

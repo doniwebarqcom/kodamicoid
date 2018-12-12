@@ -24,38 +24,54 @@
         <tbody>
           <tr>
             <td><b>Dear, {{ $user->name }}</b>
-              <p>Terima kasih kepada anda yang sudah bergabung di Koperasi Daya Masyarakat Indonesia ( KODAMI ), berikut data pendaftaran anda.</p>
+              <p>Terima kasih telah melaukan pendaftaran anggota Koperasi Produsen Daya Masyarakat Indonesia. Status anggota anda akan kami aktifkan setelah melakukan pembayaran : </p>
               <table style="width: 100%;max-width: 100%;margin-bottom: 20px;">
                 <tr>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Nama</td>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->name }}</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">1. Simpanan Pokok</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Rp. {{ number_format(get_setting('simpanan_pokok')) }}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Email</td>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->email }}</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">2. Simpanan Wajib</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Rp. {{ number_format($user->durasi_pembayaran * get_setting('simpanan_wajib')) }}</td>
                 </tr>
                 <tr>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Telepon</td>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->telepon }}</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">&nbsp;&nbsp;&nbsp;&nbsp;Durasi Pembayaran</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $user->durasi_pembayaran }} Bulan</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">3. Simpanan Sukarela</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Rp. {{ number_format($user->first_simpanan_sukarela) }}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">4. Kartu Anggota</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">Rp. {{ number_format(get_setting('kartu_anggota')) }}</td>
+                </tr>
+                <tr>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">5. Kode Unik</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $deposit->code }}</td>
+                </tr>
+                <tr>
+                  <th style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;text-align: left;">Total Pembayaran</th>
+                  <th style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;text-align: left;">Rp. {{ number_format($deposit->nominal) }}</th>
                 </tr>
               </table>
-              <p>Informasi Keanggotaan:</p>
+              <p>Pembayaran dapat dilakukan melalui transfer ke Rekening Kami di bawah ini : </p>
               <ol>
-                <li>Konfirmasi Email Anda.</li>
-                <li>Data Keanggotaan anda belum aktif, sebelum anda membayar biaya keanggotaan sebesar Rp. 100.000, anda bisa melakukan pembayaran dengan cara login ke sistem keanggotaan anda dengan akun yang sudah anda daftarkan dan lihat di menu profile anda ada tombol "Bayar Keanggotaan" dan ikuti proses selanjutnya.</li>
-                <li>Anda diwajibkan membayar iuran bulanan yaitu sebesar Rp. 10.000, untuk iuran bulanan, anda bisa melihat di menu "Iuran Bulanan" apakah anda sudah melakukan pembayaran atau belum, jika anda sudah melakukan pembayaran maka anda bisa menekan tombol "Konfirmasi Pembayaran" maka kami akan mengecek pembayaran anda.
-                </li>
+                @foreach(rekening_bank() as $item)
+                <li>{{ $item->bank->nama }} {{ $item->no_rekening }} a/n {{ $item->owner }}</li>
+                @endforeach
               </ol>
-              <p><small>Email ini otomatis terkirim otomatis oleh sistem anda tidak bisa membalas pesan ini, silahkan login ke akun profile anda untuk info lebih lanjut</small></p>
-              <a href="{{ route('aktivasi', $user->no_pendaftaran) }}" style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #1e88e5; border-radius: 60px; text-decoration:none;"> Aktivasi Data Anggota</a><br />
-              <b>Thanks,<br /> Kodami Pocket System</b> </td>
+              <p>Silahkan melakukan konfirmasi pembayaran apabila telah melakukan transfer melalui link berikut.</p>
+              <a href="{{ route('konfirmasi', $user->aktivasi_code) }}" style="display: inline-block; padding: 11px 30px; margin: 20px 0px 30px; font-size: 15px; color: #fff; background: #1e88e5; border-radius: 60px; text-decoration:none;"> Konfirmasi Pembayaran</a><br />              
+              <b>Ttd,<br /> Pengurus</b> 
+              @include('email.footer')
+            </td>
           </tr>
         </tbody>
       </table>
     </div>
     <div style="text-align: center; font-size: 12px; color: #b2b2b5; margin-top: 20px">
-      <p> Powered by Kodami Pocket System <br>
-        <a href="http:://www.kodami.co.id/unsubscribe?email={{ $user->email }}" style="color: #b2b2b5; text-decoration: underline;">Unsubscribe</a> </p>
+      <p> Powered by Kodami Pocket System</p>
     </div>
   </div>
 </div>
