@@ -14,7 +14,7 @@
 </header>
 <section id="wrapper" class="new-login-register">
       <a href="{{ url('/') }}" class="back_index"><i class="fa fa-arrow-left"></i></a>
-      <div class="col-md-6 box_left">&nbsp;</div>
+      <div class="col-md-6 box_left hidden-xs">&nbsp;</div>
       <div class="new-login-box">
           <div class="white-box">
             <h3 class="box-title m-b-0">Pendaftaran Kodami</h3>
@@ -217,6 +217,25 @@
       </div>              
 </section>
 <style type="text/css">
+
+@media all and (min-width: 320px) and (max-width: 780px) {
+  .new-login-register .new-login-box {
+    margin-top: 10%;
+    width: 100%;
+    float: right;
+    margin-right: 0%;
+  }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .new-login-register .new-login-box {
+    margin-top: 10%;
+    width: 600px;
+    float: right;
+    margin-right: 6%;
+  }
+}
+
   .text-danger {
     font-size: 12px;
   }
@@ -263,9 +282,7 @@
     -webkit-box-shadow: 0 2px 1px rgba(0, 0, 0, .1);
     box-shadow: 0 2px 1px rgba(0, 0, 0, .1);
   }
-  .new-login-box{
-    width: 600px !important;
-  }
+  
   .new-login-register .new-login-box{
     margin-top: 0 !important;
   }
@@ -276,12 +293,7 @@
     box-shadow: 0px 0px 5px 2px rgba(197, 197, 197, 0.5);
     background-color: white;
   }
-  .new-login-register .new-login-box {
-    margin-top: 10%;
-    width: 400px;
-    float: right;
-    margin-right: 6%;
-  }
+ 
 </style>
 
 <!-- sample modal content -->

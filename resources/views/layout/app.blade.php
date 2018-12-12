@@ -54,11 +54,11 @@
 					<div class="logo navbar-brand">
 						<img src="{{ asset('images/logo.png') }}" style="width: 153px;margin-top: 7px;" />
 					</div>
-		      <button class='toggle-slide-left visible-xs collapsed navbar-toggle' type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><i class="fa fa-bars"></i></button>
+		      		<button class='toggle-slide-left visible-xs collapsed navbar-toggle' type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><i class="fa fa-bars"></i></button>
 				</div>
 
-		    <!-- Collect the nav links, forms, and other content for toggling -->
-		    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		    	<!-- Collect the nav links, forms, and other content for toggling -->
+		    	<div class="collapse navbar-collapse hidden-xs" id="bs-example-navbar-collapse-1">
 					<div class="navbar-right">
 						<nav class='nav-menu navbar-left main-nav trig-mob slide-menu-left'>
 							<ul class='list-unstyled nav_atas'>
@@ -88,7 +88,6 @@
 									</a>
 								</li>
 								@endguest
-								
 								@if(Auth::check())
 								  @if(Auth::user()->access_id == 1)
 									<li>
@@ -124,9 +123,94 @@
 							</ul>
 						</nav>
 					</div>
-		    </div><!-- /.navbar-collapse -->
+		    	</div><!-- /.navbar-collapse -->
+				
+				<div class="visible-xs">
+		    	<!-- Collect the nav links, forms, and other content for toggling -->
+			    	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<div class="navbar-right">
+							<nav class='nav-menu navbar-left main-nav trig-mob slide-menu-left'>
+								<ul class='list-unstyled nav_atas'>
+									<li>
+										<a href="#" data-scroll="about_kodami">
+											<div class="inside">
+												<div class="backside"> Tentang Kodami </div>
+												<div class="frontside"> Tentang Kodami </div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a data-toggle="modal" role="button" href="#myModal">
+											<div class="inside">
+												<div class="backside"> Hubungi Kami </div>
+												<div class="frontside"> Hubungi Kami </div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="{{ route('daftar') }}" data-toggle="modal" role="button" href="#myModal">
+											<div class="inside">
+												<div class="backside"> Pendaftaran Anggota </div>
+												<div class="frontside"> Pendaftaran Anggota </div>
+											</div>
+										</a>
+									</li>
+									<li>
+										<a href="{{ route('daftar') }}" data-toggle="modal" role="button" href="#myModal">
+											<div class="inside">
+												<div class="backside"> Login Kodami ID </div>
+												<div class="frontside"> Login Kodami ID </div>
+											</div>
+										</a>
+									</li>
+									@guest
+									<li>
+										<a data-toggle="modal" role="button" href="{{ route('login') }}">
+											<div class="inside">
+												<div class="backside"> Login </div>
+												<div class="frontside"> Login </div>
+											</div>
+										</a>
+									</li>
+									@endguest
+									@if(Auth::check())
+									  @if(Auth::user()->access_id == 1)
+										<li>
+											<a data-toggle="modal" role="button" href="{{ route('admin.dashboard') }}">
+												<div class="inside">
+													<div class="backside"> Admin </div>
+													<div class="frontside"> Admin </div>
+												</div>
+											</a>
+										</li>
+									  @endif
+									  @if(Auth::user()->access_id == 3)
+										<li>
+											<a data-toggle="modal" role="button" href="{{ route('kasir.index') }}">
+												<div class="inside">
+													<div class="backside"> Kasir </div>
+													<div class="frontside"> Kasir </div>
+												</div>
+											</a>
+										</li>
+									  @endif
+									  @if(Auth::user()->access_id == 4)
+										<li>
+											<a data-toggle="modal" role="button" href="{{ route('cs.index') }}">
+												<div class="inside">
+													<div class="backside"> Customer Service </div>
+													<div class="frontside"> Customer Service </div>
+												</div>
+											</a>
+										</li>
+									  @endif
+									@endif
+								</ul>
+							</nav>
+						</div>
+			    	</div><!-- /.navbar-collapse -->
+			    </div>
 			</nav>
-
 		</div>
 	</div>
 </header>
@@ -143,48 +227,26 @@
 					<li>
 						<div class="img-slider fin_3"><img src="{{ asset('images/banner/2.jpg') }}?v=1"></div>
 					</li>
-					<!-- <li>
-						<div class="img-slider fin_3"><img src="https://bpjs-kesehatan.go.id/bpjs/./application/modules/post/images/banner_website_tular_kebaikan.jpg"></div>
-					</li>
-					<li>
-						<div class="img-slider fin_3"><img src="https://bpjs-kesehatan.go.id/bpjs/./application/modules/post/images/banner_website_kerja_sehat_bersama.jpg"></div>
-					</li>
-					<li>
-						<div class="img-slider fin_3"><img src="https://bpjs-kesehatan.go.id/bpjs/./application/modules/post/images/hut_ke_50.jpg"></div>
-					</li> -->
 				</ul>
 			</div>
 			<div class="container">
 				<div class="row">
-		
 					<div class="relative fin_3" id='elem-portable'>
-						<div class="reg-now menu-right" style="background: url('{{ asset('background-transparent.png?v=1') }}')">
+						<div class="reg-now menu-right hidden-xs" style="background: url('{{ asset('background-transparent.png?v=1') }}')">
 							<div class="item">
 								<a href="{{ route('daftar') }}">
 									<img src="{{ asset('images/icon-2.png') }}" style="height: 40px;max-width: none;" />
 								</a>
 								<div class="sub-title sub-title-1"><p>Pendaftaran Anggota</p></div>
 							</div>
-							<!-- <div class="item">
-								<img src="{{ asset('images/icon-1.png') }}" style="height: 40px;max-width: none;" />
-								<div class="sub-title sub-title-5">Konfirmasi Pembayaran</div>
-							</div> -->
 							<div class="item">
 								<h1><a href="http://pulsa.kodami.id/login"><i class="fa fa-sign-in-alt"></i></a></h1>
 								<h5 class="sub-title sub-title-1">Login Kodami ID</h5>
 							</div>
-							<!-- <div class="item">
-								<h1><i class="fa fa-user"></i></h1>
-								<div class="sub-title sub-title-2"><p>Status Keanggotaan</p></div>
-							</div> -->
 							<div class="item">
 								<h1><i class="fa fa-university"></i></h1>
 								<div class="sub-title sub-title-3">Modal Penyertaan</div>
 							</div>
-							<!-- <div class="item">
-								<h1><i class="fa fa-file"></i></h1>
-								<div class="sub-title sub-title-4">Status Pembayaran</div>
-							</div> -->
 							<div class="item">
 								<img src="{{ asset('images/icon-4.png') }}" style="height: 40px;max-width: none;" />
 								<div class="sub-title sub-title-5">Pendaftaran Kemitraan</div>
@@ -205,10 +267,6 @@
 		</a>
 	</p>
 </div>
-<!-- 
-<div class="footer-banner">
-	<img src="{{ asset('images/banner/footer.png') }}?v=1" />
-</div> -->
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" tabindex="-1" aria-hidden="true">
@@ -283,6 +341,7 @@
 }
 .forma-slider {
 	-min-height: 100vh;
+	background: url('{{ asset('images/banner/pattern.jpg') }}')
 }
 header {
 	-webkit-box-shadow: 0px 0px 5px 2px rgba(197, 197, 197, 0.5);
