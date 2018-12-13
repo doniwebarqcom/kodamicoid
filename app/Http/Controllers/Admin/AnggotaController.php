@@ -259,7 +259,7 @@ class AnggotaController extends ControllerLogin
         $data = ModelUser::where('id', $id)->first();
         $data->delete();
 
-        return redirect()->route('admin.anggota.index')->with('message-sucess', 'Data berhasi di hapus');
+        return redirect()->route('admin.anggota.index')->with('message-success', 'Data berhasi di hapus');
     }
 
    /**

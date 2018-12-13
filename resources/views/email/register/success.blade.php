@@ -24,7 +24,7 @@
         <tbody>
           <tr>
             <td><b>Dear, {{ $user->name }}</b>
-              <p>Terima kasih telah melaukan pendaftaran anggota Koperasi Produsen Daya Masyarakat Indonesia. Status anggota anda akan kami aktifkan setelah melakukan pembayaran : </p>
+              <p>Terima kasih telah melakukan pendaftaran anggota Koperasi Produsen Daya Masyarakat Indonesia. Status anggota anda akan kami aktifkan setelah melakukan pembayaran : </p>
               <table style="width: 100%;max-width: 100%;margin-bottom: 20px;">
                 <tr>
                   <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">1. Simpanan Pokok</td>
