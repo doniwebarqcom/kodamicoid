@@ -144,7 +144,7 @@
                     </select>
                   </div>
                   <div class="col-xs-6">
-                    <select name="domisili_kecamatan_id" class="form-control" required>
+                    <select name="domisili_kelurahan_id" class="form-control" required>
                         <option value=""> - Kelurahan - </option>
                         @if(!empty(old('domisili_kabupaten_id')))
                           @foreach(get_kecamatan_by_kabupaten(old('domisili_kabupaten_id')) as $item)
