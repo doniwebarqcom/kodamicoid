@@ -61,9 +61,16 @@ class HomeController extends Controller
         $password               = generateRandomString(6);
 
         $no_anggota             = date('y').date('m').date('d'). (Users::all()->count() + 1);
-        $simpanan_sukarela      = str_replace('Rp. ', '', $request->simpanan_sukarela);
-        $simpanan_sukarela      = str_replace('.', '', $simpanan_sukarela);
-        $simpanan_sukarela      = str_replace(',', '', $simpanan_sukarela);
+	if($request->simpanan_sukarela != "")
+	{
+        	$simpanan_sukarela      = str_replace('Rp. ', '', $request->simpanan_sukarela);
+        	$simpanan_sukarela      = str_replace('.', '', $simpanan_sukarela);
+       		$simpanan_sukarela      = str_replace(',', '', $simpanan_sukarela);
+	}
+	else
+	{
+		$simpanan_sukarela = 0;
+	}
 
         $data                   =  new Users();
         $data->name             = $request->name; 
