@@ -165,7 +165,7 @@
                 <div class="form-group">
                     <div class="col-md-8">
                       Simpanan Pokok
-                      <p style="font-size: 11px;">Simpanan pokok manjadi anggota KODAMI sebesar Rp. {{ number_format(get_setting('simpanan_pokok')) }}  (1 Kali Bayar)</p>
+                      <p style="font-size: 11px;">Simpanan pokok manjadi anggota KODAMI sebesar Rp. {{ number_format(get_setting('simpanan_pokok')) }}<br />  ( 1 Kali Bayar )</p>
                     </div>
                     <div class="col-md-4">
                       Rp. {{ number_format(get_setting('simpanan_pokok')) }}
@@ -174,7 +174,7 @@
                 <div class="form-group">
                     <div class="col-md-8">
                       Simpanan Wajib  
-                      <p style="font-size: 11px;">Simpanan Wajib anggota KODAMI sebesar Rp. {{ number_format(get_setting('simpanan_wajib')) }} perbulan ( Rp. {{ number_format(get_setting('simpanan_wajib') * 12) }} pertahun )</p>
+                      <p style="font-size: 11px;">Simpanan Wajib anggota KODAMI sebesar Rp. {{ number_format(get_setting('simpanan_wajib')) }} perbulan <br />( Rp. {{ number_format(get_setting('simpanan_wajib') * 12) }} pertahun )</p>
                     </div>
                     <div class="col-md-4">
                       Rp. {{ number_format(get_setting('simpanan_wajib')) }}
@@ -343,7 +343,7 @@
       $( document ).tooltip();
   } );
  jQuery('.datepicker2').datepicker({
-      format: 'yy-mm-dd'
+      format: 'yyyy-mm-dd'
   });
 
   function ketentuan()

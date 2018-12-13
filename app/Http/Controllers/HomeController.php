@@ -50,102 +50,105 @@ class HomeController extends Controller
      */
     public function daftarStore(Request $request)
     {
-        $this->validate($request,[
-            'nik'              => 'required|unique:users',
-            'jenis_kelamin'     => 'required',
-            'name'              => 'required',
-            'telepon'           => 'required|unique:users',
-            'email'             => 'required|email|unique:users',
-            'agama'              => 'required',
-            'tempat_lahir'              => 'required',
-            'tanggal_lahir'              => 'required',
-            'domisili_provinsi_id'              => 'required',
-            'domisili_kabupaten_id'              => 'required',
-            'domisili_kecamatan_id'              => 'required',
-            'domisili_kelurahan_id'              => 'required',
-            'setuju'              => 'required'
-        ]);
+        $validator = $this->validate($request,[
+                'nik'              => 'required|unique:users',
+                'jenis_kelamin'     => 'required',
+                'name'              => 'required',
+                'telepon'           => 'required|unique:users',
+                'email'             => 'required|email|unique:users',
+                'agama'              => 'required',
+                'tempat_lahir'              => 'required',
+                'tanggal_lahir'              => 'required',
+                'domisili_provinsi_id'              => 'required',
+                'domisili_kabupaten_id'              => 'required',
+                'domisili_kecamatan_id'              => 'required',
+                'domisili_kelurahan_id'              => 'required',
+                'setuju'              => 'required'
+            ]);
 
-        $password               = generateRandomString(6);
+        if(!$validator->fails())
+        {
+            $password               = generateRandomString(6);
 
-        $no_anggota             = date('y').date('m').date('d'). (Users::all()->count() + 1);
-    	if($request->simpanan_sukarela != "")
-    	{
-            	$simpanan_sukarela      = str_replace('Rp. ', '', $request->simpanan_sukarela);
-            	$simpanan_sukarela      = str_replace('.', '', $simpanan_sukarela);
-           		$simpanan_sukarela      = str_replace(',', '', $simpanan_sukarela);
-    	}
-    	else
-    	{
-    		$simpanan_sukarela = 0;
-    	}
+            $no_anggota             = date('y').date('m').date('d'). (Users::all()->count() + 1);
+        	if($request->simpanan_sukarela != "")
+        	{
+                	$simpanan_sukarela      = str_replace('Rp. ', '', $request->simpanan_sukarela);
+                	$simpanan_sukarela      = str_replace('.', '', $simpanan_sukarela);
+               		$simpanan_sukarela      = str_replace(',', '', $simpanan_sukarela);
+        	}
+        	else
+        	{
+        		$simpanan_sukarela = 0;
+        	}
 
-        $data                   =  new Users();
-        $data->name             = $request->name; 
-        $data->jenis_kelamin    = $request->jenis_kelamin; 
-        $data->email            = $request->email;
-        $data->telepon          = $request->telepon;
-        $data->agama            = $request->agama;
-        $data->tempat_lahir     = $request->tempat_lahir;
-        $data->tanggal_lahir    = $request->tanggal_lahir;
-        $data->nik              = $request->nik; 
-        $data->no_anggota       = $no_anggota;
-        $data->password         = bcrypt($password);
-        $data->aktivasi_code    = $password;
-        $data->domisili_provinsi_id     = $request->domisili_provinsi_id;
-        $data->domisili_kabupaten_id    = $request->domisili_kabupaten_id;
-        $data->domisili_kecamatan_id    = $request->domisili_kecamatan_id;
-        $data->domisili_kelurahan_id    = $request->domisili_kelurahan_id;
-        $data->domisili_alamat          = $request->domisili_alamat;
-        $data->durasi_pembayaran        = $request->durasi_pembayaran;
-        $data->register_source          = 1; // pendaftaran online
-        $data->first_simpanan_sukarela  = $simpanan_sukarela;
-        $data->durasi_pembayaran        = $request->durasi_pembayaran;
-        $data->access_id                = 2;
+            $data                   =  new Users();
+            $data->name             = $request->name; 
+            $data->jenis_kelamin    = $request->jenis_kelamin; 
+            $data->email            = $request->email;
+            $data->telepon          = $request->telepon;
+            $data->agama            = $request->agama;
+            $data->tempat_lahir     = $request->tempat_lahir;
+            $data->tanggal_lahir    = $request->tanggal_lahir;
+            $data->nik              = $request->nik; 
+            $data->no_anggota       = $no_anggota;
+            $data->password         = bcrypt($password);
+            $data->aktivasi_code    = $password;
+            $data->domisili_provinsi_id     = $request->domisili_provinsi_id;
+            $data->domisili_kabupaten_id    = $request->domisili_kabupaten_id;
+            $data->domisili_kecamatan_id    = $request->domisili_kecamatan_id;
+            $data->domisili_kelurahan_id    = $request->domisili_kelurahan_id;
+            $data->domisili_alamat          = $request->domisili_alamat;
+            $data->durasi_pembayaran        = $request->durasi_pembayaran;
+            $data->register_source          = 1; // pendaftaran online
+            $data->first_simpanan_sukarela  = $simpanan_sukarela;
+            $data->durasi_pembayaran        = $request->durasi_pembayaran;
+            $data->access_id                = 2;
 
-        if ($request->hasFile('file_ktp'))
-        {    
-            $image = $request->file('file_ktp');   
-            $name = time().'.'.$image->getClientOriginalExtension();
-            $destinationPath = public_path('/file_ktp/'. $data->id);
-            $image->move($destinationPath, $name);
-            $data->foto_ktp = $name;
+            if ($request->hasFile('file_ktp'))
+            {    
+                $image = $request->file('file_ktp');   
+                $name = time().'.'.$image->getClientOriginalExtension();
+                $destinationPath = public_path('/file_ktp/'. $data->id);
+                $image->move($destinationPath, $name);
+                $data->foto_ktp = $name;
+            }
+
+            $data->save();
+
+            $code = rand(100, 999);
+            $deposit = new Deposit;
+            $deposit->no_invoice   = (\Kodami\Models\Mysql\PInvoice::count()+1).$data->id.'/KDM/'. date('d').date('m').date('y');;
+            $deposit->user_id      = $data->id;
+            $deposit->status       = 1; // menunggu konfirmasi pembayaran
+            $deposit->type         = 1; // pembayaran awal sebagai anggota
+            $deposit->nominal      = $request->total_pembayaran + $code;
+            $deposit->due_date     = date('Y-m-d', strtotime("+3 days"));
+            $deposit->code         = $code;
+            $deposit->save();
+
+            $params['user']         = $data;
+            $params['deposit']      = $deposit;
+            
+            \Mail::send('email.register.success', $params,
+                function($message) use($data) {
+                    $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');
+                    $message->to($data->email);
+                    $message->subject('Registrasi - Kodami Pocket System');
+                }
+            );
+
+            // send notifikasi ke admin ketika ada registrasi baru
+            \Mail::send('email.register.success', $params,
+                function($message) use($data) {
+                    $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');
+                    $message->to('noreply.kodami@gmail.com');
+                    $message->subject('Pendaftaran Baru Anggota #'. $data->name .' - Kodami Pocket System');
+                }
+            );
+
+            return redirect('register/success')->with('success-register', 'Berhasil melakukan registrasi');
         }
-
-        $data->save();
-
-        $code = rand(100, 999);
-        $deposit = new Deposit;
-        $deposit->no_invoice   = (\Kodami\Models\Mysql\PInvoice::count()+1).$data->id.'/KDM/'. date('d').date('m').date('y');;
-        $deposit->user_id      = $data->id;
-        $deposit->status       = 1; // menunggu konfirmasi pembayaran
-        $deposit->type         = 1; // pembayaran awal sebagai anggota
-        $deposit->nominal      = $request->total_pembayaran + $code;
-        $deposit->due_date     = date('Y-m-d', strtotime("+3 days"));
-        $deposit->code         = $code;
-        $deposit->save();
-
-        $params['user']         = $data;
-        $params['deposit']      = $deposit;
-        
-        \Mail::send('email.register.success', $params,
-            function($message) use($data) {
-                $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');
-                $message->to($data->email);
-                $message->subject('Registrasi - Kodami Pocket System');
-            }
-        );
-
-        // send notifikasi ke admin ketika ada registrasi baru
-        \Mail::send('email.register.success', $params,
-            function($message) use($data) {
-                $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');
-                $message->to('noreply.kodami@gmail.com');
-                $message->subject('Pendaftaran Baru Anggota #'. $data->name .' - Kodami Pocket System');
-            }
-        );
-
-        return redirect('register/success')->with('success-register', 'Berhasil melakukan registrasi');
     }
 
     /**

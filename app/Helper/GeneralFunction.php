@@ -5,12 +5,17 @@
  */
 function delimiterNoAnggota($str)
 {
-  $res = substr($str, 0,4). '-';
-  $res .= substr($str, 4,4). '-';
-  $res .= substr($str, 8,4). '-';
-  $res .= substr($str, 12,4);
+  if(strlen($str) > 9)
+  {
+    $res = substr($str, 0,4). '-';
+    $res .= substr($str, 4,4). '-';
+    $res .= substr($str, 8,4). '-';
+    $res .= substr($str, 12,4);
 
-  return $res;
+    return $res;
+  }
+  
+  return '';
 }
 
 /**

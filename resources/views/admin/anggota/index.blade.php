@@ -48,7 +48,7 @@
                                             <th>TELEPON</th>
                                             <th>EMAIL</th>
                                             <th>TERDAFTAR</th>
-                                            <th>LOGIN</th>
+                                            <!-- <th>LOGIN</th> -->
                                             <th title="Status Anggota">STATUS</th>
                                             <th title="Kuota Anggota">KUOTA</th>
                                             <th>#</th>
@@ -60,11 +60,11 @@
                                                 <td class="text-center">{{ $no+1 }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ isset(getKabupatenById($item->domisili_kabupaten_id)->nama) ? getKabupatenById($item->domisili_kabupaten_id)->nama : '' }}</td>
-                                                <td>{{ $item->no_anggota }}</td>
+                                                <td>{{ delimiterNoAnggota($item->no_anggota) }}</td>
                                                 <td>{{ explode_telepon($item->telepon) }}</td>
                                                 <td>{{ $item->email }}</td>
                                                 <td>{{ date('d/m/Y', strtotime($item->created_at)) }}</td>
-                                                <td>
+                                               <!--  <td>
                                                     @switch ($item->status_login)
                                                         @case(0)
                                                             <a href="{{ route('admin.anggota.active', $item->id) }}" onclick="return confirm('Aktifkan Login Anggota ini ?')" class="btn btn-danger btn-xs" style="font-size:11px"><i class="fa fa-ban"></i> Tidak Aktif</a>
@@ -82,7 +82,7 @@
                                                             <a href="{{ route('admin.anggota.inactive', $item->id) }}" onclick="return confirm('Aktifkan Anggota ini ?')" class="btn btn-danger btn-xs" style="font-size:11px"><i class="fa fa-ban"></i> Tidak Aktif</a>
                                                         @break
                                                     @endswitch
-                                                </td>
+                                                </td> -->
                                                 <td>{!! status_anggota($item->id) !!}</td>
                                                 <td>
                                                     @if($item->access_id==2)
