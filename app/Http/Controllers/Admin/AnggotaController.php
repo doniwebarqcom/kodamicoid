@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\ControllerLogin;
 use App\ModelUser; 
 use Kodami\Models\Mysql\Users;
+use Kodami\Models\Mysql\Deposit;
+use Kodami\Models\Mysql\UserAnggotaKonfirmasiTransaksi;
 
 class AnggotaController extends ControllerLogin
 {	
@@ -73,7 +75,7 @@ class AnggotaController extends ControllerLogin
     {
         if($request->status == 1)
         {
-            $status = \Kodami\Models\Mysql\Deposit::where('id', $request->deposit_id)->first();
+            $status = Deposit::where('id', $request->deposit_id)->first();
             $status->status = 3;
             $status->proses_user_id = \Auth::user()->id;
             $status->save(); 
@@ -82,12 +84,12 @@ class AnggotaController extends ControllerLogin
 
             /** Rubah status angota jadi active */
             $user = ModelUser::where('id', $status->user_id)->first();
-            $user->status = 2;
             $user->status_anggota = 1;
+            $user->status_login = 1;
             $user->save();
 
             // Insert Simpanan Pokok
-            $deposit                = new \Kodami\Models\Mysql\Deposit();
+            $deposit                = new Deposit();
             $deposit->no_invoice    = $status->no_invoice; 
             $deposit->status        = 3;
             $deposit->type          = 3; // Simpanan Pokok
@@ -97,7 +99,7 @@ class AnggotaController extends ControllerLogin
             $deposit->save();  
 
             // Insert Simpanan Wajib
-            $deposit                = new \Kodami\Models\Mysql\Deposit();
+            $deposit                = new Deposit();
             $deposit->no_invoice    = $status->no_invoice; 
             $deposit->status        = 3; 
             $deposit->type          = 5; // Simpanan Wajib
@@ -107,7 +109,7 @@ class AnggotaController extends ControllerLogin
             $deposit->save();
 
             // Insert Simpanan Sukarela
-            $deposit                = new \Kodami\Models\Mysql\Deposit();
+            $deposit                = new Deposit();
             $deposit->no_invoice    = $status->no_invoice; 
             $deposit->status        = 3; 
             $deposit->type          = 4; // Simpanan Sukarela
@@ -132,7 +134,7 @@ class AnggotaController extends ControllerLogin
             $params['no_anggota']   = delimiterNoAnggota($no_anggota);
 
             // Update status anggota aktif ketika bayar simpanan
-            \Kodami\Models\Mysql\Users::where('id', $status->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'status_login'=>1, 'no_anggota'=> $no_anggota]);
+            Users::where('id', $status->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'status_login'=>1, 'no_anggota'=> $no_anggota]);
             
             // cek user konfirmasi
             UserAnggotaKonfirmasiTransaksi::where('user_id', $status->user_id)->where('transaksi_id', $status->id)->where('type', 2)->update(['status' => 1]);
