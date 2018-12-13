@@ -165,7 +165,7 @@
                 <div class="form-group">
                     <div class="col-md-8">
                       Simpanan Pokok
-                      <p style="font-size: 11px;">Simpanan pokok manjadi anggota KODAMI sebesar Rp. {{ number_format(get_setting('simpanan_pokok')) }}</p>
+                      <p style="font-size: 11px;">Simpanan pokok manjadi anggota KODAMI sebesar Rp. {{ number_format(get_setting('simpanan_pokok')) }}  (1 Kali Bayar)</p>
                     </div>
                     <div class="col-md-4">
                       Rp. {{ number_format(get_setting('simpanan_pokok')) }}

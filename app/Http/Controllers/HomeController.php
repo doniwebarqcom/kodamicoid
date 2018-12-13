@@ -51,26 +51,34 @@ class HomeController extends Controller
     public function daftarStore(Request $request)
     {
         $this->validate($request,[
+            'nik'              => 'required|unique:users',
+            'jenis_kelamin'     => 'required',
             'name'              => 'required',
             'telepon'           => 'required|unique:users',
             'email'             => 'required|email|unique:users',
-            'jenis_kelamin'     => 'required',
+            'agama'              => 'required',
+            'tempat_lahir'              => 'required',
+            'tanggal_lahir'              => 'required',
+            'domisili_provinsi_id'              => 'required',
+            'domisili_kabupaten_id'              => 'required',
+            'domisili_kecamatan_id'              => 'required',
+            'domisili_kelurahan_id'              => 'required',
             'setuju'              => 'required'
         ]);
 
         $password               = generateRandomString(6);
 
         $no_anggota             = date('y').date('m').date('d'). (Users::all()->count() + 1);
-	if($request->simpanan_sukarela != "")
-	{
-        	$simpanan_sukarela      = str_replace('Rp. ', '', $request->simpanan_sukarela);
-        	$simpanan_sukarela      = str_replace('.', '', $simpanan_sukarela);
-       		$simpanan_sukarela      = str_replace(',', '', $simpanan_sukarela);
-	}
-	else
-	{
-		$simpanan_sukarela = 0;
-	}
+    	if($request->simpanan_sukarela != "")
+    	{
+            	$simpanan_sukarela      = str_replace('Rp. ', '', $request->simpanan_sukarela);
+            	$simpanan_sukarela      = str_replace('.', '', $simpanan_sukarela);
+           		$simpanan_sukarela      = str_replace(',', '', $simpanan_sukarela);
+    	}
+    	else
+    	{
+    		$simpanan_sukarela = 0;
+    	}
 
         $data                   =  new Users();
         $data->name             = $request->name; 
