@@ -302,7 +302,7 @@
 	</div>
 </div>
 </div>
-<iframe src="http://kodami.co.id.local/daftar" width="100%" id="iframe_pendaftaran"></iframe>
+<iframe src="http://kodami.co.id/daftar" width="100%" id="iframe_pendaftaran"></iframe>
 <!-- Animasi -->
 <style type="text/css">
 /*body {
