@@ -46,7 +46,7 @@
                                         <img src="{{ asset('bank/'. $deposit->rekening_bank->bank->image) }}">
                                         @endif
                                         <p>
-                                            No Rekening : <strong class="no_rekening">{{ isset($deposit->rekening_bank->no_rekening) ? $deposit->rekening_bank->no_rekening : '' }}</strong><br>
+                                            <strong class="no_rekening">{{ isset($deposit->rekening_bank->no_rekening) ? $deposit->rekening_bank->no_rekening : '' }}</strong><br>
                                             <strong class="nama_akun">{{ isset($deposit->rekening_bank->owner) ? $deposit->rekening_bank->owner : '' }}</strong>
                                         </p>
                                     </div> 

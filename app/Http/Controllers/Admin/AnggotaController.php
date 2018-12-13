@@ -115,6 +115,46 @@ class AnggotaController extends ControllerLogin
             $deposit->nominal       = $user->first_simpanan_sukarela + $status->code;
             $deposit->proses_user_id = \Auth::user()->id;
             $deposit->save();
+
+             # Generata No Anggota
+            $no_anggota = generate_no_anggota($status->user_id);
+            if($no_anggota['status'] == 'success')
+            {
+              $no_anggota = $no_anggota['data'];
+            }
+            else
+            {
+              $no_anggota = 0;
+            }
+
+            $params['text']         = '<p>Dear Ibu/Bapak '. $status->user->name .'<br /> Pembayaran Data Anggota Anda berhasil </p>'. $no_anggota;
+            $params['data']         = $deposit;
+            $params['no_anggota']   = delimiterNoAnggota($no_anggota);
+
+            // Update status anggota aktif ketika bayar simpanan
+            \Kodami\Models\Mysql\Users::where('id', $status->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'status_login'=>1, 'no_anggota'=> $no_anggota]);
+            
+            // cek user konfirmasi
+            UserAnggotaKonfirmasiTransaksi::where('user_id', $status->user_id)->where('transaksi_id', $status->id)->where('type', 2)->update(['status' => 1]);
+
+            # send email
+            \Mail::send('email.register.lunas', $params,
+              function($message) use($status) {
+                  $message->from('services@kodami.co.id', 'Kodami Pocket System');
+                  $message->to($status->user->email);
+                  $message->subject('Koperasi Produsen Daya  Masyarakat Indonesia - Pembayaran Anggota Berhasil');
+              }
+            );
+
+            // send email notifikasi
+            $params['text'] = '<p>Dear Ibu/Bapak '. $status->user->name .'<br />Sudah melakuan Pembayaran Data Anggota dan berhasil</p>';
+            \Mail::send('email.default', $params,
+              function($message){
+                  $message->from('services@kodami.co.id', 'Kodami Pocket System');
+                  $message->to('noreply.kodami@gmail.com');
+                  $message->subject('Koperasi Produsen Daya  Masyarakat Indonesia - Pembayaran Anggota Berhasil');
+              }
+            );
         }
         else
         {
