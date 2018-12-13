@@ -28,7 +28,7 @@
                     <select class="form-control" name="rekening_bank_id" required>
                       <option value="">Pilih</option>
                       @foreach(rekening_bank() as $item)
-                        <option value="{{ $item->id }}">{{ $item->bank->nama }} - {{ $item->no_rekening }} - {{ $item->owner }}</option>
+                        <option value="{{ $item->id }}">{{ $item->bank_->nama }} - {{ $item->no_rekening }} - {{ $item->owner }}</option>
                       @endforeach
                     </select>
                   </div>

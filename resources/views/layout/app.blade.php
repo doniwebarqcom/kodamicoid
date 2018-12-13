@@ -388,8 +388,8 @@
 #iframe_pendaftaran {
 	position: absolute;
     top: 0px;
-    width: 0;
-    right: 0;
+    -width: 0;
+    -right: 0;
     -right: -1904px;
 	transition: 2s;
 }
@@ -586,7 +586,7 @@ header {
 	{
 		$('.main-holder').animate({left:'-'+documentWidth+'px'})
 		//$('.main-holder').css({width:0})
-		$("#iframe_pendaftaran").animate( { width: documentWidth });
+		$("#iframe_pendaftaran").animate( { right: 0 });
 	}
 	
 	$('.menu-right .item').each(function(){
@@ -598,11 +598,9 @@ header {
 		});
 	});
 	
-
-	
-
 	setTimeout(function(){
 		$("#iframe_pendaftaran").height(documentHeight);
+		$("#iframe_pendaftaran").css({ right : '-'+documentWidth+'px'});
 		$('.forma-slider').height((documentHeight - header - 14));
 		console.log(documentHeight);
 	});
@@ -626,8 +624,6 @@ header {
 
 </script>
 <style type="text/css">
-
-
 	@media (min-width: 1281px) {  }
 	@media (min-width: 1025px) and (max-width: 1280px) {}
 	@media (min-width: 768px) and (max-width: 1024px) {}

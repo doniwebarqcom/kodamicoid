@@ -116,7 +116,7 @@
                     <select name="domisili_provinsi_id" class="form-control" required>
                         <option value=""> - Provinsi - </option>
                         @foreach(get_provinsi() as $item)
-                        <option value="{{ $item->id_prov }}">{{ $item->nama }}</option>
+                          <option value="{{ $item->id_prov }}" {{ (old('domisili_provinsi_id') == $item->id_prov) ? 'selected' : '' }}>{{ $item->nama }}</option>
                         @endforeach
                     </select>
                   </div>
@@ -124,6 +124,11 @@
                     <label></label>
                     <select name="domisili_kabupaten_id" class="form-control" required>
                         <option value=""> - Kota / Kabupaten - </option>
+                        @if(!empty(old('domisili_provinsi_id')))
+                          @foreach(get_kabupaten_by_provinsi(old('domisili_provinsi_id')) as $item)
+                            <option value="{{ $item->id_kab }}" {{ (old('domisili_kabupaten_id') == $item->id_kab) ? 'selected' : '' }}>{{ $item->nama }}</option>
+                          @endforeach
+                        @endif
                     </select>
                   </div>
                 </div>
@@ -131,11 +136,21 @@
                   <div class="col-xs-6">
                     <select name="domisili_kecamatan_id" class="form-control" required>
                         <option value=""> - Kecamatan - </option>
+                        @if(!empty(old('domisili_kabupaten_id')))
+                          @foreach(get_kecamatan_by_kabupaten(old('domisili_kabupaten_id')) as $item)
+                            <option value="{{ $item->id_kec }}" {{ (old('domisili_kecamatan_id') == $item->id_kec) ? 'selected' : '' }}>{{ $item->nama }}</option>
+                          @endforeach
+                        @endif
                     </select>
                   </div>
                   <div class="col-xs-6">
-                    <select name="domisili_kelurahan_id" class="form-control" required>
+                    <select name="domisili_kecamatan_id" class="form-control" required>
                         <option value=""> - Kelurahan - </option>
+                        @if(!empty(old('domisili_kabupaten_id')))
+                          @foreach(get_kecamatan_by_kabupaten(old('domisili_kabupaten_id')) as $item)
+                            <option value="{{ $item->id_kec }}" {{ (old('domisili_kecamatan_id') == $item->id_kec) ? 'selected' : '' }}>{{ $item->nama }}</option>
+                          @endforeach
+                        @endif
                     </select>
                   </div>
                 </div>

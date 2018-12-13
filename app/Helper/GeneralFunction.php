@@ -525,7 +525,7 @@ function get_provinsi()
  */
 function get_kabupaten_by_provinsi($id)
 {
-  return \App\Kabupaten::where('id_prov', $id)->get();
+  return \Kodami\Models\Mysql\Kabupaten::where('id_prov', $id)->get();
 }
 
 /**
@@ -535,7 +535,7 @@ function get_kabupaten_by_provinsi($id)
  */
 function get_kecamatan_by_kabupaten($id)
 {
-  return \App\Kecamatan::where('id_kab', $id)->get();
+  return \Kodami\Models\Mysql\Kecamatan::where('id_kab', $id)->get();
 }
 
 /**
