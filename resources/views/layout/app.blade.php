@@ -221,36 +221,40 @@
 		<div class="forma-slider">
 			<div id="form_slider" data-anchor="form_slider">
 				<ul class="form-bxslider list-unstyled">
-					<li>
-						<div class="img-slider fin_2"><img src="{{ asset('images/banner/1.jpg') }}?v=1"></div>
-					</li>
-					<li>
-						<div class="img-slider fin_3"><img src="{{ asset('images/banner/2.jpg') }}?v=1"></div>
-					</li>
+					<li><div class="img-slider fin_2"><img src="{{ asset('images/banner/1.jpg') }}?v=1"></div></li>
+					<li><div class="img-slider fin_3"><img src="{{ asset('images/banner/2.jpg') }}?v=1"></div></li>
 				</ul>
 			</div>
 			<div class="container">
 				<div class="row">
 					<div class="relative fin_3" id='elem-portable'>
 						<div class="reg-now menu-right hidden-xs" style="background: url('{{ asset('background-transparent.png?v=1') }}')">
-							<div class="item">
-								<a href="{{ route('daftar') }}">
-									<img src="{{ asset('images/icon-2.png') }}" style="height: 40px;max-width: none;" />
-								</a>
-								<div class="sub-title sub-title-1"><p>Pendaftaran Anggota</p></div>
-							</div>
-							<div class="item">
-								<h1><a href="http://pulsa.kodami.id/login"><i class="fa fa-sign-in-alt"></i></a></h1>
-								<h5 class="sub-title sub-title-1">Login Kodami ID</h5>
-							</div>
-							<div class="item">
-								<h1><i class="fa fa-university"></i></h1>
-								<div class="sub-title sub-title-3">Modal Penyertaan</div>
-							</div>
-							<div class="item">
-								<img src="{{ asset('images/icon-4.png') }}" style="height: 40px;max-width: none;" />
-								<div class="sub-title sub-title-5">Pendaftaran Kemitraan</div>
-							</div>
+							<ul class="menu-right">
+								<li class="item">
+									<a onclick="form_pendaftaran()">
+										<img src="{{ asset('images/icon/1.png') }}" style="height: 32px" class="icon" />
+									</a>
+									<span class="sub-title sub-title-1">Pendaftaran</span>	
+								</li>
+								<li class="item">
+									<a href="https://kodami.id">
+										<img src="{{ asset('images/icon/2.png') }}" style="height: 32px" class="icon" />
+									</a>
+									<span class="sub-title sub-title-1">Belanja</span>	
+								</li>
+								<li class="item">
+									<a href="">
+										<img src="{{ asset('images/icon/3.png') }}" style="height: 32px" class="icon" />
+									</a>
+									<span class="sub-title sub-title-1">Modal Penyertaan</span>	
+								</li>
+								<li class="item">
+									<a href="">
+										<img src="{{ asset('images/icon/4.png') }}" style="height: 32px" class="icon" />
+									</a>
+									<span class="sub-title sub-title-1">Daftar Kemitraan</span>	
+								</li>
+							</ul>
 						</div>
 					</div>
 				</div>
@@ -258,7 +262,6 @@
 		</div>
 	</section>
 </div>
-
 <!-- Top -->
 <div id="back-top-wrapper" class="visible-lg">
 	<p id="back-top" class='bounceOut'>
@@ -267,7 +270,6 @@
 		</a>
 	</p>
 </div>
-
 <!-- Modal -->
 <div id="myModal" class="modal fade" tabindex="-1" aria-hidden="true">
 	<div class="modal-wr" style="width: 525px; left: 40%;">
@@ -299,10 +301,108 @@
 		<p>{{ Session::get('messages') }}</p>
 	</div>
 </div>
-
 </div>
+<iframe src="http://kodami.co.id.local/daftar" width="100%" id="iframe_pendaftaran"></iframe>
 <!-- Animasi -->
 <style type="text/css">
+/*body {
+	overflow: hidden !important
+}*/
+.menu-right{
+	height: 264px;
+	margin-bottom:0;
+	padding-left:0;
+	margin-left:0;
+}
+.menu-right .item {
+	position: relative;
+	cursor: pointer;
+	text-align: center;
+}
+.menu-right .item h1,.menu-right .item h1 a  {color: white;}
+.menu-right .item a img {
+	max-width: none;
+}
+.menu-right li.item {
+	list-style: none;
+	text-align: center;	
+	height: 66px;
+	position: relative;
+	border-bottom: 1px solid #8c8c8c;
+}
+.menu-right .item .icon {
+	position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    bottom: 0;
+    z-index: 999
+}
+.menu-right .item .sub-title {
+	display: block;
+	position: absolute;
+    top: 0px;
+    right: 50px;
+	background: #346fcd;
+	color: white;
+	min-height: 66px;
+	max-height: 66px;
+	transition: 0.5s;
+	z-index: 0;
+	padding-top: 23px;
+	width: 0;
+	text-align: left;
+}
+.menu-right .item h1:hover, .menu-right .item h1 a:hover {
+	color: #ccc;
+	background: #346fcd;
+
+}
+.sub-title-1 {
+	position: absolute !important;
+    right: 0px !important;
+    top: 0px !important;
+}
+.sub-title-1 img{
+	max-width: none;
+	-webkit-box-shadow: 0px 0px 5px 2px rgba(128, 128, 128, 0.5);
+    -moz-box-shadow: 0px 0px 5px 2px rgba(128, 128, 128, 0.5);
+    box-shadow: 0px 0px 5px 2px rgba(128, 128, 128, 0.5);
+}
+.sub-title-2 {width: 145px;}
+.sub-title-3 {width: 145px;}
+.sub-title-4 {width: 145px;}
+.sub-title-5 {width: 145px;}
+.sub-title-6 {width: 145px;}
+.reg-now {
+	/*height: -webkit-fill-available;*/
+	/*top: 71px;*/
+	width: 60px;
+	position: absolute;
+	margin: auto;
+	/*min-height:100vh;*/
+	padding:0;
+}
+
+#iframe_pendaftaran {
+	position: absolute;
+    top: 0px;
+    width: 0;
+    right: 0;
+    -right: -1904px;
+	transition: 2s;
+}
+.main-holder {
+	transition: 2s;
+	width: 100%;
+	position:relative;
+}
+
+.forma-slider {
+	-min-height: 100vh;
+	background: url('{{ asset('images/banner/pattern.jpg') }}')
+}
 .footer-banner {
 	position: absolute;
 	bottom:0;
@@ -310,38 +410,6 @@
 }
 .footer-banner img {
 	width: 352px;
-}
-.menu-right .item h1,.menu-right .item h1 a  {color: white;}
-.menu-right .item {position: relative;cursor: pointer;margin-top: 30px;}
-.menu-right .item .sub-title {
-	display: none;
-	position: absolute;
-    top: 0px;
-    right: 50px;
-	background-image: url('{{ asset('background-transparent.png?v=1') }}');
-	color: white;
-	padding: 15px 0px 15px 10px;
-	min-height: 66px;
-	max-height: 66px;
-}
-.menu-right .item h1:hover, .menu-right .item h1 a:hover {
-	color: #ccc;
-}
-.sub-title-1 {width: 145px;}
-.sub-title-2 {width: 145px;}
-.sub-title-3 {width: 145px;}
-.sub-title-4 {width: 145px;}
-.sub-title-5 {width: 145px;}
-.sub-title-6 {width: 145px;}
-.reg-now {
-	height: -webkit-fill-available;
-	top: 71px;
-	width: 70px;
-	min-height:100vh;
-}
-.forma-slider {
-	-min-height: 100vh;
-	background: url('{{ asset('images/banner/pattern.jpg') }}')
 }
 header {
 	-webkit-box-shadow: 0px 0px 5px 2px rgba(197, 197, 197, 0.5);
@@ -510,18 +578,31 @@ header {
 <script src="{{ asset('advisa/js/loader.js?v=2') }}"></script>
 <script type="text/javascript">
 	
-	$('.menu-right .item').each(function(){
-		$(this).on('mouseenter', function(){
-			$(this).find('.sub-title').show();
-		}).on('mouseleave', function(){
-			$(this).find('.sub-title').hide();
-		});
-	});
-
 	var documentHeight = $(window).height();
+	var documentWidth = $(window).width();
 	var header = $('header').height();
 
+	function form_pendaftaran()
+	{
+		$('.main-holder').animate({left:'-'+documentWidth+'px'})
+		//$('.main-holder').css({width:0})
+		$("#iframe_pendaftaran").animate( { width: documentWidth });
+	}
+	
+	$('.menu-right .item').each(function(){
+		$(this).on('mouseenter', function(){
+			$(this).find('.sub-title').show().css({width: '200px',paddingLeft: '20px' });
+		})
+		.on('mouseleave', function(){
+			$(this).find('.sub-title').css({width: 0,paddingLeft: 0 });
+		});
+	});
+	
+
+	
+
 	setTimeout(function(){
+		$("#iframe_pendaftaran").height(documentHeight);
 		$('.forma-slider').height((documentHeight - header - 14));
 		console.log(documentHeight);
 	});

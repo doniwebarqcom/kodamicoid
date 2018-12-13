@@ -161,14 +161,14 @@ class MootaGrabMutasi extends Command
                 );
 
                 // send email notifikasi
-                // $params['text'] = '<p>Dear Ibu/Bapak '. $data_deposit->user->name .'<br />Sudah melakuan Pembayaran Data Anggota dan berhasil</p>';
-                // \Mail::send('email.default', $params,
-                //   function($message){
-                //       $message->from('services@kodami.co.id', 'Kodami Pocket System');
-                //       $message->to('noreply.kodami@gmail.com');
-                //       $message->subject('Koperasi Produsen Daya  Masyarakat Indonesia - Pembayaran Anggota Berhasil');
-                //   }
-                // );
+                $params['text'] = '<p>Dear Ibu/Bapak '. $data_deposit->user->name .'<br />Sudah melakuan Pembayaran Data Anggota dan berhasil</p>';
+                \Mail::send('email.default', $params,
+                  function($message){
+                      $message->from('services@kodami.co.id', 'Kodami Pocket System');
+                      $message->to('noreply.kodami@gmail.com');
+                      $message->subject('Koperasi Produsen Daya  Masyarakat Indonesia - Pembayaran Anggota Berhasil');
+                  }
+                );
                 
                 echo " SUCCESS EMAIL : ". $data_deposit->user->email ."\n";
                 echo " =================================================\n\n";
@@ -191,7 +191,7 @@ class MootaGrabMutasi extends Command
               $temp->account_number   = $mutasi->account_number;
               $temp->mutation_id      = $mutasi->mutation_id;
               $temp->created_at_mutation=$mutasi->created_at;
-              #$temp->save();
+              $temp->save();
               
               if($konfirmasi->nominal_lebih > 0)
               {
@@ -255,7 +255,7 @@ class MootaGrabMutasi extends Command
                   }
                 );
 
-                /*
+                
                 // send email notifikasi
                 $params['text'] = '<p>Dear Ibu/Bapak '. $data_deposit->user->name .'<br />Sudah melakuan Pembayaran Data Anggota dan berhasil</p>';
                 \Mail::send('email.default', $params,
@@ -265,13 +265,8 @@ class MootaGrabMutasi extends Command
                       $message->subject('Koperasi Produsen Daya  Masyarakat Indonesia - Pembayaran Anggota Berhasil');
                   }
                 );
-                */
-
               }
-              if($konfirmasi->nominal_kurang > 0)
-              {
-                
-              }
+              
             }
           }
         }

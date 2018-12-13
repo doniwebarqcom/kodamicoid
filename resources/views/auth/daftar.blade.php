@@ -88,7 +88,7 @@
                 <div class="form-group">
                   <div class="col-xs-6">
                     <label>Tanggal Lahir</label>
-                    <input class="form-control datepicker" name="tanggal_lahir" type="text" required="" placeholder="Tanggal Lahir" value="{{ old('tanggal_lahir') }}">
+                    <input class="form-control datepicker2" name="tanggal_lahir" type="text" required="" placeholder="Tanggal Lahir" value="{{ old('tanggal_lahir') }}">
                     @if ($errors->has('tanggal_lahir'))
                         <span class="text-danger">Tanggal lahir harus diisi.</span>
                     @endif
@@ -145,7 +145,7 @@
                   </div>
                 </div>
               </div>
-              <h4 class="box-title-toggle" onclick="toggle_box('box_simpanan')">2. Simpanan</h4>
+              <h4 class="box-title-toggle" onclick="toggle_box('box_simpanan')" title="Klik disini untuk melihat detail simpanan.">2. Simpanan</h4>
               <div class="box box_simpanan" style="display: none;">
                 <div class="form-group">
                     <div class="col-md-8">
@@ -320,8 +320,16 @@
 </div>
 <!-- /.modal -->
 @section('footer-script')
+<link href="{{ asset('admin-css/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" type="text/css" />
+<script src="{{ asset('admin-css/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('js/jquery.priceformat.min.js') }}"></script>
 <script type="text/javascript">
+  $( function() {
+      $( document ).tooltip();
+  } );
+ jQuery('.datepicker2').datepicker({
+      format: 'yy-mm-dd'
+  });
 
   function ketentuan()
   {
