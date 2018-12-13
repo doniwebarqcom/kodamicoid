@@ -86,6 +86,7 @@ class HomeController extends Controller
         $data->register_source          = 1; // pendaftaran online
         $data->first_simpanan_sukarela  = $simpanan_sukarela;
         $data->durasi_pembayaran        = $request->durasi_pembayaran;
+        $data->access_id                = 2;
 
         if ($request->hasFile('file_ktp'))
         {    
