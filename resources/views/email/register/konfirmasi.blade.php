@@ -33,7 +33,7 @@
                 </tr>
                 <tr>
                   <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">2. Rekening Tujuan</td>
-                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ $konfirmasi->rekening_bank->bank->nama }} - {{ $konfirmasi->rekening_bank->no_rekening }}</td>
+                  <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">{{ isset($konfirmasi->rekening_bank->bank->nama) ? $konfirmasi->rekening_bank->bank->nama : '' }} - {{ isset($konfirmasi->rekening_bank->no_rekening) ? $konfirmasi->rekening_bank->no_rekening : '' }}</td>
                 </tr>
                 <tr>
                   <td style="padding: 8px;line-height: 1.42857143;vertical-align: top;border-top: 1px solid #ddd;">3. Tanggal Bayar</td>
