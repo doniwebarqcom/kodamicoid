@@ -42,10 +42,12 @@
                                 <div class="pull-left">
                                     <h3>Transfer Ke,</h3> 
                                     <div class="transfer_ke">
-                                        <img src="http://localhost/kodami.co.id/public/bank/1519125431.png">
+                                        @if(isset($deposit->rekening_bank->bank->image))
+                                        <img src="{{ asset('bank/'. $deposit->rekening_bank->bank->image) }}">
+                                        @endif
                                         <p>
-                                            No Rekening : <strong class="no_rekening">123456789</strong><br>
-                                            <strong class="nama_akun">Koperasi Daya Masyarakat</strong>
+                                            No Rekening : <strong class="no_rekening">{{ isset($deposit->rekening_bank->no_rekening) ? $deposit->rekening_bank->no_rekening : '' }}</strong><br>
+                                            <strong class="nama_akun">{{ isset($deposit->rekening_bank->owner) ? $deposit->rekening_bank->owner : '' }}</strong>
                                         </p>
                                     </div> 
                                 </div>

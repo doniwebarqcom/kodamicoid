@@ -152,7 +152,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <div class="pull-left">
-                                                <h3>Transfer Ke,</h3> 
+                                                <h3>Transfer Ke,</h3>  
                                                 <div class="transfer_ke">
                                                     <img src="http://localhost/kodami.co.id/public/bank/1519125431.png">
                                                     <p>
