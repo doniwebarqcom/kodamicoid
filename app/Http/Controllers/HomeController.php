@@ -178,7 +178,13 @@ class HomeController extends Controller
             'tanggal_transfer'              => 'required'
         ]);
 
-        $data               = Deposit::where('user_id', $id)->where('status','1')->where('type',1)->first(); 
+        $data               = Deposit::where('user_id', $id)->where('status',1)->orWhere('status', 2)->where('type',1)->first(); 
+        
+        if(!$data)
+        {
+            return redirect('login')->with('message-success', 'Maaf data anda tidak ditemukan.');
+        }
+
         $data->status       = 2;
         $data->due_date     = $request->tanggal_transfer;
         $data->rekening_bank_id= $request->rekening_bank_id;
@@ -195,42 +201,47 @@ class HomeController extends Controller
 
         $nominal = remove_number_format($request->nominal) - $data->nominal;
 
-        // record transaksi
-        $konfirmasi                  = new UserAnggotaKonfirmasiTransaksi();
-        $konfirmasi->transaksi_id    = $data->id;
-        $konfirmasi->user_id         = $data->user_id;
-        $konfirmasi->nominal         = remove_number_format($request->nominal);
-        $konfirmasi->nominal_kurang  = ($nominal < 0 ? $nominal : 0);
-        $konfirmasi->nominal_lebih   = ($nominal > 0 ? abs($nominal) : 0 );
-        $konfirmasi->file            = $name;
-        $konfirmasi->type            = 2; // source dari register simpanan
-        $konfirmasi->bank_id         = $request->rekening_bank_id;
-        $konfirmasi->save();
+        $konfirmasi =  UserAnggotaKonfirmasiTransaksi::where('user_id', $data->user_id)->where('transaksi_id', $data->id)->where('type', 2)->first();
 
-        $user = Users::where('id', $data->user_id)->first();
-        $user->aktivasi_link = 1;
-        $user->save();
+        if(!$konfirmasi)
+        {
+            // record transaksi
+            $konfirmasi                  = new UserAnggotaKonfirmasiTransaksi();
+            $konfirmasi->transaksi_id    = $data->id;
+            $konfirmasi->user_id         = $data->user_id;
+            $konfirmasi->nominal         = remove_number_format($request->nominal);
+            $konfirmasi->nominal_kurang  = ($nominal < 0 ? $nominal : 0);
+            $konfirmasi->nominal_lebih   = ($nominal > 0 ? abs($nominal) : 0 );
+            $konfirmasi->file            = $name;
+            $konfirmasi->type            = 2; // source dari register simpanan
+            $konfirmasi->bank_id         = $request->rekening_bank_id;
+            $konfirmasi->save();
 
-        $params['data']         = $data;
-        $params['konfirmasi']   = $konfirmasi;
+            $user = Users::where('id', $data->user_id)->first();
+            $user->aktivasi_link = 1;
+            $user->save();
 
-        \Mail::send('email.register.konfirmasi', $params,
-            function($message) use($data) {
-                $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');
-                $message->to($data->user->email);
-                $message->subject('Konfirmasi Pembayaran - Kodami Pocket System');
-            }
-        );
+            $params['data']         = $data;
+            $params['konfirmasi']   = $konfirmasi;
 
-        // send notifikasi ke admin ketika ada registrasi baru
-        \Mail::send('email.register.konfirmasi', $params,
-            function($message) use($data) {
-                $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');
-                $message->to('noreply.kodami@gmail.com');
-                $message->subject('Konfirmasi Pembayaran Anggota #'. $data->user->name .' - Kodami Pocket System');
-            }
-        );
+            \Mail::send('email.register.konfirmasi', $params,
+                function($message) use($data) {
+                    $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');
+                    $message->to($data->user->email);
+                    $message->subject('Konfirmasi Pembayaran - Kodami Pocket System');
+                }
+            );
 
-        return redirect('login')->with('message-success', 'Terima kasih telah melaukan konfirmasi pembayaran pendaftaran anggota Koperasi Produsen Daya Masyarakat Indonesia. Status anggota anda akan kami aktifkan maksimal 1x24 jam.');
+            // send notifikasi ke admin ketika ada registrasi baru
+            \Mail::send('email.register.konfirmasi', $params,
+                function($message) use($data) {
+                    $message->from('noreply.kodami@gmail.com', 'Kodami Pocket System');
+                    $message->to('noreply.kodami@gmail.com');
+                    $message->subject('Konfirmasi Pembayaran Anggota #'. $data->user->name .' - Kodami Pocket System');
+                }
+            );
+        }
+
+        return redirect('login')->with('message-success', 'Terima kasih telah melakukan konfirmasi pembayaran pendaftaran anggota Koperasi Produsen Daya Masyarakat Indonesia. Status anggota anda akan kami aktifkan maksimal 1x24 jam.');
     }
 }
