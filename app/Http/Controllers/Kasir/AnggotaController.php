@@ -93,6 +93,7 @@ class AnggotaController extends Controller
             $user_anggota                   = new UserAnggota();
             $user_anggota->user_id          = $request->user_id;
             $user_anggota->simpanan_pokok   = $request->nominal;
+            $user_anggota->kuota            = $request->nominal;
         }
         else
         {
