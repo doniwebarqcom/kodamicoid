@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use Kodami\Models\Mysql\UserAnggotaKonfirmasiTransaksi;
+use Kodami\Models\Mysql\UserAnggota;
 
 class MootaGrabMutasi extends Command
 {
@@ -151,6 +152,19 @@ class MootaGrabMutasi extends Command
                 // cek user konfirmasi
                 UserAnggotaKonfirmasiTransaksi::where('user_id', $data_deposit->user_id)->where('transaksi_id', $deposit_awal->id)->where('type', 2)->update(['status' => 1]);
 
+                # update table user anggota
+                $user_anggota = UserAnggota::where('user_id', $data_deposit->user_id)->first();
+                if(!$user_anggota)
+                {
+                    $user_anggota                   = new UserAnggota();
+                    $user_anggota->user_id          = $data_deposit->user_id;
+                    $user_anggota->simpanan_pokok   = get_setting('simpanan_pokok');
+                    $user_anggota->simpanan_wajib   = $data_deposit->user->durasi_pembayaran * get_setting('simpanan_wajib');
+                    $user_anggota->simpanan_sukarela=$data_deposit->user->first_simpanan_sukarela + $data_deposit->code;
+                    $user_anggota->kuota            = get_setting('simpanan_pokok');
+                    $user_anggota->save();
+                }
+
                 # send email
                 \Mail::send('email.register.lunas', $params,
                   function($message) use($data_deposit) {
@@ -236,6 +250,19 @@ class MootaGrabMutasi extends Command
                 else
                 {
                   $no_anggota = 0;
+                }
+
+                # update table user anggota
+                $user_anggota = UserAnggota::where('user_id', $data_deposit->user_id)->first();
+                if(!$user_anggota)
+                {
+                    $user_anggota                   = new UserAnggota();
+                    $user_anggota->user_id          = $data_deposit->user_id;
+                    $user_anggota->simpanan_pokok   = get_setting('simpanan_pokok');
+                    $user_anggota->simpanan_wajib   = $data_deposit->user->durasi_pembayaran * get_setting('simpanan_wajib');
+                    $user_anggota->simpanan_sukarela=$data_deposit->user->first_simpanan_sukarela + $data_deposit->code;
+                    $user_anggota->kuota            = get_setting('simpanan_pokok');
+                    $user_anggota->save();
                 }
 
                 $params['text']         = '<p>Dear Ibu/Bapak '. $data_deposit->user->name .'<br /> Pembayaran Data Anggota Anda berhasil </p>'. $no_anggota;

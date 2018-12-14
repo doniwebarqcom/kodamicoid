@@ -44,7 +44,7 @@
                                     <td class="text-center">{{ $no+1 }}</td>
                                     <td>{{ $item->name }}</td>
                                     <td>{{ isset(getKabupatenById($item->domisili_kabupaten_id)->nama) ? getKabupatenById($item->domisili_kabupaten_id)->nama : '' }}</td>
-                                    <td>{{ $item->no_anggota }}</td>
+                                    <td>{{ delimiterNoAnggota($item->no_anggota) }}</td>
                                     <td>{{ $item->jenis_kelamin }}</td>
                                     <td>{{ $item->telepon }}</td>
                                     <td>{{ $item->email }}</td>

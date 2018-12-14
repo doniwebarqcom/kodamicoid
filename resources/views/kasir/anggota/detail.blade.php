@@ -45,7 +45,7 @@
                                 </tr>
                                 <tr>
                                     <th style="padding-bottom: 2px;padding-top:7px;">No Anggota</th>
-                                    <th style="padding-bottom: 2px;padding-top:7px;">{{ $data->no_anggota }}</th>
+                                    <th style="padding-bottom: 2px;padding-top:7px;">{{ delimiterNoAnggota($data->no_anggota) }}</th>
                                 </tr>
                                 <tr>
                                     <th style="padding-bottom: 2px;padding-top:7px;">Name</th>
