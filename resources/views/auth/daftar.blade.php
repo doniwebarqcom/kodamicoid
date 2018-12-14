@@ -18,7 +18,7 @@
       <div class="new-login-box">
           <div class="white-box">
             <h3 class="box-title m-b-0">Pendaftaran Kodami</h3>
-            <form class="form-horizontal new-lg-form" enctype="multipart/form-data" method="POST" id="form-daftar" action="{{ route('daftar-store') }}" autocomplete="off">
+            <form class="form-horizontal new-lg-form" enctype="multipart/form-data" onsubmit="disabled_button();" method="POST" id="form-daftar" action="{{ route('daftar-store') }}" autocomplete="off">
               {{ csrf_field() }}
               @if ($errors->has('setuju'))
                   <div class="help-block">
@@ -223,7 +223,7 @@
               </div>
               <div class="form-group text-center m-t-20">
                 <div class="col-xs-12">
-                  <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit">Daftar</button>
+                  <button class="btn btn-info btn-lg btn-block btn-rounded text-uppercase waves-effect waves-light" type="submit" id="button-daftar">Daftar</button>
                 </div>
               </div>
               <input type="hidden" name="total_pembayaran" value="{{ get_setting('simpanan_pokok') + get_setting('simpanan_wajib') + get_setting('kartu_anggota') }}" />
@@ -308,7 +308,6 @@
     box-shadow: 0px 0px 5px 2px rgba(197, 197, 197, 0.5);
     background-color: white;
   }
- 
 </style>
 
 <!-- sample modal content -->
@@ -339,6 +338,12 @@
 <script src="{{ asset('admin-css/plugins/bower_components/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 <script src="{{ asset('js/jquery.priceformat.min.js') }}"></script>
 <script type="text/javascript">
+  
+  function disabled_button(){
+    $('.loading').show();
+    $("#button-daftar").attr('disabled', true).attr('title', 'Tunggu sebentar sedang dalam proses...');
+  }
+
   $( function() {
       $( document ).tooltip();
   } );

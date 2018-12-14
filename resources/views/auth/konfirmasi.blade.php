@@ -18,7 +18,7 @@
       <div class="new-login-box">
           <div class="white-box">
             <h3 class="box-title m-b-0">Konfirmasi Pembayaran</h3>
-            <form class="form-horizontal new-lg-form" enctype="multipart/form-data" method="POST" id="form-daftar" action="{{ route('konfirmasi-store', $data->id) }}" autocomplete="off">
+            <form class="form-horizontal new-lg-form" enctype="multipart/form-data" method="POST" id="form-daftar" action="{{ route('konfirmasi-store', $data->id) }}" autocomplete="off" onsubmit="disabled_button();">
               {{ csrf_field() }}
               
               <div class="box box_biodata">
@@ -74,6 +74,11 @@
 @section('footer-script')
 <script src="{{ asset('js/jquery.priceformat.min.js') }}"></script>
 <script type="text/javascript">
+  function disabled_button()
+  {
+    $('.loading').show();
+  }
+  
   $('.price_format').priceFormat({
       prefix: 'Rp. ',
       centsSeparator: '.',

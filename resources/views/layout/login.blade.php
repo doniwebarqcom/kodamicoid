@@ -15,6 +15,7 @@
 <link href="{{ asset('admin-css/css/animate.css') }}" rel="stylesheet">
 <!-- Custom CSS -->
 <link href="{{ asset('admin-css/css/style.css') }}?time=<?=date('His')?>" rel="stylesheet">
+<link href="{{ asset('css/loading.css') }}?time=<?=date('His')?>" rel="stylesheet">
 <!-- color CSS -->
 <link href="{{ asset('admin-css/css/colors/blue.css') }}" id="theme"  rel="stylesheet">
 <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -39,7 +40,7 @@
 </style>
 </head>
 <body>
-
+<div class="loading" style="display: none;">Loading</div>
 @yield('content')
 
 </section>
