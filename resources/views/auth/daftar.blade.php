@@ -365,7 +365,6 @@
 
   function calculate_simpanan()
   {
-    console.log($("input[name='simpanan_sukarela']").val());
     var simpanan_sukarela = ($("input[name='simpanan_sukarela']").val() == "" ||  $("input[name='simpanan_sukarela']").val() == "Rp. ") ? 0 : parseInt($("input[name='simpanan_sukarela']").val().replace('Rp. ','').replace(',','').replace(',','').replace(',',''));
 
     var total = (parseInt($("select[name='durasi_pembayaran'] option:selected").val()) * {{ get_setting('simpanan_wajib') }}) + {{ get_setting('simpanan_pokok') }} + {{ get_setting('kartu_anggota') }} + simpanan_sukarela;
