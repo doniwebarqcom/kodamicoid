@@ -51,14 +51,14 @@ class LoginController extends Controller
             $no_anggota = str_replace('-', '', $request->get('email'));
 
             # cek login dengan no handphone
-            $user = \Kodami\Models\Mysql\User::where('telepon', $no_anggota)->first();
+            $user = \Kodami\Models\Mysql\Users::where('telepon', $no_anggota)->first();
             if($user)
             {
                 return ['telepon'=>$no_anggota,'password'=> $request->get('password'), 'status_login' => 1];
             }
 
             # cek login no anggota
-            $user = \Kodami\Models\Mysql\User::where('no_anggota', $no_anggota)->first();
+            $user = \Kodami\Models\Mysql\Users::where('no_anggota', $no_anggota)->first();
             if($user)
             {
                 return ['no_anggota'=>$no_anggota,'password'=> $request->get('password'), 'status_login' => 1];
