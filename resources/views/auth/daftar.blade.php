@@ -259,7 +259,7 @@
     height: auto  !important;
   }
   .box_left {
-    background: url('{{ asset('images/bg-1.png?v=1') }}') !important; 
+    background: url('{{ asset('images/bg-1.png?v=2') }}') !important; 
     background-size:auto 100% !important;
     background-position:left bottom !important;
     background-repeat: no-repeat !important; 
