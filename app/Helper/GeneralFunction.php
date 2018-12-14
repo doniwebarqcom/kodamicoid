@@ -550,7 +550,7 @@ function get_kecamatan_by_kabupaten($id)
  */
 function get_kelurahan_by_kecamatan($id)
 {
-  return \App\Kelurahan::where('id_kec', $id)->get();
+  return \Kodami\Models\Mysql\Kelurahan::where('id_kec', $id)->get();
 }
 
 ?>

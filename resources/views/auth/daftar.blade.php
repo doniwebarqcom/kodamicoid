@@ -147,7 +147,7 @@
                     <select name="domisili_kelurahan_id" class="form-control" required>
                         <option value=""> - Kelurahan - </option>
                         @if(!empty(old('domisili_kecamatan_id')))
-                          @foreach(get_kecamatan_by_kabupaten(old('domisili_kecamatan_id')) as $item)
+                          @foreach(get_kelurahan_by_kecamatan(old('domisili_kecamatan_id')) as $item)
                             <option value="{{ $item->id_kec }}" {{ (old('domisili_kelurahan_id') == $item->id_kel) ? 'selected' : '' }}>{{ $item->nama }}</option>
                           @endforeach
                         @endif
@@ -156,7 +156,7 @@
                 </div>
                 <div class="form-group">
                   <div class="col-md-12">
-                      <textarea class="form-control" name="domisili_alamat" placeholder="Alamat RT / RW" required></textarea>
+                      <textarea class="form-control" name="domisili_alamat" placeholder="Alamat RT / RW" required>{{ old('domisili_alamat') }}</textarea>
                   </div>
                 </div>
               </div>

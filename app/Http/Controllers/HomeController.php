@@ -66,7 +66,7 @@ class HomeController extends Controller
                 'setuju'              => 'required'
             ]);
 
-        if(!isset($validator->fails()))
+        if(!method_exists($validator, 'fails'))
         {
             $password               = generateRandomString(6);
 
