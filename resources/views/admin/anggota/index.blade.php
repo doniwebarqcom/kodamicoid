@@ -37,7 +37,7 @@
                                 </div>
                                 <div class="clearfix"></div>
                             </form>
-                            <div class="table-responsive mt-0">
+                            <div class="table-responsive mt-0" style="padding-bottom: 64px;">
                                 <table class="display nowrap data_table" cellspacing="0" width="100%">
                                     <thead>
                                         <tr>
@@ -83,6 +83,7 @@
                                                         @break
                                                     @endswitch
                                                 </td> -->
+                                                
                                                 <td>{!! status_anggota($item->id) !!}</td>
                                                 <td>
                                                     @if($item->access_id==2)

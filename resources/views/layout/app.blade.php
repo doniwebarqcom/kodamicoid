@@ -243,16 +243,22 @@
 									<span class="sub-title sub-title-1">Belanja</span>	
 								</li>
 								<li class="item">
-									<a href="">
+									<a href="javascript:void()" onclick="alert('Maaf, Fitur masih dalam pengembangan.')">
 										<img src="{{ asset('images/icon/3.png') }}" style="height: 32px" class="icon" />
 									</a>
 									<span class="sub-title sub-title-1">Modal Penyertaan</span>	
 								</li>
 								<li class="item">
-									<a href="">
+									<a href="javascript:void()" onclick="alert('Maaf, Fitur masih dalam pengembangan.')">
 										<img src="{{ asset('images/icon/4.png') }}" style="height: 32px" class="icon" />
 									</a>
 									<span class="sub-title sub-title-1">Daftar Kemitraan</span>	
+								</li>
+								<li class="item">
+									<a href="javascript:void()" onclick="alert('Maaf, Fitur masih dalam pengembangan.')">
+										<img src="{{ asset('images/icon/5.png') }}" style="height: 32px" class="icon" />
+									</a>
+									<span class="sub-title sub-title-1">Penambahan Kuota</span>	
 								</li>
 							</ul>
 						</div>
@@ -309,7 +315,7 @@
 	overflow: hidden !important
 }*/
 .menu-right{
-	height: 264px;
+	height: 328px;
 	margin-bottom:0;
 	padding-left:0;
 	margin-left:0;
