@@ -133,6 +133,32 @@ class AnggotaController extends ControllerLogin
             $params['data']         = $deposit;
             $params['no_anggota']   = delimiterNoAnggota($no_anggota);
 
+            if(isset($user->telepon))
+            {   
+                $msg  = "*Hallo ". $user->name .",*\n\n";
+                $msg .= "Terima kasih pembayaran simpanan anggota anda telah kami terima, bersama email ini kami informasikan status keanggotaan anda saat ini telah aktif, dengan detil informasi sebagai berikut :\n\n";
+                $msg .= "1. Nama \n    *". $user->name ."*\n";
+                $msg .= "2. Nomor Anggota \n    *". delimiterNoAnggota($no_anggota) ."*\n";
+                $msg .= "3. Username \n    *". $user->telepon ." / ". delimiterNoAnggota($no_anggota) ."*\n";
+                $msg .= "4. Password \n    *".  $user->aktivasi_code ."*\n";
+                $msg .= "     _(Silahkan melakukan penggantian password pada saat pertama kali login, demi menjaga keamanan data anda)_\n\n";
+
+                if(isset($kelebihan_bayar))
+                {
+                    $msg .= "Anda memiliki kelebihan bayar sebesar *Rp. ". number_format($kelebihan_bayar) ."* dan otomatis masuk ke Simpanan Sukarela anda.\n\n";
+                }
+                
+                if(isset($kekurang_bayar))
+                {
+                    $msg .= "Anda memiliki kekurangan bayar sebesar *Rp. ". number_format($kekurang_bayar)."* \n\n";
+                }
+
+                $msg .= "Anda dapat menggunakan username dan password untuk login keanggotaan melalui https://kodami.co.id dan transaksi jual beli melalui https://kodami.id.\n\n";
+                $msg .= "*Ttd*\n *Pengurus*"; 
+              
+                ApiWhaCurl($user->telepon, $msg);
+            }
+
             // Update status anggota aktif ketika bayar simpanan
             Users::where('id', $status->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'status_login'=>1, 'no_anggota'=> $no_anggota]);
             

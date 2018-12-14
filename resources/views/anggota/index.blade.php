@@ -437,6 +437,7 @@
                                             </thead>
                                             <tbody>
                                             @foreach($transaksi as $no => $item)
+                                              @if($item->jenis_transaksi != 1)
                                                 <tr>
                                                     <td>{{ $no+1 }}</td>
                                                     <td>
@@ -459,6 +460,7 @@
                                                     </td>
                                                     <td>{{ date('d F Y H:i:s', strtotime($item->created_at)) }}</td>    
                                                 </tr>
+                                              @endif
                                             @endforeach
                                             </tbody>
                                         </table>

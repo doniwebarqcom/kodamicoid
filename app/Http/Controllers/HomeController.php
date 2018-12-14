@@ -147,6 +147,28 @@ class HomeController extends Controller
                 }
             );
 
+            // send notifikasi via whatsapp
+            $msg  = "*Hallo ". $request->name ."*\n\n";
+            $msg .= "Terima kasih telah melakukan pendaftaran anggota Koperasi Produsen Daya Masyarakat Indonesia. Status anggota anda akan kami aktifkan setelah melakukan pembayaran :\n\n";
+            $msg .= "1. Simpanan Pokok : Rp. ". number_format(get_setting('simpanan_pokok'))."\n";
+            $msg .= "2. Simpanan Wajib Rp. ". number_format($data->durasi_pembayaran * get_setting('simpanan_wajib')). "\n";
+            $msg .= "Durasi Pembayaran ". $data->durasi_pembayaran ." Bulan\n";
+            $msg .= "3. Simpanan Sukarela Rp.".number_format($data->first_simpanan_sukarela) ."\n";
+            $msg .= ".4. Kartu Anggota Rp. ". number_format(get_setting('kartu_anggota')). "\n";
+            $msg .= "5. Kode Unik ". $deposit->code ."\n";
+            $msg .= "*Total Pembayaran : Rp. ". number_format($deposit->nominal) ."*\n\n";
+            $msg .= "Pembayaran dapat dilakukan melalui transfer ke Rekening Kami di bawah ini : \n\n";
+
+            foreach(rekening_bank() as $item)
+            {
+             $msg .=  "*".$item->bank->nama .'* '. $item->no_rekening .' a/n '. $item->owner ."\n";
+            }
+
+            $msg .= "\nSilahkan melakukan konfirmasi pembayaran apabila telah melakukan transfer melalui link berikut.\n\n";
+            $msg .= route('konfirmasi', $data->aktivasi_code);
+            
+            ApiWhaCurl($request->telepon, $msg);
+
             return redirect('register/success')->with('success-register', 'Berhasil melakukan registrasi');
         }
     }
@@ -232,6 +254,20 @@ class HomeController extends Controller
             $user->aktivasi_link = 1;
             $user->save();
 
+            // notifikasi email
+            if(isset($data->user->telepon))
+            {
+                $msg  = '*Hallo '. $data->user->name ."*\n\n";
+                $msg .= "Terima kasih telah melaukan konfirmasi pembayaran pendaftaran anggota Koperasi Produsen Daya Masyarakat Indonesia. Status anggota anda akan kami aktifkan maksimal 1x24 jam.\n\n";
+                $msg .= "Detil Pembayaran\n";
+                $msg .= "1. Nominal Pembayaran ". number_format($konfirmasi->nominal) ."\n";
+                $msg .= "2. Rekening Tujuan ". (isset($konfirmasi->rekening_bank->bank->nama) ? $konfirmasi->rekening_bank->bank->nama : '' ." - ". isset($konfirmasi->rekening_bank->no_rekening) ? $konfirmasi->rekening_bank->no_rekening : '')."\n";
+                $msg .= "3. Tanggal Bayar ". date('d F Y', strtotime($data->due_date)). "\n\n";
+                $msg .= "*Ttd*,\n *Pengurus*";
+
+                ApiWhaCurl($data->user->telepon, $msg);
+            }
+
             $params['data']         = $data;
             $params['konfirmasi']   = $konfirmasi;
 
@@ -251,6 +287,8 @@ class HomeController extends Controller
                     $message->subject('Konfirmasi Pembayaran Anggota #'. $data->user->name .' - Kodami Pocket System');
                 }
             );
+
+            
         }
 
         return redirect('login')->with('message-success', 'Terima kasih telah melakukan konfirmasi pembayaran pendaftaran anggota Koperasi Produsen Daya Masyarakat Indonesia. Status anggota anda akan kami aktifkan maksimal 1x24 jam.');
