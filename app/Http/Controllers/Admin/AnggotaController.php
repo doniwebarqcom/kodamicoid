@@ -291,7 +291,7 @@ class AnggotaController extends ControllerLogin
         }
 
         #$data->status       = $request->status;
-        $data->status_login = $request->status_login;
+        #$data->status_login = $request->status_login;
         if($request->is_dropshiper == 1)
         {
             $data->access_id = 7; # set access login sebagai dropshiper
@@ -384,7 +384,7 @@ class AnggotaController extends ControllerLogin
             $image->move($destinationPath, $name);
             $data->file_npwp = $name;
         }
-        $data->status = $request->status;
+        #$data->status = $request->status;
         $data->is_dropshiper = $request->is_dropshiper;
         if($request->is_dropshiper == 1)
         {
