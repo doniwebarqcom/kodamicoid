@@ -34,6 +34,14 @@ class HomeController extends Controller
         $data->message  = $request->message;
         $data->save();
 
+        $msg  = "Seseorang telah mengajukan pertanyaan berikut detailnya.\n\n";
+        $msg .= "Nama  ".  $request->nama. "\n";
+        $msg .= "Email  ".  $request->email. "\n";
+        $msg .= "Telepon  ".  $request->telepon. "\n";
+        $msg .= "Pesan  ".  $request->message. "\n";
+
+        ApiWhaCurl('08123088437', $msg);
+
         return redirect('/')->with('messages', 'Pertanyaan dan Kritik anda akan kami proses dengan segera.');
     }
 
