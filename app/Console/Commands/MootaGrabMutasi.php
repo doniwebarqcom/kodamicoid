@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Kodami\Models\Mysql\UserAnggotaKonfirmasiTransaksi;
 use Kodami\Models\Mysql\UserAnggota;
+use Kodami\Models\Mysql\Users;
 
 class MootaGrabMutasi extends Command
 {
@@ -61,17 +62,17 @@ class MootaGrabMutasi extends Command
 
           if(!$temp)
           {
-            echo " DATE TRANSFER : ". strtoupper($bank->atas_nama) ." \n";
-            echo " DESCRIPTION : ". strtoupper($mutasi->description) ." \n";
-            echo " AMOUNT : ". strtoupper($mutasi->amount) ." \n";
-            echo " TYPE : ". strtoupper($mutasi->type) ." \n\n";
+            #echo " DATE TRANSFER : ". strtoupper($bank->atas_nama) ." \n";
+            #echo " DESCRIPTION : ". strtoupper($mutasi->description) ." \n";
+            #echo " AMOUNT : ". strtoupper($mutasi->amount) ." \n";
+            #echo " TYPE : ". strtoupper($mutasi->type) ." \n\n";
 
             /**
              * CEK TRANSAKSI YANG ADA DI-DEPOSIT
              */
             # CEK PEMBAYARAN DEPOSIT AWAL
             # VALIDASI PEMBAYARAN ANGGOTA
-            echo " CEK MUTASI PEMBAYARAN ANGGOTA \n";
+            #echo " CEK MUTASI PEMBAYARAN ANGGOTA \n";
             $deposit_awal = \Kodami\Models\Mysql\Deposit::where('type', 1)->where(function($table){
               $table->where('status', 1)->orWhere('status', 2);
             })->where('nominal', $mutasi->amount)->first();
@@ -136,7 +137,7 @@ class MootaGrabMutasi extends Command
                 if($no_anggota['status'] == 'success')
                 {
                   $no_anggota = $no_anggota['data'];
-                }
+                } 
                 else
                 {
                   $no_anggota = 0;
@@ -147,7 +148,7 @@ class MootaGrabMutasi extends Command
                 $params['no_anggota']   = delimiterNoAnggota($no_anggota);
 
                 // Update status anggota aktif ketika bayar simpanan
-                \Kodami\Models\Mysql\Users::where('id', $data_deposit->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'status_login'=>1, 'no_anggota'=> $no_anggota]);
+                Users::where('id', $data_deposit->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'status_login'=>1, 'no_anggota'=> $no_anggota]);
                 
                 // cek user konfirmasi
                 UserAnggotaKonfirmasiTransaksi::where('user_id', $data_deposit->user_id)->where('transaksi_id', $deposit_awal->id)->where('type', 2)->update(['status' => 1]);
@@ -183,6 +184,23 @@ class MootaGrabMutasi extends Command
                       $message->subject('Koperasi Produsen Daya  Masyarakat Indonesia - Pembayaran Anggota Berhasil');
                   }
                 );
+
+                $user = $data_deposit->user;
+                if(isset($user->telepon))
+                {   
+                    $msg  = "*Hallo ". $user->name .",*\n\n";
+                    $msg .= "Terima kasih pembayaran simpanan anggota anda telah kami terima, bersama email ini kami informasikan status keanggotaan anda saat ini telah aktif, dengan detil informasi sebagai berikut :\n\n";
+                    $msg .= "1. Nama \n    *". $user->name ."*\n";
+                    $msg .= "2. Nomor Anggota \n    *". delimiterNoAnggota($no_anggota) ."*\n";
+                    $msg .= "3. Username \n    *". $user->telepon ." / ". delimiterNoAnggota($no_anggota) ."*\n";
+                    $msg .= "4. Password \n    *".  $user->aktivasi_code ."*\n";
+                    $msg .= "     _(Silahkan melakukan penggantian password pada saat pertama kali login, demi menjaga keamanan data anda)_\n\n";
+
+                    $msg .= "Anda dapat menggunakan username dan password untuk login keanggotaan melalui https://kodami.co.id dan transaksi jual beli melalui https://kodami.id.\n\n";
+                    $msg .= "*Ttd*\n *Pengurus*"; 
+                  
+                    ApiWhaCurl($user->telepon, $msg);
+                }
                 
                 echo " SUCCESS EMAIL : ". $data_deposit->user->email ."\n";
                 echo " =================================================\n\n";
@@ -269,6 +287,23 @@ class MootaGrabMutasi extends Command
                 $params['data']         = $deposit;
                 $params['no_anggota']   = delimiterNoAnggota($no_anggota);
                 $params['kelebihan_bayar']=$konfirmasi->nominal_lebih;
+                
+                $user = $data_deposit->user;
+                if(isset($user->telepon))
+                {   
+                    $msg  = "*Hallo ". $user->name .",*\n\n";
+                    $msg .= "Terima kasih pembayaran simpanan anggota anda telah kami terima, bersama email ini kami informasikan status keanggotaan anda saat ini telah aktif, dengan detil informasi sebagai berikut :\n\n";
+                    $msg .= "1. Nama \n    *". $user->name ."*\n";
+                    $msg .= "2. Nomor Anggota \n    *". delimiterNoAnggota($no_anggota) ."*\n";
+                    $msg .= "3. Username \n    *". $user->telepon ." / ". delimiterNoAnggota($no_anggota) ."*\n";
+                    $msg .= "4. Password \n    *".  $user->aktivasi_code ."*\n";
+                    $msg .= "     _(Silahkan melakukan penggantian password pada saat pertama kali login, demi menjaga keamanan data anda)_\n\n";
+                    $msg .= "Anda memiliki kelebihan bayar sebesar *Rp. ". number_format($konfirmasi->nominal_lebih) ."* dan otomatis masuk ke Simpanan Sukarela anda.\n\n";
+                    $msg .= "Anda dapat menggunakan username dan password untuk login keanggotaan melalui https://kodami.co.id dan transaksi jual beli melalui https://kodami.id.\n\n";
+                    $msg .= "*Ttd*\n *Pengurus*"; 
+                  
+                    ApiWhaCurl($user->telepon, $msg);
+                }
 
                 // Update status anggota aktif ketika bayar simpanan
                 \Kodami\Models\Mysql\Users::where('id', $data_deposit->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'status_login'=>1, 'no_anggota'=> $no_anggota]);
@@ -282,7 +317,6 @@ class MootaGrabMutasi extends Command
                   }
                 );
 
-                
                 // send email notifikasi
                 $params['text'] = '<p>Dear Ibu/Bapak '. $data_deposit->user->name .'<br />Sudah melakuan Pembayaran Data Anggota dan berhasil</p>';
                 \Mail::send('email.default', $params,
@@ -293,6 +327,7 @@ class MootaGrabMutasi extends Command
                   }
                 );
               }
+
               
             }
           }
