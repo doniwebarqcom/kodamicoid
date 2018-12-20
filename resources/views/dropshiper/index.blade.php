@@ -327,9 +327,11 @@
                                                                     <div class="price-table-content">
                                                                         <div class="price-row">
                                                                             <p>Transfer Ke</p>
+                                                                            @if($tagihan->rekening_bank->bank->image)
                                                                             <img src="{{ asset('bank/'. $tagihan->rekening_bank->bank->image) }}" /> <br />
                                                                         <strong>{{ $tagihan->rekening_bank->no_rekening }}</strong> <br />
                                                                         {{ $tagihan->rekening_bank->nama_akun }}
+                                                                        @endif
                                                                         
                                                                         </div>
                                                                         <div id="countdown">

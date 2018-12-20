@@ -37,8 +37,14 @@ Route::get('/', function () {
             return redirect()->route('dropshiper.dashboard');
         }
     }
-
-    return view('welcome');
+    if(isMobileDevice())
+    {
+    	return view('layout.mobile');
+    }
+    else
+    {
+    	return view('welcome');
+    }
 });
 Route::get('home', function () {
 	if(Auth::check())
@@ -64,7 +70,14 @@ Route::get('home', function () {
         }
     }
 
-    return view('welcome');
+    if(isMobileDevice())
+    {
+    	return view('layout.mobile');
+    }
+    else
+    {
+    	return view('welcome');
+    }
 });
 
 Route::get('register/success', 'RegisterController@success');
