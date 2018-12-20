@@ -142,17 +142,6 @@ class AnggotaController extends ControllerLogin
                 $msg .= "3. Username \n    *". $user->telepon ." / ". delimiterNoAnggota($no_anggota) ."*\n";
                 $msg .= "4. Password \n    *".  $user->aktivasi_code ."*\n";
                 $msg .= "     _(Silahkan melakukan penggantian password pada saat pertama kali login, demi menjaga keamanan data anda)_\n\n";
-
-                if(isset($kelebihan_bayar))
-                {
-                    $msg .= "Anda memiliki kelebihan bayar sebesar *Rp. ". number_format($kelebihan_bayar) ."* dan otomatis masuk ke Simpanan Sukarela anda.\n\n";
-                }
-                
-                if(isset($kekurang_bayar))
-                {
-                    $msg .= "Anda memiliki kekurangan bayar sebesar *Rp. ". number_format($kekurang_bayar)."* \n\n";
-                }
-
                 $msg .= "Anda dapat menggunakan username dan password untuk login keanggotaan melalui https://kodami.co.id dan transaksi jual beli melalui https://kodami.id.\n\n";
                 $msg .= "*Ttd*\n *Pengurus*"; 
               
@@ -303,7 +292,7 @@ class AnggotaController extends ControllerLogin
 
         #$data->status       = $request->status;
         $data->status_login = $request->status_login;
-        if($data->is_dropshiper == 1)
+        if($request->is_dropshiper == 1)
         {
             $data->access_id = 7; # set access login sebagai dropshiper
         }
@@ -397,7 +386,7 @@ class AnggotaController extends ControllerLogin
         }
         $data->status = $request->status;
         $data->is_dropshiper = $request->is_dropshiper;
-        if($data->is_dropshiper == 1)
+        if($request->is_dropshiper == 1)
         {
             $data->access_id = 7; # set access login sebagai dropshiper
         }
