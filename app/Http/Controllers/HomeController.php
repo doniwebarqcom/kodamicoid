@@ -91,7 +91,7 @@ class HomeController extends Controller
         	}
 
             $data                   =  new Users();
-            $data->name             = $request->name; 
+            $data->name             = strtoupper($request->name); 
             $data->jenis_kelamin    = $request->jenis_kelamin; 
             $data->email            = $request->email;
             $data->telepon          = $request->telepon;
@@ -219,7 +219,9 @@ class HomeController extends Controller
             'tanggal_transfer'              => 'required'
         ]);
 
-        $data               = Deposit::where('user_id', $id)->where('status',1)->orWhere('status', 2)->where('type',1)->first(); 
+        $data               = Deposit::where('user_id', $id)->where(function($table){
+                                                                            $table->where('status',1)->orWhere('status', 2); })
+                                                            ->where('type',1)->first(); 
         
         if(!$data)
         {
@@ -243,6 +245,7 @@ class HomeController extends Controller
         $nominal = remove_number_format($request->nominal) - $data->nominal;
 
         $konfirmasi =  UserAnggotaKonfirmasiTransaksi::where('user_id', $data->user_id)->where('transaksi_id', $data->id)->where('type', 2)->first();
+        
 
         if(!$konfirmasi)
         {
@@ -295,8 +298,6 @@ class HomeController extends Controller
                     $message->subject('Konfirmasi Pembayaran Anggota #'. $data->user->name .' - Kodami Pocket System');
                 }
             );
-
-            
         }
 
         return redirect('login')->with('message-success', 'Terima kasih telah melakukan konfirmasi pembayaran pendaftaran anggota Koperasi Produsen Daya Masyarakat Indonesia. Status anggota anda akan kami aktifkan maksimal 1x24 jam.');
