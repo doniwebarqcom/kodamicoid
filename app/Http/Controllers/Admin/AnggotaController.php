@@ -314,8 +314,8 @@ class AnggotaController extends ControllerLogin
         {
             $data->access_id = 2; # set access login sebagai anggota
         }
-        $data->is_dropshiper = $request->is_dropshiper;
-        $data->durasi_pembayaran = $request->durasi_pembayaran;
+        $data->is_dropshiper        = $request->is_dropshiper;
+        $data->durasi_pembayaran    = $request->durasi_pembayaran;
         $data->save();
 
         return redirect()->route('admin.anggota.edit', $data->id)->with('message-success', 'Data berhasil disimpan'); 

@@ -103,13 +103,13 @@
                                 <div class="clearfix"></div>
                                 <hr>
                                 <div class="form-group">
-                                    <h4>File Confirmation</h4>
-                                    <img src="{{ asset('file_confirmation/'. $data->id .'/'. $deposit->file_confirmation)}}" style="width: 50%;" />
+                                    <h4>Bukti Pembayaran</h4>
+                                    <a href="{{ asset('file_confirmation/'. $deposit->id .'/'. $deposit->file_confirmation )}}" target="_blank"><i class="fa fa-file"></i> Lihat</a>
                                 </div>
                                 <div class="form-group">
-                                    <a href="{{ route('admin.anggota.index') }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Back</a>
-                                    <span class="btn btn-danger" id="reject"><i class="fa fa-close"></i> Reject </span>
-                                    <span class="btn btn-success" id="approve"><i class="fa fa-check"></i> Approve </span>
+                                    <a href="{{ route('admin.anggota.index') }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
+                                    <span class="btn btn-danger" id="reject"><i class="fa fa-close"></i> Tolak </span>
+                                    <span class="btn btn-success" id="approve"><i class="fa fa-check"></i> Setuju </span>
                                 </div>
                                 <input type="hidden" name="status" value="0" />
                                 <input type="hidden" name="user_id" value="{{ $data->id }}"  />
@@ -148,8 +148,4 @@
        }); 
     </script>
 @endsection
-
-<!-- ============================================================== -->
-<!-- End Page Content -->
-<!-- ============================================================== -->
 @endsection
