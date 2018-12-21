@@ -141,7 +141,7 @@ class AnggotaController extends Controller
 
         $data->is_dropshiper    = $request->is_dropshiper;
 
-        if($data->is_dropshiper == 1)
+        if($request->is_dropshiper == 1)
         {
             $data->access_id = 7; # set access login sebagai dropshiper
         }
