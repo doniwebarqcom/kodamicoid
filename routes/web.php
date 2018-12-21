@@ -37,39 +37,20 @@ Route::get('/', function () {
             return redirect()->route('dropshiper.dashboard');
         }
     }
-    
-    	return view('welcome');
-    
-});
-Route::get('home', function () {
-	if(Auth::check())
+   	
+   	return view('welcome');
+
+    if(isMobileDevice())
     {
-        if(Auth::user()->access_id == 2) // Anggota
-        {
-            return redirect()->route('anggota.dashboard');
-        }
-
-        if(Auth::user()->access_id == 1) // Admin
-        {
-            return redirect()->route('admin.dashboard');
-        }
-
-        if(Auth::user()->access_id == 4) // CS
-        {
-            return redirect()->route('cs.index');
-        }
-
-        if(Auth::user()->access_id == 7) // CS
-        {
-            return redirect()->route('dropshiper.dashboard');
-        }
+    	return view('layout.mobile');
     }
-
-    
+    else
+    {
     	return view('welcome');
-    
+    }
 });
 
+Route::get('home', function () { return redirect('/'); });
 Route::get('register/success', 'RegisterController@success');
 Route::get('register', 'RegisterController@index');
 Route::get('logout', 'Auth\LoginController@logout');
