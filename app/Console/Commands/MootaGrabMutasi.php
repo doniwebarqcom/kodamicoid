@@ -148,7 +148,7 @@ class MootaGrabMutasi extends Command
                 $params['no_anggota']   = delimiterNoAnggota($no_anggota);
 
                 // Update status anggota aktif ketika bayar simpanan
-                Users::where('id', $data_deposit->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'status_login'=>1, 'no_anggota'=> $no_anggota]);
+                Users::where('id', $data_deposit->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'status_login'=>1, 'no_anggota'=> $no_anggota, 'active_simko'=>1]);
                 
                 // cek user konfirmasi
                 UserAnggotaKonfirmasiTransaksi::where('user_id', $data_deposit->user_id)->where('transaksi_id', $deposit_awal->id)->where('type', 2)->update(['status' => 1]);

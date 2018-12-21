@@ -54,7 +54,7 @@
                                     <label class="col-md-6">No Anggota</label>
                                     <label class="col-md-6">KTP Number</label>
                                     <div class="col-md-6">
-                                        <input type="text" name="no_anggota" readonly="true" value="{{ $data->no_anggota }}" class="form-control"> 
+                                        <input type="text" name="no_anggota" readonly="true" value="{{ strlen($data->no_anggota) > 9 ? $data->no_anggota : '' }}" class="form-control"> 
                                     </div>
                                     <div class="col-md-6">
                                         <input type="text" name="nik" class="form-control" value="{{ $data->nik }}"> 
@@ -333,7 +333,7 @@
                                                                 </h3>
                                 <label class="btn btn-info btn-xs" onclick="topup_simpanan_wajib()"><i class="fa fa-plus"></i> Topup</label>
                             
-                                <p>Jatuh tempo pembayaran selanjutnya<br /> <label class="text-danger">{{ date('d F Y', strtotime($data->first_durasi_pembayaran_date ." + ". $data->durasi_pembayaran ." month") ) }}</label></p>
+                                <!-- <p>Jatuh tempo pembayaran selanjutnya<br /> <label class="text-danger">{{ date('d F Y', strtotime($data->first_durasi_pembayaran_date ." + ". $data->durasi_pembayaran ." month") ) }}</label></p> -->
                             
                             </div>
                             <div class="col-md-2">simpanan

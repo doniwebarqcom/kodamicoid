@@ -2,15 +2,7 @@
 
 @section('title', 'Admin - Koperasi Daya Masyarakat Indonesia')
 
-@section('sidebar')
-
-@endsection
-
 @section('content')
-
-<!-- ============================================================== -->
-<!-- Page Content -->
-<!-- ============================================================== -->
 <div id="page-wrapper">
 
     <div class="container-fluid">
@@ -24,9 +16,7 @@
                     <li class="active">Anggota</li>
                 </ol>
             </div>
-            <!-- /.col-lg-12 -->
         </div>
-        <!-- .row -->
         <div class="row">
             <div class="col-md-12">
             <div class="white-box">
@@ -43,14 +33,13 @@
                             </ul>
                         </div>
                     @endif
-                    
                     <div class="col-md-6">
                         {{ csrf_field() }}
                         <div class="form-group">
                             <label class="col-md-6">No Anggota</label>
                             <label class="col-md-6">KTP Number</label>
                             <div class="col-md-6">
-                                <input type="text" name="no_anggota" value="{{ $no_anggota }}" class="form-control"> 
+                                <input type="text" name="no_anggota" value="" class="form-control"> 
                             </div>
                             <div class="col-md-6">
                                 <input type="text" name="nik" class="form-control"> 
@@ -268,7 +257,6 @@
             changeYear : true,
             changeMonth : true
         });
-
 
         /**
          * DOMISILI LOKASI

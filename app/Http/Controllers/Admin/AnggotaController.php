@@ -8,6 +8,7 @@ use App\ModelUser;
 use Kodami\Models\Mysql\Users;
 use Kodami\Models\Mysql\Deposit;
 use Kodami\Models\Mysql\UserAnggotaKonfirmasiTransaksi;
+use Kodami\Models\Mysql\UserAnggota;
 
 class AnggotaController extends ControllerLogin
 {	
@@ -149,10 +150,23 @@ class AnggotaController extends ControllerLogin
             }
 
             // Update status anggota aktif ketika bayar simpanan
-            Users::where('id', $status->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'status_login'=>1, 'no_anggota'=> $no_anggota]);
+            Users::where('id', $status->user_id)->update(['status_anggota'=>1, 'status_pembayaran' => 1, 'status_login'=>1, 'no_anggota'=> $no_anggota, 'active_simko'=>1]);
             
             // cek user konfirmasi
             UserAnggotaKonfirmasiTransaksi::where('user_id', $status->user_id)->where('transaksi_id', $status->id)->where('type', 2)->update(['status' => 1]);
+
+            # update table user anggota
+            $user_anggota = UserAnggota::where('user_id', $status->user_id)->first();
+            if(!$user_anggota)
+            {
+                $user_anggota                   = new UserAnggota();
+                $user_anggota->user_id          = $status->user_id;
+                $user_anggota->simpanan_pokok   = get_setting('simpanan_pokok');
+                $user_anggota->simpanan_wajib   = $status->user->durasi_pembayaran * get_setting('simpanan_wajib');
+                $user_anggota->simpanan_sukarela=$status->user->first_simpanan_sukarela + $status->code;
+                $user_anggota->kuota            = get_setting('simpanan_pokok');
+                $user_anggota->save();
+            }
 
             # send email
             \Mail::send('email.register.lunas', $params,
