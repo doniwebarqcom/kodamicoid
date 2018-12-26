@@ -9,6 +9,8 @@ use Kodami\Models\Mysql\Users;
 use Kodami\Models\Mysql\Deposit;
 use Kodami\Models\Mysql\UserAnggotaKonfirmasiTransaksi;
 use Kodami\Models\Mysql\UserAnggota;
+use Kodami\Models\Mysql\UserDropshiperHistoryKuota;
+use Kodami\Models\Mysql\UserDropshiper;
 
 class AnggotaController extends ControllerLogin
 {	
@@ -202,6 +204,39 @@ class AnggotaController extends ControllerLogin
         }
 
         return redirect()->route('admin.anggota.index')->with('message-success', 'Data berhasil di konfirmasi');
+    }
+
+    /**
+     * Aktifasi DS
+     */
+    public function aktifasiDS(Request $request, $id)
+    {
+        $data               = Users::where('id', $id)->first();
+        $data->access_id    =7;
+        $data->save();
+
+        $user = UserDropshiper::where('user_id', $id)->first();
+        if(!$user)
+        {
+            $user                           = new UserDropshiper();
+            $user->user_id                  = $id;
+            $user->saldo_terpakai           = 0;
+            $user->total_saldo_terpakai     = 0;
+        }
+
+        // history
+        $history                    = new UserDropshiperHistoryKuota();
+        $history->user_id           = $id;
+        $history->user_proses_id    = \Auth::user()->id;
+        $history->nominal           = $request->kuota;
+        $history->type              = 1; // topup by admin
+        $history->save();
+
+        $user->saldo        = $request->kuota;
+        $user->saldo_awal   = $request->kuota;
+        $user->save();
+
+        return redirect()->route('admin.anggota.index')->with('message-success', 'Dropshiper berhasil di aktifasi.');
     }
 
     /**

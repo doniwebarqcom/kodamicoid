@@ -84,7 +84,14 @@
                                                     @endswitch
                                                 </td> -->
                                                 
-                                                <td>{!! status_anggota($item->id) !!}</td>
+                                                <td>
+                                                    @php ($status_deposit_awal = status_deposit_awal($item->id))
+                                                    @if($status_deposit_awal == 2)
+                                                        <a href="{{ route('admin.anggota.confirm', $item->id) }}" class="btn btn-warning btn-xs" style="color: #163240;"><i class="fa fa-info"></i> Konfirmasi</a>
+                                                    @else
+                                                        {!! status_anggota($item->id) !!}
+                                                    @endif
+                                                </td>
                                                 <td>
                                                     @if($item->access_id==2)
                                                         @php($simpanan_pokok = simpanan_pokok($item->id)->where('status', 3)->sum('nominal'))
@@ -101,11 +108,10 @@
                                                         <button aria-expanded="false" data-toggle="dropdown" class="btn btn-xs btn-default dropdown-toggle waves-effect waves-light" type="button">Action 
                                                             <span class="caret"></span>
                                                         </button>
-                                                        <ul role="menu" class="dropdown-menu">
-                                                        @php ($status_deposit_awal = status_deposit_awal($item->id))
-                                                        @if($status_deposit_awal == 2)
-                                                            <li><a href="{{ route('admin.anggota.confirm', $item->id) }}">Konfirmasi</a></li>
-                                                        @endif
+                                                        <ul role="menu" class="dropdown-menu" style="right: 0 !important;left: auto !important;">
+                                                            @if($item->access_id == 2 and $item->status_anggota == 1 and $item->status_login == 1)
+                                                            <li><a title="Aktifasi Dropshiper" onclick="aktifasi_ds('{{ route('admin.anggota.aktifasi-ds', $item->id) }}')"><i class="fa fa-check"></i> Aktifasi DS</a>
+                                                            @endif
                                                             <li><a href="{{ route('admin.anggota.edit', ['id' => $item->id]) }}"> <i class="ti-pencil-alt"></i> detail</a></li>
                                                             <li><a href="{{ route('admin.anggota.destroy', ['id' => $item->id]) }}" onclick="return confirm('Hapus data anggota ?')"> <i class="fa fa-trash"></i> delete</a></li>
                                                             <li><a onclick="confirm_autologin('{{ route('admin.autologin', $item->id) }}', '{{ $item->name }}')"><i class="fa fa-key"></i> Autologin</a></li>
@@ -156,8 +162,39 @@
         font-weight: normal !important;
     }
 </style>
+
+<div id="modal_set_dropshiper" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 class="modal-title" id="myModalLabel">Set Kuota Dropshiper</h4> </div>
+            <div class="modal-body">
+                <form method="POST" action="" id="form_set_kuota_dropshiper">
+                    {{ csrf_field() }}
+                    <div class="form-group">
+                        <label>Set Kuota</label>
+                        <input type="number" name="kuota" class="form-control">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger waves-effect" data-dismiss="modal">Batal</button>
+                <button type="button" class="btn btn-success waves-effect" data-dismiss="modal">Aktifasi Dropshiper</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /.modal -->
 @section('footer-script')
 <script type="text/javascript">
+    
+    function aktifasi_ds(url)
+    {
+        $("#form_set_kuota_dropshiper").attr('action', url);
+        $("#modal_set_dropshiper").modal("show");
+    }
+
     var confirm_autologin = function(url, name){
         bootbox.confirm("Login sebagai "+ name +" ?", function(res){
             if(res)

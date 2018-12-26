@@ -55,4 +55,28 @@ class KemitraanController extends Controller
 
         return redirect()->route('admin.kemitraan.index')->with('message-success', 'Kuota berhasil di tambahkan !');
     }
+
+    /**
+     * Active Dropshiper
+     */
+    public function dropshiperActive($id)
+    {
+        $user =  Users::where('id', $id)->first();
+        $user->status = 1;
+        $user->save();
+
+        return redirect()->route('admin.kemitraan.index')->with('message-success', 'Dropshiper berhasil di Aktifkan');
+    }
+
+    /**
+     * Inactive Dropshiper
+     */
+    public function dropshiperInactive($id)
+    {
+        $user =  Users::where('id', $id)->first();
+        $user->status = 0;
+        $user->save();
+
+        return redirect()->route('admin.kemitraan.index')->with('message-success', 'Dropshiper berhasil di Inaktifkan');
+    }
 }

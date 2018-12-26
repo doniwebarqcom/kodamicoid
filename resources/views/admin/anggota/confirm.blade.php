@@ -109,7 +109,7 @@
                                 <div class="form-group">
                                     <a href="{{ route('admin.anggota.index') }}" class="btn btn-default"><i class="fa fa-arrow-left"></i> Kembali</a>
                                     <span class="btn btn-danger" id="reject"><i class="fa fa-close"></i> Tolak </span>
-                                    <span class="btn btn-success" id="approve"><i class="fa fa-check"></i> Setuju </span>
+                                    <span class="btn btn-success" id="approve"><i class="fa fa-check"></i> Terima </span>
                                 </div>
                                 <input type="hidden" name="status" value="0" />
                                 <input type="hidden" name="user_id" value="{{ $data->id }}"  />
@@ -122,11 +122,9 @@
               </div>
             </div>                        
         </div>
-        <!-- /.row -->
-        <!-- ============================================================== -->
     </div>
     <!-- /.container-fluid -->
-    @extends('layout.footer-admin')
+    @include('layout.footer-admin')
 </div>
 
 @section('footer-script')

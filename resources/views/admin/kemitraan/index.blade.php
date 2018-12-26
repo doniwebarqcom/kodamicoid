@@ -103,7 +103,7 @@
                                                             <label class="btn btn-danger btn-xs" style="font-size: 10px;height: 17px;">Tidak Aktif</label>
                                                         </a>
                                                     @else
-                                                        <a href="{{ route('admin.kemitraan.dropshiper-active', $item->id) }}" onclick="return confirm('Non Aktifkan Dropshiper ?')">
+                                                        <a href="{{ route('admin.kemitraan.dropshiper-inactive', $item->id) }}" onclick="return confirm('Non Aktifkan Dropshiper ?')">
                                                             <label class="btn btn-success btn-xs" style="font-size: 10px;height: 17px;">Aktif</label>
                                                         </a>
                                                     @endif

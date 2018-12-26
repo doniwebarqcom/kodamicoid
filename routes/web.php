@@ -101,6 +101,7 @@ Route::group(['prefix' => 'admin', 'namespace' => 'Admin', 'middleware' => ['aut
 	Route::post('anggota/topup-simpanan-wajib','AnggotaController@topupSimpananWajib')->name('admin.anggota.topup-simpanan-wajib');
 	Route::post('anggota/add-rekening-bank','AnggotaController@addRekeningBank')->name('admin.anggota.add-rekening-bank');
 	Route::post('anggota/confirm-submit','AnggotaController@confirmSubmit')->name('admin.anggota.confirm-submit');
+	Route::post('anggota/aktifasi-ds/{id}','AnggotaController@aktifasiDS')->name('admin.anggota.aktifasi-ds');
 	Route::resource('user','UserController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
 	Route::resource('user-group','UserGroupController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'user-group']);
 	Route::resource('bank','BankController', ['only'=> ['index','create','store', 'edit','destroy','update'], 'as' => 'admin']);
