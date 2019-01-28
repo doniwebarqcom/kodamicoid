@@ -144,7 +144,7 @@
                                                 <td>
                                                     <a href="{{ route('kasir.anggota.cetak-kwitansi', ['id'=> $item->id, 'jenis_transaksi'=> $item->jenis_transaksi]) }}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-print"></i> cetak</a>
                                                     @if(!empty($item->file_confirmation))
-                                                    <br /><a href="{{ asset('file_confirmation/'. $item->id .'/'. $item->file_confirmation )}}" target="_blank"><i class="fa fa-file"></i> Bukti Transfer</a>
+                                                    <br /><a href="{{ asset('file_confirmation/'. $item->user_id .'/'. $item->file_confirmation )}}" target="_blank"><i class="fa fa-file"></i> Bukti Transfer</a>
                                                     @endif
                                                 </td>
                                             </tr>
