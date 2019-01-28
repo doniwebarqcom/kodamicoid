@@ -143,6 +143,9 @@
                                                 <td>{{ date('d F Y H:i:s', strtotime($item->created_at)) }}</td>    
                                                 <td>
                                                     <a href="{{ route('kasir.anggota.cetak-kwitansi', ['id'=> $item->id, 'jenis_transaksi'=> $item->jenis_transaksi]) }}" target="_blank" class="btn btn-default btn-xs"><i class="fa fa-print"></i> cetak</a>
+                                                    @if(!empty($item->file_confirmation))
+                                                    <a href="{{ asset('file_confirmation/'. $item->id .'/'. $item->file_confirmation )}}" target="_blank"><i class="fa fa-file"></i> Bukti Transfer</a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
