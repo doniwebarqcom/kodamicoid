@@ -29,7 +29,7 @@ class AnggotaController extends Controller
      */
     public function detail($id)
     {
-        $deposit                = Deposit::select('id','user_id','nominal','created_at', \DB::raw(' 0 as jenis_transaksi'),'type','no_invoice')->where('user_id', $id)->orderBy('id', 'DESC')->get(); 
+        $deposit                = Deposit::select('id','user_id','nominal','created_at', \DB::raw(' 0 as jenis_transaksi'),'type','no_invoice','file_confirmation')->where('user_id', $id)->orderBy('id', 'DESC')->get(); 
         $pulsa                  = PPulsaTransaksi::select('id','user_id',\DB::raw('harga_beli as nominal'), 'created_at', \DB::raw('1 as jenis_transaksi'), \DB::raw('p_pulsa_id as type'),'no_invoice')->where('user_id', $id)->orderBy('id', 'DESC')->get(); 
         
         $params['data']         = Users::where('id', $id)->first(); 
